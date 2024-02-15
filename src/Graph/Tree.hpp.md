@@ -3,10 +3,10 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
-    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
-      \u3084\u3064"
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedVerifiedWith:
@@ -16,21 +16,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3022.test.cpp
-    title: test/aoj/3022.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_3_A.test.cpp
-    title: test/aoj/GRL_3_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/bonnie-and-clyde.test.cpp
-    title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/biconnected_components.test.cpp
-    title: test/yosupo/biconnected_components.test.cpp
   - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
@@ -43,9 +31,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1326.test.cpp
-    title: test/yukicoder/1326.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
@@ -66,32 +51,34 @@ data:
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
     #include <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n\
     #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
-    #include <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
-    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
-    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false>\
-    \ class Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
-    \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
-    \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
-    \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
-    \ Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>, std::pair<int,\
-    \ int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int>\
-    \ P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n Tree(int n): P(n,\
-    \ -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>, void>\
-    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
-    \ <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void> add_edge(int\
-    \ u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u, c); }\n template\
-    \ <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    #include <iostream>\n#include <iterator>\n#line 6 \"src/Internal/ListRange.hpp\"\
+    \n#define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using\
+    \ Iterator= typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator\
+    \ begin() const { return bg; } \\\n  Iterator end() const { return ed; } \\\n\
+    \  size_t size() const { return std::distance(bg, ed); } \\\n  CT &operator[](int\
+    \ i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange,\
+    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
+    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
+    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
+    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
+    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
+    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
+    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
+    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
+    \ << ']';\n}\n#line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool\
+    \ weight= false> class Tree {\n template <class D, class T> struct Edge_B {\n\
+    \  int to;\n  T cost;\n  operator int() const { return to; }\n };\n template <class\
+    \ D> struct Edge_B<D, void> {\n  int to;\n  operator int() const { return to;\
+    \ }\n };\n using Edge= Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>,\
+    \ std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
+    \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
+    \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
+    \ Tree(int n): P(n, -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>,\
+    \ void> add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u);\
+    \ }\n template <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void>\
+    \ add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u,\
+    \ c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -229,7 +216,7 @@ data:
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/BiConnectedComponents.hpp
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp
@@ -238,15 +225,10 @@ data:
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/235.HLD.test.cpp
-  - test/yukicoder/1326.test.cpp
-  - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/lca.HLD.test.cpp
-  - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
-  - test/aoj/GRL_3_A.test.cpp
-  - test/aoj/3022.test.cpp
   - test/atcoder/abc202_e.test.cpp
 documentation_of: src/Graph/Tree.hpp
 layout: document

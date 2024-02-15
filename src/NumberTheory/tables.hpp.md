@@ -3,8 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
-    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
-      \u3084\u3064"
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
   - icon: ':x:'
@@ -53,22 +53,24 @@ data:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
     #include <cstdint>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
-    #include <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
-    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
-    #line 5 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace nt_internal {\nusing\
-    \ namespace std;\nvector<int> ps, lf;\nvoid sieve(int N) {\n static int n= 2;\n\
-    \ if (n > N) return;\n if (lf.resize((N + 1) >> 1); n == 2) ps.push_back(n++);\n\
+    #include <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name,\
+    \ IT, CT) \\\n template <class T> struct name { \\\n  using Iterator= typename\
+    \ std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return\
+    \ bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size() const {\
+    \ return std::distance(bg, ed); } \\\n  CT &operator[](int i) const { return bg[i];\
+    \ } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange, const_iterator,\
+    \ const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T>\
+    \ dat;\n std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n\
+    \ ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i\
+    \ + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
+    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
+    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
+    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
+    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
+    \ << ']';\n}\n#line 5 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace nt_internal\
+    \ {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int N) {\n static int\
+    \ n= 2;\n if (n > N) return;\n if (lf.resize((N + 1) >> 1); n == 2) ps.push_back(n++);\n\
     \ int M= (N - 1) / 2;\n for (int j= 1, e= ps.size(); j < e; ++j) {\n  int p= ps[j];\n\
     \  if (int64_t(p) * p > N) break;\n  for (auto k= int64_t(p) * max(n / p / 2 *\
     \ 2 + 1, p) / 2; k <= M; k+= p) lf[k]+= p * !lf[k];\n }\n for (; n <= N; n+= 2)\n\
@@ -177,7 +179,7 @@ data:
   isVerificationFile: false
   path: src/NumberTheory/tables.hpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1019.numth.test.cpp

@@ -3,8 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
-    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
-      \u3084\u3064"
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
@@ -20,25 +20,28 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
     \ <algorithm>\n#include <numeric>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
-    \ <vector>\n#include <iostream>\n#include <iterator>\ntemplate <class T> struct\
-    \ ListRange {\n using Iterator= typename std::vector<T>::iterator;\n Iterator\
-    \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
-    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
-    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
-    #line 6 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
-    \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
-    \ L, int R): blg{std::vector(L, -3), std::vector(R, -3)} {}\n void add_edge(int\
-    \ l, int r) { es.push_back({l, r}); }\n void build() {\n  const int n[]= {(int)blg[0].size(),\
-    \ (int)blg[1].size()};\n  std::vector<int> g[2], rt, pre, que(std::max(n[0], n[1]));\n\
-    \  for (int b= 2; b--;) g[b].resize(es.size()), pos[b].resize(n[b] + 1), mate[b].assign(n[b],\
+    \ <vector>\n#include <iostream>\n#include <iterator>\n#include <type_traits>\n\
+    #define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using Iterator=\
+    \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
+    \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
+    \ const { return std::distance(bg, ed); } \\\n  CT &operator[](int i) const {\
+    \ return bg[i]; } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange,\
+    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
+    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
+    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
+    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
+    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
+    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
+    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
+    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
+    \ << ']';\n}\n#line 6 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn\
+    \ {\n std::vector<int> blg[2], mate[2], pos[2];\n std::vector<std::array<int,\
+    \ 2>> es;\npublic:\n DulmageMendelsohn(int L, int R): blg{std::vector(L, -3),\
+    \ std::vector(R, -3)} {}\n void add_edge(int l, int r) { es.push_back({l, r});\
+    \ }\n void build() {\n  const int n[]= {(int)blg[0].size(), (int)blg[1].size()};\n\
+    \  std::vector<int> g[2], rt, pre, que(std::max(n[0], n[1]));\n  for (int b= 2;\
+    \ b--;) g[b].resize(es.size()), pos[b].resize(n[b] + 1), mate[b].assign(n[b],\
     \ -1);\n  for (auto [l, r]: es) ++pos[0][l], ++pos[1][r];\n  for (int b= 2; b--;)\
     \ std::partial_sum(pos[b].begin(), pos[b].end(), pos[b].begin());\n  for (auto\
     \ [l, r]: es) g[0][--pos[0][l]]= r, g[1][--pos[1][r]]= l;\n  int t= 0, k= 0;\n\
@@ -115,7 +118,7 @@ data:
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp

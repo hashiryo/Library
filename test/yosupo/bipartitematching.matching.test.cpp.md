@@ -1,14 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/Matching.hpp
-    title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
+  - icon: ':question:'
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Graph/general_matching.hpp
+    title: "\u4E00\u822C\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\
+      \u30B0"
+  - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
@@ -16,55 +24,82 @@ data:
     - https://judge.yosupo.jp/problem/bipartitematching
   bundledCode: "#line 1 \"test/yosupo/bipartitematching.matching.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include <iostream>\n\
-    #line 2 \"src/Graph/Matching.hpp\"\n#include <vector>\n#include <array>\nclass\
-    \ Matching {\n std::vector<std::array<int, 2>> es;\n std::vector<int> mate;\n\
-    public:\n Matching(int n): mate(n, -1) {}\n void add_edge(int u, int v) { es.push_back({u,\
-    \ v}); }\n void build() {\n  const int n= mate.size();\n  std::vector<int> g(es.size()\
-    \ * 2), pos(n + 1), que(n), id(n, -1), p(n);\n  std::vector<std::array<int, 2>>\
-    \ fs(n);\n  for (auto [u, v]: es) ++pos[u], ++pos[v];\n  for (int i= 0; i < n;\
-    \ ++i) pos[i + 1]+= pos[i];\n  for (auto [u, v]: es) g[--pos[u]]= v, g[--pos[v]]=\
-    \ u;\n  auto rematch= [&](auto self, int u, int v) -> void {\n   int w;\n   if\
-    \ (w= mate[u], mate[u]= v; w == -1 || mate[w] != u) return;\n   if (auto [x, y]=\
-    \ fs[u]; y == -1) self(self, mate[w]= x, w);\n   else self(self, x, y), self(self,\
-    \ y, x);\n  };\n  int ts= 0;\n  auto f= [&](auto self, int x) -> int { return\
-    \ id[x] != ts || p[x] == -1 ? x : (p[x]= self(self, p[x])); };\n  auto check=\
-    \ [&](int rt) {\n   int s= 1;\n   fs[rt]= {-1, -1}, id[rt]= ts, p[que[0]= rt]=\
-    \ -1;\n   for (int i= 0; i < s; ++i) {\n    for (int x= que[i], j= pos[x], y,\
-    \ u, v, w, a, b; j < pos[x + 1]; ++j) {\n     if (y= g[j]; y == rt) continue;\n\
-    \     if (mate[y] == -1) return rematch(rematch, mate[y]= x, y), true;\n     if\
-    \ (id[y] == ts) {\n      if (a= u= f(f, x), b= v= f(f, y), w= rt; u == v) continue;\n\
-    \      for (; u != rt || v != rt; fs[u]= {x, y}, u= f(f, fs[mate[u]][0])) {\n\
-    \       if (v != rt) std::swap(u, v);\n       if (fs[u][0] == x && fs[u][1] ==\
-    \ y) {\n        w= u;\n        break;\n       }\n      }\n      for (; a != w;\
-    \ a= f(f, fs[mate[a]][0])) id[a]= ts, p[a]= w, que[s++]= a;\n      for (; b !=\
-    \ w; b= f(f, fs[mate[b]][0])) id[b]= ts, p[b]= w, que[s++]= b;\n     } else if\
-    \ (id[mate[y]] != ts) fs[y]= {-1, -1}, fs[mate[y]]= {x, -1}, id[mate[y]]= ts,\
-    \ p[mate[y]]= y, que[s++]= mate[y];\n    }\n   }\n   return false;\n  };\n  for\
-    \ (int rt= n; rt--;)\n   if (mate[rt] == -1) ts+= check(rt);\n }\n int match(int\
-    \ u) const { return mate[u]; }\n std::vector<std::array<int, 2>> max_matching()\
-    \ const {\n  std::vector<std::array<int, 2>> ret;\n  const int n= mate.size();\n\
-    \  for (int i= 0; i < n; ++i)\n   if (int j= mate[i]; i < j) ret.push_back({i,\
-    \ j});\n  return ret;\n }\n};\n#line 4 \"test/yosupo/bipartitematching.matching.test.cpp\"\
+    #line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\
+    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n\
+    \ template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
+    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
+    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
+    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
+    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
+    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
+    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s,\
+    \ d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return --s,\
+    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n friend std::istream\
+    \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
+    \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
+    \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
+    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): n(n), vector(m) {}\n size_t\
+    \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
+    \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
+    \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
+    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int\
+    \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
+    \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
+    \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
+    \ ++p[v]), (c[--p[(*this)[i].s]]= a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return\
+    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
+    \ { _ADJ((*this)[i].d, (*this)[i].s); }\n CSRArray<int> adjacency_edge(bool direct)\
+    \ const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/general_matching.hpp\"\
+    \nstd::vector<Edge> general_matching(const CSRArray<int> &adj) {\n const int n=\
+    \ adj.size();\n std::vector<int> pos(n + 1), que(n), id(n, -1), p(n), mate(n,\
+    \ -1);\n std::vector<Edge> fs(n), ret;\n auto rematch= [&](auto self, int u, int\
+    \ v) -> void {\n  int w;\n  if (w= mate[u], mate[u]= v; w == -1 || mate[w] !=\
+    \ u) return;\n  if (auto [x, y]= fs[u]; y == -1) self(self, mate[w]= x, w);\n\
+    \  else self(self, x, y), self(self, y, x);\n };\n int ts= 0;\n auto f= [&](auto\
+    \ self, int x) -> int { return id[x] != ts || p[x] == -1 ? x : (p[x]= self(self,\
+    \ p[x])); };\n auto check= [&](int rt) {\n  fs[rt]= {-1, -1}, id[rt]= ts, p[que[0]=\
+    \ rt]= -1;\n  for (int i= 0, s= 1; i < s; ++i) {\n   int x= que[i];\n   for (int\
+    \ y: adj[x]) {\n    if (y == rt) continue;\n    if (mate[y] == -1) return rematch(rematch,\
+    \ mate[y]= x, y), true;\n    if (id[y] == ts) {\n     int u= f(f, x), v= f(f,\
+    \ y), w= rt;\n     if (u == v) continue;\n     for (; u != rt || v != rt; fs[u]=\
+    \ {x, y}, u= f(f, fs[mate[u]].s)) {\n      if (v != rt) std::swap(u, v);\n   \
+    \   if (fs[u].s == x && fs[u].d == y) {\n       w= u;\n       break;\n      }\n\
+    \     }\n     for (int a= u; a != w; a= f(f, fs[mate[a]].s)) id[a]= ts, p[a]=\
+    \ w, que[s++]= a;\n     for (int b= v; b != w; b= f(f, fs[mate[b]].s)) id[b]=\
+    \ ts, p[b]= w, que[s++]= b;\n    } else if (id[mate[y]] != ts) fs[y]= {-1, -1},\
+    \ fs[mate[y]]= {x, -1}, id[mate[y]]= ts, p[mate[y]]= y, que[s++]= mate[y];\n \
+    \  }\n  }\n  return false;\n };\n for (int rt= n; rt--;)\n  if (mate[rt] == -1)\
+    \ ts+= check(rt);\n for (int i= 0; i < n; ++i)\n  if (int j= mate[i]; i < j) ret.emplace_back(i,\
+    \ j);\n return ret;\n}\nstd::vector<Edge> general_matching(const Graph &g) { return\
+    \ general_matching(g.adjacency_vertex(0)); }\n#line 5 \"test/yosupo/bipartitematching.matching.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int L, R, M;\n cin >> L >> R >> M;\n Matching graph(L + R);\n while (M--) {\n\
-    \  int a, b;\n  cin >> a >> b;\n  graph.add_edge(a, L + b);\n }\n graph.build();\n\
-    \ cout << graph.max_matching().size() << '\\n';\n for (int l= 0; l < L; ++l)\n\
-    \  if (int r= graph.match(l); r != -1) cout << l << \" \" << r - L << '\\n';\n\
-    \ return 0;\n}\n"
+    \ int L, R, M;\n cin >> L >> R >> M;\n Graph g(L + R, M);\n for (int i= 0; i <\
+    \ M; ++i) cin >> g[i], g[i].d+= L;\n auto ans= general_matching(g);\n cout <<\
+    \ ans.size() << '\\n';\n for (auto [l, r]: ans) cout << l << \" \" << r - L <<\
+    \ '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
-    \ <iostream>\n#include \"src/Graph/Matching.hpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n cin >> L\
-    \ >> R >> M;\n Matching graph(L + R);\n while (M--) {\n  int a, b;\n  cin >> a\
-    \ >> b;\n  graph.add_edge(a, L + b);\n }\n graph.build();\n cout << graph.max_matching().size()\
-    \ << '\\n';\n for (int l= 0; l < L; ++l)\n  if (int r= graph.match(l); r != -1)\
-    \ cout << l << \" \" << r - L << '\\n';\n return 0;\n}"
+    \ <iostream>\n#include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/general_matching.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int L, R, M;\n cin >> L >> R >> M;\n Graph g(L + R, M);\n for (int i= 0; i <\
+    \ M; ++i) cin >> g[i], g[i].d+= L;\n auto ans= general_matching(g);\n cout <<\
+    \ ans.size() << '\\n';\n for (auto [l, r]: ans) cout << l << \" \" << r - L <<\
+    \ '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Graph/Matching.hpp
+  - src/Graph/Graph.hpp
+  - src/Internal/ListRange.hpp
+  - src/Graph/general_matching.hpp
   isVerificationFile: true
   path: test/yosupo/bipartitematching.matching.test.cpp
   requiredBy: []
-  timestamp: '2023-03-16 02:01:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-15 14:27:01+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.matching.test.cpp
 layout: document

@@ -2,19 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3032.test.cpp
-    title: test/aoj/3032.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/bipartitematching.matching.test.cpp
-    title: test/yosupo/bipartitematching.matching.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/general_matching.test.cpp
-    title: test/yosupo/general_matching.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Matching.hpp\"\n#include <vector>\n#include <array>\n\
@@ -79,11 +70,8 @@ data:
   path: src/Graph/Matching.hpp
   requiredBy: []
   timestamp: '2023-03-14 17:54:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yosupo/bipartitematching.matching.test.cpp
-  - test/yosupo/general_matching.test.cpp
-  - test/aoj/3032.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Graph/Matching.hpp
 layout: document
 title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"

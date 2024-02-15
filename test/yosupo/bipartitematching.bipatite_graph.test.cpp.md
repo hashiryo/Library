@@ -9,8 +9,8 @@ data:
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
-    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
-      \u3084\u3064"
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -26,24 +26,26 @@ data:
     \ <iostream>\n#line 2 \"src/Graph/BipartiteGraph.hpp\"\n#include <array>\n#include\
     \ <algorithm>\n#include <numeric>\n#include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\
     \n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
-    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
-    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
-    #line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray\
-    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
-    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
-    \ {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
-    \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
-    \ + 1]}; }\n};\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph\
+    #include <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct\
+    \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
+    \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
+    \ return ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n\
+    \  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
+    \ const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n#line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class\
+    \ T> class CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n\
+    \ CsrArray()= default;\n CsrArray(const std::vector<T> &c, const std::vector<int>\
+    \ &p): csr(c), pos(p) {}\n size_t size() const { return pos.size() - 1; }\n const\
+    \ ConstListRange<T> operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin()\
+    \ + pos[i + 1]}; }\n};\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph\
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> col, pos, ord, pre,\
     \ mate, blg;\n CsrArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
     \ col(n, -1), pos(n + 1), ord(n), mate(n, -1), blg(n, -3), l(0) {}\n void add_edge(int\
@@ -127,7 +129,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 18:06:06+09:00'
+  timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.bipatite_graph.test.cpp

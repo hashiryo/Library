@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/SegmentArrangement.hpp
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
@@ -26,7 +26,7 @@ data:
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':question:'
@@ -36,19 +36,27 @@ data:
     path: src/Graph/Tree.hpp
     title: "\u6728"
   - icon: ':x:'
+    path: src/Graph/block_cut_tree.hpp
+    title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
+      \u5F35))"
+  - icon: ':question:'
+    path: src/Graph/general_matching.hpp
+    title: "\u4E00\u822C\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\
+      \u30B0"
+  - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
   - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   - icon: ':question:'
     path: src/NumberTheory/tables.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
       \u307F\u8FBC\u307F\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
@@ -70,7 +78,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1226.test.cpp
     title: test/aoj/1226.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':heavy_check_mark:'
@@ -82,70 +90,73 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3032.test.cpp
+    title: test/aoj/3032.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3176.test.cpp
     title: test/aoj/3176.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
   - icon: ':x:'
@@ -167,6 +178,9 @@ data:
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - icon: ':x:'
+    path: test/yosupo/bipartitematching.matching.test.cpp
+    title: test/yosupo/bipartitematching.matching.test.cpp
+  - icon: ':x:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
   - icon: ':x:'
@@ -175,6 +189,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/gcd_convolution.test.cpp
     title: test/yosupo/gcd_convolution.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/general_matching.test.cpp
+    title: test/yosupo/general_matching.test.cpp
   - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
@@ -301,32 +318,37 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
-    \ <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange {\n using\
-    \ Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin()\
-    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
-    \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
-    \  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i) os << (i ? \", \" : \"\
-    \") << r[i];\n  return os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
-    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
-    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
-    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
-    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i <\
-    \ e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n"
+    \ <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT,\
+    \ CT) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
+    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
+    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
+    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
+    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
+    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
+    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n"
   code: "#pragma once\n#include <vector>\n#include <iostream>\n#include <iterator>\n\
-    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
-    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};"
+    #include <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct\
+    \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
+    \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
+    \ return ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n\
+    \  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
+    \ const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Internal/ListRange.hpp
@@ -335,7 +357,9 @@ data:
   - src/NumberTheory/tables.hpp
   - src/NumberTheory/sum_on_primes.hpp
   - src/Geometry/SegmentArrangement.hpp
+  - src/Graph/block_cut_tree.hpp
   - src/Graph/BipartiteGraph.hpp
+  - src/Graph/general_matching.hpp
   - src/Graph/Rerooting.hpp
   - src/Graph/Tree.hpp
   - src/Graph/FunctionalGraph.hpp
@@ -347,7 +371,7 @@ data:
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
   - src/DataStructure/CsrArray.hpp
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp
@@ -383,6 +407,7 @@ data:
   - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/enumerate_primes.test.cpp
   - test/yosupo/scc.test.cpp
+  - test/yosupo/bipartitematching.matching.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
@@ -392,6 +417,7 @@ data:
   - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/general_matching.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
@@ -403,6 +429,7 @@ data:
   - test/aoj/1050.test.cpp
   - test/aoj/1198.test.cpp
   - test/aoj/1226.test.cpp
+  - test/aoj/3032.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/3176.test.cpp
   - test/aoj/GRL_3_A.test.cpp
@@ -433,7 +460,36 @@ data:
   - test/atcoder/abc179_c.mul_sum.test.cpp
 documentation_of: src/Internal/ListRange.hpp
 layout: document
-title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\u3084\
-  \u3064"
+title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217 \u4ED6"
 ---
 
+## `ListRange<T>` クラス
+
+|メンバ関数|概要|
+|---|---|
+|`size()`||
+|`begin()`||
+|`end()`||
+|`operator[](i)`|参照値を返す.|
+
+## `ConstListRange<T>` クラス
+
+|メンバ関数|概要|
+|---|---|
+|`size()`||
+|`begin()`||
+|`end()`||
+|`operator[](i)`|const 参照値を返す.|
+
+## `CSRArray<T>` クラス
+
+`vector<vector<T>>` の気持ちで使う．
+
+|メンバ関数|概要|
+|---|---|
+|`size()`||
+|`operator[](i)`| `ListRange` もしくは `ConstListRange` を返す.|
+
+
+## 参考
+[https://nachiavivias.github.io/cp-library/cpp/array/csr-array.html](https://nachiavivias.github.io/cp-library/cpp/array/csr-array.html)

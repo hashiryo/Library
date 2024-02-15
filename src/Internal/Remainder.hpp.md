@@ -185,7 +185,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -666,6 +666,9 @@ data:
     path: test/yukicoder/2578.test.cpp
     title: test/yukicoder/2578.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/3030.test.cpp
+    title: test/yukicoder/3030.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
   - icon: ':x:'
@@ -897,6 +900,7 @@ data:
   - test/yukicoder/737.test.cpp
   - test/yukicoder/1142.test.cpp
   - test/yukicoder/42.test.cpp
+  - test/yukicoder/3030.test.cpp
   - test/yukicoder/1848.zalgo.test.cpp
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/2264.test.cpp

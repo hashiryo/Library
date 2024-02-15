@@ -6,8 +6,8 @@ data:
     title: "CSR\u5F62\u5F0F"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
-    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
-      \u3084\u3064"
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy:
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
@@ -38,23 +38,25 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Graph/StronglyConnectedComponents.hpp\"\n#include <algorithm>\n\
     #include <numeric>\n#include <array>\n#line 2 \"src/Internal/ListRange.hpp\"\n\
-    #include <vector>\n#include <iostream>\n#include <iterator>\ntemplate <class T>\
-    \ struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n Iterator\
-    \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
-    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
-    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
-    #line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray\
-    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
-    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
-    \ {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
+    #include <vector>\n#include <iostream>\n#include <iterator>\n#include <type_traits>\n\
+    #define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using Iterator=\
+    \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
+    \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
+    \ const { return std::distance(bg, ed); } \\\n  CT &operator[](int i) const {\
+    \ return bg[i]; } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange,\
+    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
+    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
+    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
+    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
+    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
+    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
+    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
+    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
+    \ << ']';\n}\n#line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class\
+    \ CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()=\
+    \ default;\n CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c),\
+    \ pos(p) {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
     \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
     \ + 1]}; }\n};\n#line 6 \"src/Graph/StronglyConnectedComponents.hpp\"\nclass StronglyConnectedComponents\
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> csr, pos, id;\npublic:\n\
@@ -114,7 +116,7 @@ data:
   path: src/Graph/StronglyConnectedComponents.hpp
   requiredBy:
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1813.test.cpp

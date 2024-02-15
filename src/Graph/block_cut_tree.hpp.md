@@ -4,29 +4,35 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
-    path: src/Graph/block_cut_tree.hpp
-    title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
-      \u5F35))"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/3022.test.cpp
+    title: test/aoj/3022.test.cpp
+  - icon: ':x:'
+    path: test/aoj/GRL_3_A.test.cpp
+    title: test/aoj/GRL_3_A.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/bonnie-and-clyde.test.cpp
+    title: test/hackerrank/bonnie-and-clyde.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/biconnected_components.test.cpp
+    title: test/yosupo/biconnected_components.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1326.test.cpp
+    title: test/yukicoder/1326.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/biconnected_components
-    links:
-    - https://judge.yosupo.jp/problem/biconnected_components
-  bundledCode: "#line 1 \"test/yosupo/biconnected_components.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/biconnected_components\"\n#include <iostream>\n\
-    #line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\
-    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n\
-    \ template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    links: []
+  bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
+    \ <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT,\
+    \ CT) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
     \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
     \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
@@ -71,35 +77,61 @@ data:
     \ ret.add_edge(k, pp), ret.add_edge(k, p), low[p]= k++;\n  }\n for (int s= 0;\
     \ s < n; ++s)\n  if (!adj[s].size()) ret.add_edge(ret.add_vertex(), s);\n return\
     \ ret;\n}\nGraph block_cut_tree(const Graph &g) { return block_cut_tree(g.adjacency_vertex(0));\
-    \ }\n#line 5 \"test/yosupo/biconnected_components.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n\
-    \ cin >> N >> M;\n Graph g(N, M);\n for (int i= 0; i < M; ++i) cin >> g[i];\n\
-    \ auto bct= block_cut_tree(g).adjecency_vertex(0);\n int K= bct.size();\n cout\
-    \ << K - N << '\\n';\n for (int i= N; i < K; ++i) {\n  cout << bct[i].size();\n\
-    \  for (int v: bct[i]) cout << \" \" << v;\n  cout << '\\n';\n }\n return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
-    \n#include <iostream>\n#include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/block_cut_tree.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n cin >> N >> M;\n Graph g(N, M);\n for (int i= 0; i < M; ++i) cin\
-    \ >> g[i];\n auto bct= block_cut_tree(g).adjecency_vertex(0);\n int K= bct.size();\n\
-    \ cout << K - N << '\\n';\n for (int i= N; i < K; ++i) {\n  cout << bct[i].size();\n\
-    \  for (int v: bct[i]) cout << \" \" << v;\n  cout << '\\n';\n }\n return 0;\n\
-    }"
+    \ }\n"
+  code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\n// [0,n) : vertex\n// [n,n+b)\
+    \ : block\n// deg(v) > 1 -> articulation point\nGraph block_cut_tree(const CSRArray<int>\
+    \ &adj) {\n const int n= adj.size();\n std::vector<int> ord(n), par(n, -2), dat(adj.p.begin(),\
+    \ adj.p.begin() + n);\n int k= 0;\n for (int s= n, p; s--;)\n  if (par[s] == -2)\n\
+    \   for (par[p= s]= -1; p >= 0;) {\n    if (dat[p] == adj.p[p]) ord[k++]= p;\n\
+    \    if (dat[p] == adj.p[p + 1]) p= par[p];\n    else if (int q= adj.dat[dat[p]++];\
+    \ par[q] == -2) par[q]= p, p= q;\n   }\n for (int i= n; i--;) dat[ord[i]]= i;\n\
+    \ auto low= dat;\n for (int v= n; v--;)\n  for (int u: adj[v]) low[v]= std::min(low[v],\
+    \ dat[u]);\n for (int i= n; i--;)\n  if (int p= ord[i], pp= par[p]; pp >= 0) low[pp]=\
+    \ std::min(low[pp], low[p]);\n Graph ret(k);\n for (int p: ord)\n  if (par[p]\
+    \ >= 0) {\n   if (int pp= par[p]; low[p] < dat[pp]) ret.add_edge(low[p]= low[pp],\
+    \ p);\n   else ret.add_vertex(), ret.add_edge(k, pp), ret.add_edge(k, p), low[p]=\
+    \ k++;\n  }\n for (int s= 0; s < n; ++s)\n  if (!adj[s].size()) ret.add_edge(ret.add_vertex(),\
+    \ s);\n return ret;\n}\nGraph block_cut_tree(const Graph &g) { return block_cut_tree(g.adjacency_vertex(0));\
+    \ }"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
-  - src/Graph/block_cut_tree.hpp
-  isVerificationFile: true
-  path: test/yosupo/biconnected_components.test.cpp
+  isVerificationFile: false
+  path: src/Graph/block_cut_tree.hpp
   requiredBy: []
   timestamp: '2024-02-15 14:27:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/yosupo/biconnected_components.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yukicoder/1326.test.cpp
+  - test/yosupo/biconnected_components.test.cpp
+  - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/aoj/GRL_3_A.test.cpp
+  - test/aoj/3022.test.cpp
+documentation_of: src/Graph/block_cut_tree.hpp
 layout: document
-redirect_from:
-- /verify/test/yosupo/biconnected_components.test.cpp
-- /verify/test/yosupo/biconnected_components.test.cpp.html
-title: test/yosupo/biconnected_components.test.cpp
+title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\u5F35\
+  ))"
 ---
+![bct.svg](https://github.com/hashiryo/Library/blob/master/img/bct.drawio.svg?raw=true)
+
+|関数名|概要|
+|---|---|
+|`block_cut_tree(CSRArray<int> adj)` <br> `block_cut_tree(Graph g)` |無向グラフ g を二点連結成分分解して構築した block-cut-tree (拡張) を返す. <br> 引数は頂点 to 頂点の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) もしくは [`Graph`クラス](Graph.hpp) で無向グラフを渡す.　<br> 返り値は `Graph` クラス．|
+
+
+### block-cut-tree (拡張) について
+[参考](https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg)
+
+頂点数 $N$ の無向グラフ $g$ の二点連結成分の個数を $C$ とする.\
+block-cut-tree (拡張) は頂点数が $N+C$ の森である. 
+- $N$ 個の頂点 $0,1,\dots,N-1$ は元のグラフ $g$ の頂点に対応.
+  - 隣接頂点は属する二点連結成分を指す.
+  - 隣接頂点が複数  $(>1)\rightarrow$ 関節点
+- $C$ 個の頂点 $N,N+1,\dots,N+C-1$ は $g$ の二点連結成分に対応.
+  - 隣接頂点はその二点連結成分を構成する頂点を指す.
+
+## 問題例
+[AtCoder Regular Contest 062 F - AtCoDeerくんとグラフ色塗り](https://atcoder.jp/contests/arc062/tasks/arc062_d)
+## 参考
+[https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg](https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg)\
+[https://nachiavivias.github.io/cp-library/column/2022/01.html](https://nachiavivias.github.io/cp-library/column/2022/01.html)
