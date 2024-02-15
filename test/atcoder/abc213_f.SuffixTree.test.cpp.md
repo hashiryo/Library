@@ -108,22 +108,23 @@ data:
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
     \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s,\
     \ d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return --s,\
-    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n friend std::istream\
+    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
+    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
     \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
-    \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
-    \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
-    \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
-    \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].s]]= a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].d, (*this)[i].s); }\n CSRArray<int> adjacency_edge(bool direct)\
-    \ const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 5 \"src/Graph/HeavyLightDecomposition.hpp\"\
+    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
+    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
+    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
+    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
+    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
+    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
+    \ _ADJ\n#undef _ADJ_FOR\n};\n#line 5 \"src/Graph/HeavyLightDecomposition.hpp\"\
     \nclass HeavyLightDecomposition {\n std::vector<int> P, PP, D, I, L, R;\npublic:\n\
     \ HeavyLightDecomposition()= default;\n HeavyLightDecomposition(const Graph &g,\
     \ int root= 0): HeavyLightDecomposition(g.adjacency_vertex(0), root) {}\n HeavyLightDecomposition(const\
@@ -239,7 +240,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_f.SuffixTree.test.cpp
   requiredBy: []
-  timestamp: '2024-02-15 15:29:25+09:00'
+  timestamp: '2024-02-15 23:40:55+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_f.SuffixTree.test.cpp

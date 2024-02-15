@@ -9,16 +9,7 @@ data:
   - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
-  - icon: ':question:'
-    path: src/Graph/StronglyConnectedComponents.hpp
-    title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':x:'
-    path: src/Math/TwoSatisfiability.hpp
-    title: 2-SAT
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0366.test.cpp
-    title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
@@ -28,21 +19,6 @@ data:
   - icon: ':x:'
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/scc.test.cpp
-    title: test/yosupo/scc.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/two_sat.test.cpp
-    title: test/yosupo/two_sat.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1170.test.cpp
-    title: test/yukicoder/1170.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1293.scc.test.cpp
-    title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1813.test.cpp
-    title: test/yukicoder/1813.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -81,18 +57,10 @@ data:
   path: src/DataStructure/CsrArray.hpp
   requiredBy:
   - src/Graph/BipartiteGraph.hpp
-  - src/Graph/StronglyConnectedComponents.hpp
-  - src/Math/TwoSatisfiability.hpp
   timestamp: '2024-02-15 14:27:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1813.test.cpp
-  - test/yukicoder/1170.test.cpp
-  - test/yukicoder/1293.scc.test.cpp
-  - test/yosupo/scc.test.cpp
-  - test/yosupo/two_sat.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  - test/aoj/0366.test.cpp
   - test/aoj/3168.bm.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/DataStructure/CsrArray.hpp

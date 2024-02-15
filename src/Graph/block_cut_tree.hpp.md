@@ -47,33 +47,34 @@ data:
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
     \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s,\
     \ d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return --s,\
-    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n friend std::istream\
+    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
+    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
     \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
-    \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
-    \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
-    \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
-    \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].s]]= a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].d, (*this)[i].s); }\n CSRArray<int> adjacency_edge(bool direct)\
-    \ const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/block_cut_tree.hpp\"\
-    \n// [0,n) : vertex\n// [n,n+b) : block\n// deg(v) > 1 -> articulation point\n\
-    Graph block_cut_tree(const CSRArray<int> &adj) {\n const int n= adj.size();\n\
-    \ std::vector<int> ord(n), par(n, -2), dat(adj.p.begin(), adj.p.begin() + n);\n\
-    \ int k= 0;\n for (int s= n, p; s--;)\n  if (par[s] == -2)\n   for (par[p= s]=\
-    \ -1; p >= 0;) {\n    if (dat[p] == adj.p[p]) ord[k++]= p;\n    if (dat[p] ==\
-    \ adj.p[p + 1]) p= par[p];\n    else if (int q= adj.dat[dat[p]++]; par[q] == -2)\
-    \ par[q]= p, p= q;\n   }\n for (int i= n; i--;) dat[ord[i]]= i;\n auto low= dat;\n\
-    \ for (int v= n; v--;)\n  for (int u: adj[v]) low[v]= std::min(low[v], dat[u]);\n\
-    \ for (int i= n; i--;)\n  if (int p= ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp],\
-    \ low[p]);\n Graph ret(k);\n for (int p: ord)\n  if (par[p] >= 0) {\n   if (int\
-    \ pp= par[p]; low[p] < dat[pp]) ret.add_edge(low[p]= low[pp], p);\n   else ret.add_vertex(),\
+    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
+    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
+    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
+    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
+    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
+    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
+    \ _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/block_cut_tree.hpp\"\n// [0,n)\
+    \ : vertex\n// [n,n+b) : block\n// deg(v) > 1 -> articulation point\nGraph block_cut_tree(const\
+    \ CSRArray<int> &adj) {\n const int n= adj.size();\n std::vector<int> ord(n),\
+    \ par(n, -2), dat(adj.p.begin(), adj.p.begin() + n);\n int k= 0;\n for (int s=\
+    \ n, p; s--;)\n  if (par[s] == -2)\n   for (par[p= s]= -1; p >= 0;) {\n    if\
+    \ (dat[p] == adj.p[p]) ord[k++]= p;\n    if (dat[p] == adj.p[p + 1]) p= par[p];\n\
+    \    else if (int q= adj.dat[dat[p]++]; par[q] == -2) par[q]= p, p= q;\n   }\n\
+    \ for (int i= n; i--;) dat[ord[i]]= i;\n auto low= dat;\n for (int v= n; v--;)\n\
+    \  for (int u: adj[v]) low[v]= std::min(low[v], dat[u]);\n for (int i= n; i--;)\n\
+    \  if (int p= ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n\
+    \ Graph ret(k);\n for (int p: ord)\n  if (par[p] >= 0) {\n   if (int pp= par[p];\
+    \ low[p] < dat[pp]) ret.add_edge(low[p]= low[pp], p);\n   else ret.add_vertex(),\
     \ ret.add_edge(k, pp), ret.add_edge(k, p), low[p]= k++;\n  }\n for (int s= 0;\
     \ s < n; ++s)\n  if (!adj[s].size()) ret.add_edge(ret.add_vertex(), s);\n return\
     \ ret;\n}\nGraph block_cut_tree(const Graph &g) { return block_cut_tree(g.adjacency_vertex(0));\
@@ -99,7 +100,7 @@ data:
   isVerificationFile: false
   path: src/Graph/block_cut_tree.hpp
   requiredBy: []
-  timestamp: '2024-02-15 15:29:25+09:00'
+  timestamp: '2024-02-15 23:40:55+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1326.test.cpp

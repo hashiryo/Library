@@ -16,6 +16,9 @@ data:
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':x:'
+    path: src/Graph/StronglyConnectedComponents.hpp
+    title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':x:'
     path: src/Graph/block_cut_tree.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
       \u5F35))"
@@ -27,9 +30,15 @@ data:
     path: src/Graph/incidence_linear_system.hpp
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
   - icon: ':x:'
+    path: src/Math/TwoSatisfiability.hpp
+    title: 2-SAT
+  - icon: ':x:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0366.test.cpp
+    title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
@@ -94,8 +103,14 @@ data:
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
+    path: test/yosupo/scc.test.cpp
+    title: test/yosupo/scc.test.cpp
+  - icon: ':x:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/two_sat.test.cpp
+    title: test/yosupo/two_sat.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
@@ -103,11 +118,17 @@ data:
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1170.test.cpp
+    title: test/yukicoder/1170.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1211.test.cpp
     title: test/yukicoder/1211.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1242.test.cpp
     title: test/yukicoder/1242.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1293.scc.test.cpp
+    title: test/yukicoder/1293.scc.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
@@ -126,6 +147,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1813.test.cpp
+    title: test/yukicoder/1813.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
@@ -163,40 +187,42 @@ data:
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
     \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s,\
     \ d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return --s,\
-    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n friend std::istream\
+    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
+    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
     \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
-    \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
-    \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
-    \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
-    \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].s]]= a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].d, (*this)[i].s); }\n CSRArray<int> adjacency_edge(bool direct)\
-    \ const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n"
+    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
+    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
+    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
+    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
+    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
+    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
+    \ _ADJ\n#undef _ADJ_FOR\n};\n"
   code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Edge {\n int\
     \ s, d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return\
-    \ --s, --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n friend std::istream\
+    \ --s, --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
+    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
     \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
-    \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
-    \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
-    \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
-    \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].s]]= a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].d, (*this)[i].s); }\n CSRArray<int> adjacency_edge(bool direct)\
-    \ const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};"
+    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
+    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
+    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
+    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
+    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
+    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
+    \ _ADJ\n#undef _ADJ_FOR\n};"
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
@@ -207,9 +233,11 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
+  - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
-  timestamp: '2024-02-15 15:29:25+09:00'
+  - src/Math/TwoSatisfiability.hpp
+  timestamp: '2024-02-15 23:40:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1494.test.cpp
@@ -223,18 +251,24 @@ data:
   - test/yukicoder/1295.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
+  - test/yukicoder/1813.test.cpp
+  - test/yukicoder/1170.test.cpp
   - test/yukicoder/922.test.cpp
   - test/yukicoder/1242.test.cpp
   - test/yukicoder/768.test.cpp
+  - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yosupo/biconnected_components.test.cpp
+  - test/yosupo/scc.test.cpp
   - test/yosupo/bipartitematching.matching.test.cpp
+  - test/yosupo/two_sat.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/general_matching.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/3032.test.cpp
   - test/aoj/GRL_3_A.test.cpp
+  - test/aoj/0366.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
@@ -288,7 +322,9 @@ for(int v=0;v<n;++v)
 
 |その他関数|概要|
 |---|---|
+|`operator<(Edge e1, Edge e2)`|辞書順比較．|
 |`operator>>(istream& is,Edge &e)`| `s d` のフォーマットの入力に対応.  |
+|`operator<<(ostream& is,Edge &e)`| `(s, d)` のフォーマットで出力.  |
 
 
 ## `Graph` クラス
@@ -296,7 +332,11 @@ for(int v=0;v<n;++v)
 `vector<Edge>` を継承.\
 辺の配列の役割を担ったクラス.
 
-|名前|概要|
+|メンバ変数|概要|
+|---|---|
+|`n`|頂点数を意味する．|
+
+|メンバ関数|概要|
 |---|---|
 |`Graph(n=0,m=0)`|コンストラクタ．頂点の数 $n$ と 辺の数 $m$ を渡す． <br> 辺はすべて $(0,0)$ で初期化．|
 |`vertex_size()`|頂点の数を返す．|
