@@ -1,6 +1,13 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -9,7 +16,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1868.test.cpp
     title: test/yukicoder/1868.test.cpp
   _isVerificationFailed: true
@@ -17,47 +24,78 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/RangeToRangeGraph.hpp\"\n#include <vector>\n#include\
-    \ <tuple>\ntemplate <typename T= int> class RangeToRangeGraph {\n const int n;\n\
-    \ int nn;\n std::vector<std::tuple<int, int, T>> es;\n inline int to_upper_idx(int\
-    \ i) const { return i >= n ? i - n : n + i; }\n inline int to_lower_idx(int i)\
-    \ const { return i >= n ? i - n : n + n + i; }\npublic:\n RangeToRangeGraph(int\
-    \ n): n(n), nn(n * 3) {\n  for (int i= 2; i < n + n; ++i) add(to_upper_idx(i /\
-    \ 2), to_upper_idx(i));\n  for (int i= 2; i < n + n; ++i) add(to_lower_idx(i),\
-    \ to_lower_idx(i / 2));\n }\n void add(int s, int t, T w= 0) { es.emplace_back(s,\
-    \ t, w); }\n // [s_l, s_r) -> t\n void add_from_range(int s_l, int s_r, int t,\
-    \ T w= 0) {\n  for (int l= s_l + n, r= s_r + n; l < r; l>>= 1, r>>= 1) {\n   if\
-    \ (l & 1) add(to_lower_idx(l++), t, w);\n   if (r & 1) add(to_lower_idx(--r),\
+  bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
+    \ <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT,\
+    \ CT) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
+    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
+    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
+    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
+    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
+    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
+    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int,\
+    \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
+    \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
+    \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
+    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
+    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
+    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"\
+    src/Graph/RangeToRangeGraph.hpp\"\ntemplate <typename T= int> class RangeToRangeGraph\
+    \ {\n int n;\n inline int to_upper_idx(int i) const { return i >= n ? i - n :\
+    \ n + i; }\n inline int to_lower_idx(int i) const { return i >= n ? i - n : n\
+    \ + n + i; }\npublic:\n Graph graph;\n std::vector<T> weight;\n RangeToRangeGraph(int\
+    \ n): n(n), graph(n * 3) {\n  for (int i= 2; i < n + n; ++i) add(to_upper_idx(i\
+    \ / 2), to_upper_idx(i));\n  for (int i= 2; i < n + n; ++i) add(to_lower_idx(i),\
+    \ to_lower_idx(i / 2));\n }\n void add(int s, int t, T w= 0) { graph.add_edge(s,\
+    \ t), weight.emplace_back(w); }\n // [s_l, s_r) -> t\n void add_from_range(int\
+    \ s_l, int s_r, int t, T w= 0) {\n  for (int l= s_l + n, r= s_r + n; l < r; l>>=\
+    \ 1, r>>= 1) {\n   if (l & 1) add(to_lower_idx(l++), t, w);\n   if (r & 1) add(to_lower_idx(--r),\
     \ t, w);\n  }\n }\n // s -> [t_l, t_r)\n void add_to_range(int s, int t_l, int\
     \ t_r, T w= 0) {\n  for (int l= t_l + n, r= t_r + n; l < r; l>>= 1, r>>= 1) {\n\
     \   if (l & 1) add(s, to_upper_idx(l++), w);\n   if (r & 1) add(s, to_upper_idx(--r),\
     \ w);\n  }\n }\n // [s_l, s_r) -> [t_l, t_r)\n void add_from_range_to_range(int\
-    \ s_l, int s_r, int t_l, int t_r, T w= 0) { add_from_range(s_l, s_r, nn, w), add_to_range(nn,\
-    \ t_l, t_r, 0), ++nn; }\n int node_size() const { return nn; }\n std::vector<std::tuple<int,\
-    \ int, T>> get_edges() const { return es; }\n};\n"
-  code: "#pragma once\n#include <vector>\n#include <tuple>\ntemplate <typename T=\
-    \ int> class RangeToRangeGraph {\n const int n;\n int nn;\n std::vector<std::tuple<int,\
-    \ int, T>> es;\n inline int to_upper_idx(int i) const { return i >= n ? i - n\
-    \ : n + i; }\n inline int to_lower_idx(int i) const { return i >= n ? i - n :\
-    \ n + n + i; }\npublic:\n RangeToRangeGraph(int n): n(n), nn(n * 3) {\n  for (int\
-    \ i= 2; i < n + n; ++i) add(to_upper_idx(i / 2), to_upper_idx(i));\n  for (int\
-    \ i= 2; i < n + n; ++i) add(to_lower_idx(i), to_lower_idx(i / 2));\n }\n void\
-    \ add(int s, int t, T w= 0) { es.emplace_back(s, t, w); }\n // [s_l, s_r) -> t\n\
-    \ void add_from_range(int s_l, int s_r, int t, T w= 0) {\n  for (int l= s_l +\
-    \ n, r= s_r + n; l < r; l>>= 1, r>>= 1) {\n   if (l & 1) add(to_lower_idx(l++),\
+    \ s_l, int s_r, int t_l, int t_r, T w= 0) { add_from_range(s_l, s_r, graph.n,\
+    \ w), add_to_range(graph.n, t_l, t_r, 0), ++graph.n; }\n};\n"
+  code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\ntemplate <typename T= int>\
+    \ class RangeToRangeGraph {\n int n;\n inline int to_upper_idx(int i) const {\
+    \ return i >= n ? i - n : n + i; }\n inline int to_lower_idx(int i) const { return\
+    \ i >= n ? i - n : n + n + i; }\npublic:\n Graph graph;\n std::vector<T> weight;\n\
+    \ RangeToRangeGraph(int n): n(n), graph(n * 3) {\n  for (int i= 2; i < n + n;\
+    \ ++i) add(to_upper_idx(i / 2), to_upper_idx(i));\n  for (int i= 2; i < n + n;\
+    \ ++i) add(to_lower_idx(i), to_lower_idx(i / 2));\n }\n void add(int s, int t,\
+    \ T w= 0) { graph.add_edge(s, t), weight.emplace_back(w); }\n // [s_l, s_r) ->\
+    \ t\n void add_from_range(int s_l, int s_r, int t, T w= 0) {\n  for (int l= s_l\
+    \ + n, r= s_r + n; l < r; l>>= 1, r>>= 1) {\n   if (l & 1) add(to_lower_idx(l++),\
     \ t, w);\n   if (r & 1) add(to_lower_idx(--r), t, w);\n  }\n }\n // s -> [t_l,\
     \ t_r)\n void add_to_range(int s, int t_l, int t_r, T w= 0) {\n  for (int l= t_l\
     \ + n, r= t_r + n; l < r; l>>= 1, r>>= 1) {\n   if (l & 1) add(s, to_upper_idx(l++),\
     \ w);\n   if (r & 1) add(s, to_upper_idx(--r), w);\n  }\n }\n // [s_l, s_r) ->\
     \ [t_l, t_r)\n void add_from_range_to_range(int s_l, int s_r, int t_l, int t_r,\
-    \ T w= 0) { add_from_range(s_l, s_r, nn, w), add_to_range(nn, t_l, t_r, 0), ++nn;\
-    \ }\n int node_size() const { return nn; }\n std::vector<std::tuple<int, int,\
-    \ T>> get_edges() const { return es; }\n};"
-  dependsOn: []
+    \ T w= 0) { add_from_range(s_l, s_r, graph.n, w), add_to_range(graph.n, t_l, t_r,\
+    \ 0), ++graph.n; }\n};"
+  dependsOn:
+  - src/Graph/Graph.hpp
+  - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/RangeToRangeGraph.hpp
   requiredBy: []
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2024-02-16 12:23:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1868.test.cpp

@@ -232,7 +232,7 @@ data:
     - icon: ':question:'
       path: src/Graph/Rerooting.hpp
       title: "\u5168\u65B9\u4F4D\u6728DP"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':question:'
@@ -529,7 +529,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0356.test.cpp
       title: test/aoj/0356.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0366.test.cpp
       title: test/aoj/0366.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1164,7 +1164,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2057,7 +2057,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1867.test.cpp
       title: test/yukicoder/1867.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1868.test.cpp
       title: test/yukicoder/1868.test.cpp
     - icon: ':x:'

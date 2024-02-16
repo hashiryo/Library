@@ -13,9 +13,12 @@ data:
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
+    path: src/Graph/RangeToRangeGraph.hpp
+    title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
+  - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':x:'
@@ -36,7 +39,7 @@ data:
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,6 +51,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3506.test.cpp
+    title: test/aoj/3506.test.cpp
   - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
@@ -151,6 +157,9 @@ data:
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1868.test.cpp
+    title: test/yukicoder/1868.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
   - icon: ':x:'
@@ -185,44 +194,40 @@ data:
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s,\
-    \ d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return --s,\
-    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
-    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
-    \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
-    \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
-    \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
-    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
-    \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
-    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
-    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
-    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
-    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
-    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
-    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
-    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
-    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
-    \ _ADJ\n#undef _ADJ_FOR\n};\n"
-  code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Edge {\n int\
-    \ s, d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return\
-    \ --s, --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
-    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
-    \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
-    \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
-    \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
-    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
-    \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
-    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
-    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
-    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
-    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
-    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
-    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
-    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
-    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
-    \ _ADJ\n#undef _ADJ_FOR\n};"
+    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int,\
+    \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
+    \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
+    \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
+    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
+    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
+    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n"
+  code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Edge: std::pair<int,\
+    \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
+    \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
+    \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
+    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
+    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
+    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};"
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
@@ -231,18 +236,20 @@ data:
   - src/Graph/block_cut_tree.hpp
   - src/Graph/general_matching.hpp
   - src/Graph/Rerooting.hpp
+  - src/Graph/RangeToRangeGraph.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-15 23:40:55+09:00'
+  timestamp: '2024-02-16 12:23:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1494.test.cpp
   - test/yukicoder/1211.test.cpp
   - test/yukicoder/1976.test.cpp
+  - test/yukicoder/1868.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
@@ -269,6 +276,7 @@ data:
   - test/aoj/3032.test.cpp
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/0366.test.cpp
+  - test/aoj/3506.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
@@ -308,12 +316,9 @@ for(int v=0;v<n;++v)
 ```
 
 ## `Edge` クラス
-辺 $e=(s,d)$ を表すクラス．
-
-|メンバ変数|概要|
-|---|---|
-|`s`|辺の端点の一つ．有向辺なら始点を表す．|
-|`d`|辺の端点の一つ．有向辺なら終点を表す．|
+`pair<int,int>` を継承 \
+辺 $e=(s,d)$ を表すクラス．\
+`first` で始点，`second` で終点を表現する.
 
 |メンバ関数|概要|
 |---|---|
@@ -324,7 +329,6 @@ for(int v=0;v<n;++v)
 |---|---|
 |`operator<(Edge e1, Edge e2)`|辞書順比較．|
 |`operator>>(istream& is,Edge &e)`| `s d` のフォーマットの入力に対応.  |
-|`operator<<(ostream& is,Edge &e)`| `(s, d)` のフォーマットで出力.  |
 
 
 ## `Graph` クラス

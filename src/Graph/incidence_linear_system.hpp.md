@@ -33,35 +33,34 @@ data:
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s,\
-    \ d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return --s,\
-    \ --d, *this; }\n int to(int u) const { return u ^ s ^ d; }\n bool operator<(const\
-    \ Edge &e) const { return s != e.s ? s < e.s : d < e.d; }\n friend std::istream\
-    \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
-    \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
-    \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
-    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
-    \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
-    \ }\n int add_vertex() { return n++; }\n int add_edge(int s, int d) { return emplace_back(s,\
-    \ d), size() - 1; }\n int add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define\
-    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
-    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b)\
-    \ \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
-    \ c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]=\
-    \ a, c[--p[(*this)[i].d]]= b)) \\\n } \\\n return {std::move(c), std::move(p)}\n\
-    \ CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].d, (*this)[i].s);\
-    \ }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i, i); }\n#undef\
-    \ _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/incidence_linear_system.hpp\"\
-    \ntemplate <class T> std::vector<T> incidence_linear_system(const Graph &g, std::vector<T>\
-    \ b) {\n const int n= g.vertex_size();\n assert((int)b.size() == n);\n std::vector<T>\
-    \ x(g.edge_size());\n auto adje= g.adjecency_edge(0);\n std::vector<int> pre(n,\
-    \ -2), ei(adje.p.begin(), adje.p.begin() + n);\n for (int s= 0, p, e; s < n; ++s)\n\
-    \  if (pre[s] == -2)\n   for (pre[p= s]= -1;;) {\n    if (ei[p] == adje.p[p +\
-    \ 1]) {\n     if (e= pre[p]; e < 0) {\n      if (b[p] != T()) return {};  // no\
-    \ solution\n      break;\n     }\n     T tmp= b[p];\n     p= g[e].to(p);\n   \
-    \  if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]= tmp ^ b[p];\n     else\
-    \ x[e]= g[e].d == p ? -tmp : tmp, b[p]+= tmp;\n    } else if (int q= g[e= adje.dat[ei[p]++]].to(p);\
-    \ pre[q] == -2) pre[p= q]= e;\n   }\n return x;\n}\n"
+    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int,\
+    \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
+    \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
+    \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
+    \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
+    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
+    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
+    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"\
+    src/Graph/incidence_linear_system.hpp\"\ntemplate <class T> std::vector<T> incidence_linear_system(const\
+    \ Graph &g, std::vector<T> b) {\n const int n= g.vertex_size();\n assert((int)b.size()\
+    \ == n);\n std::vector<T> x(g.edge_size());\n auto adje= g.adjecency_edge(0);\n\
+    \ std::vector<int> pre(n, -2), ei(adje.p.begin(), adje.p.begin() + n);\n for (int\
+    \ s= 0, p, e; s < n; ++s)\n  if (pre[s] == -2)\n   for (pre[p= s]= -1;;) {\n \
+    \   if (ei[p] == adje.p[p + 1]) {\n     if (e= pre[p]; e < 0) {\n      if (b[p]\
+    \ != T()) return {};  // no solution\n      break;\n     }\n     T tmp= b[p];\n\
+    \     p= g[e].to(p);\n     if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]=\
+    \ tmp ^ b[p];\n     else x[e]= g[e].second == p ? -tmp : tmp, b[p]+= tmp;\n  \
+    \  } else if (int q= g[e= adje.dat[ei[p]++]].to(p); pre[q] == -2) pre[p= q]= e;\n\
+    \   }\n return x;\n}\n"
   code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\ntemplate <class T> std::vector<T>\
     \ incidence_linear_system(const Graph &g, std::vector<T> b) {\n const int n= g.vertex_size();\n\
     \ assert((int)b.size() == n);\n std::vector<T> x(g.edge_size());\n auto adje=\
@@ -70,16 +69,16 @@ data:
     \ s]= -1;;) {\n    if (ei[p] == adje.p[p + 1]) {\n     if (e= pre[p]; e < 0) {\n\
     \      if (b[p] != T()) return {};  // no solution\n      break;\n     }\n   \
     \  T tmp= b[p];\n     p= g[e].to(p);\n     if constexpr (std::is_same_v<T, bool>)\
-    \ x[e]= tmp, b[p]= tmp ^ b[p];\n     else x[e]= g[e].d == p ? -tmp : tmp, b[p]+=\
-    \ tmp;\n    } else if (int q= g[e= adje.dat[ei[p]++]].to(p); pre[q] == -2) pre[p=\
-    \ q]= e;\n   }\n return x;\n}"
+    \ x[e]= tmp, b[p]= tmp ^ b[p];\n     else x[e]= g[e].second == p ? -tmp : tmp,\
+    \ b[p]+= tmp;\n    } else if (int q= g[e= adje.dat[ei[p]++]].to(p); pre[q] ==\
+    \ -2) pre[p= q]= e;\n   }\n return x;\n}"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/incidence_linear_system.hpp
   requiredBy: []
-  timestamp: '2024-02-15 23:40:55+09:00'
+  timestamp: '2024-02-16 12:23:49+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp

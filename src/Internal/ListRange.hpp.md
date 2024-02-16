@@ -27,9 +27,12 @@ data:
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
+    path: src/Graph/RangeToRangeGraph.hpp
+    title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
+  - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
@@ -66,7 +69,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0273.test.cpp
     title: test/aoj/0273.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
@@ -105,6 +108,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3176.test.cpp
     title: test/aoj/3176.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3506.test.cpp
+    title: test/aoj/3506.test.cpp
   - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
@@ -129,7 +135,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
   - icon: ':x:'
@@ -292,6 +298,9 @@ data:
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1868.test.cpp
+    title: test/yukicoder/1868.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
   - icon: ':x:'
@@ -367,6 +376,7 @@ data:
   - src/Graph/BipartiteGraph.hpp
   - src/Graph/general_matching.hpp
   - src/Graph/Rerooting.hpp
+  - src/Graph/RangeToRangeGraph.hpp
   - src/Graph/Tree.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/DulmageMendelsohn.hpp
@@ -387,6 +397,7 @@ data:
   - test/yukicoder/1019.numth.test.cpp
   - test/yukicoder/1976.test.cpp
   - test/yukicoder/1600.Seg2D.test.cpp
+  - test/yukicoder/1868.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
@@ -441,6 +452,7 @@ data:
   - test/aoj/3176.test.cpp
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/0366.test.cpp
+  - test/aoj/3506.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/3168.bm.test.cpp
   - test/aoj/GRL_5_A.test.cpp
