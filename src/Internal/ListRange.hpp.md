@@ -26,7 +26,7 @@ data:
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Graph/RangeToRangeGraph.hpp
     title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
   - icon: ':question:'
@@ -49,6 +49,9 @@ data:
   - icon: ':x:'
     path: src/Graph/incidence_linear_system.hpp
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
+  - icon: ':question:'
+    path: src/Graph/minimum_spanning_aborescence.hpp
+    title: src/Graph/minimum_spanning_aborescence.hpp
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
@@ -94,6 +97,9 @@ data:
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2647.test.cpp
+    title: test/aoj/2647.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':x:'
@@ -108,9 +114,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3176.test.cpp
     title: test/aoj/3176.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_B.test.cpp
+    title: test/aoj/GRL_2_B.test.cpp
   - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
@@ -144,10 +153,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
@@ -195,6 +204,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/directedmst.test.cpp
+    title: test/yosupo/directedmst.test.cpp
   - icon: ':x:'
     path: test/yosupo/enumerate_primes.test.cpp
     title: test/yosupo/enumerate_primes.test.cpp
@@ -380,6 +392,7 @@ data:
   - src/Graph/Tree.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/DulmageMendelsohn.hpp
+  - src/Graph/minimum_spanning_aborescence.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/Graph.hpp
@@ -438,6 +451,7 @@ data:
   - test/yosupo/general_matching.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
+  - test/yosupo/directedmst.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
@@ -448,6 +462,7 @@ data:
   - test/aoj/1198.test.cpp
   - test/aoj/1226.test.cpp
   - test/aoj/3032.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/3176.test.cpp
   - test/aoj/GRL_3_A.test.cpp
@@ -458,6 +473,7 @@ data:
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
   - test/aoj/1033.test.cpp
+  - test/aoj/2647.test.cpp
   - test/aoj/0273.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc136_d.test.cpp

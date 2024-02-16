@@ -12,7 +12,7 @@ data:
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Graph/RangeToRangeGraph.hpp
     title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
   - icon: ':question:'
@@ -32,6 +32,9 @@ data:
   - icon: ':x:'
     path: src/Graph/incidence_linear_system.hpp
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
+  - icon: ':question:'
+    path: src/Graph/minimum_spanning_aborescence.hpp
+    title: src/Graph/minimum_spanning_aborescence.hpp
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
@@ -45,15 +48,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2647.test.cpp
+    title: test/aoj/2647.test.cpp
   - icon: ':x:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_B.test.cpp
+    title: test/aoj/GRL_2_B.test.cpp
   - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
@@ -72,7 +81,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
   - icon: ':x:'
@@ -102,6 +111,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/bipartitematching.matching.test.cpp
     title: test/yosupo/bipartitematching.matching.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/directedmst.test.cpp
+    title: test/yosupo/directedmst.test.cpp
   - icon: ':x:'
     path: test/yosupo/general_matching.test.cpp
     title: test/yosupo/general_matching.test.cpp
@@ -238,6 +250,7 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/RangeToRangeGraph.hpp
   - src/Graph/FunctionalGraph.hpp
+  - src/Graph/minimum_spanning_aborescence.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/incidence_linear_system.hpp
@@ -272,14 +285,17 @@ data:
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/yosupo/directedmst.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/3032.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/0366.test.cpp
   - test/aoj/3506.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
+  - test/aoj/2647.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp

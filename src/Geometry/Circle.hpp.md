@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
   _extendedRequiredBy:

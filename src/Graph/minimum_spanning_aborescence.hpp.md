@@ -8,34 +8,37 @@ data:
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
-    path: src/Graph/minimum_spanning_aborescence.hpp
-    title: src/Graph/minimum_spanning_aborescence.hpp
-  - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2647.test.cpp
+    title: test/aoj/2647.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_B.test.cpp
+    title: test/aoj/GRL_2_B.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/directedmst.test.cpp
+    title: test/yosupo/directedmst.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B
-  bundledCode: "#line 1 \"test/aoj/GRL_2_B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B\"\
-    \n#include <iostream>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
-    #line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n#include <type_traits>\n\
-    #define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using Iterator=\
-    \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
-    \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
-    \ const { return std::distance(bg, ed); } \\\n  CT &operator[](int i) const {\
-    \ return bg[i]; } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange,\
-    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
-    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
-    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
-    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    links: []
+  bundledCode: "#line 2 \"src/Graph/minimum_spanning_aborescence.hpp\"\n#include <utility>\n\
+    #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
+    #include <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name,\
+    \ IT, CT) \\\n template <class T> struct name { \\\n  using Iterator= typename\
+    \ std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return\
+    \ bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size() const {\
+    \ return std::distance(bg, ed); } \\\n  CT &operator[](int i) const { return bg[i];\
+    \ } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange, const_iterator,\
+    \ const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T>\
+    \ dat;\n std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n\
+    \ ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i\
+    \ + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
     \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
     \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
     \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
@@ -57,10 +60,9 @@ data:
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
     \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
     \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 2 \"\
-    src/Graph/minimum_spanning_aborescence.hpp\"\n#include <utility>\n#include <cassert>\n\
-    #line 3 \"src/DataStructure/UnionFind.hpp\"\n#include <algorithm>\ntemplate <bool\
-    \ undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
+    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"\
+    src/DataStructure/UnionFind.hpp\"\n#include <algorithm>\ntemplate <bool undoable=\
+    \ false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
     \ int>> his;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int\
     \ v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v])\
     \ std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n \
@@ -96,32 +98,49 @@ data:
     \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cycles.rbegin(); it != cycles.rend();\
     \ ++it) {\n  auto [e, t]= *it;\n  int r= uf2.root(g[e].second);\n  uf2.rollback(t);\n\
     \  int v= uf2.root(g[edge[r]].second);\n  edge[v]= std::exchange(edge[r], e);\n\
-    \ }\n edge.erase(edge.begin() + root);\n return {sum, edge};\n}\n#line 5 \"test/aoj/GRL_2_B.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M, r;\n cin >> N >> M >> r;\n Graph g(N, M);\n vector<int> w(M);\n for\
-    \ (int i= 0; i < M; ++i) cin >> g[i] >> w[i];\n auto [ans, _]= minimum_spanning_aborescence(g,\
-    \ w, r);\n cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B\"\
-    \n#include <iostream>\n#include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/minimum_spanning_aborescence.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M, r;\n cin >> N >> M >> r;\n Graph g(N, M);\n vector<int> w(M);\n for\
-    \ (int i= 0; i < M; ++i) cin >> g[i] >> w[i];\n auto [ans, _]= minimum_spanning_aborescence(g,\
-    \ w, r);\n cout << ans << '\\n';\n return 0;\n}"
+    \ }\n edge.erase(edge.begin() + root);\n return {sum, edge};\n}\n"
+  code: "#pragma once\n#include <utility>\n#include <cassert>\n#include \"src/Graph/Graph.hpp\"\
+    \n#include \"src/DataStructure/UnionFind.hpp\"\n// return edge ids of minimum\
+    \ spanning aborescence\ntemplate <class cost_t> std::pair<cost_t, std::vector<int>>\
+    \ minimum_spanning_aborescence(const Graph &g, std::vector<cost_t> w, int root)\
+    \ {\n const int n= g.vertex_size(), m= g.edge_size();\n assert((int)w.size() ==\
+    \ m);\n std::vector<cost_t> lz(m);\n std::vector<std::pair<int, int>> lr(m, {-1,\
+    \ -1}), cycles;\n std::vector<int> top(n, -1), edge(n, -1);\n UnionFind uf(n);\n\
+    \ UnionFind<true> uf2(n);\n auto upd= [&](int i, cost_t v) { w[i]-= v, lz[i]+=\
+    \ v; };\n auto push= [&](int i) {\n  auto [l, r]= lr[i];\n  if (l != -1) upd(l,\
+    \ lz[i]);\n  if (r != -1) upd(r, lz[i]);\n  lz[i]= 0;\n };\n auto merge= [&](auto\
+    \ &&rec, int u, int v) -> int {\n  if (u == -1) return v;\n  if (v == -1) return\
+    \ u;\n  if (w[v] < w[u]) std::swap(u, v);\n  auto &[l, r]= lr[u];\n  return push(u),\
+    \ r= rec(rec, r, v), std::swap(l, r), u;\n };\n for (int i= m; i--;) {\n  auto\
+    \ [s, d]= g[i];\n  top[d]= merge(merge, top[d], i);\n }\n cost_t sum= 0;\n for\
+    \ (int i= n; i--;) {\n  if (i == root) continue;\n  for (int v= i;;) {\n   if\
+    \ (top[v] == -1) return {cost_t(), std::vector<int>()};\n   int nxt= uf2.root(g[edge[v]=\
+    \ top[v]].first);\n   if (sum+= w[edge[v]], upd(edge[v], w[edge[v]]); uf.unite(v,\
+    \ nxt)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v, nxt); v= r,\
+    \ nxt= uf2.root(g[edge[nxt]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
+    \ top[nxt]);\n   cycles.emplace_back(edge[v], t);\n   while (top[v] != -1 && uf2.same(v,\
+    \ g[top[v]].first)) {\n    auto [l, r]= lr[top[v]];\n    push(top[v]), top[v]=\
+    \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cycles.rbegin(); it != cycles.rend();\
+    \ ++it) {\n  auto [e, t]= *it;\n  int r= uf2.root(g[e].second);\n  uf2.rollback(t);\n\
+    \  int v= uf2.root(g[edge[r]].second);\n  edge[v]= std::exchange(edge[r], e);\n\
+    \ }\n edge.erase(edge.begin() + root);\n return {sum, edge};\n}"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
-  - src/Graph/minimum_spanning_aborescence.hpp
   - src/DataStructure/UnionFind.hpp
-  isVerificationFile: true
-  path: test/aoj/GRL_2_B.test.cpp
+  isVerificationFile: false
+  path: src/Graph/minimum_spanning_aborescence.hpp
   requiredBy: []
   timestamp: '2024-02-17 00:01:28+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: test/aoj/GRL_2_B.test.cpp
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - test/yosupo/directedmst.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/2647.test.cpp
+documentation_of: src/Graph/minimum_spanning_aborescence.hpp
 layout: document
 redirect_from:
-- /verify/test/aoj/GRL_2_B.test.cpp
-- /verify/test/aoj/GRL_2_B.test.cpp.html
-title: test/aoj/GRL_2_B.test.cpp
+- /library/src/Graph/minimum_spanning_aborescence.hpp
+- /library/src/Graph/minimum_spanning_aborescence.hpp.html
+title: src/Graph/minimum_spanning_aborescence.hpp
 ---

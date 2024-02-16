@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -152,22 +152,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Geometry/Circle.hpp
       title: "\u5186"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Geometry/Convex.hpp
       title: "\u51F8\u591A\u89D2\u5F62"
     - icon: ':heavy_check_mark:'
       path: src/Geometry/IncrementalConvexHull.hpp
       title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Geometry/Line.hpp
       title: "\u76F4\u7DDA"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Geometry/Point.hpp
       title: "\u70B9"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Geometry/Polygon.hpp
       title: "\u591A\u89D2\u5F62"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Geometry/Segment.hpp
       title: "\u7DDA\u5206"
     - icon: ':heavy_check_mark:'
@@ -190,7 +190,7 @@ data:
     - icon: ':warning:'
       path: src/Graph/BiConnectedComponents.hpp
       title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Graph/BipartiteEdgeColoring.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
     - icon: ':question:'
@@ -214,7 +214,7 @@ data:
     - icon: ':question:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "\u91CD\u8EFD\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
     - icon: ':warning:'
@@ -223,10 +223,10 @@ data:
     - icon: ':warning:'
       path: src/Graph/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Graph/RangeToRangeGraph.hpp
       title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
     - icon: ':question:'
@@ -253,6 +253,9 @@ data:
     - icon: ':x:'
       path: src/Graph/incidence_linear_system.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
+    - icon: ':question:'
+      path: src/Graph/minimum_spanning_aborescence.hpp
+      title: src/Graph/minimum_spanning_aborescence.hpp
   - name: src/Internal
     pages:
     - icon: ':question:'
@@ -517,7 +520,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0334.test.cpp
       title: test/aoj/0334.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/0342.test.cpp
       title: test/aoj/0342.test.cpp
     - icon: ':heavy_check_mark:'
@@ -829,7 +832,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2893.onlinedicon.test.cpp
       title: test/aoj/2893.onlinedicon.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2893.test.cpp
       title: test/aoj/2893.test.cpp
     - icon: ':heavy_check_mark:'
@@ -889,7 +892,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3198.test.cpp
       title: test/aoj/3198.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3506.test.cpp
       title: test/aoj/3506.test.cpp
     - icon: ':heavy_check_mark:'
@@ -997,7 +1000,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_F.test.cpp
       title: test/aoj/DPL_5_F.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DSL_1_A.test.cpp
       title: test/aoj/DSL_1_A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1024,7 +1027,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_3_D.sparsetable.test.cpp
       title: test/aoj/DSL_3_D.sparsetable.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/GRL_2_A.kruskal.test.cpp
       title: test/aoj/GRL_2_A.kruskal.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1036,7 +1039,7 @@ data:
     - icon: ':x:'
       path: test/aoj/GRL_3_A.test.cpp
       title: test/aoj/GRL_3_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/GRL_3_B.test.cpp
       title: test/aoj/GRL_3_B.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1185,7 +1188,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_d.test.cpp
       title: test/atcoder/abc179_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_e.test.cpp
       title: test/atcoder/abc179_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1197,7 +1200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1488,7 +1491,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
       title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/bipartite_edge_coloring.test.cpp
       title: test/yosupo/bipartite_edge_coloring.test.cpp
     - icon: ':x:'
@@ -1527,7 +1530,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/directedmst.test.cpp
       title: test/yosupo/directedmst.test.cpp
     - icon: ':x:'
@@ -1845,7 +1848,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/tree_path_composite_sum.test.cpp
       title: test/yosupo/tree_path_composite_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/two_edge_connected_components.test.cpp
       title: test/yosupo/two_edge_connected_components.test.cpp
     - icon: ':x:'
@@ -2180,7 +2183,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/519.test.cpp
       title: test/yukicoder/519.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/529.LCT.test.cpp
       title: test/yukicoder/529.LCT.test.cpp
     - icon: ':x:'

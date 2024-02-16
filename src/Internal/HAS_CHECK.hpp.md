@@ -29,7 +29,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
@@ -61,9 +61,6 @@ data:
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2647.test.cpp
-    title: test/aoj/2647.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,9 +84,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I.DynSeg.test.cpp
     title: test/aoj/DSL_2_I.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_2_B.test.cpp
-    title: test/aoj/GRL_2_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_2_D.SplayTree.test.cpp
     title: test/aoj/ITP2_2_D.SplayTree.test.cpp
@@ -138,9 +132,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/directedmst.test.cpp
-    title: test/yosupo/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -195,7 +186,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -280,7 +271,6 @@ data:
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/directedmst.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
   - test/aoj/1508.WBT.test.cpp
@@ -288,7 +278,6 @@ data:
   - test/aoj/ITP2_4_B.SplayTree.test.cpp
   - test/aoj/1508.SplayTree.test.cpp
   - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
   - test/aoj/ITP2_4_C.WBT.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/1068.KDT.test.cpp
@@ -305,7 +294,6 @@ data:
   - test/aoj/2893.onlinedicon.test.cpp
   - test/aoj/ITP2_4_C.SplayTree.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/aoj/2647.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp

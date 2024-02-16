@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
     title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
@@ -21,12 +21,20 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\n\
     #include <iostream>\n#include <vector>\n#line 2 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
     \n#include <unordered_set>\n#line 3 \"src/DataStructure/UnionFind.hpp\"\n#include\
-    \ <algorithm>\nclass UnionFind {\n std::vector<int> par;\npublic:\n UnionFind(int\
-    \ n): par(n, -1) {}\n bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v)))\
-    \ return false;\n  if (par[u] > par[v]) std::swap(u, v);\n  return par[u]+= par[v],\
-    \ par[v]= u, true;\n }\n bool same(int u, int v) { return root(u) == root(v);\
-    \ }\n int root(int u) { return par[u] < 0 ? u : par[u]= root(par[u]); }\n int\
-    \ size(int u) { return -par[root(u)]; }\n};\n#line 4 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
+    \ <algorithm>\ntemplate <bool undoable= false> class UnionFind {\n std::vector<int>\
+    \ par;\n std::vector<std::pair<int, int>> his;\npublic:\n UnionFind(int n): par(n,\
+    \ -1) {}\n bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return\
+    \ false;\n  if (par[u] > par[v]) std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v,\
+    \ par[v]);\n  return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u,\
+    \ int v) { return root(u) == root(v); }\n int root(int u) {\n  if constexpr (undoable)\
+    \ return par[u] < 0 ? u : root(par[u]);\n  else return par[u] < 0 ? u : par[u]=\
+    \ root(par[u]);\n }\n int size(int u) { return -par[root(u)]; }\n int time() const\
+    \ {\n  static_assert(undoable, \"\\'time\\' is not enabled\");\n  return his.size();\n\
+    \ }\n void undo() {\n  static_assert(undoable, \"\\'undo\\' is not enabled\");\n\
+    \  auto [u, s]= his.back();\n  assert(par[par[u]] < 0);\n  his.pop_back(), par[par[u]]-=\
+    \ s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable, \"\\\
+    'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
+    \ > t) undo();\n }\n};\n#line 4 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
     \nclass IncrementalBridgeConnectivity {\n UnionFind cc, bcc;\n std::vector<int>\
     \ bbf;\n inline int parent(int v) { return bbf[v] < 0 ? -1 : bcc.root(bbf[v]);\
     \ }\n int lca(int u, int v) {\n  for (std::unordered_set<int> reached;; std::swap(u,\
@@ -64,8 +72,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/two_edge_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-17 00:01:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/two_edge_connected_components.test.cpp
 layout: document
