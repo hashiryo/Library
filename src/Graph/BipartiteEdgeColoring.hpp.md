@@ -16,20 +16,20 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Graph/BipartiteEdgeColoring.hpp\"\n#include <array>\n\
     #include <queue>\n#include <numeric>\n#line 2 \"src/DataStructure/UnionFind.hpp\"\
-    \n#include <vector>\n#include <algorithm>\ntemplate <bool undoable= false> class\
-    \ UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int, int>> his;\n\
-    public:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int v) {\n  if ((u=\
-    \ root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v]) std::swap(u,\
-    \ v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n  return par[u]+=\
-    \ par[v], par[v]= u, true;\n }\n bool same(int u, int v) { return root(u) == root(v);\
-    \ }\n int root(int u) {\n  if constexpr (undoable) return par[u] < 0 ? u : root(par[u]);\n\
-    \  else return par[u] < 0 ? u : par[u]= root(par[u]);\n }\n int size(int u) {\
-    \ return -par[root(u)]; }\n int time() const {\n  static_assert(undoable, \"\\\
-    'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n  static_assert(undoable,\
-    \ \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n  assert(par[par[u]]\
-    \ < 0);\n  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t\
-    \ t) {\n  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t\
-    \ <= his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 6 \"src/Graph/BipartiteEdgeColoring.hpp\"\
+    \n#include <vector>\n#include <algorithm>\n#include <cassert>\ntemplate <bool\
+    \ undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
+    \ int>> his;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int\
+    \ v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v])\
+    \ std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n \
+    \ return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u, int v) { return\
+    \ root(u) == root(v); }\n int root(int u) {\n  if constexpr (undoable) return\
+    \ par[u] < 0 ? u : root(par[u]);\n  else return par[u] < 0 ? u : par[u]= root(par[u]);\n\
+    \ }\n int size(int u) { return -par[root(u)]; }\n int time() const {\n  static_assert(undoable,\
+    \ \"\\'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n\
+    \  static_assert(undoable, \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n\
+    \  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n\
+    \  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t <=\
+    \ his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 6 \"src/Graph/BipartiteEdgeColoring.hpp\"\
     \nclass BipartiteEdgeColoring {\n std::vector<std::array<int, 2>> es_;\n const\
     \ int n[2];\npublic:\n BipartiteEdgeColoring(int L, int R): n{L, R} {}\n void\
     \ add_edge(int l, int r) { es_.push_back({l, r}); }\n std::vector<int> edge_coloring()\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: false
   path: src/Graph/BipartiteEdgeColoring.hpp
   requiredBy: []
-  timestamp: '2024-02-17 00:01:28+09:00'
+  timestamp: '2024-02-17 10:13:57+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/bipartite_edge_coloring.test.cpp

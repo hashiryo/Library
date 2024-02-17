@@ -15,7 +15,7 @@ data:
     path: src/Graph/minimum_spanning_aborescence.hpp
     title: src/Graph/minimum_spanning_aborescence.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,13 +27,13 @@ data:
   - icon: ':x:'
     path: test/aoj/2893.test.cpp
     title: test/aoj/2893.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_1_A.test.cpp
     title: test/aoj/DSL_1_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_A.kruskal.test.cpp
     title: test/aoj/GRL_2_A.kruskal.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,22 +69,22 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/UnionFind.hpp\"\n#include <vector>\n#include\
-    \ <algorithm>\ntemplate <bool undoable= false> class UnionFind {\n std::vector<int>\
-    \ par;\n std::vector<std::pair<int, int>> his;\npublic:\n UnionFind(int n): par(n,\
-    \ -1) {}\n bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return\
-    \ false;\n  if (par[u] > par[v]) std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v,\
-    \ par[v]);\n  return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u,\
-    \ int v) { return root(u) == root(v); }\n int root(int u) {\n  if constexpr (undoable)\
-    \ return par[u] < 0 ? u : root(par[u]);\n  else return par[u] < 0 ? u : par[u]=\
-    \ root(par[u]);\n }\n int size(int u) { return -par[root(u)]; }\n int time() const\
-    \ {\n  static_assert(undoable, \"\\'time\\' is not enabled\");\n  return his.size();\n\
-    \ }\n void undo() {\n  static_assert(undoable, \"\\'undo\\' is not enabled\");\n\
-    \  auto [u, s]= his.back();\n  assert(par[par[u]] < 0);\n  his.pop_back(), par[par[u]]-=\
-    \ s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable, \"\\\
-    'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
+    \ <algorithm>\n#include <cassert>\ntemplate <bool undoable= false> class UnionFind\
+    \ {\n std::vector<int> par;\n std::vector<std::pair<int, int>> his;\npublic:\n\
+    \ UnionFind(int n): par(n, -1) {}\n bool unite(int u, int v) {\n  if ((u= root(u))\
+    \ == (v= root(v))) return false;\n  if (par[u] > par[v]) std::swap(u, v);\n  if\
+    \ constexpr (undoable) his.emplace_back(v, par[v]);\n  return par[u]+= par[v],\
+    \ par[v]= u, true;\n }\n bool same(int u, int v) { return root(u) == root(v);\
+    \ }\n int root(int u) {\n  if constexpr (undoable) return par[u] < 0 ? u : root(par[u]);\n\
+    \  else return par[u] < 0 ? u : par[u]= root(par[u]);\n }\n int size(int u) {\
+    \ return -par[root(u)]; }\n int time() const {\n  static_assert(undoable, \"\\\
+    'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n  static_assert(undoable,\
+    \ \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n  his.pop_back(),\
+    \ par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable,\
+    \ \"\\'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
     \ > t) undo();\n }\n};\n"
-  code: "#pragma once\n#include <vector>\n#include <algorithm>\ntemplate <bool undoable=\
-    \ false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
+  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <cassert>\n\
+    template <bool undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
     \ int>> his;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int\
     \ v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v])\
     \ std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n \
@@ -94,10 +94,9 @@ data:
     \ }\n int size(int u) { return -par[root(u)]; }\n int time() const {\n  static_assert(undoable,\
     \ \"\\'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n\
     \  static_assert(undoable, \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n\
-    \  assert(par[par[u]] < 0);\n  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n\
-    \ void rollback(size_t t) {\n  static_assert(undoable, \"\\'rollback\\' is not\
-    \ enabled\");\n  assert(t <= his.size());\n  while (his.size() > t) undo();\n\
-    \ }\n};"
+    \  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n\
+    \  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t <=\
+    \ his.size());\n  while (his.size() > t) undo();\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
@@ -106,7 +105,7 @@ data:
   - src/Graph/BipartiteEdgeColoring.hpp
   - src/Graph/IncrementalBridgeConnectivity.hpp
   - src/Graph/minimum_spanning_aborescence.hpp
-  timestamp: '2024-02-17 00:01:28+09:00'
+  timestamp: '2024-02-17 10:13:57+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1600.Seg2D.test.cpp

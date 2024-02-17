@@ -21,8 +21,8 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/bipartite_edge_coloring\"\n#include\
     \ <iostream>\n#include <algorithm>\n#line 2 \"src/Graph/BipartiteEdgeColoring.hpp\"\
     \n#include <array>\n#include <queue>\n#include <numeric>\n#line 2 \"src/DataStructure/UnionFind.hpp\"\
-    \n#include <vector>\n#line 4 \"src/DataStructure/UnionFind.hpp\"\ntemplate <bool\
-    \ undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
+    \n#include <vector>\n#line 4 \"src/DataStructure/UnionFind.hpp\"\n#include <cassert>\n\
+    template <bool undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
     \ int>> his;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int\
     \ v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v])\
     \ std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n \
@@ -32,15 +32,15 @@ data:
     \ }\n int size(int u) { return -par[root(u)]; }\n int time() const {\n  static_assert(undoable,\
     \ \"\\'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n\
     \  static_assert(undoable, \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n\
-    \  assert(par[par[u]] < 0);\n  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n\
-    \ void rollback(size_t t) {\n  static_assert(undoable, \"\\'rollback\\' is not\
-    \ enabled\");\n  assert(t <= his.size());\n  while (his.size() > t) undo();\n\
-    \ }\n};\n#line 6 \"src/Graph/BipartiteEdgeColoring.hpp\"\nclass BipartiteEdgeColoring\
-    \ {\n std::vector<std::array<int, 2>> es_;\n const int n[2];\npublic:\n BipartiteEdgeColoring(int\
-    \ L, int R): n{L, R} {}\n void add_edge(int l, int r) { es_.push_back({l, r});\
-    \ }\n std::vector<int> edge_coloring() {\n  auto es= es_;\n  const int m= es.size();\n\
-    \  std::vector<int> color(m, -1), deg[2]= {std::vector<int>(n[0]), std::vector<int>(n[1])};\n\
-    \  for (auto [l, r]: es) ++deg[0][l], ++deg[1][r];\n  const int D= std::max(*std::max_element(deg[0].begin(),\
+    \  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n\
+    \  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t <=\
+    \ his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 6 \"src/Graph/BipartiteEdgeColoring.hpp\"\
+    \nclass BipartiteEdgeColoring {\n std::vector<std::array<int, 2>> es_;\n const\
+    \ int n[2];\npublic:\n BipartiteEdgeColoring(int L, int R): n{L, R} {}\n void\
+    \ add_edge(int l, int r) { es_.push_back({l, r}); }\n std::vector<int> edge_coloring()\
+    \ {\n  auto es= es_;\n  const int m= es.size();\n  std::vector<int> color(m, -1),\
+    \ deg[2]= {std::vector<int>(n[0]), std::vector<int>(n[1])};\n  for (auto [l, r]:\
+    \ es) ++deg[0][l], ++deg[1][r];\n  const int D= std::max(*std::max_element(deg[0].begin(),\
     \ deg[0].end()), *std::max_element(deg[1].begin(), deg[1].end()));\n  UnionFind<>\
     \ uf[2]= {UnionFind(n[0]), UnionFind(n[1])};\n  int cnt[2], col= 0;\n  for (int\
     \ s= 2; s--;) {\n   std::priority_queue<std::pair<int, int>> pq;\n   for (int\
@@ -106,7 +106,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartite_edge_coloring.test.cpp
   requiredBy: []
-  timestamp: '2024-02-17 00:01:28+09:00'
+  timestamp: '2024-02-17 10:13:57+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartite_edge_coloring.test.cpp

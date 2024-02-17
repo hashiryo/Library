@@ -152,22 +152,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Geometry/Circle.hpp
       title: "\u5186"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Convex.hpp
       title: "\u51F8\u591A\u89D2\u5F62"
     - icon: ':heavy_check_mark:'
       path: src/Geometry/IncrementalConvexHull.hpp
       title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Line.hpp
       title: "\u76F4\u7DDA"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Point.hpp
       title: "\u70B9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Polygon.hpp
       title: "\u591A\u89D2\u5F62"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Segment.hpp
       title: "\u7DDA\u5206"
     - icon: ':heavy_check_mark:'
@@ -226,7 +226,7 @@ data:
     - icon: ':warning:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/RangeToRangeGraph.hpp
       title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
     - icon: ':question:'
@@ -520,7 +520,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0334.test.cpp
       title: test/aoj/0334.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0342.test.cpp
       title: test/aoj/0342.test.cpp
     - icon: ':heavy_check_mark:'
@@ -892,7 +892,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3198.test.cpp
       title: test/aoj/3198.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3506.test.cpp
       title: test/aoj/3506.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1000,7 +1000,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_F.test.cpp
       title: test/aoj/DPL_5_F.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_1_A.test.cpp
       title: test/aoj/DSL_1_A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1027,7 +1027,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_3_D.sparsetable.test.cpp
       title: test/aoj/DSL_3_D.sparsetable.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_2_A.kruskal.test.cpp
       title: test/aoj/GRL_2_A.kruskal.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1173,7 +1173,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc177_e.gcd_conv.test.cpp
       title: test/atcoder/abc177_e.gcd_conv.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1182,7 +1182,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'

@@ -14,9 +14,9 @@ data:
       \u307F\u8FBC\u307F\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc177/tasks/abc177_e
@@ -126,7 +126,7 @@ data:
   path: test/atcoder/abc177_e.gcd_conv.test.cpp
   requiredBy: []
   timestamp: '2024-02-15 14:27:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc177_e.gcd_conv.test.cpp
 layout: document
