@@ -57,23 +57,23 @@ data:
     \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
     \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"\
-    src/DataStructure/UnionFind.hpp\"\n#include <algorithm>\n#include <cassert>\n\
-    template <bool undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
-    \ int>> his;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int\
-    \ v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v])\
-    \ std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n \
-    \ return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u, int v) { return\
-    \ root(u) == root(v); }\n int root(int u) {\n  if constexpr (undoable) return\
-    \ par[u] < 0 ? u : root(par[u]);\n  else return par[u] < 0 ? u : par[u]= root(par[u]);\n\
-    \ }\n int size(int u) { return -par[root(u)]; }\n int time() const {\n  static_assert(undoable,\
-    \ \"\\'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n\
-    \  static_assert(undoable, \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n\
-    \  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n\
-    \  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t <=\
-    \ his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 5 \"src/Graph/minimum_spanning_aborescence.hpp\"\
+    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/DataStructure/UnionFind.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\ntemplate <bool undoable= false> class\
+    \ UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int, int>> his;\n\
+    public:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int v) {\n  if ((u=\
+    \ root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v]) std::swap(u,\
+    \ v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n  return par[u]+=\
+    \ par[v], par[v]= u, true;\n }\n bool same(int u, int v) { return root(u) == root(v);\
+    \ }\n int root(int u) {\n  if constexpr (undoable) return par[u] < 0 ? u : root(par[u]);\n\
+    \  else return par[u] < 0 ? u : par[u]= root(par[u]);\n }\n int size(int u) {\
+    \ return -par[root(u)]; }\n int time() const {\n  static_assert(undoable, \"\\\
+    'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n  static_assert(undoable,\
+    \ \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n  his.pop_back(),\
+    \ par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable,\
+    \ \"\\'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
+    \ > t) undo();\n }\n};\n#line 5 \"src/Graph/minimum_spanning_aborescence.hpp\"\
     \n// return edge ids of minimum spanning aborescence\ntemplate <class cost_t>\
     \ std::pair<cost_t, std::vector<int>> minimum_spanning_aborescence(const Graph\
     \ &g, std::vector<cost_t> w, int root) {\n const int n= g.vertex_size(), m= g.edge_size();\n\
@@ -130,7 +130,7 @@ data:
   isVerificationFile: false
   path: src/Graph/minimum_spanning_aborescence.hpp
   requiredBy: []
-  timestamp: '2024-02-17 10:13:57+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/directedmst.test.cpp

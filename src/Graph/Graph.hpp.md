@@ -87,22 +87,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
@@ -256,9 +256,9 @@ data:
     \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
     \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n"
+    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n"
   code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Edge: std::pair<int,\
     \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
     \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
@@ -273,9 +273,9 @@ data:
     \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
     \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};"
+    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};"
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
@@ -292,7 +292,7 @@ data:
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-16 12:23:49+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp

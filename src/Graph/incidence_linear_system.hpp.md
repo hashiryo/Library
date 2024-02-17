@@ -47,20 +47,19 @@ data:
     \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
     \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"\
-    src/Graph/incidence_linear_system.hpp\"\ntemplate <class T> std::vector<T> incidence_linear_system(const\
-    \ Graph &g, std::vector<T> b) {\n const int n= g.vertex_size();\n assert((int)b.size()\
-    \ == n);\n std::vector<T> x(g.edge_size());\n auto adje= g.adjecency_edge(0);\n\
-    \ std::vector<int> pre(n, -2), ei(adje.p.begin(), adje.p.begin() + n);\n for (int\
-    \ s= 0, p, e; s < n; ++s)\n  if (pre[s] == -2)\n   for (pre[p= s]= -1;;) {\n \
-    \   if (ei[p] == adje.p[p + 1]) {\n     if (e= pre[p]; e < 0) {\n      if (b[p]\
-    \ != T()) return {};  // no solution\n      break;\n     }\n     T tmp= b[p];\n\
-    \     p= g[e].to(p);\n     if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]=\
-    \ tmp ^ b[p];\n     else x[e]= g[e].second == p ? -tmp : tmp, b[p]+= tmp;\n  \
-    \  } else if (int q= g[e= adje.dat[ei[p]++]].to(p); pre[q] == -2) pre[p= q]= e;\n\
-    \   }\n return x;\n}\n"
+    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/incidence_linear_system.hpp\"\
+    \ntemplate <class T> std::vector<T> incidence_linear_system(const Graph &g, std::vector<T>\
+    \ b) {\n const int n= g.vertex_size();\n assert((int)b.size() == n);\n std::vector<T>\
+    \ x(g.edge_size());\n auto adje= g.adjecency_edge(0);\n std::vector<int> pre(n,\
+    \ -2), ei(adje.p.begin(), adje.p.begin() + n);\n for (int s= 0, p, e; s < n; ++s)\n\
+    \  if (pre[s] == -2)\n   for (pre[p= s]= -1;;) {\n    if (ei[p] == adje.p[p +\
+    \ 1]) {\n     if (e= pre[p]; e < 0) {\n      if (b[p] != T()) return {};  // no\
+    \ solution\n      break;\n     }\n     T tmp= b[p];\n     p= g[e].to(p);\n   \
+    \  if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]= tmp ^ b[p];\n     else\
+    \ x[e]= g[e].second == p ? -tmp : tmp, b[p]+= tmp;\n    } else if (int q= g[e=\
+    \ adje.dat[ei[p]++]].to(p); pre[q] == -2) pre[p= q]= e;\n   }\n return x;\n}\n"
   code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\ntemplate <class T> std::vector<T>\
     \ incidence_linear_system(const Graph &g, std::vector<T> b) {\n const int n= g.vertex_size();\n\
     \ assert((int)b.size() == n);\n std::vector<T> x(g.edge_size());\n auto adje=\
@@ -78,7 +77,7 @@ data:
   isVerificationFile: false
   path: src/Graph/incidence_linear_system.hpp
   requiredBy: []
-  timestamp: '2024-02-16 12:23:49+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp

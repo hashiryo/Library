@@ -66,28 +66,27 @@ data:
     \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
     \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 4 \"\
-    src/Graph/StronglyConnectedComponents.hpp\"\nclass StronglyConnectedComponents\
-    \ {\n Graph _g;\n std::vector<int> csr, pos, ord;\npublic:\n StronglyConnectedComponents(const\
-    \ Graph &g): _g(g) {\n  const int n= g.vertex_size();\n  csr.assign(n, -2), ord.resize(n),\
-    \ pos= {0};\n  {\n   auto adj= g.adjacency_vertex(1);\n   std::vector<int> ei(adj.p.begin(),\
-    \ adj.p.begin() + n);\n   for (int s= 0, k= n, p; s < n; ++s)\n    if (csr[s]\
-    \ == -2)\n     for (csr[p= s]= -1; p >= 0;) {\n      if (ei[p] == adj.p[p + 1])\
-    \ ord[--k]= p, p= csr[p];\n      else if (int q= adj.dat[ei[p]++]; csr[q] == -2)\
-    \ csr[q]= p, p= q;\n     }\n  }\n  for (auto &[s, d]: _g) std::swap(s, d);\n \
-    \ auto adj= _g.adjacency_vertex(1);\n  std::vector<char> vis(n);\n  int k= 0,\
-    \ p= 0;\n  for (int s: ord)\n   if (!vis[s]) {\n    for (vis[csr[k++]= s]= 1;\
-    \ p < k; ++p)\n     for (int u: adj[csr[p]])\n      if (!vis[u]) vis[csr[k++]=\
-    \ u]= 1;\n    pos.push_back(k);\n   }\n  for (int i= pos.size() - 1; i--;)\n \
-    \  while (k > pos[i]) ord[csr[--k]]= i;\n }\n size_t size() const { return pos.size()\
-    \ - 1; }\n ConstListRange<int> block(int k) const { return {csr.cbegin() + pos[k],\
-    \ csr.cbegin() + pos[k + 1]}; }\n int operator()(int i) const { return ord[i];\
-    \ }\n Graph dag() const {\n  Graph ret(size());\n  for (auto [d, s]: _g)\n   if\
-    \ (int u= (*this)(s), v= (*this)(d); u != v) ret.add_edge(u, v);\n  return sort(ret.begin(),\
-    \ ret.end()), ret.erase(unique(ret.begin(), ret.end()), ret.end()), ret;\n }\n\
-    };\n"
+    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 4 \"src/Graph/StronglyConnectedComponents.hpp\"\
+    \nclass StronglyConnectedComponents {\n Graph _g;\n std::vector<int> csr, pos,\
+    \ ord;\npublic:\n StronglyConnectedComponents(const Graph &g): _g(g) {\n  const\
+    \ int n= g.vertex_size();\n  csr.assign(n, -2), ord.resize(n), pos= {0};\n  {\n\
+    \   auto adj= g.adjacency_vertex(1);\n   std::vector<int> ei(adj.p.begin(), adj.p.begin()\
+    \ + n);\n   for (int s= 0, k= n, p; s < n; ++s)\n    if (csr[s] == -2)\n     for\
+    \ (csr[p= s]= -1; p >= 0;) {\n      if (ei[p] == adj.p[p + 1]) ord[--k]= p, p=\
+    \ csr[p];\n      else if (int q= adj.dat[ei[p]++]; csr[q] == -2) csr[q]= p, p=\
+    \ q;\n     }\n  }\n  for (auto &[s, d]: _g) std::swap(s, d);\n  auto adj= _g.adjacency_vertex(1);\n\
+    \  std::vector<char> vis(n);\n  int k= 0, p= 0;\n  for (int s: ord)\n   if (!vis[s])\
+    \ {\n    for (vis[csr[k++]= s]= 1; p < k; ++p)\n     for (int u: adj[csr[p]])\n\
+    \      if (!vis[u]) vis[csr[k++]= u]= 1;\n    pos.push_back(k);\n   }\n  for (int\
+    \ i= pos.size() - 1; i--;)\n   while (k > pos[i]) ord[csr[--k]]= i;\n }\n size_t\
+    \ size() const { return pos.size() - 1; }\n ConstListRange<int> block(int k) const\
+    \ { return {csr.cbegin() + pos[k], csr.cbegin() + pos[k + 1]}; }\n int operator()(int\
+    \ i) const { return ord[i]; }\n Graph dag() const {\n  Graph ret(size());\n  for\
+    \ (auto [d, s]: _g)\n   if (int u= (*this)(s), v= (*this)(d); u != v) ret.add_edge(u,\
+    \ v);\n  return sort(ret.begin(), ret.end()), ret.erase(unique(ret.begin(), ret.end()),\
+    \ ret.end()), ret;\n }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include \"src/Graph/Graph.hpp\"\nclass\
     \ StronglyConnectedComponents {\n Graph _g;\n std::vector<int> csr, pos, ord;\n\
     public:\n StronglyConnectedComponents(const Graph &g): _g(g) {\n  const int n=\
@@ -114,7 +113,7 @@ data:
   path: src/Graph/StronglyConnectedComponents.hpp
   requiredBy:
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-16 12:23:49+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1813.test.cpp

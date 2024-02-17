@@ -53,26 +53,25 @@ data:
     \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
     \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
     \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {std::move(c), std::move(p)}\n CSRArray<int> adjacency_vertex(bool direct) const\
-    \ { _ADJ((*this)[i].second, (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool\
-    \ direct) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"\
-    src/Graph/RangeToRangeGraph.hpp\"\ntemplate <typename cost_t= int> class RangeToRangeGraph\
-    \ {\n int n;\n inline int to_upper_idx(int i) const { return i >= n ? i - n :\
-    \ n + i; }\n inline int to_lower_idx(int i) const { return i >= n ? i - n : n\
-    \ + n + i; }\npublic:\n Graph graph;\n std::vector<cost_t> weight;\n RangeToRangeGraph(int\
-    \ n): n(n), graph(n * 3) {\n  for (int i= 2; i < n + n; ++i) add(to_upper_idx(i\
-    \ / 2), to_upper_idx(i));\n  for (int i= 2; i < n + n; ++i) add(to_lower_idx(i),\
-    \ to_lower_idx(i / 2));\n }\n void add(int s, int t, cost_t w= 0) { graph.add_edge(s,\
-    \ t), weight.emplace_back(w); }\n // [s_l, s_r) -> t\n void add_from_range(int\
-    \ s_l, int s_r, int t, cost_t w= 0) {\n  for (int l= s_l + n, r= s_r + n; l <\
-    \ r; l>>= 1, r>>= 1) {\n   if (l & 1) add(to_lower_idx(l++), t, w);\n   if (r\
-    \ & 1) add(to_lower_idx(--r), t, w);\n  }\n }\n // s -> [t_l, t_r)\n void add_to_range(int\
-    \ s, int t_l, int t_r, cost_t w= 0) {\n  for (int l= t_l + n, r= t_r + n; l <\
-    \ r; l>>= 1, r>>= 1) {\n   if (l & 1) add(s, to_upper_idx(l++), w);\n   if (r\
-    \ & 1) add(s, to_upper_idx(--r), w);\n  }\n }\n // [s_l, s_r) -> [t_l, t_r)\n\
-    \ void add_from_range_to_range(int s_l, int s_r, int t_l, int t_r, cost_t w= 0)\
-    \ { add_from_range(s_l, s_r, graph.n, w), add_to_range(graph.n, t_l, t_r, 0),\
-    \ ++graph.n; }\n};\n"
+    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/RangeToRangeGraph.hpp\"\
+    \ntemplate <typename cost_t= int> class RangeToRangeGraph {\n int n;\n inline\
+    \ int to_upper_idx(int i) const { return i >= n ? i - n : n + i; }\n inline int\
+    \ to_lower_idx(int i) const { return i >= n ? i - n : n + n + i; }\npublic:\n\
+    \ Graph graph;\n std::vector<cost_t> weight;\n RangeToRangeGraph(int n): n(n),\
+    \ graph(n * 3) {\n  for (int i= 2; i < n + n; ++i) add(to_upper_idx(i / 2), to_upper_idx(i));\n\
+    \  for (int i= 2; i < n + n; ++i) add(to_lower_idx(i), to_lower_idx(i / 2));\n\
+    \ }\n void add(int s, int t, cost_t w= 0) { graph.add_edge(s, t), weight.emplace_back(w);\
+    \ }\n // [s_l, s_r) -> t\n void add_from_range(int s_l, int s_r, int t, cost_t\
+    \ w= 0) {\n  for (int l= s_l + n, r= s_r + n; l < r; l>>= 1, r>>= 1) {\n   if\
+    \ (l & 1) add(to_lower_idx(l++), t, w);\n   if (r & 1) add(to_lower_idx(--r),\
+    \ t, w);\n  }\n }\n // s -> [t_l, t_r)\n void add_to_range(int s, int t_l, int\
+    \ t_r, cost_t w= 0) {\n  for (int l= t_l + n, r= t_r + n; l < r; l>>= 1, r>>=\
+    \ 1) {\n   if (l & 1) add(s, to_upper_idx(l++), w);\n   if (r & 1) add(s, to_upper_idx(--r),\
+    \ w);\n  }\n }\n // [s_l, s_r) -> [t_l, t_r)\n void add_from_range_to_range(int\
+    \ s_l, int s_r, int t_l, int t_r, cost_t w= 0) { add_from_range(s_l, s_r, graph.n,\
+    \ w), add_to_range(graph.n, t_l, t_r, 0), ++graph.n; }\n};\n"
   code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\ntemplate <typename cost_t=\
     \ int> class RangeToRangeGraph {\n int n;\n inline int to_upper_idx(int i) const\
     \ { return i >= n ? i - n : n + i; }\n inline int to_lower_idx(int i) const {\
@@ -96,7 +95,7 @@ data:
   isVerificationFile: false
   path: src/Graph/RangeToRangeGraph.hpp
   requiredBy: []
-  timestamp: '2024-02-17 00:01:28+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1868.test.cpp

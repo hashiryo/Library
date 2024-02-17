@@ -70,10 +70,10 @@ data:
     \ pos[b].end(), pos[b].begin()), s= n[b]; s--;) mate[b][--pos[b][blg[b][s]]]=\
     \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
     \ left_belong(int l) const { return blg[0][l]; }\n int right_belong(int r) const\
-    \ { return blg[1][r]; }\n const ListRange<int> left_block(int k) const { return\
-    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n const\
-    \ ListRange<int> right_block(int k) const { return {mate[1].cbegin() + pos[1][k],\
-    \ mate[1].cbegin() + pos[1][k + 1]}; }\n};\n"
+    \ { return blg[1][r]; }\n ConstListRange<int> left_block(int k) const { return\
+    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n ConstListRange<int>\
+    \ right_block(int k) const { return {mate[1].cbegin() + pos[1][k], mate[1].cbegin()\
+    \ + pos[1][k + 1]}; }\n};\n"
   code: "#pragma once\n#include <array>\n#include <algorithm>\n#include <numeric>\n\
     #include \"src/Internal/ListRange.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
     \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
@@ -109,16 +109,16 @@ data:
     \ pos[b].end(), pos[b].begin()), s= n[b]; s--;) mate[b][--pos[b][blg[b][s]]]=\
     \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
     \ left_belong(int l) const { return blg[0][l]; }\n int right_belong(int r) const\
-    \ { return blg[1][r]; }\n const ListRange<int> left_block(int k) const { return\
-    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n const\
-    \ ListRange<int> right_block(int k) const { return {mate[1].cbegin() + pos[1][k],\
-    \ mate[1].cbegin() + pos[1][k + 1]}; }\n};"
+    \ { return blg[1][r]; }\n ConstListRange<int> left_block(int k) const { return\
+    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n ConstListRange<int>\
+    \ right_block(int k) const { return {mate[1].cbegin() + pos[1][k], mate[1].cbegin()\
+    \ + pos[1][k + 1]}; }\n};"
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp

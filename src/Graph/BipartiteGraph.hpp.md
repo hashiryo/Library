@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/CsrArray.hpp
-    title: "CSR\u5F62\u5F0F"
-  - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
@@ -41,15 +38,10 @@ data:
     \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
     \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
     \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
-    \ << ']';\n}\n#line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class\
-    \ CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()=\
-    \ default;\n CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c),\
-    \ pos(p) {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
-    \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
-    \ + 1]}; }\n};\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph\
-    \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> col, pos, ord, pre,\
-    \ mate, blg;\n CsrArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
-    \ col(n, -1), pos(n + 1), ord(n), mate(n, -1), blg(n, -3), l(0) {}\n void add_edge(int\
+    \ << ']';\n}\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph {\n\
+    \ std::vector<std::array<int, 2>> es;\n std::vector<int> col, pos, ord, pre, mate,\
+    \ blg;\n CSRArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n): col(n,\
+    \ -1), pos(n + 1), ord(n), mate(n, -1), blg(n, -3), l(0) {}\n void add_edge(int\
     \ u, int v) { es.push_back({u, v}); }\n void build() {\n  const int n= col.size();\n\
     \  std::vector<int> rt, que(n), g(es.size() * 2);\n  for (auto [u, v]: es) ++pos[u],\
     \ ++pos[v];\n  for (int i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for (auto [u,\
@@ -93,7 +85,7 @@ data:
     \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
     \ - 1; }\n int belong(int v) const { return blg[v]; }\n ConstListRange<int> block(int\
     \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
-    \ <bool rev> const CsrArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
+    \ <bool rev> const CSRArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
     \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
     \ i= l; i--;)\n   if (int v= ord[i], u= mate[v]; u != -1) ret.push_back({v, u});\n\
     \  return ret;\n }\n std::vector<int> min_vertex_cover() const {\n  const int\
@@ -109,9 +101,9 @@ data:
     \ 1; i < t; ++i)\n     for (int u: dag_[c][que[i]])\n      if (sel[u] == -1) sel[u]=\
     \ s, que[t++]= u;\n   if (c ^ s) ret.push_back(v);\n  }\n  return ret;\n }\n};\n"
   code: "#pragma once\n#include <array>\n#include <algorithm>\n#include <numeric>\n\
-    #include <cassert>\n#include \"src/DataStructure/CsrArray.hpp\"\nclass BipartiteGraph\
+    #include <cassert>\n#include \"src/Internal/ListRange.hpp\"\nclass BipartiteGraph\
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> col, pos, ord, pre,\
-    \ mate, blg;\n CsrArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
+    \ mate, blg;\n CSRArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
     \ col(n, -1), pos(n + 1), ord(n), mate(n, -1), blg(n, -3), l(0) {}\n void add_edge(int\
     \ u, int v) { es.push_back({u, v}); }\n void build() {\n  const int n= col.size();\n\
     \  std::vector<int> rt, que(n), g(es.size() * 2);\n  for (auto [u, v]: es) ++pos[u],\
@@ -156,7 +148,7 @@ data:
     \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
     \ - 1; }\n int belong(int v) const { return blg[v]; }\n ConstListRange<int> block(int\
     \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
-    \ <bool rev> const CsrArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
+    \ <bool rev> const CSRArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
     \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
     \ i= l; i--;)\n   if (int v= ord[i], u= mate[v]; u != -1) ret.push_back({v, u});\n\
     \  return ret;\n }\n std::vector<int> min_vertex_cover() const {\n  const int\
@@ -172,12 +164,11 @@ data:
     \ 1; i < t; ++i)\n     for (int u: dag_[c][que[i]])\n      if (sel[u] == -1) sel[u]=\
     \ s, que[t++]= u;\n   if (c ^ s) ret.push_back(v);\n  }\n  return ret;\n }\n};"
   dependsOn:
-  - src/DataStructure/CsrArray.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/BipartiteGraph.hpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp

@@ -5,23 +5,11 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  _extendedRequiredBy:
-  - icon: ':question:'
-    path: src/Graph/BipartiteGraph.hpp
-    title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3168.bm.test.cpp
-    title: test/aoj/3168.bm.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc223_g.dm.test.cpp
-    title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-    title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  _isVerificationFailed: true
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
@@ -55,14 +43,10 @@ data:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/DataStructure/CsrArray.hpp
-  requiredBy:
-  - src/Graph/BipartiteGraph.hpp
+  requiredBy: []
   timestamp: '2024-02-15 14:27:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  - test/aoj/3168.bm.test.cpp
-  - test/atcoder/abc223_g.dm.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/DataStructure/CsrArray.hpp
 layout: document
 title: "CSR\u5F62\u5F0F"

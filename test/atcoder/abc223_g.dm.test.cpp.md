@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/CsrArray.hpp
-    title: "CSR\u5F62\u5F0F"
-  - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -40,14 +37,9 @@ data:
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n#line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class\
-    \ T> class CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n\
-    \ CsrArray()= default;\n CsrArray(const std::vector<T> &c, const std::vector<int>\
-    \ &p): csr(c), pos(p) {}\n size_t size() const { return pos.size() - 1; }\n const\
-    \ ConstListRange<T> operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin()\
-    \ + pos[i + 1]}; }\n};\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph\
+    \ return os << ']';\n}\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph\
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> col, pos, ord, pre,\
-    \ mate, blg;\n CsrArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
+    \ mate, blg;\n CSRArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
     \ col(n, -1), pos(n + 1), ord(n), mate(n, -1), blg(n, -3), l(0) {}\n void add_edge(int\
     \ u, int v) { es.push_back({u, v}); }\n void build() {\n  const int n= col.size();\n\
     \  std::vector<int> rt, que(n), g(es.size() * 2);\n  for (auto [u, v]: es) ++pos[u],\
@@ -92,7 +84,7 @@ data:
     \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
     \ - 1; }\n int belong(int v) const { return blg[v]; }\n ConstListRange<int> block(int\
     \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
-    \ <bool rev> const CsrArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
+    \ <bool rev> const CSRArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
     \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
     \ i= l; i--;)\n   if (int v= ord[i], u= mate[v]; u != -1) ret.push_back({v, u});\n\
     \  return ret;\n }\n std::vector<int> min_vertex_cover() const {\n  const int\
@@ -125,12 +117,11 @@ data:
     \ '\\n';\n return 0;\n}"
   dependsOn:
   - src/Graph/BipartiteGraph.hpp
-  - src/DataStructure/CsrArray.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: true
   path: test/atcoder/abc223_g.dm.test.cpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-17 17:58:55+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.dm.test.cpp
