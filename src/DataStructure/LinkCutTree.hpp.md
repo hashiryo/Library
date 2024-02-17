@@ -8,9 +8,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2270.Patricia.test.cpp
-    title: test/aoj/2270.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2450.LCT.test.cpp
     title: test/aoj/2450.LCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -203,7 +200,6 @@ data:
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/aoj/2270.Patricia.test.cpp
   - test/aoj/2450.LCT.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp

@@ -9,43 +9,10 @@ data:
   - icon: ':warning:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2270.DynSeg.test.cpp
-    title: test/aoj/2270.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2667.HLD.test.cpp
-    title: test/aoj/2667.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc202_e.test.cpp
-    title: test/atcoder/abc202_e.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/lca.HLD.test.cpp
-    title: test/yosupo/lca.HLD.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-    title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1216.KDT.test.cpp
-    title: test/yukicoder/1216.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1216.Seg2D.test.cpp
-    title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1600.KDT.test.cpp
-    title: test/yukicoder/1600.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1600.Seg2D.test.cpp
-    title: test/yukicoder/1600.Seg2D.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/2342.KDT.test.cpp
-    title: test/yukicoder/2342.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/235.HLD.test.cpp
-    title: test/yukicoder/235.HLD.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -217,19 +184,8 @@ data:
   requiredBy:
   - src/Graph/BiConnectedComponents.hpp
   timestamp: '2024-02-15 14:27:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/yukicoder/1216.KDT.test.cpp
-  - test/yukicoder/1600.Seg2D.test.cpp
-  - test/yukicoder/2342.KDT.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
-  - test/yukicoder/1216.Seg2D.test.cpp
-  - test/yukicoder/235.HLD.test.cpp
-  - test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - test/yosupo/lca.HLD.test.cpp
-  - test/aoj/2667.HLD.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
-  - test/atcoder/abc202_e.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Graph/Tree.hpp
 layout: document
 title: "\u6728"

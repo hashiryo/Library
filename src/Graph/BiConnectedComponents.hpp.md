@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
   - icon: ':question:'
