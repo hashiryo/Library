@@ -117,8 +117,8 @@ data:
     \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
-    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
     \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
     \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
     \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
@@ -255,7 +255,7 @@ data:
   isVerificationFile: false
   path: src/String/SuffixTree.hpp
   requiredBy: []
-  timestamp: '2024-02-18 22:00:56+09:00'
+  timestamp: '2024-02-19 02:01:34+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/2361.SuffixTree.test.cpp

@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -851,7 +851,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3024.WBT.test.cpp
       title: test/aoj/3024.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3032.test.cpp
       title: test/aoj/3032.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1192,7 +1192,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_d.test.cpp
       title: test/atcoder/abc179_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_e.test.cpp
       title: test/atcoder/abc179_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1204,7 +1204,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1243,10 +1243,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc218_h.test.cpp
       title: test/atcoder/abc218_h.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1258,7 +1258,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc223_g.rerooting.test.cpp
       title: test/atcoder/abc223_g.rerooting.test.cpp
     - icon: ':heavy_check_mark:'

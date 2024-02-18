@@ -61,8 +61,8 @@ data:
     \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
-    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
     \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
     \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
     \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
@@ -82,8 +82,8 @@ data:
     \ > q[i]) b[m[--k]]= i;\n }\n size_t size() const { return q.size() - 1; }\n ConstListRange<int>\
     \ block(int k) const { return {m.cbegin() + q[k], m.cbegin() + q[k + 1]}; }\n\
     \ int operator()(int i) const { return b[i]; }\n Graph dag(const Graph &g) const\
-    \ {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (int u= b[s], v= b[d];\
-    \ u != v) ret.add_edge(u, v);\n  return std::sort(ret.begin(), ret.end()), ret.erase(std::unique(ret.begin(),\
+    \ {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (b[s] != b[d]) ret.add_edge(b[s],\
+    \ b[d]);\n  return std::sort(ret.begin(), ret.end()), ret.erase(std::unique(ret.begin(),\
     \ ret.end()), ret.end()), ret;\n }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include \"src/Graph/Graph.hpp\"\nclass\
     \ StronglyConnectedComponents {\n std::vector<int> m, q, b;\npublic:\n StronglyConnectedComponents(const\
@@ -99,8 +99,8 @@ data:
     \ > q[i]) b[m[--k]]= i;\n }\n size_t size() const { return q.size() - 1; }\n ConstListRange<int>\
     \ block(int k) const { return {m.cbegin() + q[k], m.cbegin() + q[k + 1]}; }\n\
     \ int operator()(int i) const { return b[i]; }\n Graph dag(const Graph &g) const\
-    \ {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (int u= b[s], v= b[d];\
-    \ u != v) ret.add_edge(u, v);\n  return std::sort(ret.begin(), ret.end()), ret.erase(std::unique(ret.begin(),\
+    \ {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (b[s] != b[d]) ret.add_edge(b[s],\
+    \ b[d]);\n  return std::sort(ret.begin(), ret.end()), ret.erase(std::unique(ret.begin(),\
     \ ret.end()), ret.end()), ret;\n }\n};"
   dependsOn:
   - src/Graph/Graph.hpp
@@ -109,7 +109,7 @@ data:
   path: src/Graph/StronglyConnectedComponents.hpp
   requiredBy:
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-18 23:57:57+09:00'
+  timestamp: '2024-02-19 02:01:34+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1813.test.cpp

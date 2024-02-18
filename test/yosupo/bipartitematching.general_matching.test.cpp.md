@@ -49,8 +49,8 @@ data:
     \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
-    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
     \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
     \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
     \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
@@ -63,24 +63,24 @@ data:
     \ const int n= adj.size();\n std::vector<int> q(n), id(n, -1), p(n), m(partner);\n\
     \ if (m.empty()) m.assign(n, -1);\n assert((int)m.size() == n);\n std::vector<Edge>\
     \ fs(n);\n auto rematch= [&](auto self, int u, int v) -> void {\n  int w;\n  if\
-    \ (w= m[u], m[u]= v; w == -1 || m[w] != u) return;\n  if (auto [x, y]= fs[u];\
-    \ y == -1) self(self, m[w]= x, w);\n  else self(self, x, y), self(self, y, x);\n\
-    \ };\n int t= 0;\n auto f= [&](auto self, int x) -> int { return id[x] != t ||\
-    \ p[x] == -1 ? x : (p[x]= self(self, p[x])); };\n auto check= [&](int rt) {\n\
-    \  fs[rt]= {-1, -1}, id[rt]= t, p[q[0]= rt]= -1;\n  for (int i= 0, s= 1; i < s;\
-    \ ++i) {\n   int x= q[i];\n   for (int y: adj[x]) {\n    if (y == rt) continue;\n\
-    \    if (m[y] == -1) return rematch(rematch, m[y]= x, y), true;\n    if (id[y]\
-    \ == t) {\n     int u= f(f, x), v= f(f, y), w= rt;\n     if (u == v) continue;\n\
-    \     for (; u != rt || v != rt; fs[u]= {x, y}, u= f(f, fs[m[u]].first)) {\n \
-    \     if (v != rt) std::swap(u, v);\n      if (fs[u].first == x && fs[u].second\
-    \ == y) {\n       w= u;\n       break;\n      }\n     }\n     for (int a= u; a\
-    \ != w; a= f(f, fs[m[a]].first)) id[a]= t, p[a]= w, q[s++]= a;\n     for (int\
-    \ b= v; b != w; b= f(f, fs[m[b]].first)) id[b]= t, p[b]= w, q[s++]= b;\n    }\
-    \ else if (id[m[y]] != t) fs[y]= {-1, -1}, fs[m[y]]= {x, -1}, id[m[y]]= t, p[m[y]]=\
-    \ y, q[s++]= m[y];\n   }\n  }\n  return false;\n };\n for (int rt= n; rt--;)\n\
-    \  if (m[rt] == -1) t+= check(rt);\n p.clear();\n for (int i= 0, e= g.edge_size();\
-    \ i < e; ++i)\n  if (auto [u, v]= g[i]; m[u] == v && q[u] >= 0) p.push_back(i),\
-    \ q[u]= q[v]= -1;\n return {p, m};\n}\n#line 5 \"test/yosupo/bipartitematching.general_matching.test.cpp\"\
+    \ (w= m[u], m[u]= v; w == -1) return;\n  if (auto [x, y]= fs[u]; y == -1) self(self,\
+    \ m[w]= x, w);\n  else self(self, x, y), self(self, y, x);\n };\n int t= 0;\n\
+    \ auto f= [&](auto self, int x) -> int { return id[x] != t || p[x] == -1 ? x :\
+    \ (p[x]= self(self, p[x])); };\n auto check= [&](int rt) {\n  fs[rt]= {-1, -1},\
+    \ id[rt]= t, p[q[0]= rt]= -1;\n  for (int i= 0, s= 1; i < s; ++i) {\n   int x=\
+    \ q[i];\n   for (int y: adj[x]) {\n    if (y == rt) continue;\n    if (m[y] ==\
+    \ -1) return rematch(rematch, m[y]= x, y), true;\n    if (id[y] == t) {\n    \
+    \ int u= f(f, x), v= f(f, y), w= rt;\n     if (u == v) continue;\n     for (;\
+    \ u != rt || v != rt; fs[u]= {x, y}, u= f(f, fs[m[u]].first)) {\n      if (v !=\
+    \ rt) std::swap(u, v);\n      if (fs[u].first == x && fs[u].second == y) {\n \
+    \      w= u;\n       break;\n      }\n     }\n     for (int a= u; a != w; a= f(f,\
+    \ fs[m[a]].first)) id[a]= t, p[a]= w, q[s++]= a;\n     for (int b= v; b != w;\
+    \ b= f(f, fs[m[b]].first)) id[b]= t, p[b]= w, q[s++]= b;\n    } else if (id[m[y]]\
+    \ != t) fs[y]= {-1, -1}, fs[m[y]]= {x, -1}, id[m[y]]= t, p[m[y]]= y, q[s++]= m[y];\n\
+    \   }\n  }\n  return false;\n };\n for (int rt= n; rt--;)\n  if (m[rt] == -1)\
+    \ t+= check(rt);\n p.clear();\n for (int i= 0, e= g.edge_size(); i < e; ++i)\n\
+    \  if (auto [u, v]= g[i]; m[u] == v && q[u] >= 0) p.push_back(i), q[u]= q[v]=\
+    \ -1;\n return {p, m};\n}\n#line 5 \"test/yosupo/bipartitematching.general_matching.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int L, R, M;\n cin >> L >> R >> M;\n Graph g(L + R, M);\n for (int i= 0; i <\
     \ M; ++i) cin >> g[i], g[i].second+= L;\n auto [ans, _]= general_matching(g);\n\
@@ -100,7 +100,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartitematching.general_matching.test.cpp
   requiredBy: []
-  timestamp: '2024-02-18 23:01:54+09:00'
+  timestamp: '2024-02-19 02:01:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.general_matching.test.cpp
