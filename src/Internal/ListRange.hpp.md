@@ -108,7 +108,7 @@ data:
   - icon: ':x:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,6 +117,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3176.test.cpp
     title: test/aoj/3176.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3198.general_matching.test.cpp
+    title: test/aoj/3198.general_matching.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
@@ -159,13 +162,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
   - icon: ':x:'
@@ -202,8 +205,8 @@ data:
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - icon: ':x:'
-    path: test/yosupo/bipartitematching.matching.test.cpp
-    title: test/yosupo/bipartitematching.matching.test.cpp
+    path: test/yosupo/bipartitematching.general_matching.test.cpp
+    title: test/yosupo/bipartitematching.general_matching.test.cpp
   - icon: ':x:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
@@ -441,7 +444,6 @@ data:
   - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/enumerate_primes.test.cpp
   - test/yosupo/scc.test.cpp
-  - test/yosupo/bipartitematching.matching.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
@@ -456,12 +458,14 @@ data:
   - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/directedmst.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
+  - test/yosupo/bipartitematching.general_matching.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/2448.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/1050.test.cpp
+  - test/aoj/3198.general_matching.test.cpp
   - test/aoj/1198.test.cpp
   - test/aoj/1226.test.cpp
   - test/aoj/3032.test.cpp

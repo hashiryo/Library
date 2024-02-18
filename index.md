@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -851,7 +851,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3024.WBT.test.cpp
       title: test/aoj/3024.WBT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3032.test.cpp
       title: test/aoj/3032.test.cpp
     - icon: ':heavy_check_mark:'
@@ -890,6 +890,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3176.test.cpp
       title: test/aoj/3176.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/3198.general_matching.test.cpp
+      title: test/aoj/3198.general_matching.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/3198.test.cpp
       title: test/aoj/3198.test.cpp
@@ -1201,7 +1204,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1216,7 +1219,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc212_g.test.cpp
       title: test/atcoder/abc212_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc212_h.test.cpp
       title: test/atcoder/abc212_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1225,7 +1228,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1240,7 +1243,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc218_h.test.cpp
       title: test/atcoder/abc218_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
     - icon: ':x:'
@@ -1499,8 +1502,8 @@ data:
       path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
       title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     - icon: ':x:'
-      path: test/yosupo/bipartitematching.matching.test.cpp
-      title: test/yosupo/bipartitematching.matching.test.cpp
+      path: test/yosupo/bipartitematching.general_matching.test.cpp
+      title: test/yosupo/bipartitematching.general_matching.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
