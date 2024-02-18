@@ -1246,7 +1246,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1255,10 +1255,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.rerooting.test.cpp
       title: test/atcoder/abc223_g.rerooting.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1288,7 +1288,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_ex.test.cpp
       title: test/atcoder/abc236_ex.test.cpp
     - icon: ':x:'
