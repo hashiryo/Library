@@ -38,17 +38,18 @@ data:
     \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
     \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
     \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
-    \ n= 0, size_t m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return\
+    \ n= 0, size_t m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return\
     \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
     \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
     \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
-    \ vector<int> p(n + 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u],\
-    \ c[--p[(*this)[i].first]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]),\
-    \ (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n } \\\n return\
-    \ {c, p}\n CSRArray<int> adjacency_vertex(bool direct) const { _ADJ((*this)[i].second,\
-    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(bool direct) const { _ADJ(i,\
+    \ vector<int> p(n + 1), c(size() << !dir); \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u],\
+    \ ++p[v]), (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n }\
+    \ else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].first]]= a) \\\n\
+    \ } else { \\\n  _ADJ_FOR(++p[v], c[--p[(*this)[i].second]]= b) \\\n } \\\n return\
+    \ {c, p}\n CSRArray<int> adjacency_vertex(int dir) const { _ADJ((*this)[i].second,\
+    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(int dir) const { _ADJ(i,\
     \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/incidence_linear_system.hpp\"\
     \ntemplate <class T> std::vector<T> incidence_linear_system(const Graph &g, std::vector<T>\
     \ b) {\n const int n= g.vertex_size();\n assert((int)b.size() == n);\n std::vector<T>\
@@ -77,7 +78,7 @@ data:
   isVerificationFile: false
   path: src/Graph/incidence_linear_system.hpp
   requiredBy: []
-  timestamp: '2024-02-17 17:58:55+09:00'
+  timestamp: '2024-02-18 12:20:50+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp
