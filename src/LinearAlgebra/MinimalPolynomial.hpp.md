@@ -53,7 +53,7 @@ data:
     \ m];\n  if (2 * d <= i) d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d +\
     \ 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n return c;\n}\n#line 2 \"\
     src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include <valarray>\nnamespace\
-    \ la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
+    \ _la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
     \ valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
     using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
     \ *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >>\
@@ -73,7 +73,7 @@ data:
     \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;\n\
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing _la_internal::Vector;\n\
     #line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#line 4 \"src/Misc/rng.hpp\"\n\
     uint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
     \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
@@ -159,7 +159,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
-  timestamp: '2023-11-17 11:57:49+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1750.MinPoly.test.cpp

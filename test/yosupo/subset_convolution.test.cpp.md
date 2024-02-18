@@ -108,7 +108,7 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Math/set_power_series.hpp\"\
     \n#include <algorithm>\n#line 5 \"src/Math/set_power_series.hpp\"\nnamespace sps\
-    \ {\nnamespace sps_internal {\nusing namespace std;\n#define _ZETA(s, l) \\\n\
+    \ {\nnamespace _sps_internal {\nusing namespace std;\n#define _ZETA(s, l) \\\n\
     \ if constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s + l]-=\
     \ A[s]; \\\n else if constexpr (t == 2) A[s]+= A[s + l]; \\\n else if constexpr\
     \ (t == 3) A[s]-= A[s + l]; \\\n else tie(A[s], A[s + l])= make_pair(A[s] + A[s\
@@ -262,13 +262,13 @@ data:
     \ f^k/k! g for k=0,1,...,n , O(n^2 2^n)\ntemplate <class T> vector<T> egf_T(const\
     \ vector<T>& f, vector<T> g) {\n const int N= f.size(), n= __builtin_ctz(N);\n\
     \ assert(!(N & (N - 1)));\n if (n == 0) return {g[1]};\n return _egfT(f.data()\
-    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing sps_internal::subset_zeta, sps_internal::subset_mobius,\
-    \ sps_internal::supset_zeta, sps_internal::supset_mobius, sps_internal::hadamard,\
-    \ sps_internal::or_convolve, sps_internal::and_convolve, sps_internal::xor_convolve,\
-    \ sps_internal::convolve, sps_internal::semi_relaxed_convolve, sps_internal::self_relaxed_convolve,\
-    \ sps_internal::inv, sps_internal::div, sps_internal::exp, sps_internal::log,\
-    \ sps_internal::egf_comp, sps_internal::poly_comp, sps_internal::egf_T;\n}\n#line\
-    \ 6 \"test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\nsigned\
+    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing _sps_internal::subset_zeta, _sps_internal::subset_mobius,\
+    \ _sps_internal::supset_zeta, _sps_internal::supset_mobius, _sps_internal::hadamard,\
+    \ _sps_internal::or_convolve, _sps_internal::and_convolve, _sps_internal::xor_convolve,\
+    \ _sps_internal::convolve, _sps_internal::semi_relaxed_convolve, _sps_internal::self_relaxed_convolve,\
+    \ _sps_internal::inv, _sps_internal::div, _sps_internal::exp, _sps_internal::log,\
+    \ _sps_internal::egf_comp, _sps_internal::poly_comp, _sps_internal::egf_T;\n}\n\
+    #line 6 \"test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
     \ int N;\n cin >> N;\n vector<Mint> a(1 << N), b(1 << N);\n for (auto &ai: a)\
     \ cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto c= sps::convolve(a, b);\n for\
@@ -290,7 +290,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2024-02-06 15:06:49+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp

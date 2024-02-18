@@ -10,19 +10,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc199_d.test.cpp
     title: test/atcoder/abc199_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc212_h.test.cpp
     title: test/atcoder/abc212_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc236_ex.test.cpp
     title: test/atcoder/abc236_ex.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc253_ex.test.cpp
     title: test/atcoder/abc253_ex.test.cpp
   - icon: ':x:'
@@ -64,7 +64,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/set_power_series.hpp\"\n#include <algorithm>\n\
-    #include <vector>\n#include <cassert>\nnamespace sps {\nnamespace sps_internal\
+    #include <vector>\n#include <cassert>\nnamespace sps {\nnamespace _sps_internal\
     \ {\nusing namespace std;\n#define _ZETA(s, l) \\\n if constexpr (!t) A[s + l]+=\
     \ A[s]; \\\n else if constexpr (t == 1) A[s + l]-= A[s]; \\\n else if constexpr\
     \ (t == 2) A[s]+= A[s + l]; \\\n else if constexpr (t == 3) A[s]-= A[s + l]; \\\
@@ -218,14 +218,14 @@ data:
     \ f^k/k! g for k=0,1,...,n , O(n^2 2^n)\ntemplate <class T> vector<T> egf_T(const\
     \ vector<T>& f, vector<T> g) {\n const int N= f.size(), n= __builtin_ctz(N);\n\
     \ assert(!(N & (N - 1)));\n if (n == 0) return {g[1]};\n return _egfT(f.data()\
-    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing sps_internal::subset_zeta, sps_internal::subset_mobius,\
-    \ sps_internal::supset_zeta, sps_internal::supset_mobius, sps_internal::hadamard,\
-    \ sps_internal::or_convolve, sps_internal::and_convolve, sps_internal::xor_convolve,\
-    \ sps_internal::convolve, sps_internal::semi_relaxed_convolve, sps_internal::self_relaxed_convolve,\
-    \ sps_internal::inv, sps_internal::div, sps_internal::exp, sps_internal::log,\
-    \ sps_internal::egf_comp, sps_internal::poly_comp, sps_internal::egf_T;\n}\n"
+    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing _sps_internal::subset_zeta, _sps_internal::subset_mobius,\
+    \ _sps_internal::supset_zeta, _sps_internal::supset_mobius, _sps_internal::hadamard,\
+    \ _sps_internal::or_convolve, _sps_internal::and_convolve, _sps_internal::xor_convolve,\
+    \ _sps_internal::convolve, _sps_internal::semi_relaxed_convolve, _sps_internal::self_relaxed_convolve,\
+    \ _sps_internal::inv, _sps_internal::div, _sps_internal::exp, _sps_internal::log,\
+    \ _sps_internal::egf_comp, _sps_internal::poly_comp, _sps_internal::egf_T;\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <vector>\n#include <cassert>\n\
-    namespace sps {\nnamespace sps_internal {\nusing namespace std;\n#define _ZETA(s,\
+    namespace sps {\nnamespace _sps_internal {\nusing namespace std;\n#define _ZETA(s,\
     \ l) \\\n if constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s\
     \ + l]-= A[s]; \\\n else if constexpr (t == 2) A[s]+= A[s + l]; \\\n else if constexpr\
     \ (t == 3) A[s]-= A[s + l]; \\\n else tie(A[s], A[s + l])= make_pair(A[s] + A[s\
@@ -379,18 +379,18 @@ data:
     \ f^k/k! g for k=0,1,...,n , O(n^2 2^n)\ntemplate <class T> vector<T> egf_T(const\
     \ vector<T>& f, vector<T> g) {\n const int N= f.size(), n= __builtin_ctz(N);\n\
     \ assert(!(N & (N - 1)));\n if (n == 0) return {g[1]};\n return _egfT(f.data()\
-    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing sps_internal::subset_zeta, sps_internal::subset_mobius,\
-    \ sps_internal::supset_zeta, sps_internal::supset_mobius, sps_internal::hadamard,\
-    \ sps_internal::or_convolve, sps_internal::and_convolve, sps_internal::xor_convolve,\
-    \ sps_internal::convolve, sps_internal::semi_relaxed_convolve, sps_internal::self_relaxed_convolve,\
-    \ sps_internal::inv, sps_internal::div, sps_internal::exp, sps_internal::log,\
-    \ sps_internal::egf_comp, sps_internal::poly_comp, sps_internal::egf_T;\n}"
+    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing _sps_internal::subset_zeta, _sps_internal::subset_mobius,\
+    \ _sps_internal::supset_zeta, _sps_internal::supset_mobius, _sps_internal::hadamard,\
+    \ _sps_internal::or_convolve, _sps_internal::and_convolve, _sps_internal::xor_convolve,\
+    \ _sps_internal::convolve, _sps_internal::semi_relaxed_convolve, _sps_internal::self_relaxed_convolve,\
+    \ _sps_internal::inv, _sps_internal::div, _sps_internal::exp, _sps_internal::log,\
+    \ _sps_internal::egf_comp, _sps_internal::poly_comp, _sps_internal::egf_T;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/set_power_series.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2024-02-06 15:06:49+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1901.test.cpp

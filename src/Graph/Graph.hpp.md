@@ -84,10 +84,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
   - icon: ':x:'
@@ -252,14 +252,13 @@ data:
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
     \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
-    \ vector<int> p(n + 1), c(size() << !dir); \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n }\
-    \ else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].first]]= a) \\\n\
-    \ } else { \\\n  _ADJ_FOR(++p[v], c[--p[(*this)[i].second]]= b) \\\n } \\\n return\
-    \ {c, p}\n CSRArray<int> adjacency_vertex(int dir) const { _ADJ((*this)[i].second,\
-    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(int dir) const { _ADJ(i,\
-    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n"
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n"
   code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Edge: std::pair<int,\
     \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
     \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
@@ -270,14 +269,13 @@ data:
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
     \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
-    \ vector<int> p(n + 1), c(size() << !dir); \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n }\
-    \ else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].first]]= a) \\\n\
-    \ } else { \\\n  _ADJ_FOR(++p[v], c[--p[(*this)[i].second]]= b) \\\n } \\\n return\
-    \ {c, p}\n CSRArray<int> adjacency_vertex(int dir) const { _ADJ((*this)[i].second,\
-    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(int dir) const { _ADJ(i,\
-    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};"
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};"
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
@@ -294,7 +292,7 @@ data:
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-18 12:20:50+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp

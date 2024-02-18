@@ -32,10 +32,10 @@ data:
   bundledCode: "#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
     \ <vector>\n#include <algorithm>\n#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include\
     \ <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include\
-    \ <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class R>\
-    \ struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\nusing\
-    \ u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool\
-    \ val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
+    \ <valarray>\nnamespace _la_internal {\nusing namespace std;\ntemplate <class\
+    \ R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\n\
+    using u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n\
+    \ bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
     \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
     \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
     \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
@@ -53,8 +53,8 @@ data:
     \ const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
     \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
     \ begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return r\
-    \ * b; }\n};\n}\nusing la_internal::Vector;\n#line 5 \"src/LinearAlgebra/Matrix.hpp\"\
-    \nnamespace la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
+    \ * b; }\n};\n}\nusing _la_internal::Vector;\n#line 5 \"src/LinearAlgebra/Matrix.hpp\"\
+    \nnamespace _la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
     \ W;\n valarray<R> dat;\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix\
     \ ret(n, n);\n  return ret.dat[slice(0, n, n + 1)]= R(true), ret;\n }\n Matrix():\
     \ W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h * w) {}\n size_t\
@@ -119,9 +119,9 @@ data:
     \ H);\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ?\
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <class K> static\
     \ bool is_zero(K x) {\n if constexpr (is_floating_point_v<K>) return abs(x) <\
-    \ 1e-8;\n else return x == K();\n}\n}\nusing la_internal::Matrix;\n#line 5 \"\
+    \ 1e-8;\n else return x == K();\n}\n}\nusing _la_internal::Matrix;\n#line 5 \"\
     src/LinearAlgebra/characteristic_polynomial.hpp\"\ntemplate <class K> Matrix<K>\
-    \ hessenberg(Matrix<K> A, bool mint= false) {\n using la_internal::is_zero;\n\
+    \ hessenberg(Matrix<K> A, bool mint= false) {\n using _la_internal::is_zero;\n\
     \ const size_t n= A.width();\n assert(n == A.height());\n for (size_t j= 0, i,\
     \ r; j + 2 < n; ++j) {\n  if constexpr (std::is_floating_point_v<K>) {\n   for\
     \ (i= j + 1, r= j + 2; r < n; ++r)\n    if (std::abs(A[i][j]) < std::abs(A[r][j]))\
@@ -152,7 +152,7 @@ data:
     \ 1, v, iv;\n for (size_t p= 0, piv, r, i; p < n;) {\n  if constexpr (std::is_floating_point_v<K>)\
     \ {\n   for (piv= p, r= p + 1; r < n; ++r)\n    if (std::abs(M1[piv][p]) < std::abs(M1[r][p]))\
     \ piv= r;\n  } else\n   for (piv= p; piv < n; ++piv)\n    if (M1[piv][p] != K())\
-    \ break;\n  if (piv == n || la_internal::is_zero(M1[piv][p])) {\n   if (++cnt\
+    \ break;\n  if (piv == n || _la_internal::is_zero(M1[piv][p])) {\n   if (++cnt\
     \ > n) return std::vector<K>(n + 1);\n   for (r= p; r--;)\n    for (v= M1[r][p],\
     \ M1[r][p]= K(), i= n; i--;) M0[i][p]-= v * M0[i][r];\n   for (i= n; i--;) std::swap(M0[i][p],\
     \ M1[i][p]);\n   continue;\n  }\n  if (piv != p) {\n   for (det*= -1, i= 0; i\
@@ -165,7 +165,7 @@ data:
     \ x*= det;\n return poly.resize(n + 1), poly;\n}\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include \"src/LinearAlgebra/Matrix.hpp\"\
     \ntemplate <class K> Matrix<K> hessenberg(Matrix<K> A, bool mint= false) {\n using\
-    \ la_internal::is_zero;\n const size_t n= A.width();\n assert(n == A.height());\n\
+    \ _la_internal::is_zero;\n const size_t n= A.width();\n assert(n == A.height());\n\
     \ for (size_t j= 0, i, r; j + 2 < n; ++j) {\n  if constexpr (std::is_floating_point_v<K>)\
     \ {\n   for (i= j + 1, r= j + 2; r < n; ++r)\n    if (std::abs(A[i][j]) < std::abs(A[r][j]))\
     \ i= r;\n  } else\n   for (i= r= j + 1; r < n; ++r)\n    if (A[r][j] != K()) i=\
@@ -195,7 +195,7 @@ data:
     \ 1, v, iv;\n for (size_t p= 0, piv, r, i; p < n;) {\n  if constexpr (std::is_floating_point_v<K>)\
     \ {\n   for (piv= p, r= p + 1; r < n; ++r)\n    if (std::abs(M1[piv][p]) < std::abs(M1[r][p]))\
     \ piv= r;\n  } else\n   for (piv= p; piv < n; ++piv)\n    if (M1[piv][p] != K())\
-    \ break;\n  if (piv == n || la_internal::is_zero(M1[piv][p])) {\n   if (++cnt\
+    \ break;\n  if (piv == n || _la_internal::is_zero(M1[piv][p])) {\n   if (++cnt\
     \ > n) return std::vector<K>(n + 1);\n   for (r= p; r--;)\n    for (v= M1[r][p],\
     \ M1[r][p]= K(), i= n; i--;) M0[i][p]-= v * M0[i][r];\n   for (i= n; i--;) std::swap(M0[i][p],\
     \ M1[i][p]);\n   continue;\n  }\n  if (piv != p) {\n   for (det*= -1, i= 0; i\
@@ -212,7 +212,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
-  timestamp: '2023-10-30 16:37:49+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1303.test.cpp

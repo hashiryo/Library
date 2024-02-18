@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc236/tasks/abc236_g
@@ -54,7 +54,7 @@ data:
     \ <class T= unsigned long long> using BitwiseXorAndRig= SemiRing<BitwiseXorAnd<T>>;\n\
     #line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#include <vector>\n\
     #line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include <valarray>\n\
-    namespace la_internal {\nusing namespace std;\ntemplate <class R> struct Vector:\
+    namespace _la_internal {\nusing namespace std;\ntemplate <class R> struct Vector:\
     \ public valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
     using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
     \ *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >>\
@@ -74,8 +74,8 @@ data:
     \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;\n\
-    #line 5 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing _la_internal::Vector;\n\
+    #line 5 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace _la_internal {\ntemplate <class\
     \ R> class Matrix {\npublic:\n size_t W;\n valarray<R> dat;\npublic:\n static\
     \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
@@ -141,7 +141,7 @@ data:
     \ H);\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ?\
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <class K> static\
     \ bool is_zero(K x) {\n if constexpr (is_floating_point_v<K>) return abs(x) <\
-    \ 1e-8;\n else return x == K();\n}\n}\nusing la_internal::Matrix;\n#line 6 \"\
+    \ 1e-8;\n else return x == K();\n}\n}\nusing _la_internal::Matrix;\n#line 6 \"\
     test/atcoder/abc236_g.test.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(0);\n using R= MinMaxRig<int>;\n int N, T, L;\n cin >>\
     \ N >> T >> L;\n Matrix<R> A(N, N);\n for (int t= 1; t <= T; t++) {\n  int u,\
@@ -163,8 +163,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 16:37:49+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-18 22:00:56+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
 layout: document

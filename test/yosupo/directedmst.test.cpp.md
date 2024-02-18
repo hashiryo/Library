@@ -50,14 +50,13 @@ data:
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
     \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
-    \ vector<int> p(n + 1), c(size() << !dir); \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n }\
-    \ else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].first]]= a) \\\n\
-    \ } else { \\\n  _ADJ_FOR(++p[v], c[--p[(*this)[i].second]]= b) \\\n } \\\n return\
-    \ {c, p}\n CSRArray<int> adjacency_vertex(int dir) const { _ADJ((*this)[i].second,\
-    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(int dir) const { _ADJ(i,\
-    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 2 \"src/Graph/minimum_spanning_aborescence.hpp\"\
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 2 \"src/Graph/minimum_spanning_aborescence.hpp\"\
     \n#include <utility>\n#line 3 \"src/DataStructure/UnionFind.hpp\"\n#include <algorithm>\n\
     #include <cassert>\ntemplate <bool undoable= false> class UnionFind {\n std::vector<int>\
     \ par;\n std::vector<std::pair<int, int>> his;\npublic:\n UnionFind(int n): par(n,\
@@ -119,7 +118,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2024-02-18 12:20:50+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp

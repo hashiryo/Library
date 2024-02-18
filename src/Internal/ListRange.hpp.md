@@ -135,13 +135,13 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
   - icon: ':heavy_check_mark:'

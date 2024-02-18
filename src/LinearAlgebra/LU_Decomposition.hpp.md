@@ -27,7 +27,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':x:'
@@ -41,11 +41,11 @@ data:
   bundledCode: "#line 2 \"src/LinearAlgebra/LU_Decomposition.hpp\"\n#include <type_traits>\n\
     #include <numeric>\n#include <vector>\n#line 2 \"src/LinearAlgebra/Matrix.hpp\"\
     \n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n\
-    #include <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class\
-    \ R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\n\
-    using u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n\
-    \ bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
-    \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
+    #include <valarray>\nnamespace _la_internal {\nusing namespace std;\ntemplate\
+    \ <class R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n\
+    };\nusing u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8\
+    \ i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n\
+    \ ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
     \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
     \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
     \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
@@ -62,8 +62,8 @@ data:
     \ const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
     \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
     \ begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return r\
-    \ * b; }\n};\n}\nusing la_internal::Vector;\n#line 5 \"src/LinearAlgebra/Matrix.hpp\"\
-    \nnamespace la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
+    \ * b; }\n};\n}\nusing _la_internal::Vector;\n#line 5 \"src/LinearAlgebra/Matrix.hpp\"\
+    \nnamespace _la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
     \ W;\n valarray<R> dat;\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix\
     \ ret(n, n);\n  return ret.dat[slice(0, n, n + 1)]= R(true), ret;\n }\n Matrix():\
     \ W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h * w) {}\n size_t\
@@ -128,8 +128,8 @@ data:
     \ H);\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ?\
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <class K> static\
     \ bool is_zero(K x) {\n if constexpr (is_floating_point_v<K>) return abs(x) <\
-    \ 1e-8;\n else return x == K();\n}\n}\nusing la_internal::Matrix;\n#line 6 \"\
-    src/LinearAlgebra/LU_Decomposition.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ 1e-8;\n else return x == K();\n}\n}\nusing _la_internal::Matrix;\n#line 6 \"\
+    src/LinearAlgebra/LU_Decomposition.hpp\"\nnamespace _la_internal {\ntemplate <class\
     \ K> class LU_Decomposition {\n Matrix<K> dat;\n vector<size_t> perm, piv;\n bool\
     \ sgn;\n size_t psz;\npublic:\n LU_Decomposition(const Matrix<K> &A): dat(A),\
     \ perm(A.height()), sgn(false), psz(0) {\n  const size_t h= A.height(), w= A.width();\n\
@@ -206,11 +206,11 @@ data:
     \ (size_t c= 0; c < n; ++c)\n    if (y[c]^= perm[c] == i; c < n && y[c]) add_upper(y.data(),\
     \ dat[c].data(), c, n);\n   for (size_t j= n; j--;)\n    if ((ret[j][i]= y[j]))\
     \ add_lower(y.data(), dat[j].data(), j);\n  }\n  return ret;\n }\n};\n}\nusing\
-    \ la_internal::LU_Decomposition;\n"
+    \ _la_internal::LU_Decomposition;\n"
   code: "#pragma once\n#include <type_traits>\n#include <numeric>\n#include <vector>\n\
-    #include \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
-    \ K> class LU_Decomposition {\n Matrix<K> dat;\n vector<size_t> perm, piv;\n bool\
-    \ sgn;\n size_t psz;\npublic:\n LU_Decomposition(const Matrix<K> &A): dat(A),\
+    #include \"src/LinearAlgebra/Matrix.hpp\"\nnamespace _la_internal {\ntemplate\
+    \ <class K> class LU_Decomposition {\n Matrix<K> dat;\n vector<size_t> perm, piv;\n\
+    \ bool sgn;\n size_t psz;\npublic:\n LU_Decomposition(const Matrix<K> &A): dat(A),\
     \ perm(A.height()), sgn(false), psz(0) {\n  const size_t h= A.height(), w= A.width();\n\
     \  iota(perm.begin(), perm.end(), 0), piv.resize(min(w, h));\n  for (size_t c=\
     \ 0, pos; c < w && psz < h; ++c) {\n   pos= psz;\n   if constexpr (is_floating_point_v<K>)\
@@ -285,14 +285,14 @@ data:
     \ (size_t c= 0; c < n; ++c)\n    if (y[c]^= perm[c] == i; c < n && y[c]) add_upper(y.data(),\
     \ dat[c].data(), c, n);\n   for (size_t j= n; j--;)\n    if ((ret[j][i]= y[j]))\
     \ add_lower(y.data(), dat[j].data(), j);\n  }\n  return ret;\n }\n};\n}\nusing\
-    \ la_internal::LU_Decomposition;"
+    \ _la_internal::LU_Decomposition;"
   dependsOn:
   - src/LinearAlgebra/Matrix.hpp
   - src/LinearAlgebra/Vector.hpp
   isVerificationFile: false
   path: src/LinearAlgebra/LU_Decomposition.hpp
   requiredBy: []
-  timestamp: '2023-10-30 16:37:49+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/803.test.cpp

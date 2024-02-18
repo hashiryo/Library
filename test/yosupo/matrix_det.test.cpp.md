@@ -36,11 +36,11 @@ data:
     \n#include <iostream>\n#line 2 \"src/LinearAlgebra/LU_Decomposition.hpp\"\n#include\
     \ <type_traits>\n#include <numeric>\n#include <vector>\n#line 2 \"src/LinearAlgebra/Matrix.hpp\"\
     \n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n\
-    #include <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class\
-    \ R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\n\
-    using u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n\
-    \ bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
-    \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
+    #include <valarray>\nnamespace _la_internal {\nusing namespace std;\ntemplate\
+    \ <class R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n\
+    };\nusing u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8\
+    \ i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n\
+    \ ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
     \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
     \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
     \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
@@ -57,8 +57,8 @@ data:
     \ const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
     \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
     \ begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return r\
-    \ * b; }\n};\n}\nusing la_internal::Vector;\n#line 5 \"src/LinearAlgebra/Matrix.hpp\"\
-    \nnamespace la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
+    \ * b; }\n};\n}\nusing _la_internal::Vector;\n#line 5 \"src/LinearAlgebra/Matrix.hpp\"\
+    \nnamespace _la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
     \ W;\n valarray<R> dat;\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix\
     \ ret(n, n);\n  return ret.dat[slice(0, n, n + 1)]= R(true), ret;\n }\n Matrix():\
     \ W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h * w) {}\n size_t\
@@ -123,8 +123,8 @@ data:
     \ H);\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ?\
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <class K> static\
     \ bool is_zero(K x) {\n if constexpr (is_floating_point_v<K>) return abs(x) <\
-    \ 1e-8;\n else return x == K();\n}\n}\nusing la_internal::Matrix;\n#line 6 \"\
-    src/LinearAlgebra/LU_Decomposition.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ 1e-8;\n else return x == K();\n}\n}\nusing _la_internal::Matrix;\n#line 6 \"\
+    src/LinearAlgebra/LU_Decomposition.hpp\"\nnamespace _la_internal {\ntemplate <class\
     \ K> class LU_Decomposition {\n Matrix<K> dat;\n vector<size_t> perm, piv;\n bool\
     \ sgn;\n size_t psz;\npublic:\n LU_Decomposition(const Matrix<K> &A): dat(A),\
     \ perm(A.height()), sgn(false), psz(0) {\n  const size_t h= A.height(), w= A.width();\n\
@@ -201,8 +201,8 @@ data:
     \ (size_t c= 0; c < n; ++c)\n    if (y[c]^= perm[c] == i; c < n && y[c]) add_upper(y.data(),\
     \ dat[c].data(), c, n);\n   for (size_t j= n; j--;)\n    if ((ret[j][i]= y[j]))\
     \ add_lower(y.data(), dat[j].data(), j);\n  }\n  return ret;\n }\n};\n}\nusing\
-    \ la_internal::LU_Decomposition;\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class\
-    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ _la_internal::LU_Decomposition;\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate\
+    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
     \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
@@ -300,7 +300,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det.test.cpp

@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':x:'
@@ -63,7 +63,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
   - icon: ':x:'
@@ -75,7 +75,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':x:'
@@ -99,10 +99,10 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include\
-    \ <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class R>\
-    \ struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\nusing\
-    \ u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool\
-    \ val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
+    \ <valarray>\nnamespace _la_internal {\nusing namespace std;\ntemplate <class\
+    \ R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\n\
+    using u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n\
+    \ bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
     \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
     \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
     \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
@@ -120,8 +120,8 @@ data:
     \ const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
     \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
     \ begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return r\
-    \ * b; }\n};\n}\nusing la_internal::Vector;\n"
-  code: "#pragma once\n#include <cstdint>\n#include <valarray>\nnamespace la_internal\
+    \ * b; }\n};\n}\nusing _la_internal::Vector;\n"
+  code: "#pragma once\n#include <cstdint>\n#include <valarray>\nnamespace _la_internal\
     \ {\nusing namespace std;\ntemplate <class R> struct Vector: public valarray<R>\
     \ {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= uint8_t;\n\
     class Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool\
@@ -142,7 +142,7 @@ data:
     \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;"
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing _la_internal::Vector;"
   dependsOn: []
   isVerificationFile: false
   path: src/LinearAlgebra/Vector.hpp
@@ -151,7 +151,7 @@ data:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   - src/LinearAlgebra/Matrix.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
-  timestamp: '2023-10-30 16:37:49+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1340.test.cpp

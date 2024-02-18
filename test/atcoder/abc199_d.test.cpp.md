@@ -10,9 +10,9 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc199/tasks/abc199_d
@@ -20,7 +20,7 @@ data:
     - https://atcoder.jp/contests/abc199/tasks/abc199_d
   bundledCode: "#line 1 \"test/atcoder/abc199_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\
     \n#include <iostream>\n#line 2 \"src/Math/set_power_series.hpp\"\n#include <algorithm>\n\
-    #include <vector>\n#include <cassert>\nnamespace sps {\nnamespace sps_internal\
+    #include <vector>\n#include <cassert>\nnamespace sps {\nnamespace _sps_internal\
     \ {\nusing namespace std;\n#define _ZETA(s, l) \\\n if constexpr (!t) A[s + l]+=\
     \ A[s]; \\\n else if constexpr (t == 1) A[s + l]-= A[s]; \\\n else if constexpr\
     \ (t == 2) A[s]+= A[s + l]; \\\n else if constexpr (t == 3) A[s]-= A[s + l]; \\\
@@ -174,13 +174,13 @@ data:
     \ f^k/k! g for k=0,1,...,n , O(n^2 2^n)\ntemplate <class T> vector<T> egf_T(const\
     \ vector<T>& f, vector<T> g) {\n const int N= f.size(), n= __builtin_ctz(N);\n\
     \ assert(!(N & (N - 1)));\n if (n == 0) return {g[1]};\n return _egfT(f.data()\
-    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing sps_internal::subset_zeta, sps_internal::subset_mobius,\
-    \ sps_internal::supset_zeta, sps_internal::supset_mobius, sps_internal::hadamard,\
-    \ sps_internal::or_convolve, sps_internal::and_convolve, sps_internal::xor_convolve,\
-    \ sps_internal::convolve, sps_internal::semi_relaxed_convolve, sps_internal::self_relaxed_convolve,\
-    \ sps_internal::inv, sps_internal::div, sps_internal::exp, sps_internal::log,\
-    \ sps_internal::egf_comp, sps_internal::poly_comp, sps_internal::egf_T;\n}\n#line\
-    \ 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nclass UndirectedGraphSetPowerSeries\
+    \ + (N >> 1), g.data(), N >> 1, n);\n}\n}\nusing _sps_internal::subset_zeta, _sps_internal::subset_mobius,\
+    \ _sps_internal::supset_zeta, _sps_internal::supset_mobius, _sps_internal::hadamard,\
+    \ _sps_internal::or_convolve, _sps_internal::and_convolve, _sps_internal::xor_convolve,\
+    \ _sps_internal::convolve, _sps_internal::semi_relaxed_convolve, _sps_internal::self_relaxed_convolve,\
+    \ _sps_internal::inv, _sps_internal::div, _sps_internal::exp, _sps_internal::log,\
+    \ _sps_internal::egf_comp, _sps_internal::poly_comp, _sps_internal::egf_T;\n}\n\
+    #line 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nclass UndirectedGraphSetPowerSeries\
     \ {\n using u64= unsigned long long;\n template <class T> using Sps= std::vector<T>;\n\
     \ template <class T> using Poly= std::vector<T>;\n const int n, N, m, o;\n std::vector<u64>\
     \ adj;\n std::vector<int> es;\n template <class T> static inline T pow(T x, int\
@@ -333,8 +333,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc199_d.test.cpp
   requiredBy: []
-  timestamp: '2024-02-06 15:06:49+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-18 22:00:56+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc199_d.test.cpp
 layout: document

@@ -49,14 +49,13 @@ data:
     \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
     \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
     \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n\
-    \ vector<int> p(n + 1), c(size() << !dir); \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u],\
-    \ ++p[v]), (c[--p[(*this)[i].first]]= a, c[--p[(*this)[i].second]]= b)) \\\n }\
-    \ else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].first]]= a) \\\n\
-    \ } else { \\\n  _ADJ_FOR(++p[v], c[--p[(*this)[i].second]]= b) \\\n } \\\n return\
-    \ {c, p}\n CSRArray<int> adjacency_vertex(int dir) const { _ADJ((*this)[i].second,\
-    \ (*this)[i].first); }\n CSRArray<int> adjacency_edge(int dir) const { _ADJ(i,\
-    \ i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/general_matching.hpp\"\
+    \ p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/general_matching.hpp\"\
     \nstd::vector<Edge> general_matching(const CSRArray<int> &adj) {\n const int n=\
     \ adj.size();\n std::vector<int> pos(n + 1), que(n), id(n, -1), p(n), mate(n,\
     \ -1);\n std::vector<Edge> fs(n), ret;\n auto rematch= [&](auto self, int u, int\
@@ -96,7 +95,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2024-02-18 12:20:50+09:00'
+  timestamp: '2024-02-18 22:00:56+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/general_matching.test.cpp

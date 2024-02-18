@@ -332,7 +332,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Rational.hpp
       title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':x:'
@@ -1150,13 +1150,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc155_e.test.cpp
       title: test/atcoder/abc155_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc160_f.test.cpp
       title: test/atcoder/abc160_f.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc162_e.test.cpp
       title: test/atcoder/abc162_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1198,7 +1198,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc194_e.test.cpp
       title: test/atcoder/abc194_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
     - icon: ':x:'
@@ -1216,7 +1216,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc212_g.test.cpp
       title: test/atcoder/abc212_g.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc212_h.test.cpp
       title: test/atcoder/abc212_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1225,7 +1225,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1285,10 +1285,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc236_ex.test.cpp
       title: test/atcoder/abc236_ex.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1306,7 +1306,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.test.cpp
       title: test/atcoder/abc250_g.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc253_ex.test.cpp
       title: test/atcoder/abc253_ex.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1965,7 +1965,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1339.test.cpp
       title: test/yukicoder/1339.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
     - icon: ':x:'
@@ -2052,7 +2052,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1813.test.cpp
       title: test/yukicoder/1813.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':x:'
