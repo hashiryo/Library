@@ -56,58 +56,56 @@ data:
     \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
     \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
     \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/general_matching.hpp\"\
-    \nstd::vector<Edge> general_matching(const CSRArray<int> &adj) {\n const int n=\
-    \ adj.size();\n std::vector<int> pos(n + 1), que(n), id(n, -1), p(n), mate(n,\
-    \ -1);\n std::vector<Edge> fs(n), ret;\n auto rematch= [&](auto self, int u, int\
-    \ v) -> void {\n  int w;\n  if (w= mate[u], mate[u]= v; w == -1 || mate[w] !=\
-    \ u) return;\n  if (auto [x, y]= fs[u]; y == -1) self(self, mate[w]= x, w);\n\
-    \  else self(self, x, y), self(self, y, x);\n };\n int ts= 0;\n auto f= [&](auto\
-    \ self, int x) -> int { return id[x] != ts || p[x] == -1 ? x : (p[x]= self(self,\
-    \ p[x])); };\n auto check= [&](int rt) {\n  fs[rt]= {-1, -1}, id[rt]= ts, p[que[0]=\
-    \ rt]= -1;\n  for (int i= 0, s= 1; i < s; ++i) {\n   int x= que[i];\n   for (int\
-    \ y: adj[x]) {\n    if (y == rt) continue;\n    if (mate[y] == -1) return rematch(rematch,\
-    \ mate[y]= x, y), true;\n    if (id[y] == ts) {\n     int u= f(f, x), v= f(f,\
-    \ y), w= rt;\n     if (u == v) continue;\n     for (; u != rt || v != rt; fs[u]=\
-    \ {x, y}, u= f(f, fs[mate[u]].first)) {\n      if (v != rt) std::swap(u, v);\n\
-    \      if (fs[u].first == x && fs[u].second == y) {\n       w= u;\n       break;\n\
-    \      }\n     }\n     for (int a= u; a != w; a= f(f, fs[mate[a]].first)) id[a]=\
-    \ ts, p[a]= w, que[s++]= a;\n     for (int b= v; b != w; b= f(f, fs[mate[b]].first))\
-    \ id[b]= ts, p[b]= w, que[s++]= b;\n    } else if (id[mate[y]] != ts) fs[y]= {-1,\
-    \ -1}, fs[mate[y]]= {x, -1}, id[mate[y]]= ts, p[mate[y]]= y, que[s++]= mate[y];\n\
-    \   }\n  }\n  return false;\n };\n for (int rt= n; rt--;)\n  if (mate[rt] == -1)\
-    \ ts+= check(rt);\n for (int i= 0; i < n; ++i)\n  if (int j= mate[i]; i < j) ret.emplace_back(i,\
-    \ j);\n return ret;\n}\nstd::vector<Edge> general_matching(const Graph &g) { return\
-    \ general_matching(g.adjacency_vertex(0)); }\n"
-  code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\nstd::vector<Edge> general_matching(const\
-    \ CSRArray<int> &adj) {\n const int n= adj.size();\n std::vector<int> pos(n +\
-    \ 1), que(n), id(n, -1), p(n), mate(n, -1);\n std::vector<Edge> fs(n), ret;\n\
-    \ auto rematch= [&](auto self, int u, int v) -> void {\n  int w;\n  if (w= mate[u],\
-    \ mate[u]= v; w == -1 || mate[w] != u) return;\n  if (auto [x, y]= fs[u]; y ==\
-    \ -1) self(self, mate[w]= x, w);\n  else self(self, x, y), self(self, y, x);\n\
-    \ };\n int ts= 0;\n auto f= [&](auto self, int x) -> int { return id[x] != ts\
-    \ || p[x] == -1 ? x : (p[x]= self(self, p[x])); };\n auto check= [&](int rt) {\n\
-    \  fs[rt]= {-1, -1}, id[rt]= ts, p[que[0]= rt]= -1;\n  for (int i= 0, s= 1; i\
-    \ < s; ++i) {\n   int x= que[i];\n   for (int y: adj[x]) {\n    if (y == rt) continue;\n\
-    \    if (mate[y] == -1) return rematch(rematch, mate[y]= x, y), true;\n    if\
-    \ (id[y] == ts) {\n     int u= f(f, x), v= f(f, y), w= rt;\n     if (u == v) continue;\n\
-    \     for (; u != rt || v != rt; fs[u]= {x, y}, u= f(f, fs[mate[u]].first)) {\n\
-    \      if (v != rt) std::swap(u, v);\n      if (fs[u].first == x && fs[u].second\
+    \nstd::vector<int> general_matching(const Graph &g) {\n auto adj= g.adjacency_vertex(0);\n\
+    \ const int n= adj.size();\n std::vector<int> q(n), id(n, -1), p(n), m(n, -1);\n\
+    \ std::vector<Edge> fs(n);\n auto rematch= [&](auto self, int u, int v) -> void\
+    \ {\n  int w;\n  if (w= m[u], m[u]= v; w == -1 || m[w] != u) return;\n  if (auto\
+    \ [x, y]= fs[u]; y == -1) self(self, m[w]= x, w);\n  else self(self, x, y), self(self,\
+    \ y, x);\n };\n int t= 0;\n auto f= [&](auto self, int x) -> int { return id[x]\
+    \ != t || p[x] == -1 ? x : (p[x]= self(self, p[x])); };\n auto check= [&](int\
+    \ rt) {\n  fs[rt]= {-1, -1}, id[rt]= t, p[q[0]= rt]= -1;\n  for (int i= 0, s=\
+    \ 1; i < s; ++i) {\n   int x= q[i];\n   for (int y: adj[x]) {\n    if (y == rt)\
+    \ continue;\n    if (m[y] == -1) return rematch(rematch, m[y]= x, y), true;\n\
+    \    if (id[y] == t) {\n     int u= f(f, x), v= f(f, y), w= rt;\n     if (u ==\
+    \ v) continue;\n     for (; u != rt || v != rt; fs[u]= {x, y}, u= f(f, fs[m[u]].first))\
+    \ {\n      if (v != rt) std::swap(u, v);\n      if (fs[u].first == x && fs[u].second\
     \ == y) {\n       w= u;\n       break;\n      }\n     }\n     for (int a= u; a\
-    \ != w; a= f(f, fs[mate[a]].first)) id[a]= ts, p[a]= w, que[s++]= a;\n     for\
-    \ (int b= v; b != w; b= f(f, fs[mate[b]].first)) id[b]= ts, p[b]= w, que[s++]=\
-    \ b;\n    } else if (id[mate[y]] != ts) fs[y]= {-1, -1}, fs[mate[y]]= {x, -1},\
-    \ id[mate[y]]= ts, p[mate[y]]= y, que[s++]= mate[y];\n   }\n  }\n  return false;\n\
-    \ };\n for (int rt= n; rt--;)\n  if (mate[rt] == -1) ts+= check(rt);\n for (int\
-    \ i= 0; i < n; ++i)\n  if (int j= mate[i]; i < j) ret.emplace_back(i, j);\n return\
-    \ ret;\n}\nstd::vector<Edge> general_matching(const Graph &g) { return general_matching(g.adjacency_vertex(0));\
-    \ }"
+    \ != w; a= f(f, fs[m[a]].first)) id[a]= t, p[a]= w, q[s++]= a;\n     for (int\
+    \ b= v; b != w; b= f(f, fs[m[b]].first)) id[b]= t, p[b]= w, q[s++]= b;\n    }\
+    \ else if (id[m[y]] != t) fs[y]= {-1, -1}, fs[m[y]]= {x, -1}, id[m[y]]= t, p[m[y]]=\
+    \ y, q[s++]= m[y];\n   }\n  }\n  return false;\n };\n for (int rt= n; rt--;)\n\
+    \  if (m[rt] == -1) t+= check(rt);\n p.clear();\n for (int i= 0, e= g.edge_size();\
+    \ i < e; ++i)\n  if (auto [u, v]= g[i]; m[u] == v) p.push_back(i), m[u]= m[v]=\
+    \ -1;\n return p;\n}\n"
+  code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\nstd::vector<int> general_matching(const\
+    \ Graph &g) {\n auto adj= g.adjacency_vertex(0);\n const int n= adj.size();\n\
+    \ std::vector<int> q(n), id(n, -1), p(n), m(n, -1);\n std::vector<Edge> fs(n);\n\
+    \ auto rematch= [&](auto self, int u, int v) -> void {\n  int w;\n  if (w= m[u],\
+    \ m[u]= v; w == -1 || m[w] != u) return;\n  if (auto [x, y]= fs[u]; y == -1) self(self,\
+    \ m[w]= x, w);\n  else self(self, x, y), self(self, y, x);\n };\n int t= 0;\n\
+    \ auto f= [&](auto self, int x) -> int { return id[x] != t || p[x] == -1 ? x :\
+    \ (p[x]= self(self, p[x])); };\n auto check= [&](int rt) {\n  fs[rt]= {-1, -1},\
+    \ id[rt]= t, p[q[0]= rt]= -1;\n  for (int i= 0, s= 1; i < s; ++i) {\n   int x=\
+    \ q[i];\n   for (int y: adj[x]) {\n    if (y == rt) continue;\n    if (m[y] ==\
+    \ -1) return rematch(rematch, m[y]= x, y), true;\n    if (id[y] == t) {\n    \
+    \ int u= f(f, x), v= f(f, y), w= rt;\n     if (u == v) continue;\n     for (;\
+    \ u != rt || v != rt; fs[u]= {x, y}, u= f(f, fs[m[u]].first)) {\n      if (v !=\
+    \ rt) std::swap(u, v);\n      if (fs[u].first == x && fs[u].second == y) {\n \
+    \      w= u;\n       break;\n      }\n     }\n     for (int a= u; a != w; a= f(f,\
+    \ fs[m[a]].first)) id[a]= t, p[a]= w, q[s++]= a;\n     for (int b= v; b != w;\
+    \ b= f(f, fs[m[b]].first)) id[b]= t, p[b]= w, q[s++]= b;\n    } else if (id[m[y]]\
+    \ != t) fs[y]= {-1, -1}, fs[m[y]]= {x, -1}, id[m[y]]= t, p[m[y]]= y, q[s++]= m[y];\n\
+    \   }\n  }\n  return false;\n };\n for (int rt= n; rt--;)\n  if (m[rt] == -1)\
+    \ t+= check(rt);\n p.clear();\n for (int i= 0, e= g.edge_size(); i < e; ++i)\n\
+    \  if (auto [u, v]= g[i]; m[u] == v) p.push_back(i), m[u]= m[v]= -1;\n return\
+    \ p;\n}"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/general_matching.hpp
   requiredBy: []
-  timestamp: '2024-02-18 22:00:56+09:00'
+  timestamp: '2024-02-18 22:23:19+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bipartitematching.matching.test.cpp
