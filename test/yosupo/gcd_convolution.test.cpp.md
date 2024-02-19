@@ -17,10 +17,10 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/tables.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
       \u307F\u8FBC\u307F\u306A\u3069"
@@ -38,17 +38,17 @@ data:
     \ \"https://judge.yosupo.jp/problem/gcd_convolution\"\n#include <iostream>\n#include\
     \ <vector>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
     #include <cstdint>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
-    #include <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct\
+    #include <type_traits>\n#define _LR(name, IT, C) \\\n template <class T> struct\
     \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
     \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
     \ return ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n\
-    \  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
-    \ const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
-    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
-    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
-    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
-    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
-    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
+    \ );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate <class\
+    \ T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t size()\
+    \ const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return {dat.begin()\
+    \ + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const\
+    \ { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template\
+    \ <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
@@ -217,7 +217,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/gcd_convolution.test.cpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-19 14:48:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/gcd_convolution.test.cpp

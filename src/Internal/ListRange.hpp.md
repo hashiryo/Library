@@ -55,13 +55,13 @@ data:
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/tables.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
       \u307F\u8FBC\u307F\u306A\u3069"
@@ -138,43 +138,43 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
   - icon: ':x:'
@@ -352,32 +352,32 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
     \ <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT,\
-    \ CT) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    \ C) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
     \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
-    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
-    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
-    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
-    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
-    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
-    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
-    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
-    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
-    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
-    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n"
-  code: "#pragma once\n#include <vector>\n#include <iostream>\n#include <iterator>\n\
-    #include <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct\
-    \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
-    \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
-    \ return ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n\
-    \  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
-    \ const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
+    \ ed); } \\\n  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate\
     \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
     \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
     \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
     \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
     \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n"
+  code: "#pragma once\n#include <vector>\n#include <iostream>\n#include <iterator>\n\
+    #include <type_traits>\n#define _LR(name, IT, C) \\\n template <class T> struct\
+    \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
+    \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
+    \ return ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n\
+    \  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
+    \ );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate <class\
+    \ T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t size()\
+    \ const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return {dat.begin()\
+    \ + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const\
+    \ { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template\
+    \ <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
@@ -407,7 +407,7 @@ data:
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
   - src/DataStructure/CsrArray.hpp
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-19 14:48:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp

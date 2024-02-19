@@ -154,10 +154,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
   - icon: ':heavy_check_mark:'

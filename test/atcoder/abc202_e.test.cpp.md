@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   - icon: ':question:'
@@ -16,9 +16,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_e
@@ -26,17 +26,17 @@ data:
     - https://atcoder.jp/contests/abc202/tasks/abc202_e
   bundledCode: "#line 1 \"test/atcoder/abc202_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc202/tasks/abc202_e\"\
     \n#include <iostream>\n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\
-    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n\
-    \ template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
-    \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, C) \\\n template\
+    \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
+    \n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
-    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
-    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
-    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
-    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
-    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
-    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
-    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ed); } \\\n  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
@@ -155,8 +155,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc202_e.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 02:01:34+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-19 14:48:31+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc202_e.test.cpp
 layout: document

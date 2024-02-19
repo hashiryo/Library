@@ -5,20 +5,20 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/CumSumQuotient.hpp
     title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc172/tasks/abc172_d
@@ -29,36 +29,37 @@ data:
     #include <iostream>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include\
     \ <algorithm>\n#include <cstdint>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
     \ <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n#include\
-    \ <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct name\
+    \ <type_traits>\n#define _LR(name, IT, C) \\\n template <class T> struct name\
     \ { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg, ed;\
     \ \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const { return\
-    \ ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n  CT &operator[](int\
-    \ i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange,\
-    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
-    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
-    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
-    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
-    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
-    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
-    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
-    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
-    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
-    \ << ']';\n}\n#line 5 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace nt_internal\
-    \ {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int N) {\n static int\
-    \ n= 2;\n if (n > N) return;\n if (lf.resize((N + 1) >> 1); n == 2) ps.push_back(n++);\n\
-    \ int M= (N - 1) / 2;\n for (int j= 1, e= ps.size(); j < e; ++j) {\n  int p= ps[j];\n\
-    \  if (int64_t(p) * p > N) break;\n  for (auto k= int64_t(p) * max(n / p / 2 *\
-    \ 2 + 1, p) / 2; k <= M; k+= p) lf[k]+= p * !lf[k];\n }\n for (; n <= N; n+= 2)\n\
-    \  if (!lf[n >> 1]) {\n   ps.push_back(lf[n >> 1]= n);\n   for (auto j= int64_t(n)\
-    \ * n / 2; j <= M; j+= n) lf[j]+= n * !lf[j];\n  }\n}\nConstListRange<int> enumerate_primes()\
-    \ { return {ps.cbegin(), ps.cend()}; }\nConstListRange<int> enumerate_primes(int\
-    \ N) {\n sieve(N);\n return {ps.cbegin(), upper_bound(ps.cbegin(), ps.cend(),\
-    \ N)};\n}\nint least_prime_factor(int n) { return n & 1 ? sieve(n), lf[(n >> 1)]\
-    \ : 2; }\n// f(p,e) := f(p^e)\ntemplate <class T, class F> vector<T> completely_multiplicative_table(int\
-    \ N, const F &f) {\n vector<T> ret(N + 1);\n sieve(N);\n for (int n= 3, i= 1;\
-    \ n <= N; n+= 2, ++i) ret[n]= lf[i] == n ? f(n, 1) : ret[lf[i]] * ret[n / lf[i]];\n\
-    \ if (int n= 4; 2 <= N)\n  for (T t= ret[2]= f(2, 1); n <= N; n+= 2) ret[n]= t\
-    \ * ret[n >> 1];\n return ret[1]= 1, ret;\n}\n}\nusing nt_internal::enumerate_primes,\
+    \ ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n  C T\
+    \ &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange, iterator, );\n\
+    _LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate <class T> struct\
+    \ CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t size() const\
+    \ { return p.size() - 1; }\n ListRange<T> operator[](int i) { return {dat.begin()\
+    \ + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const\
+    \ { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template\
+    \ <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n#line 5 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace\
+    \ nt_internal {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int N)\
+    \ {\n static int n= 2;\n if (n > N) return;\n if (lf.resize((N + 1) >> 1); n ==\
+    \ 2) ps.push_back(n++);\n int M= (N - 1) / 2;\n for (int j= 1, e= ps.size(); j\
+    \ < e; ++j) {\n  int p= ps[j];\n  if (int64_t(p) * p > N) break;\n  for (auto\
+    \ k= int64_t(p) * max(n / p / 2 * 2 + 1, p) / 2; k <= M; k+= p) lf[k]+= p * !lf[k];\n\
+    \ }\n for (; n <= N; n+= 2)\n  if (!lf[n >> 1]) {\n   ps.push_back(lf[n >> 1]=\
+    \ n);\n   for (auto j= int64_t(n) * n / 2; j <= M; j+= n) lf[j]+= n * !lf[j];\n\
+    \  }\n}\nConstListRange<int> enumerate_primes() { return {ps.cbegin(), ps.cend()};\
+    \ }\nConstListRange<int> enumerate_primes(int N) {\n sieve(N);\n return {ps.cbegin(),\
+    \ upper_bound(ps.cbegin(), ps.cend(), N)};\n}\nint least_prime_factor(int n) {\
+    \ return n & 1 ? sieve(n), lf[(n >> 1)] : 2; }\n// f(p,e) := f(p^e)\ntemplate\
+    \ <class T, class F> vector<T> completely_multiplicative_table(int N, const F\
+    \ &f) {\n vector<T> ret(N + 1);\n sieve(N);\n for (int n= 3, i= 1; n <= N; n+=\
+    \ 2, ++i) ret[n]= lf[i] == n ? f(n, 1) : ret[lf[i]] * ret[n / lf[i]];\n if (int\
+    \ n= 4; 2 <= N)\n  for (T t= ret[2]= f(2, 1); n <= N; n+= 2) ret[n]= t * ret[n\
+    \ >> 1];\n return ret[1]= 1, ret;\n}\n}\nusing nt_internal::enumerate_primes,\
     \ nt_internal::least_prime_factor, nt_internal::completely_multiplicative_table;\n\
     // O(N log k / log N + N)\ntemplate <class T> static std::vector<T> pow_table(int\
     \ N, uint64_t k) {\n if (k == 0) return std::vector<T>(N + 1, 1);\n auto f= [k](int\
@@ -133,8 +134,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc172_d.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-19 14:48:31+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.mul_sum.test.cpp
 layout: document

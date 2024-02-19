@@ -26,17 +26,17 @@ data:
     - https://judge.yosupo.jp/problem/directedmst
   bundledCode: "#line 1 \"test/yosupo/directedmst.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\
     \n#include <iostream>\n#include <vector>\n#include <numeric>\n#line 4 \"src/Internal/ListRange.hpp\"\
-    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n\
-    \ template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
-    \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, C) \\\n template\
+    \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
+    \n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
-    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
-    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
-    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
-    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
-    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
-    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
-    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ed); } \\\n  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
@@ -72,29 +72,29 @@ data:
     \ void rollback(size_t t) {\n  static_assert(undoable, \"\\'rollback\\' is not\
     \ enabled\");\n  assert(t <= his.size());\n  while (his.size() > t) undo();\n\
     \ }\n};\n#line 5 \"src/Graph/minimum_spanning_aborescence.hpp\"\n// return {total\
-    \ cost, edge ids of minimum spanning aborescence}\ntemplate <class cost_t> std::pair<cost_t,\
-    \ std::vector<int>> minimum_spanning_aborescence(const Graph &g, std::vector<cost_t>\
-    \ w, int root) {\n const int n= g.vertex_size(), m= g.edge_size();\n assert((int)w.size()\
-    \ == m);\n std::vector<cost_t> lz(m);\n std::vector<std::pair<int, int>> lr(m,\
-    \ {-1, -1}), cycles;\n std::vector<int> top(n, -1), edge(n, -1);\n UnionFind uf(n);\n\
-    \ UnionFind<true> uf2(n);\n auto upd= [&](int i, cost_t v) { w[i]-= v, lz[i]+=\
-    \ v; };\n auto push= [&](int i) {\n  auto [l, r]= lr[i];\n  if (l != -1) upd(l,\
-    \ lz[i]);\n  if (r != -1) upd(r, lz[i]);\n  lz[i]= 0;\n };\n auto merge= [&](auto\
-    \ &&rec, int u, int v) -> int {\n  if (u == -1) return v;\n  if (v == -1) return\
-    \ u;\n  if (w[v] < w[u]) std::swap(u, v);\n  auto &[l, r]= lr[u];\n  return push(u),\
-    \ r= rec(rec, r, v), std::swap(l, r), u;\n };\n for (int i= m; i--;) {\n  auto\
-    \ [s, d]= g[i];\n  top[d]= merge(merge, top[d], i);\n }\n cost_t sum= 0;\n for\
-    \ (int i= n; i--;) {\n  if (i == root) continue;\n  for (int v= i;;) {\n   if\
-    \ (top[v] == -1) return {cost_t(), std::vector<int>()};\n   int nxt= uf2.root(g[edge[v]=\
-    \ top[v]].first);\n   if (sum+= w[edge[v]], upd(edge[v], w[edge[v]]); uf.unite(v,\
-    \ nxt)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v, nxt); v= r,\
-    \ nxt= uf2.root(g[edge[nxt]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
-    \ top[nxt]);\n   cycles.emplace_back(edge[v], t);\n   while (top[v] != -1 && uf2.same(v,\
+    \ cost, es ids}\n// {0, {}} if the graph has no spanning aborescence of the root\n\
+    template <class cost_t> std::pair<cost_t, std::vector<int>> minimum_spanning_aborescence(const\
+    \ Graph &g, std::vector<cost_t> w, int root) {\n const int n= g.vertex_size(),\
+    \ m= g.edge_size();\n assert((int)w.size() == m);\n std::vector<cost_t> lz(m);\n\
+    \ std::vector<std::pair<int, int>> lr(m, {-1, -1}), cyc;\n std::vector<int> top(n,\
+    \ -1), es(n, -1);\n UnionFind uf(n);\n UnionFind<true> uf2(n);\n auto upd= [&](int\
+    \ i, cost_t v) { w[i]-= v, lz[i]+= v; };\n auto push= [&](int i) {\n  auto [l,\
+    \ r]= lr[i];\n  if (l != -1) upd(l, lz[i]);\n  if (r != -1) upd(r, lz[i]);\n \
+    \ lz[i]= 0;\n };\n auto merge= [&](auto &&rec, int u, int v) -> int {\n  if (u\
+    \ == -1) return v;\n  if (v == -1) return u;\n  if (w[v] < w[u]) std::swap(u,\
+    \ v);\n  auto &[l, r]= lr[u];\n  return push(u), r= rec(rec, r, v), std::swap(l,\
+    \ r), u;\n };\n for (int i= m; i--;) {\n  auto [s, d]= g[i];\n  top[d]= merge(merge,\
+    \ top[d], i);\n }\n cost_t sum= 0;\n for (int i= n; i--;) {\n  if (i == root)\
+    \ continue;\n  for (int v= i;;) {\n   if (top[v] == -1) return {cost_t(), std::vector<int>()};\n\
+    \   int x= uf2.root(g[es[v]= top[v]].first);\n   if (sum+= w[es[v]], upd(es[v],\
+    \ w[es[v]]); uf.unite(v, x)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v,\
+    \ x); v= r, x= uf2.root(g[es[x]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
+    \ top[x]);\n   cyc.emplace_back(es[v], t);\n   while (top[v] != -1 && uf2.same(v,\
     \ g[top[v]].first)) {\n    auto [l, r]= lr[top[v]];\n    push(top[v]), top[v]=\
-    \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cycles.rbegin(); it != cycles.rend();\
+    \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cyc.rbegin(); it != cyc.rend();\
     \ ++it) {\n  auto [e, t]= *it;\n  int r= uf2.root(g[e].second);\n  uf2.rollback(t);\n\
-    \  int v= uf2.root(g[edge[r]].second);\n  edge[v]= std::exchange(edge[r], e);\n\
-    \ }\n edge.erase(edge.begin() + root);\n return {sum, edge};\n}\n#line 7 \"test/yosupo/directedmst.test.cpp\"\
+    \  int v= uf2.root(g[es[r]].second);\n  es[v]= std::exchange(es[r], e);\n }\n\
+    \ es.erase(es.begin() + root);\n return {sum, es};\n}\n#line 7 \"test/yosupo/directedmst.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, M, S;\n cin >> N >> M >> S;\n Graph g(N, M);\n vector<long long> c(M);\n\
     \ for (int i= 0; i < M; ++i) cin >> g[i] >> c[i];\n auto [X, es]= minimum_spanning_aborescence(g,\
@@ -118,7 +118,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 13:27:45+09:00'
+  timestamp: '2024-02-19 14:48:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp

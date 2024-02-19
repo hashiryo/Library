@@ -87,25 +87,25 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
@@ -232,16 +232,16 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
     \ <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT,\
-    \ CT) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    \ C) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
     \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
-    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
-    \ iterator, const T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\n\
-    template <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int>\
-    \ p;\n size_t size() const { return p.size() - 1; }\n ListRange<T> operator[](int\
-    \ i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T>\
-    \ operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i +\
-    \ 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ed); } \\\n  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
@@ -295,7 +295,7 @@ data:
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-19 02:01:34+09:00'
+  timestamp: '2024-02-19 14:48:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp

@@ -19,25 +19,24 @@ data:
     #include <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n\
     #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
     #include <iostream>\n#include <iterator>\n#line 6 \"src/Internal/ListRange.hpp\"\
-    \n#define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using\
-    \ Iterator= typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator\
-    \ begin() const { return bg; } \\\n  Iterator end() const { return ed; } \\\n\
-    \  size_t size() const { return std::distance(bg, ed); } \\\n  CT &operator[](int\
-    \ i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator, const T);\n_LR(ConstListRange,\
-    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
-    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
-    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
-    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
-    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
-    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
-    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
-    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
-    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
-    \ << ']';\n}\n#line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool\
-    \ weight= false> class Tree {\n template <class D, class T> struct Edge_B {\n\
-    \  int to;\n  T cost;\n  operator int() const { return to; }\n };\n template <class\
-    \ D> struct Edge_B<D, void> {\n  int to;\n  operator int() const { return to;\
-    \ }\n };\n using Edge= Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>,\
+    \n#define _LR(name, IT, C) \\\n template <class T> struct name { \\\n  using Iterator=\
+    \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
+    \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
+    \ const { return std::distance(bg, ed); } \\\n  C T &operator[](int i) C { return\
+    \ bg[i]; } \\\n }\n_LR(ListRange, iterator, );\n_LR(ConstListRange, const_iterator,\
+    \ const);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T> dat;\n\
+    \ std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n ListRange<T>\
+    \ operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n\
+    \ ConstListRange<T> operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin()\
+    \ + p[i + 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n#line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost=\
+    \ void, bool weight= false> class Tree {\n template <class D, class T> struct\
+    \ Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to; }\n };\n\
+    \ template <class D> struct Edge_B<D, void> {\n  int to;\n  operator int() const\
+    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>,\
     \ std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
     \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
     \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
@@ -183,7 +182,7 @@ data:
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/BiConnectedComponents.hpp
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-19 14:48:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/Graph/Tree.hpp
