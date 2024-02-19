@@ -72,8 +72,8 @@ data:
     \ void rollback(size_t t) {\n  static_assert(undoable, \"\\'rollback\\' is not\
     \ enabled\");\n  assert(t <= his.size());\n  while (his.size() > t) undo();\n\
     \ }\n};\n#line 5 \"src/Graph/minimum_spanning_aborescence.hpp\"\n// return {total\
-    \ cost, es ids}\n// {0, {}} if the graph has no spanning aborescence of the root\n\
-    template <class cost_t> std::pair<cost_t, std::vector<int>> minimum_spanning_aborescence(const\
+    \ cost, edge ids}\n// return {0, {}} if the graph has no spanning aborescence\
+    \ of the root\ntemplate <class cost_t> std::pair<cost_t, std::vector<int>> minimum_spanning_aborescence(const\
     \ Graph &g, std::vector<cost_t> w, int root) {\n const int n= g.vertex_size(),\
     \ m= g.edge_size();\n assert((int)w.size() == m);\n std::vector<cost_t> lz(m);\n\
     \ std::vector<std::pair<int, int>> lr(m, {-1, -1}), cyc;\n std::vector<int> top(n,\
@@ -118,7 +118,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
+  timestamp: '2024-02-19 15:51:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp

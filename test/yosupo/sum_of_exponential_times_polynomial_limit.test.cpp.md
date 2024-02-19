@@ -21,7 +21,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
   _extendedRequiredBy: []

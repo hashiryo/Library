@@ -5,7 +5,7 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
   _extendedRequiredBy: []

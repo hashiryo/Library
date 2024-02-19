@@ -5,15 +5,15 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/CumSumQuotient.hpp
     title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
@@ -159,7 +159,7 @@ data:
   path: src/NumberTheory/sum_on_primes.hpp
   requiredBy: []
   timestamp: '2024-02-19 15:31:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/counting_primes.test.cpp

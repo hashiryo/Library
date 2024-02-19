@@ -6,24 +6,24 @@ data:
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/tables.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
       \u307F\u8FBC\u307F\u306A\u3069"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
   - icon: ':x:'
@@ -73,7 +73,7 @@ data:
     title: test/yukicoder/886.numth.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
@@ -146,7 +146,7 @@ data:
   - src/NumberTheory/tables.hpp
   - src/NumberTheory/sum_on_primes.hpp
   timestamp: '2024-02-19 15:31:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1019.numth.test.cpp
   - test/yukicoder/886.numth.test.cpp

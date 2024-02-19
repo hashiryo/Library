@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/CumSumQuotient.hpp\"\n#include <cstdint>\n\
@@ -62,7 +62,7 @@ data:
   requiredBy:
   - src/NumberTheory/sum_on_primes.hpp
   timestamp: '2024-02-07 23:03:20+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/counting_primes.test.cpp
