@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -1186,13 +1186,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_d.test.cpp
       title: test/atcoder/abc179_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_e.test.cpp
       title: test/atcoder/abc179_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1204,7 +1204,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
