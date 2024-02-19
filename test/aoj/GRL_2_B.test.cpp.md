@@ -72,8 +72,8 @@ data:
     \  auto [u, s]= his.back();\n  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n\
     \ void rollback(size_t t) {\n  static_assert(undoable, \"\\'rollback\\' is not\
     \ enabled\");\n  assert(t <= his.size());\n  while (his.size() > t) undo();\n\
-    \ }\n};\n#line 5 \"src/Graph/minimum_spanning_aborescence.hpp\"\n// return edge\
-    \ ids of minimum spanning aborescence\ntemplate <class cost_t> std::pair<cost_t,\
+    \ }\n};\n#line 5 \"src/Graph/minimum_spanning_aborescence.hpp\"\n// return {total\
+    \ cost, edge ids of minimum spanning aborescence}\ntemplate <class cost_t> std::pair<cost_t,\
     \ std::vector<int>> minimum_spanning_aborescence(const Graph &g, std::vector<cost_t>\
     \ w, int root) {\n const int n= g.vertex_size(), m= g.edge_size();\n assert((int)w.size()\
     \ == m);\n std::vector<cost_t> lz(m);\n std::vector<std::pair<int, int>> lr(m,\
@@ -114,7 +114,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_2_B.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 02:01:34+09:00'
+  timestamp: '2024-02-19 13:27:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_B.test.cpp

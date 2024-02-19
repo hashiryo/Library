@@ -57,27 +57,27 @@ data:
     \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 2 \"src/Graph/StronglyConnectedComponents.hpp\"\
     \n#include <algorithm>\n#line 4 \"src/Graph/StronglyConnectedComponents.hpp\"\n\
     class StronglyConnectedComponents {\n std::vector<int> m, q, b;\npublic:\n StronglyConnectedComponents(const\
-    \ Graph &g) {\n  const int n= g.vertex_size();\n  m.assign(n, -2), b.resize(n),\
-    \ q= {0};\n  {\n   auto adj= g.adjacency_vertex(1);\n   std::vector<int> c(adj.p.begin(),\
+    \ Graph &g) {\n  const int n= g.vertex_size();\n  m.assign(n, -2), b.resize(n);\n\
+    \  {\n   auto adj= g.adjacency_vertex(1);\n   std::vector<int> c(adj.p.begin(),\
     \ adj.p.begin() + n);\n   for (int s= 0, k= n, p; s < n; ++s)\n    if (m[s] ==\
     \ -2)\n     for (m[p= s]= -1; p >= 0;) {\n      if (c[p] == adj.p[p + 1]) b[--k]=\
     \ p, p= m[p];\n      else if (int w= adj.dat[c[p]++]; m[w] == -2) m[w]= p, p=\
     \ w;\n     }\n  }\n  auto adj= g.adjacency_vertex(-1);\n  std::vector<char> z(n);\n\
-    \  int k= 0, p= 0;\n  for (int s: b)\n   if (!z[s]) {\n    for (z[m[k++]= s]=\
-    \ 1; p < k; ++p)\n     for (int u: adj[m[p]])\n      if (!z[u]) z[m[k++]= u]=\
-    \ 1;\n    q.push_back(k);\n   }\n  for (int i= q.size() - 1; i--;)\n   while (k\
-    \ > q[i]) b[m[--k]]= i;\n }\n size_t size() const { return q.size() - 1; }\n ConstListRange<int>\
-    \ block(int k) const { return {m.cbegin() + q[k], m.cbegin() + q[k + 1]}; }\n\
-    \ int operator()(int i) const { return b[i]; }\n Graph dag(const Graph &g) const\
-    \ {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (b[s] != b[d]) ret.add_edge(b[s],\
-    \ b[d]);\n  return std::sort(ret.begin(), ret.end()), ret.erase(std::unique(ret.begin(),\
-    \ ret.end()), ret.end()), ret;\n }\n};\n#line 5 \"test/yosupo/scc.test.cpp\"\n\
-    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n cin >> N >> M;\n Graph g(N, M);\n for (int i= 0; i < M; ++i) cin\
-    \ >> g[i];\n StronglyConnectedComponents scc(g);\n int C= scc.size();\n cout <<\
-    \ C << '\\n';\n for (int i= 0; i < C; ++i) {\n  auto blk= scc.block(i);\n  cout\
-    \ << blk.size();\n  for (int v: blk) cout << \" \" << v;\n  cout << '\\n';\n }\n\
-    \ return 0;\n}\n"
+    \  int k= 0, p= 0;\n  q= {0};\n  for (int s: b)\n   if (!z[s]) {\n    for (z[m[k++]=\
+    \ s]= 1; p < k; ++p)\n     for (int u: adj[m[p]])\n      if (!z[u]) z[m[k++]=\
+    \ u]= 1;\n    q.push_back(k);\n   }\n  for (int i= q.size() - 1; i--;)\n   while\
+    \ (k > q[i]) b[m[--k]]= i;\n }\n size_t size() const { return q.size() - 1; }\n\
+    \ ConstListRange<int> block(int k) const { return {m.cbegin() + q[k], m.cbegin()\
+    \ + q[k + 1]}; }\n int operator()(int i) const { return b[i]; }\n Graph dag(const\
+    \ Graph &g) const {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (b[s]\
+    \ != b[d]) ret.add_edge(b[s], b[d]);\n  return std::sort(ret.begin(), ret.end()),\
+    \ ret.erase(std::unique(ret.begin(), ret.end()), ret.end()), ret;\n }\n};\n#line\
+    \ 5 \"test/yosupo/scc.test.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N, M;\n cin >> N >> M;\n Graph g(N, M);\n for\
+    \ (int i= 0; i < M; ++i) cin >> g[i];\n StronglyConnectedComponents scc(g);\n\
+    \ int C= scc.size();\n cout << C << '\\n';\n for (int i= 0; i < C; ++i) {\n  auto\
+    \ blk= scc.block(i);\n  cout << blk.size();\n  for (int v: blk) cout << \" \"\
+    \ << v;\n  cout << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include <iostream>\n\
     #include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/StronglyConnectedComponents.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -93,7 +93,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/scc.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 02:01:34+09:00'
+  timestamp: '2024-02-19 13:27:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/scc.test.cpp

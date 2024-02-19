@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   - icon: ':question:'
@@ -16,9 +16,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_e
@@ -156,7 +156,7 @@ data:
   path: test/atcoder/abc202_e.test.cpp
   requiredBy: []
   timestamp: '2024-02-19 02:01:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc202_e.test.cpp
 layout: document

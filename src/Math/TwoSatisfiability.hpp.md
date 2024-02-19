@@ -55,33 +55,33 @@ data:
     \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
     \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 4 \"src/Graph/StronglyConnectedComponents.hpp\"\
     \nclass StronglyConnectedComponents {\n std::vector<int> m, q, b;\npublic:\n StronglyConnectedComponents(const\
-    \ Graph &g) {\n  const int n= g.vertex_size();\n  m.assign(n, -2), b.resize(n),\
-    \ q= {0};\n  {\n   auto adj= g.adjacency_vertex(1);\n   std::vector<int> c(adj.p.begin(),\
+    \ Graph &g) {\n  const int n= g.vertex_size();\n  m.assign(n, -2), b.resize(n);\n\
+    \  {\n   auto adj= g.adjacency_vertex(1);\n   std::vector<int> c(adj.p.begin(),\
     \ adj.p.begin() + n);\n   for (int s= 0, k= n, p; s < n; ++s)\n    if (m[s] ==\
     \ -2)\n     for (m[p= s]= -1; p >= 0;) {\n      if (c[p] == adj.p[p + 1]) b[--k]=\
     \ p, p= m[p];\n      else if (int w= adj.dat[c[p]++]; m[w] == -2) m[w]= p, p=\
     \ w;\n     }\n  }\n  auto adj= g.adjacency_vertex(-1);\n  std::vector<char> z(n);\n\
-    \  int k= 0, p= 0;\n  for (int s: b)\n   if (!z[s]) {\n    for (z[m[k++]= s]=\
-    \ 1; p < k; ++p)\n     for (int u: adj[m[p]])\n      if (!z[u]) z[m[k++]= u]=\
-    \ 1;\n    q.push_back(k);\n   }\n  for (int i= q.size() - 1; i--;)\n   while (k\
-    \ > q[i]) b[m[--k]]= i;\n }\n size_t size() const { return q.size() - 1; }\n ConstListRange<int>\
-    \ block(int k) const { return {m.cbegin() + q[k], m.cbegin() + q[k + 1]}; }\n\
-    \ int operator()(int i) const { return b[i]; }\n Graph dag(const Graph &g) const\
-    \ {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (b[s] != b[d]) ret.add_edge(b[s],\
-    \ b[d]);\n  return std::sort(ret.begin(), ret.end()), ret.erase(std::unique(ret.begin(),\
-    \ ret.end()), ret.end()), ret;\n }\n};\n#line 3 \"src/Math/TwoSatisfiability.hpp\"\
-    \nclass TwoSatisfiability {\n int n;\n Graph g;\n inline int neg(int x) const\
-    \ { return x >= n ? x - n : x + n; }\npublic:\n TwoSatisfiability(int n): n(n),\
-    \ g(n + n) {}\n void add_if(int u, int v) { g.add_edge(u, v), g.add_edge(neg(v),\
-    \ neg(u)); }  // u -> v <=> !v -> !u\n void add_or(int u, int v) { add_if(neg(u),\
-    \ v); }                             // u or v <=> !u -> v\n void add_nand(int\
-    \ u, int v) { add_if(u, neg(v)); }                           // u nand v <=> u\
-    \ -> !v\n void set_true(int u) { g.add_edge(neg(u), u); }                    \
-    \          // u <=> !u -> u\n void set_false(int u) { g.add_edge(u, neg(u)); }\
-    \                             // !u <=> u -> !u\n std::vector<bool> solve() {\n\
-    \  StronglyConnectedComponents scc(g);\n  std::vector<bool> ret(n);\n  for (int\
-    \ i= 0, l, r; i<n; ret[i++]= l> r)\n   if (l= scc(i), r= scc(neg(i)); l == r)\
-    \ return {};  // no solution\n  return ret;\n }\n};\n"
+    \  int k= 0, p= 0;\n  q= {0};\n  for (int s: b)\n   if (!z[s]) {\n    for (z[m[k++]=\
+    \ s]= 1; p < k; ++p)\n     for (int u: adj[m[p]])\n      if (!z[u]) z[m[k++]=\
+    \ u]= 1;\n    q.push_back(k);\n   }\n  for (int i= q.size() - 1; i--;)\n   while\
+    \ (k > q[i]) b[m[--k]]= i;\n }\n size_t size() const { return q.size() - 1; }\n\
+    \ ConstListRange<int> block(int k) const { return {m.cbegin() + q[k], m.cbegin()\
+    \ + q[k + 1]}; }\n int operator()(int i) const { return b[i]; }\n Graph dag(const\
+    \ Graph &g) const {\n  Graph ret(size());\n  for (auto [s, d]: g)\n   if (b[s]\
+    \ != b[d]) ret.add_edge(b[s], b[d]);\n  return std::sort(ret.begin(), ret.end()),\
+    \ ret.erase(std::unique(ret.begin(), ret.end()), ret.end()), ret;\n }\n};\n#line\
+    \ 3 \"src/Math/TwoSatisfiability.hpp\"\nclass TwoSatisfiability {\n int n;\n Graph\
+    \ g;\n inline int neg(int x) const { return x >= n ? x - n : x + n; }\npublic:\n\
+    \ TwoSatisfiability(int n): n(n), g(n + n) {}\n void add_if(int u, int v) { g.add_edge(u,\
+    \ v), g.add_edge(neg(v), neg(u)); }  // u -> v <=> !v -> !u\n void add_or(int\
+    \ u, int v) { add_if(neg(u), v); }                             // u or v <=> !u\
+    \ -> v\n void add_nand(int u, int v) { add_if(u, neg(v)); }                  \
+    \         // u nand v <=> u -> !v\n void set_true(int u) { g.add_edge(neg(u),\
+    \ u); }                              // u <=> !u -> u\n void set_false(int u)\
+    \ { g.add_edge(u, neg(u)); }                             // !u <=> u -> !u\n std::vector<bool>\
+    \ solve() {\n  StronglyConnectedComponents scc(g);\n  std::vector<bool> ret(n);\n\
+    \  for (int i= 0, l, r; i<n; ret[i++]= l> r)\n   if (l= scc(i), r= scc(neg(i));\
+    \ l == r) return {};  // no solution\n  return ret;\n }\n};\n"
   code: "#pragma once\n#include \"src/Graph/StronglyConnectedComponents.hpp\"\nclass\
     \ TwoSatisfiability {\n int n;\n Graph g;\n inline int neg(int x) const { return\
     \ x >= n ? x - n : x + n; }\npublic:\n TwoSatisfiability(int n): n(n), g(n + n)\
@@ -102,7 +102,7 @@ data:
   isVerificationFile: false
   path: src/Math/TwoSatisfiability.hpp
   requiredBy: []
-  timestamp: '2024-02-19 02:01:34+09:00'
+  timestamp: '2024-02-19 13:27:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/two_sat.test.cpp
