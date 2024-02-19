@@ -65,16 +65,16 @@ data:
     \n// [0, L) is left, [L, n) is right\nstruct BipartiteGraph: Graph {\n size_t\
     \ L;\n BipartiteGraph() {}\n BipartiteGraph(size_t L, size_t R, size_t m= 0):\
     \ Graph(L + R, m), L(L) {}\n size_t left_size() const { return L; }\n size_t right_size()\
-    \ const { return this->n - L; }\n};\nstd::vector<int> paint_in_2_color(const CSRArray<int>\
+    \ const { return this->n - L; }\n};\nstd::vector<int> paint_two_colors(const CSRArray<int>\
     \ &adj) {\n const int n= adj.size();\n std::vector<int> col(n, -1);\n for (int\
     \ s= n; s--;)\n  if (col[s] == -1) {\n   std::vector<int> q= {s};\n   for (int\
     \ i= col[s]= 0, v; i < (int)q.size(); ++i)\n    for (int u: adj[v= q[i]])\n  \
     \   if (int c= col[v]; col[u] == c) return {};\n     else if (col[u] == -1) col[u]=\
-    \ c ^ 1, q.push_back(u);\n  }\n return col;\n}\nstd::vector<int> paint_in_2_color(const\
-    \ Graph &g) { return paint_in_2_color(g.adjacency_vertex(0)); }\n// { BipartiteGraph\
+    \ c ^ 1, q.push_back(u);\n  }\n return col;\n}\nstd::vector<int> paint_two_colors(const\
+    \ Graph &g) { return paint_two_colors(g.adjacency_vertex(0)); }\n// { BipartiteGraph\
     \ , original to new, new to original }\n// {{},{},{}} if not bipartite\nstd::tuple<BipartiteGraph,\
     \ std::vector<int>, std::vector<int>> graph_to_bipartite(const Graph &g, std::vector<int>\
-    \ color= {}) {\n if (color.empty()) color= paint_in_2_color(g);\n if (color.empty())\
+    \ color= {}) {\n if (color.empty()) color= paint_two_colors(g);\n if (color.empty())\
     \ return {};\n const int n= g.vertex_size(), m= g.edge_size();\n std::vector<int>\
     \ a(n), b(n);\n int l= 0, r= n;\n for (int i= n; i--;) b[a[i]= color[i] ? --r\
     \ : l++]= i;\n BipartiteGraph bg(l, n - l, m);\n for (int i= m; i--;) {\n  auto\
@@ -87,12 +87,12 @@ data:
     \  if (x= m[r]; x == -1) {\n      for (u= true; r != -1; l= p[l]) m[r]= l, std::swap(m[l],\
     \ r);\n      break;\n     }\n     if (p[x] == -1) a[q[t++]= x]= a[p[x]= l];\n\
     \    }\n }\n return a;\n}\n}\ntemplate <bool lexical= false> std::pair<std::vector<int>,\
-    \ std::vector<int>> bipartite_matching(const BipartiteGraph &g, std::vector<int>\
-    \ partner= {}) {\n const int L= g.left_size(), M= g.edge_size();\n if (partner.empty())\
-    \ partner.assign(g.vertex_size(), -1);\n assert(partner.size() == g.vertex_size());\n\
+    \ std::vector<int>> bipartite_matching(const BipartiteGraph &bg, std::vector<int>\
+    \ partner= {}) {\n const int L= bg.left_size(), M= bg.edge_size();\n if (partner.empty())\
+    \ partner.assign(bg.vertex_size(), -1);\n assert(partner.size() == bg.vertex_size());\n\
     \ {\n  CSRArray<int> adj{std::vector<int>(M), std::vector<int>(L + 1)};\n  for\
-    \ (auto [l, r]: g) ++adj.p[l];\n  for (int i= 0; i < L; ++i) adj.p[i + 1]+= adj.p[i];\n\
-    \  for (auto [l, r]: g) adj.dat[--adj.p[l]]= r;\n  if constexpr (lexical) {\n\
+    \ (auto [l, r]: bg) ++adj.p[l];\n  for (int i= 0; i < L; ++i) adj.p[i + 1]+= adj.p[i];\n\
+    \  for (auto [l, r]: bg) adj.dat[--adj.p[l]]= r;\n  if constexpr (lexical) {\n\
     \   for (int l= L; l--;) std::sort(adj[l].begin(), adj[l].end());\n   _bg_internal::_bm(L,\
     \ adj, partner);\n   std::vector<char> a(L, 1);\n   for (int l= 0; l < L; ++l)\n\
     \    if (int r= partner[l], v= l; r != -1) {\n     std::vector<int> p(L, partner[v]=\
@@ -102,11 +102,11 @@ data:
     \ std::swap(partner[v], r);\n       break;\n      } else if (a[u] && p[u] == -1)\
     \ p[u]= v, v= u;\n     }\n     a[l]= 0;\n    }\n  } else _bg_internal::_bm(L,\
     \ adj, partner);\n }\n std::vector<int> c;\n std::vector<char> p(L);\n for (int\
-    \ i= 0; i < M; ++i)\n  if (auto [l, r]= g[i]; partner[l] == r && !p[l]) c.push_back(i),\
+    \ i= 0; i < M; ++i)\n  if (auto [l, r]= bg[i]; partner[l] == r && !p[l]) c.push_back(i),\
     \ p[l]= 1;\n return {c, partner};\n}\n#line 5 \"src/Graph/DulmageMendelsohn.hpp\"\
     \nclass DulmageMendelsohn {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int>\
-    \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &g): L(g.left_size())\
-    \ {\n  auto adj= g.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
+    \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &bg): L(bg.left_size())\
+    \ {\n  auto adj= bg.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
     \ -1), b.assign(n, -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n\
     \ - L);\n  int t= 0, k= 0;\n  for (int l= L; l--;)\n   if (a[l] != -1)\n    if\
     \ (b[l]= -1; m[l] != -1) b[m[l]]= -1;\n  for (int r= n; r-- > L;)\n   if (m[r]\
@@ -122,7 +122,7 @@ data:
     \ l= L; l--;)\n   if (b[l] == -1)\n    if (b[l]= k; m[l] != -1) b[m[l]]= k;\n\
     \  a.assign(k + 2, 0);\n  for (int i= n; i--;) ++a[b[i]];\n  for (int i= 0; i\
     \ <= k; ++i) a[i + 1]+= a[i];\n  for (int i= n; i--;) m[--a[b[i]]]= i;\n  Graph\
-    \ h(k + 1);\n  for (auto [l, r]: g)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n\
+    \ h(k + 1);\n  for (auto [l, r]: bg)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n\
     \  std::sort(h.begin(), h.end()), h.erase(std::unique(h.begin(), h.end()), h.end()),\
     \ dag[0]= h.adjacency_vertex(1), dag[1]= h.adjacency_vertex(-1);\n }\n size_t\
     \ size() const { return a.size() - 1; }\n ConstListRange<int> block(int k) const\
@@ -137,8 +137,8 @@ data:
     \ vc;\n }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <numeric>\n#include \"src/Graph/BipartiteGraph.hpp\"\
     \nclass DulmageMendelsohn {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int>\
-    \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &g): L(g.left_size())\
-    \ {\n  auto adj= g.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
+    \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &bg): L(bg.left_size())\
+    \ {\n  auto adj= bg.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
     \ -1), b.assign(n, -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n\
     \ - L);\n  int t= 0, k= 0;\n  for (int l= L; l--;)\n   if (a[l] != -1)\n    if\
     \ (b[l]= -1; m[l] != -1) b[m[l]]= -1;\n  for (int r= n; r-- > L;)\n   if (m[r]\
@@ -154,7 +154,7 @@ data:
     \ l= L; l--;)\n   if (b[l] == -1)\n    if (b[l]= k; m[l] != -1) b[m[l]]= k;\n\
     \  a.assign(k + 2, 0);\n  for (int i= n; i--;) ++a[b[i]];\n  for (int i= 0; i\
     \ <= k; ++i) a[i + 1]+= a[i];\n  for (int i= n; i--;) m[--a[b[i]]]= i;\n  Graph\
-    \ h(k + 1);\n  for (auto [l, r]: g)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n\
+    \ h(k + 1);\n  for (auto [l, r]: bg)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n\
     \  std::sort(h.begin(), h.end()), h.erase(std::unique(h.begin(), h.end()), h.end()),\
     \ dag[0]= h.adjacency_vertex(1), dag[1]= h.adjacency_vertex(-1);\n }\n size_t\
     \ size() const { return a.size() - 1; }\n ConstListRange<int> block(int k) const\
@@ -174,7 +174,7 @@ data:
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2024-02-19 22:51:27+09:00'
+  timestamp: '2024-02-20 00:09:10+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp
@@ -184,6 +184,24 @@ documentation_of: src/Graph/DulmageMendelsohn.hpp
 layout: document
 title: "Dulmage-Mendelsohn \u5206\u89E3"
 ---
+
+## `DulmageMendelsohn` クラス
+
+二部グラフを Dulmage-Mendelsohn 分解によって
+K+1 個 の集合(0~K) に分割する．
+- 左側の頂点： 0~K-1番目のいずれかの集合に属する $\iff$ マッチングに必ず使う
+- 右側の頂点： 1~K番目のいずれかの集合に属する $\iff$ マッチングに必ず使う
+- 左側の頂点lがa番目の集合, 右側の頂点rがb番目の集合に属する: 辺(l,r)が存在 $\implies$ a $\le$ b
+  - 即ち DAG
+
+|メンバ関数|概要|計算量|
+|---|---|---|
+|`DulmageMendelsohn(bg)`|コンストラクタ. <br> 引数は [`BipartiteGraph` クラス](BipartiteGraph.hpp)．| $O(E\sqrt{V})$|
+|`size()`|分割された集合の個数(K+1)を返す．||
+|`block(k)`| k 番目の集合を返す．<br> 頂点は昇順にソートされている．<br>(ので，ある区切りを境に左側頂点と右側頂点に分かれている)||
+|`operator()(i)`|頂点 i の所属する集合が何番目かを返す．||
+|`min_vertex_cover(ord={})`|最小頂点被覆を返す．<br> 引数は優先度で並んだ順列で，この順に貪欲に実行．<br> 引数を指定しない場合，頂点番号の低い順で実行．<br>（つまり左側の点が優先される）<br> 戻り値は `vector<int>` で最小頂点被覆に使う頂点の集合を表す．| $O(E+V)$|
+
 
 ## 問題例
 [東京大学プログラミングコンテスト2013 K - 辞書順最小頂点被覆](https://atcoder.jp/contests/utpc2013/tasks/utpc2013_11) (辞書順最小頂点被覆のverify)\

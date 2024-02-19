@@ -27,12 +27,12 @@ data:
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n#line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class\
-    \ T> class CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n\
-    \ CsrArray()= default;\n CsrArray(const std::vector<T> &c, const std::vector<int>\
-    \ &p): csr(c), pos(p) {}\n size_t size() const { return pos.size() - 1; }\n const\
-    \ ConstListRange<T> operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin()\
-    \ + pos[i + 1]}; }\n};\n"
+    \ return os << ']';\n}\n#line 3 \"src/old/CsrArray.hpp\"\ntemplate <class T> class\
+    \ CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()=\
+    \ default;\n CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c),\
+    \ pos(p) {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
+    \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
+    \ + 1]}; }\n};\n"
   code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\ntemplate <class T>\
     \ class CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()=\
     \ default;\n CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c),\
@@ -42,12 +42,12 @@ data:
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
-  path: src/DataStructure/CsrArray.hpp
+  path: src/old/CsrArray.hpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
+  timestamp: '2024-02-20 00:09:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/DataStructure/CsrArray.hpp
+documentation_of: src/old/CsrArray.hpp
 layout: document
 title: "CSR\u5F62\u5F0F"
 ---

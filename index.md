@@ -12,9 +12,6 @@ data:
     - icon: ':question:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-    - icon: ':warning:'
-      path: src/DataStructure/CsrArray.hpp
-      title: "CSR\u5F62\u5F0F"
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/DQuery.hpp
       title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
@@ -314,7 +311,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Rational.hpp
       title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':x:'
@@ -487,6 +484,9 @@ data:
     - icon: ':warning:'
       path: src/old/BipartiteMatching.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
+    - icon: ':warning:'
+      path: src/old/CsrArray.hpp
+      title: "CSR\u5F62\u5F0F"
     - icon: ':warning:'
       path: src/old/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
@@ -1269,7 +1269,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.rerooting.test.cpp
       title: test/atcoder/abc223_g.rerooting.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1302,7 +1302,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_ex.test.cpp
       title: test/atcoder/abc236_ex.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
     - icon: ':heavy_check_mark:'

@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/DataStructure/CsrArray.hpp
-    title: "CSR\u5F62\u5F0F"
   - icon: ':heavy_check_mark:'
     path: src/Geometry/SegmentArrangement.hpp
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
@@ -68,6 +65,9 @@ data:
   - icon: ':warning:'
     path: src/old/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
+  - icon: ':warning:'
+    path: src/old/CsrArray.hpp
+    title: "CSR\u5F62\u5F0F"
   - icon: ':warning:'
     path: src/old/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
@@ -192,7 +192,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
   - icon: ':x:'
@@ -426,8 +426,8 @@ data:
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  - src/DataStructure/CsrArray.hpp
   - src/old/BipartiteGraph.hpp
+  - src/old/CsrArray.hpp
   - src/old/Tree.hpp
   - src/old/DulmageMendelsohn.hpp
   timestamp: '2024-02-19 15:31:52+09:00'
@@ -564,4 +564,5 @@ title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217 \
 
 
 ## 参考
+[https://ja.wikipedia.org/wiki/疎行列#圧縮行格納](https://ja.wikipedia.org/wiki/%E7%96%8E%E8%A1%8C%E5%88%97#%E5%9C%A7%E7%B8%AE%E8%A1%8C%E6%A0%BC%E7%B4%8D) \
 [https://nachiavivias.github.io/cp-library/cpp/array/csr-array.html](https://nachiavivias.github.io/cp-library/cpp/array/csr-array.html)

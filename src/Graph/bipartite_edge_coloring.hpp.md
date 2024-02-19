@@ -75,16 +75,16 @@ data:
     \n// [0, L) is left, [L, n) is right\nstruct BipartiteGraph: Graph {\n size_t\
     \ L;\n BipartiteGraph() {}\n BipartiteGraph(size_t L, size_t R, size_t m= 0):\
     \ Graph(L + R, m), L(L) {}\n size_t left_size() const { return L; }\n size_t right_size()\
-    \ const { return this->n - L; }\n};\nstd::vector<int> paint_in_2_color(const CSRArray<int>\
+    \ const { return this->n - L; }\n};\nstd::vector<int> paint_two_colors(const CSRArray<int>\
     \ &adj) {\n const int n= adj.size();\n std::vector<int> col(n, -1);\n for (int\
     \ s= n; s--;)\n  if (col[s] == -1) {\n   std::vector<int> q= {s};\n   for (int\
     \ i= col[s]= 0, v; i < (int)q.size(); ++i)\n    for (int u: adj[v= q[i]])\n  \
     \   if (int c= col[v]; col[u] == c) return {};\n     else if (col[u] == -1) col[u]=\
-    \ c ^ 1, q.push_back(u);\n  }\n return col;\n}\nstd::vector<int> paint_in_2_color(const\
-    \ Graph &g) { return paint_in_2_color(g.adjacency_vertex(0)); }\n// { BipartiteGraph\
+    \ c ^ 1, q.push_back(u);\n  }\n return col;\n}\nstd::vector<int> paint_two_colors(const\
+    \ Graph &g) { return paint_two_colors(g.adjacency_vertex(0)); }\n// { BipartiteGraph\
     \ , original to new, new to original }\n// {{},{},{}} if not bipartite\nstd::tuple<BipartiteGraph,\
     \ std::vector<int>, std::vector<int>> graph_to_bipartite(const Graph &g, std::vector<int>\
-    \ color= {}) {\n if (color.empty()) color= paint_in_2_color(g);\n if (color.empty())\
+    \ color= {}) {\n if (color.empty()) color= paint_two_colors(g);\n if (color.empty())\
     \ return {};\n const int n= g.vertex_size(), m= g.edge_size();\n std::vector<int>\
     \ a(n), b(n);\n int l= 0, r= n;\n for (int i= n; i--;) b[a[i]= color[i] ? --r\
     \ : l++]= i;\n BipartiteGraph bg(l, n - l, m);\n for (int i= m; i--;) {\n  auto\
@@ -97,12 +97,12 @@ data:
     \  if (x= m[r]; x == -1) {\n      for (u= true; r != -1; l= p[l]) m[r]= l, std::swap(m[l],\
     \ r);\n      break;\n     }\n     if (p[x] == -1) a[q[t++]= x]= a[p[x]= l];\n\
     \    }\n }\n return a;\n}\n}\ntemplate <bool lexical= false> std::pair<std::vector<int>,\
-    \ std::vector<int>> bipartite_matching(const BipartiteGraph &g, std::vector<int>\
-    \ partner= {}) {\n const int L= g.left_size(), M= g.edge_size();\n if (partner.empty())\
-    \ partner.assign(g.vertex_size(), -1);\n assert(partner.size() == g.vertex_size());\n\
+    \ std::vector<int>> bipartite_matching(const BipartiteGraph &bg, std::vector<int>\
+    \ partner= {}) {\n const int L= bg.left_size(), M= bg.edge_size();\n if (partner.empty())\
+    \ partner.assign(bg.vertex_size(), -1);\n assert(partner.size() == bg.vertex_size());\n\
     \ {\n  CSRArray<int> adj{std::vector<int>(M), std::vector<int>(L + 1)};\n  for\
-    \ (auto [l, r]: g) ++adj.p[l];\n  for (int i= 0; i < L; ++i) adj.p[i + 1]+= adj.p[i];\n\
-    \  for (auto [l, r]: g) adj.dat[--adj.p[l]]= r;\n  if constexpr (lexical) {\n\
+    \ (auto [l, r]: bg) ++adj.p[l];\n  for (int i= 0; i < L; ++i) adj.p[i + 1]+= adj.p[i];\n\
+    \  for (auto [l, r]: bg) adj.dat[--adj.p[l]]= r;\n  if constexpr (lexical) {\n\
     \   for (int l= L; l--;) std::sort(adj[l].begin(), adj[l].end());\n   _bg_internal::_bm(L,\
     \ adj, partner);\n   std::vector<char> a(L, 1);\n   for (int l= 0; l < L; ++l)\n\
     \    if (int r= partner[l], v= l; r != -1) {\n     std::vector<int> p(L, partner[v]=\
@@ -112,11 +112,11 @@ data:
     \ std::swap(partner[v], r);\n       break;\n      } else if (a[u] && p[u] == -1)\
     \ p[u]= v, v= u;\n     }\n     a[l]= 0;\n    }\n  } else _bg_internal::_bm(L,\
     \ adj, partner);\n }\n std::vector<int> c;\n std::vector<char> p(L);\n for (int\
-    \ i= 0; i < M; ++i)\n  if (auto [l, r]= g[i]; partner[l] == r && !p[l]) c.push_back(i),\
+    \ i= 0; i < M; ++i)\n  if (auto [l, r]= bg[i]; partner[l] == r && !p[l]) c.push_back(i),\
     \ p[l]= 1;\n return {c, partner};\n}\n#line 6 \"src/Graph/bipartite_edge_coloring.hpp\"\
-    \nstd::vector<int> bipartite_edge_coloring(BipartiteGraph g) {\n const int m=\
-    \ g.edge_size();\n int L= g.left_size(), n= g.vertex_size(), D, col= 0;\n {\n\
-    \  std::vector<int> deg(n), id(n);\n  for (auto [l, r]: g) ++deg[l], ++deg[r];\n\
+    \nstd::vector<int> bipartite_edge_coloring(BipartiteGraph bg) {\n const int m=\
+    \ bg.edge_size();\n int L= bg.left_size(), n= bg.vertex_size(), D, col= 0;\n {\n\
+    \  std::vector<int> deg(n), id(n);\n  for (auto [l, r]: bg) ++deg[l], ++deg[r];\n\
     \  D= *std::max_element(deg.begin(), deg.end());\n  UnionFind uf(n);\n  for (int\
     \ _: {0, n}) {\n   auto [b, e]= std::minmax(_, L);\n   std::priority_queue<std::pair<int,\
     \ int>> pq;\n   for (int i= b; i < e; ++i) pq.emplace(-deg[i], i);\n   for (;\
@@ -125,38 +125,38 @@ data:
     \ pq.emplace(sum, v);\n    else break;\n   }\n  }\n  int i= 0, cl= 0, cr= 0;\n\
     \  for (; i < L; ++i)\n   if (uf.root(i) == i) id[i]= cl++;\n  for (; i < n; ++i)\n\
     \   if (uf.root(i) == i) id[i]= cr++;\n  L= std::max(cl, cr), deg.assign(n= L\
-    \ + L, 0), g.reserve(L * D);\n  for (auto &[l, r]: g) ++deg[l= id[uf.root(l)]],\
+    \ + L, 0), bg.reserve(L * D);\n  for (auto &[l, r]: bg) ++deg[l= id[uf.root(l)]],\
     \ ++deg[r= id[uf.root(r)] + L];\n  for (int l= 0, r= L; l < L; ++l)\n   while\
     \ (deg[l] < D) {\n    while (r < n && deg[r] == D) ++r;\n    int x= D - std::max(deg[l],\
-    \ deg[r]);\n    for (int k= x; k--;) g.add_edge(l, r);\n    deg[l]+= x, deg[r]+=\
+    \ deg[r]);\n    for (int k= x; k--;) bg.add_edge(l, r);\n    deg[l]+= x, deg[r]+=\
     \ x;\n   }\n }\n std::vector<int> color(m, -1);\n auto rc= [&](auto &&rc, int\
     \ d, const std::vector<int> &idx) -> void {\n  if (!d) return;\n  if (d == 1)\
     \ {\n   for (int e: idx)\n    if (e < m) color[e]= col;\n   ++col;\n   return;\n\
     \  }\n  if (d & 1) {\n   CSRArray<int> adj{std::vector<int>(idx.size()), std::vector<int>(L\
-    \ + 1)};\n   for (int e: idx) ++adj.p[g[e].first];\n   for (int i= 0; i < L; ++i)\
-    \ adj.p[i + 1]+= adj.p[i];\n   for (int e: idx) {\n    auto [l, r]= g[e];\n  \
-    \  adj.dat[--adj.p[l]]= r;\n   }\n   std::vector<int> mate(n, -1), rm;\n   _bg_internal::_bm(L,\
-    \ adj, mate);\n   for (int e: idx) {\n    auto [l, r]= g[e];\n    if (mate[l]\
+    \ + 1)};\n   for (int e: idx) ++adj.p[bg[e].first];\n   for (int i= 0; i < L;\
+    \ ++i) adj.p[i + 1]+= adj.p[i];\n   for (int e: idx) {\n    auto [l, r]= bg[e];\n\
+    \    adj.dat[--adj.p[l]]= r;\n   }\n   std::vector<int> mate(n, -1), rm;\n   _bg_internal::_bm(L,\
+    \ adj, mate);\n   for (int e: idx) {\n    auto [l, r]= bg[e];\n    if (mate[l]\
     \ == r) {\n     if (mate[l]= mate[r]= -1; e < m) color[e]= col;\n    } else rm.push_back(e);\n\
     \   }\n   return ++col, rc(rc, d - 1, rm);\n  }\n  const int mm= idx.size();\n\
     \  std::vector<int> circuit;\n  {\n   std::vector<int> c(mm), p(n + 1);\n   for\
-    \ (int e: idx) {\n    auto [l, r]= g[e];\n    ++p[l], ++p[r];\n   }\n   for (int\
+    \ (int e: idx) {\n    auto [l, r]= bg[e];\n    ++p[l], ++p[r];\n   }\n   for (int\
     \ i= 0; i < L; ++i) p[i + 1]+= p[i];\n   for (int i= mm; i--;) {\n    auto [l,\
-    \ r]= g[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int> it(p.begin(),\
-    \ p.begin() + n);\n   std::vector<char> used1(n), used2(mm);\n   for (int v= n;\
-    \ v--;)\n    if (!used1[v]) {\n     for (std::vector<std::pair<int, int>> st=\
-    \ {{v, -1}}; st.size();) {\n      auto [u, e]= st.back();\n      if (used1[u]=\
-    \ 1; it[u] == p[u + 1]) circuit.push_back(e), st.pop_back();\n      else if (int\
-    \ i= c[it[u]++]; !used2[i]) used2[i]= 1, st.emplace_back(g[idx[i]].to(u), i);\n\
-    \     }\n     circuit.pop_back();\n    }\n  }\n  std::vector<int> half1(mm / 2),\
-    \ half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i * 2]], half2[i]=\
-    \ idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d / 2, half2);\n };\n\
-    \ std::vector<int> idx(m * D);\n return std::iota(idx.begin(), idx.end(), 0),\
-    \ rc(rc, D, idx), color;\n}\n"
+    \ r]= bg[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int>\
+    \ it(p.begin(), p.begin() + n);\n   std::vector<char> used1(n), used2(mm);\n \
+    \  for (int v= n; v--;)\n    if (!used1[v]) {\n     for (std::vector<std::pair<int,\
+    \ int>> st= {{v, -1}}; st.size();) {\n      auto [u, e]= st.back();\n      if\
+    \ (used1[u]= 1; it[u] == p[u + 1]) circuit.push_back(e), st.pop_back();\n    \
+    \  else if (int i= c[it[u]++]; !used2[i]) used2[i]= 1, st.emplace_back(bg[idx[i]].to(u),\
+    \ i);\n     }\n     circuit.pop_back();\n    }\n  }\n  std::vector<int> half1(mm\
+    \ / 2), half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i *\
+    \ 2]], half2[i]= idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d /\
+    \ 2, half2);\n };\n std::vector<int> idx(m * D);\n return std::iota(idx.begin(),\
+    \ idx.end(), 0), rc(rc, D, idx), color;\n}\n"
   code: "#pragma once\n#include <queue>\n#include <numeric>\n#include \"src/DataStructure/UnionFind.hpp\"\
     \n#include \"src/Graph/BipartiteGraph.hpp\"\nstd::vector<int> bipartite_edge_coloring(BipartiteGraph\
-    \ g) {\n const int m= g.edge_size();\n int L= g.left_size(), n= g.vertex_size(),\
-    \ D, col= 0;\n {\n  std::vector<int> deg(n), id(n);\n  for (auto [l, r]: g) ++deg[l],\
+    \ bg) {\n const int m= bg.edge_size();\n int L= bg.left_size(), n= bg.vertex_size(),\
+    \ D, col= 0;\n {\n  std::vector<int> deg(n), id(n);\n  for (auto [l, r]: bg) ++deg[l],\
     \ ++deg[r];\n  D= *std::max_element(deg.begin(), deg.end());\n  UnionFind uf(n);\n\
     \  for (int _: {0, n}) {\n   auto [b, e]= std::minmax(_, L);\n   std::priority_queue<std::pair<int,\
     \ int>> pq;\n   for (int i= b; i < e; ++i) pq.emplace(-deg[i], i);\n   for (;\
@@ -165,34 +165,34 @@ data:
     \ pq.emplace(sum, v);\n    else break;\n   }\n  }\n  int i= 0, cl= 0, cr= 0;\n\
     \  for (; i < L; ++i)\n   if (uf.root(i) == i) id[i]= cl++;\n  for (; i < n; ++i)\n\
     \   if (uf.root(i) == i) id[i]= cr++;\n  L= std::max(cl, cr), deg.assign(n= L\
-    \ + L, 0), g.reserve(L * D);\n  for (auto &[l, r]: g) ++deg[l= id[uf.root(l)]],\
+    \ + L, 0), bg.reserve(L * D);\n  for (auto &[l, r]: bg) ++deg[l= id[uf.root(l)]],\
     \ ++deg[r= id[uf.root(r)] + L];\n  for (int l= 0, r= L; l < L; ++l)\n   while\
     \ (deg[l] < D) {\n    while (r < n && deg[r] == D) ++r;\n    int x= D - std::max(deg[l],\
-    \ deg[r]);\n    for (int k= x; k--;) g.add_edge(l, r);\n    deg[l]+= x, deg[r]+=\
+    \ deg[r]);\n    for (int k= x; k--;) bg.add_edge(l, r);\n    deg[l]+= x, deg[r]+=\
     \ x;\n   }\n }\n std::vector<int> color(m, -1);\n auto rc= [&](auto &&rc, int\
     \ d, const std::vector<int> &idx) -> void {\n  if (!d) return;\n  if (d == 1)\
     \ {\n   for (int e: idx)\n    if (e < m) color[e]= col;\n   ++col;\n   return;\n\
     \  }\n  if (d & 1) {\n   CSRArray<int> adj{std::vector<int>(idx.size()), std::vector<int>(L\
-    \ + 1)};\n   for (int e: idx) ++adj.p[g[e].first];\n   for (int i= 0; i < L; ++i)\
-    \ adj.p[i + 1]+= adj.p[i];\n   for (int e: idx) {\n    auto [l, r]= g[e];\n  \
-    \  adj.dat[--adj.p[l]]= r;\n   }\n   std::vector<int> mate(n, -1), rm;\n   _bg_internal::_bm(L,\
-    \ adj, mate);\n   for (int e: idx) {\n    auto [l, r]= g[e];\n    if (mate[l]\
+    \ + 1)};\n   for (int e: idx) ++adj.p[bg[e].first];\n   for (int i= 0; i < L;\
+    \ ++i) adj.p[i + 1]+= adj.p[i];\n   for (int e: idx) {\n    auto [l, r]= bg[e];\n\
+    \    adj.dat[--adj.p[l]]= r;\n   }\n   std::vector<int> mate(n, -1), rm;\n   _bg_internal::_bm(L,\
+    \ adj, mate);\n   for (int e: idx) {\n    auto [l, r]= bg[e];\n    if (mate[l]\
     \ == r) {\n     if (mate[l]= mate[r]= -1; e < m) color[e]= col;\n    } else rm.push_back(e);\n\
     \   }\n   return ++col, rc(rc, d - 1, rm);\n  }\n  const int mm= idx.size();\n\
     \  std::vector<int> circuit;\n  {\n   std::vector<int> c(mm), p(n + 1);\n   for\
-    \ (int e: idx) {\n    auto [l, r]= g[e];\n    ++p[l], ++p[r];\n   }\n   for (int\
+    \ (int e: idx) {\n    auto [l, r]= bg[e];\n    ++p[l], ++p[r];\n   }\n   for (int\
     \ i= 0; i < L; ++i) p[i + 1]+= p[i];\n   for (int i= mm; i--;) {\n    auto [l,\
-    \ r]= g[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int> it(p.begin(),\
-    \ p.begin() + n);\n   std::vector<char> used1(n), used2(mm);\n   for (int v= n;\
-    \ v--;)\n    if (!used1[v]) {\n     for (std::vector<std::pair<int, int>> st=\
-    \ {{v, -1}}; st.size();) {\n      auto [u, e]= st.back();\n      if (used1[u]=\
-    \ 1; it[u] == p[u + 1]) circuit.push_back(e), st.pop_back();\n      else if (int\
-    \ i= c[it[u]++]; !used2[i]) used2[i]= 1, st.emplace_back(g[idx[i]].to(u), i);\n\
-    \     }\n     circuit.pop_back();\n    }\n  }\n  std::vector<int> half1(mm / 2),\
-    \ half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i * 2]], half2[i]=\
-    \ idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d / 2, half2);\n };\n\
-    \ std::vector<int> idx(m * D);\n return std::iota(idx.begin(), idx.end(), 0),\
-    \ rc(rc, D, idx), color;\n}"
+    \ r]= bg[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int>\
+    \ it(p.begin(), p.begin() + n);\n   std::vector<char> used1(n), used2(mm);\n \
+    \  for (int v= n; v--;)\n    if (!used1[v]) {\n     for (std::vector<std::pair<int,\
+    \ int>> st= {{v, -1}}; st.size();) {\n      auto [u, e]= st.back();\n      if\
+    \ (used1[u]= 1; it[u] == p[u + 1]) circuit.push_back(e), st.pop_back();\n    \
+    \  else if (int i= c[it[u]++]; !used2[i]) used2[i]= 1, st.emplace_back(bg[idx[i]].to(u),\
+    \ i);\n     }\n     circuit.pop_back();\n    }\n  }\n  std::vector<int> half1(mm\
+    \ / 2), half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i *\
+    \ 2]], half2[i]= idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d /\
+    \ 2, half2);\n };\n std::vector<int> idx(m * D);\n return std::iota(idx.begin(),\
+    \ idx.end(), 0), rc(rc, D, idx), color;\n}"
   dependsOn:
   - src/DataStructure/UnionFind.hpp
   - src/Graph/BipartiteGraph.hpp
@@ -201,7 +201,7 @@ data:
   isVerificationFile: false
   path: src/Graph/bipartite_edge_coloring.hpp
   requiredBy: []
-  timestamp: '2024-02-19 22:51:27+09:00'
+  timestamp: '2024-02-20 00:09:10+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/bipartite_edge_coloring.test.cpp
@@ -210,6 +210,9 @@ layout: document
 title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
 ---
 
+|関数名|概要|計算量|
+|---|---|---|
+|`bipartite_edge_coloring(bg)`|二部グラフの辺彩色を構築する．<br> 引数は [`BipartiteGraph` クラス](BipartiteGraph.hpp)．<br> 戻り値は辺のサイズの `vector<int>` で各辺への色の割り当てを表す．| <br>$O(E\sqrt{V}\log \Delta)$ <br> ただし頂点の次数のうち最大のものを $\Delta$ とおいた． |
 
 
 ## 問題例
