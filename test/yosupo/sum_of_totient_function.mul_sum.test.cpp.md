@@ -119,12 +119,12 @@ data:
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\
     \n#include <algorithm>\n#include <cstdint>\n#line 2 \"src/Internal/ListRange.hpp\"\
     \n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
-    #line 6 \"src/Internal/ListRange.hpp\"\n#define _LR(name, IT, C) \\\n template\
+    #line 6 \"src/Internal/ListRange.hpp\"\n#define _LR(name, IT, CT) \\\n template\
     \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
     \n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
-    \ ed); } \\\n  C T &operator[](int i) C { return bg[i]; } \\\n }\n_LR(ListRange,\
-    \ iterator, );\n_LR(ConstListRange, const_iterator, const);\n#undef _LR\ntemplate\
+    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
     \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
     \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
     \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
@@ -227,7 +227,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 14:48:31+09:00'
+  timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

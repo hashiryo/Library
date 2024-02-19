@@ -21,20 +21,21 @@ data:
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
     \ <algorithm>\n#include <numeric>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
     \ <vector>\n#include <iostream>\n#include <iterator>\n#include <type_traits>\n\
-    #define _LR(name, IT, C) \\\n template <class T> struct name { \\\n  using Iterator=\
+    #define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using Iterator=\
     \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
     \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
-    \ const { return std::distance(bg, ed); } \\\n  C T &operator[](int i) C { return\
-    \ bg[i]; } \\\n }\n_LR(ListRange, iterator, );\n_LR(ConstListRange, const_iterator,\
-    \ const);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T> dat;\n\
-    \ std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n ListRange<T>\
-    \ operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n\
-    \ ConstListRange<T> operator[](int i) const { return {dat.cbegin() + p[i], dat.cbegin()\
-    \ + p[i + 1]}; }\n};\ntemplate <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
-    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
-    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
-    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n#line 6 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn\
+    \ const { return std::distance(bg, ed); } \\\n  CT &operator[](int i) const {\
+    \ return bg[i]; } \\\n }\n_LR(ListRange, iterator, T);\n_LR(ConstListRange, const_iterator,\
+    \ const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T>\
+    \ dat;\n std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n\
+    \ ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i\
+    \ + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
+    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
+    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
+    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
+    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
+    \ << ']';\n}\n#line 6 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn\
     \ {\n std::vector<int> blg[2], mate[2], pos[2];\n std::vector<std::array<int,\
     \ 2>> es;\npublic:\n DulmageMendelsohn(int L, int R): blg{std::vector(L, -3),\
     \ std::vector(R, -3)} {}\n void add_edge(int l, int r) { es.push_back({l, r});\
@@ -117,7 +118,7 @@ data:
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2024-02-19 14:48:31+09:00'
+  timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp
