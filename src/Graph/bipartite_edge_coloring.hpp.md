@@ -10,28 +10,37 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
-    path: src/Graph/bipartite_edge_coloring.hpp
-    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/yosupo/bipartite_edge_coloring.test.cpp
+    title: test/yosupo/bipartite_edge_coloring.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/bipartite_edge_coloring
-    links:
-    - https://judge.yosupo.jp/problem/bipartite_edge_coloring
-  bundledCode: "#line 1 \"test/yosupo/bipartite_edge_coloring.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/bipartite_edge_coloring\"\n#include\
-    \ <iostream>\n#include <algorithm>\n#line 2 \"src/Graph/BipartiteGraph.hpp\"\n\
-    #include <cassert>\n#include <tuple>\n#line 2 \"src/Internal/ListRange.hpp\"\n\
-    #include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    links: []
+  bundledCode: "#line 2 \"src/Graph/bipartite_edge_coloring.hpp\"\n#include <queue>\n\
+    #include <numeric>\n#line 2 \"src/DataStructure/UnionFind.hpp\"\n#include <vector>\n\
+    #include <algorithm>\n#include <cassert>\ntemplate <bool undoable= false> class\
+    \ UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int, int>> his;\n\
+    public:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int v) {\n  if ((u=\
+    \ root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v]) std::swap(u,\
+    \ v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n  return par[u]+=\
+    \ par[v], par[v]= u, true;\n }\n bool same(int u, int v) { return root(u) == root(v);\
+    \ }\n int root(int u) {\n  if constexpr (undoable) return par[u] < 0 ? u : root(par[u]);\n\
+    \  else return par[u] < 0 ? u : par[u]= root(par[u]);\n }\n int size(int u) {\
+    \ return -par[root(u)]; }\n int time() const {\n  static_assert(undoable, \"\\\
+    'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n  static_assert(undoable,\
+    \ \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n  his.pop_back(),\
+    \ par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable,\
+    \ \"\\'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
+    \ > t) undo();\n }\n};\n#line 3 \"src/Graph/BipartiteGraph.hpp\"\n#include <tuple>\n\
+    #line 3 \"src/Internal/ListRange.hpp\"\n#include <iostream>\n#include <iterator>\n\
     #include <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct\
     \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
     \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
@@ -104,22 +113,48 @@ data:
     \ p[u]= v, v= u;\n     }\n     a[l]= 0;\n    }\n  } else _bg_internal::_bm(L,\
     \ adj, partner);\n }\n std::vector<int> c;\n std::vector<char> p(L);\n for (int\
     \ i= 0; i < M; ++i)\n  if (auto [l, r]= g[i]; partner[l] == r && !p[l]) c.push_back(i),\
-    \ p[l]= 1;\n return {c, partner};\n}\n#line 2 \"src/Graph/bipartite_edge_coloring.hpp\"\
-    \n#include <queue>\n#include <numeric>\n#line 5 \"src/DataStructure/UnionFind.hpp\"\
-    \ntemplate <bool undoable= false> class UnionFind {\n std::vector<int> par;\n\
-    \ std::vector<std::pair<int, int>> his;\npublic:\n UnionFind(int n): par(n, -1)\
-    \ {}\n bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return\
-    \ false;\n  if (par[u] > par[v]) std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v,\
-    \ par[v]);\n  return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u,\
-    \ int v) { return root(u) == root(v); }\n int root(int u) {\n  if constexpr (undoable)\
-    \ return par[u] < 0 ? u : root(par[u]);\n  else return par[u] < 0 ? u : par[u]=\
-    \ root(par[u]);\n }\n int size(int u) { return -par[root(u)]; }\n int time() const\
-    \ {\n  static_assert(undoable, \"\\'time\\' is not enabled\");\n  return his.size();\n\
-    \ }\n void undo() {\n  static_assert(undoable, \"\\'undo\\' is not enabled\");\n\
-    \  auto [u, s]= his.back();\n  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n\
-    \ void rollback(size_t t) {\n  static_assert(undoable, \"\\'rollback\\' is not\
-    \ enabled\");\n  assert(t <= his.size());\n  while (his.size() > t) undo();\n\
-    \ }\n};\n#line 6 \"src/Graph/bipartite_edge_coloring.hpp\"\nstd::vector<int> bipartite_edge_coloring(BipartiteGraph\
+    \ p[l]= 1;\n return {c, partner};\n}\n#line 6 \"src/Graph/bipartite_edge_coloring.hpp\"\
+    \nstd::vector<int> bipartite_edge_coloring(BipartiteGraph g) {\n const int m=\
+    \ g.edge_size();\n int L= g.left_size(), n= g.vertex_size(), D, col= 0;\n {\n\
+    \  std::vector<int> deg(n), id(n);\n  for (auto [l, r]: g) ++deg[l], ++deg[r];\n\
+    \  D= *std::max_element(deg.begin(), deg.end());\n  UnionFind uf(n);\n  for (int\
+    \ _: {0, n}) {\n   auto [b, e]= std::minmax(_, L);\n   std::priority_queue<std::pair<int,\
+    \ int>> pq;\n   for (int i= b; i < e; ++i) pq.emplace(-deg[i], i);\n   for (;\
+    \ pq.size() > 1;) {\n    auto [a, v]= pq.top();\n    pq.pop();\n    auto [b, u]=\
+    \ pq.top();\n    pq.pop();\n    if (int sum= a + b; -sum <= D) uf.unite(v, u),\
+    \ pq.emplace(sum, v);\n    else break;\n   }\n  }\n  int i= 0, cl= 0, cr= 0;\n\
+    \  for (; i < L; ++i)\n   if (uf.root(i) == i) id[i]= cl++;\n  for (; i < n; ++i)\n\
+    \   if (uf.root(i) == i) id[i]= cr++;\n  L= std::max(cl, cr), deg.assign(n= L\
+    \ + L, 0), g.reserve(L * D);\n  for (auto &[l, r]: g) ++deg[l= id[uf.root(l)]],\
+    \ ++deg[r= id[uf.root(r)] + L];\n  for (int l= 0, r= L; l < L; ++l)\n   while\
+    \ (deg[l] < D) {\n    while (r < n && deg[r] == D) ++r;\n    int x= D - std::max(deg[l],\
+    \ deg[r]);\n    for (int k= x; k--;) g.add_edge(l, r);\n    deg[l]+= x, deg[r]+=\
+    \ x;\n   }\n }\n std::vector<int> color(m, -1);\n auto rc= [&](auto &&rc, int\
+    \ d, const std::vector<int> &idx) -> void {\n  if (!d) return;\n  if (d == 1)\
+    \ {\n   for (int e: idx)\n    if (e < m) color[e]= col;\n   ++col;\n   return;\n\
+    \  }\n  if (d & 1) {\n   CSRArray<int> adj{std::vector<int>(idx.size()), std::vector<int>(L\
+    \ + 1)};\n   for (int e: idx) ++adj.p[g[e].first];\n   for (int i= 0; i < L; ++i)\
+    \ adj.p[i + 1]+= adj.p[i];\n   for (int e: idx) {\n    auto [l, r]= g[e];\n  \
+    \  adj.dat[--adj.p[l]]= r;\n   }\n   std::vector<int> mate(n, -1), rm;\n   _bg_internal::_bm(L,\
+    \ adj, mate);\n   for (int e: idx) {\n    auto [l, r]= g[e];\n    if (mate[l]\
+    \ == r) {\n     if (mate[l]= mate[r]= -1; e < m) color[e]= col;\n    } else rm.push_back(e);\n\
+    \   }\n   return ++col, rc(rc, d - 1, rm);\n  }\n  const int mm= idx.size();\n\
+    \  std::vector<int> circuit;\n  {\n   std::vector<int> c(mm), p(n + 1);\n   for\
+    \ (int e: idx) {\n    auto [l, r]= g[e];\n    ++p[l], ++p[r];\n   }\n   for (int\
+    \ i= 0; i < L; ++i) p[i + 1]+= p[i];\n   for (int i= mm; i--;) {\n    auto [l,\
+    \ r]= g[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int> it(p.begin(),\
+    \ p.begin() + n);\n   std::vector<char> used1(n), used2(mm);\n   for (int v= n;\
+    \ v--;)\n    if (!used1[v]) {\n     for (std::vector<std::pair<int, int>> st=\
+    \ {{v, -1}}; st.size();) {\n      auto [u, e]= st.back();\n      if (used1[u]=\
+    \ 1; it[u] == p[u + 1]) circuit.push_back(e), st.pop_back();\n      else if (int\
+    \ i= c[it[u]++]; !used2[i]) used2[i]= 1, st.emplace_back(g[idx[i]].to(u), i);\n\
+    \     }\n     circuit.pop_back();\n    }\n  }\n  std::vector<int> half1(mm / 2),\
+    \ half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i * 2]], half2[i]=\
+    \ idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d / 2, half2);\n };\n\
+    \ std::vector<int> idx(m * D);\n return std::iota(idx.begin(), idx.end(), 0),\
+    \ rc(rc, D, idx), color;\n}\n"
+  code: "#pragma once\n#include <queue>\n#include <numeric>\n#include \"src/DataStructure/UnionFind.hpp\"\
+    \n#include \"src/Graph/BipartiteGraph.hpp\"\nstd::vector<int> bipartite_edge_coloring(BipartiteGraph\
     \ g) {\n const int m= g.edge_size();\n int L= g.left_size(), n= g.vertex_size(),\
     \ D, col= 0;\n {\n  std::vector<int> deg(n), id(n);\n  for (auto [l, r]: g) ++deg[l],\
     \ ++deg[r];\n  D= *std::max_element(deg.begin(), deg.end());\n  UnionFind uf(n);\n\
@@ -157,36 +192,28 @@ data:
     \ half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i * 2]], half2[i]=\
     \ idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d / 2, half2);\n };\n\
     \ std::vector<int> idx(m * D);\n return std::iota(idx.begin(), idx.end(), 0),\
-    \ rc(rc, D, idx), color;\n}\n#line 6 \"test/yosupo/bipartite_edge_coloring.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int L, R, M;\n cin >> L >> R >> M;\n BipartiteGraph bg(L, R, M);\n for (int\
-    \ i= 0; i < M; ++i) cin >> bg[i], bg[i].second+= L;\n auto ans= bipartite_edge_coloring(bg);\n\
-    \ cout << *max_element(ans.begin(), ans.end()) + 1 << '\\n';\n for (auto a: ans)\
-    \ cout << a << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartite_edge_coloring\"\
-    \n#include <iostream>\n#include <algorithm>\n#include \"src/Graph/BipartiteGraph.hpp\"\
-    \n#include \"src/Graph/bipartite_edge_coloring.hpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n cin >> L\
-    \ >> R >> M;\n BipartiteGraph bg(L, R, M);\n for (int i= 0; i < M; ++i) cin >>\
-    \ bg[i], bg[i].second+= L;\n auto ans= bipartite_edge_coloring(bg);\n cout <<\
-    \ *max_element(ans.begin(), ans.end()) + 1 << '\\n';\n for (auto a: ans) cout\
-    \ << a << '\\n';\n return 0;\n}"
+    \ rc(rc, D, idx), color;\n}"
   dependsOn:
+  - src/DataStructure/UnionFind.hpp
   - src/Graph/BipartiteGraph.hpp
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
-  - src/Graph/bipartite_edge_coloring.hpp
-  - src/DataStructure/UnionFind.hpp
-  isVerificationFile: true
-  path: test/yosupo/bipartite_edge_coloring.test.cpp
+  isVerificationFile: false
+  path: src/Graph/bipartite_edge_coloring.hpp
   requiredBy: []
   timestamp: '2024-02-19 22:51:27+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/yosupo/bipartite_edge_coloring.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yosupo/bipartite_edge_coloring.test.cpp
+documentation_of: src/Graph/bipartite_edge_coloring.hpp
 layout: document
-redirect_from:
-- /verify/test/yosupo/bipartite_edge_coloring.test.cpp
-- /verify/test/yosupo/bipartite_edge_coloring.test.cpp.html
-title: test/yosupo/bipartite_edge_coloring.test.cpp
+title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
 ---
+
+
+
+## 問題例
+[AtCoder Grand Contest 037 D - Sorting a Grid](https://atcoder.jp/contests/agc037/tasks/agc037_d) (sp judge)
+
+## 参考
+[https://ei1333.hateblo.jp/entry/2020/08/25/015955](https://ei1333.hateblo.jp/entry/2020/08/25/015955)

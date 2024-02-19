@@ -187,18 +187,9 @@ data:
       title: "\u6700\u5C0F\u5305\u542B\u5186"
   - name: src/Graph
     pages:
-    - icon: ':warning:'
-      path: src/Graph/BiConnectedComponents.hpp
-      title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':x:'
-      path: src/Graph/BipartiteEdgeColoring.hpp
-      title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
     - icon: ':question:'
       path: src/Graph/BipartiteGraph.hpp
-      title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
-    - icon: ':heavy_check_mark:'
-      path: src/Graph/BipartiteMatching.hpp
-      title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
+      title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
     - icon: ':question:'
       path: src/Graph/CliqueProblem.hpp
       title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"
@@ -218,15 +209,6 @@ data:
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206\
         )"
-    - icon: ':warning:'
-      path: src/Graph/LinearSystemIncidence.hpp
-      title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
-    - icon: ':warning:'
-      path: src/Graph/Matching.hpp
-      title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':warning:'
-      path: src/Graph/MinimumSpanningAborescense.hpp
-      title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
     - icon: ':question:'
       path: src/Graph/RangeToRangeGraph.hpp
       title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
@@ -236,13 +218,13 @@ data:
     - icon: ':question:'
       path: src/Graph/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':warning:'
-      path: src/Graph/Tree.hpp
-      title: "\u6728"
     - icon: ':question:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
+    - icon: ':x:'
+      path: src/Graph/bipartite_edge_coloring.hpp
+      title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
     - icon: ':x:'
       path: src/Graph/block_cut_tree.hpp
       title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
@@ -491,6 +473,35 @@ data:
     - icon: ':question:'
       path: src/String/z_algorithm.hpp
       title: Z-Algorithm
+  - name: src/old
+    pages:
+    - icon: ':warning:'
+      path: src/old/BiConnectedComponents.hpp
+      title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    - icon: ':warning:'
+      path: src/old/BipartiteEdgeColoring.hpp
+      title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
+    - icon: ':warning:'
+      path: src/old/BipartiteGraph.hpp
+      title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
+    - icon: ':warning:'
+      path: src/old/BipartiteMatching.hpp
+      title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
+    - icon: ':warning:'
+      path: src/old/DulmageMendelsohn.hpp
+      title: "Dulmage-Mendelsohn \u5206\u89E3"
+    - icon: ':warning:'
+      path: src/old/LinearSystemIncidence.hpp
+      title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
+    - icon: ':warning:'
+      path: src/old/Matching.hpp
+      title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
+    - icon: ':warning:'
+      path: src/old/MinimumSpanningAborescense.hpp
+      title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
+    - icon: ':warning:'
+      path: src/old/Tree.hpp
+      title: "\u6728"
   verificationCategories:
   - name: test/aoj
     pages:
@@ -878,7 +889,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3112.SA.test.cpp
       title: test/aoj/3112.SA.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3168.bm.test.cpp
       title: test/aoj/3168.bm.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1243,10 +1254,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc218_h.test.cpp
       title: test/atcoder/abc218_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1499,12 +1510,9 @@ data:
       path: test/yosupo/bipartite_edge_coloring.test.cpp
       title: test/yosupo/bipartite_edge_coloring.test.cpp
     - icon: ':x:'
-      path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-      title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-    - icon: ':x:'
       path: test/yosupo/bipartitematching.general_matching.test.cpp
       title: test/yosupo/bipartitematching.general_matching.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
     - icon: ':x:'
@@ -2011,9 +2019,6 @@ data:
       path: test/yukicoder/1615.MCF.test.cpp
       title: test/yukicoder/1615.MCF.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/yukicoder/1615.bm.test.cpp
-      title: test/yukicoder/1615.bm.test.cpp
-    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1625.KDT.test.cpp
       title: test/yukicoder/1625.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2172,7 +2177,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/421.matroid_intersection.test.cpp
       title: test/yukicoder/421.matroid_intersection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/421.test.cpp
       title: test/yukicoder/421.test.cpp
     - icon: ':heavy_check_mark:'

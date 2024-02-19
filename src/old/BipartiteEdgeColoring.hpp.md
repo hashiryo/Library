@@ -5,16 +5,13 @@ data:
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/yosupo/bipartite_edge_coloring.test.cpp
-    title: test/yosupo/bipartite_edge_coloring.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/BipartiteEdgeColoring.hpp\"\n#include <array>\n\
+  bundledCode: "#line 2 \"src/old/BipartiteEdgeColoring.hpp\"\n#include <array>\n\
     #include <queue>\n#include <numeric>\n#line 2 \"src/DataStructure/UnionFind.hpp\"\
     \n#include <vector>\n#include <algorithm>\n#include <cassert>\ntemplate <bool\
     \ undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
@@ -29,7 +26,7 @@ data:
     \  static_assert(undoable, \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n\
     \  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n\
     \  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t <=\
-    \ his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 6 \"src/Graph/BipartiteEdgeColoring.hpp\"\
+    \ his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 6 \"src/old/BipartiteEdgeColoring.hpp\"\
     \nclass BipartiteEdgeColoring {\n std::vector<std::array<int, 2>> es_;\n const\
     \ int n[2];\npublic:\n BipartiteEdgeColoring(int L, int R): n{L, R} {}\n void\
     \ add_edge(int l, int r) { es_.push_back({l, r}); }\n std::vector<int> edge_coloring()\
@@ -138,13 +135,12 @@ data:
   dependsOn:
   - src/DataStructure/UnionFind.hpp
   isVerificationFile: false
-  path: src/Graph/BipartiteEdgeColoring.hpp
+  path: src/old/BipartiteEdgeColoring.hpp
   requiredBy: []
-  timestamp: '2024-02-17 10:13:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/yosupo/bipartite_edge_coloring.test.cpp
-documentation_of: src/Graph/BipartiteEdgeColoring.hpp
+  timestamp: '2024-02-19 22:51:27+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: src/old/BipartiteEdgeColoring.hpp
 layout: document
 title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
 ---

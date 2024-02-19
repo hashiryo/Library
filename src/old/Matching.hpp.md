@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/Matching.hpp\"\n#include <vector>\n#include <array>\n\
+  bundledCode: "#line 2 \"src/old/Matching.hpp\"\n#include <vector>\n#include <array>\n\
     class Matching {\n std::vector<std::array<int, 2>> es;\n std::vector<int> mate;\n\
     public:\n Matching(int n): mate(n, -1) {}\n void add_edge(int u, int v) { es.push_back({u,\
     \ v}); }\n void build() {\n  const int n= mate.size();\n  std::vector<int> g(es.size()\
@@ -67,12 +67,12 @@ data:
     \ < j) ret.push_back({i, j});\n  return ret;\n }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/Matching.hpp
+  path: src/old/Matching.hpp
   requiredBy: []
-  timestamp: '2023-03-14 17:54:07+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/Graph/Matching.hpp
+documentation_of: src/old/Matching.hpp
 layout: document
 title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
 ---

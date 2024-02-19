@@ -88,16 +88,15 @@ data:
     \ r, v), std::swap(l, r), u;\n };\n for (int i= m; i--;) {\n  auto [s, d]= g[i];\n\
     \  top[d]= merge(merge, top[d], i);\n }\n cost_t sum= 0;\n for (int i= n; i--;)\
     \ {\n  if (i == root) continue;\n  for (int v= i;;) {\n   if (top[v] == -1) return\
-    \ {cost_t(), std::vector<int>()};\n   int x= uf2.root(g[es[v]= top[v]].first);\n\
-    \   if (sum+= w[es[v]], upd(es[v], w[es[v]]); uf.unite(v, x)) break;\n   int t=\
-    \ uf2.time();\n   for (int r; uf2.unite(v, x); v= r, x= uf2.root(g[es[x]].first))\
-    \ top[r= uf2.root(v)]= merge(merge, top[v], top[x]);\n   cyc.emplace_back(es[v],\
-    \ t);\n   while (top[v] != -1 && uf2.same(v, g[top[v]].first)) {\n    auto [l,\
-    \ r]= lr[top[v]];\n    push(top[v]), top[v]= merge(merge, l, r);\n   }\n  }\n\
-    \ }\n for (auto it= cyc.rbegin(); it != cyc.rend(); ++it) {\n  auto [e, t]= *it;\n\
-    \  int r= uf2.root(g[e].second);\n  uf2.rollback(t);\n  int v= uf2.root(g[es[r]].second);\n\
-    \  es[v]= std::exchange(es[r], e);\n }\n es.erase(es.begin() + root);\n return\
-    \ {sum, es};\n}\n"
+    \ {};\n   int x= uf2.root(g[es[v]= top[v]].first);\n   if (sum+= w[es[v]], upd(es[v],\
+    \ w[es[v]]); uf.unite(v, x)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v,\
+    \ x); v= r, x= uf2.root(g[es[x]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
+    \ top[x]);\n   cyc.emplace_back(es[v], t);\n   while (top[v] != -1 && uf2.same(v,\
+    \ g[top[v]].first)) {\n    auto [l, r]= lr[top[v]];\n    push(top[v]), top[v]=\
+    \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cyc.rbegin(); it != cyc.rend();\
+    \ ++it) {\n  auto [e, t]= *it;\n  int r= uf2.root(g[e].second);\n  uf2.rollback(t);\n\
+    \  int v= uf2.root(g[es[r]].second);\n  es[v]= std::exchange(es[r], e);\n }\n\
+    \ es.erase(es.begin() + root);\n return {sum, es};\n}\n"
   code: "#pragma once\n#include <utility>\n#include \"src/Graph/Graph.hpp\"\n#include\
     \ \"src/DataStructure/UnionFind.hpp\"\n// return {total cost, edge ids}\n// return\
     \ {0, {}} if the graph has no spanning aborescence of the root\ntemplate <class\
@@ -113,10 +112,10 @@ data:
     \ v);\n  auto &[l, r]= lr[u];\n  return push(u), r= rec(rec, r, v), std::swap(l,\
     \ r), u;\n };\n for (int i= m; i--;) {\n  auto [s, d]= g[i];\n  top[d]= merge(merge,\
     \ top[d], i);\n }\n cost_t sum= 0;\n for (int i= n; i--;) {\n  if (i == root)\
-    \ continue;\n  for (int v= i;;) {\n   if (top[v] == -1) return {cost_t(), std::vector<int>()};\n\
-    \   int x= uf2.root(g[es[v]= top[v]].first);\n   if (sum+= w[es[v]], upd(es[v],\
-    \ w[es[v]]); uf.unite(v, x)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v,\
-    \ x); v= r, x= uf2.root(g[es[x]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
+    \ continue;\n  for (int v= i;;) {\n   if (top[v] == -1) return {};\n   int x=\
+    \ uf2.root(g[es[v]= top[v]].first);\n   if (sum+= w[es[v]], upd(es[v], w[es[v]]);\
+    \ uf.unite(v, x)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v, x);\
+    \ v= r, x= uf2.root(g[es[x]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
     \ top[x]);\n   cyc.emplace_back(es[v], t);\n   while (top[v] != -1 && uf2.same(v,\
     \ g[top[v]].first)) {\n    auto [l, r]= lr[top[v]];\n    push(top[v]), top[v]=\
     \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cyc.rbegin(); it != cyc.rend();\
@@ -130,7 +129,7 @@ data:
   isVerificationFile: false
   path: src/Graph/minimum_spanning_aborescence.hpp
   requiredBy: []
-  timestamp: '2024-02-19 15:51:18+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/directedmst.test.cpp

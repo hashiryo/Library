@@ -7,6 +7,12 @@ data:
       \ \u4ED6"
   _extendedRequiredBy:
   - icon: ':question:'
+    path: src/Graph/BipartiteGraph.hpp
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
+  - icon: ':x:'
+    path: src/Graph/DulmageMendelsohn.hpp
+    title: "Dulmage-Mendelsohn \u5206\u89E3"
+  - icon: ':question:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -21,6 +27,9 @@ data:
   - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':x:'
+    path: src/Graph/bipartite_edge_coloring.hpp
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
   - icon: ':x:'
     path: src/Graph/block_cut_tree.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
@@ -43,6 +52,9 @@ data:
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0334.test.cpp
+    title: test/aoj/0334.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
@@ -55,6 +67,9 @@ data:
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
   - icon: ':heavy_check_mark:'
@@ -66,9 +81,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
+  - icon: ':x:'
+    path: test/aoj/3168.bm.test.cpp
+    title: test/aoj/3168.bm.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3198.general_matching.test.cpp
     title: test/aoj/3198.general_matching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3198.test.cpp
+    title: test/aoj/3198.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
@@ -102,12 +123,15 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc223_g.dm.test.cpp
+    title: test/atcoder/abc223_g.dm.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
@@ -124,8 +148,14 @@ data:
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
   - icon: ':x:'
+    path: test/yosupo/bipartite_edge_coloring.test.cpp
+    title: test/yosupo/bipartite_edge_coloring.test.cpp
+  - icon: ':x:'
     path: test/yosupo/bipartitematching.general_matching.test.cpp
     title: test/yosupo/bipartitematching.general_matching.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/bipartitematching.test.cpp
+    title: test/yosupo/bipartitematching.test.cpp
   - icon: ':x:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
@@ -199,6 +229,12 @@ data:
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1744.test.cpp
+    title: test/yukicoder/1744.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1745.test.cpp
+    title: test/yukicoder/1745.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
   - icon: ':x:'
@@ -219,6 +255,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/421.test.cpp
+    title: test/yukicoder/421.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
@@ -285,10 +324,13 @@ data:
   path: src/Graph/Graph.hpp
   requiredBy:
   - src/Graph/block_cut_tree.hpp
+  - src/Graph/BipartiteGraph.hpp
   - src/Graph/general_matching.hpp
   - src/Graph/Rerooting.hpp
   - src/Graph/RangeToRangeGraph.hpp
+  - src/Graph/bipartite_edge_coloring.hpp
   - src/Graph/FunctionalGraph.hpp
+  - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/minimum_spanning_aborescence.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/StronglyConnectedComponents.hpp
@@ -311,10 +353,13 @@ data:
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1744.test.cpp
   - test/yukicoder/1295.test.cpp
   - test/yukicoder/1075.test.cpp
+  - test/yukicoder/1745.test.cpp
   - test/yukicoder/1718.test.cpp
   - test/yukicoder/1813.test.cpp
+  - test/yukicoder/421.test.cpp
   - test/yukicoder/1170.test.cpp
   - test/yukicoder/922.test.cpp
   - test/yukicoder/1242.test.cpp
@@ -327,13 +372,16 @@ data:
   - test/yosupo/scc.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
+  - test/yosupo/bipartitematching.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/lca.HLD.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/yosupo/bipartite_edge_coloring.test.cpp
   - test/yosupo/directedmst.test.cpp
   - test/yosupo/bipartitematching.general_matching.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/aoj/3198.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/3198.general_matching.test.cpp
   - test/aoj/3032.test.cpp
@@ -343,8 +391,11 @@ data:
   - test/aoj/0366.test.cpp
   - test/aoj/3506.test.cpp
   - test/aoj/3022.test.cpp
+  - test/aoj/3168.bm.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
+  - test/aoj/2423.test.cpp
+  - test/aoj/0334.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/2647.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
@@ -355,6 +406,7 @@ data:
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc179_e.test.cpp
   - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc223_g.dm.test.cpp
   - test/atcoder/abc202_e.test.cpp
   - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp

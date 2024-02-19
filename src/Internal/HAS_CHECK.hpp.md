@@ -30,7 +30,7 @@ data:
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - icon: ':warning:'
-    path: src/Graph/MinimumSpanningAborescense.hpp
+    path: src/old/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -236,7 +236,6 @@ data:
   isVerificationFile: false
   path: src/Internal/HAS_CHECK.hpp
   requiredBy:
-  - src/Graph/MinimumSpanningAborescense.hpp
   - src/DataStructure/OnlineDynamicConnectivity.hpp
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/SegmentTree_Dynamic.hpp
@@ -246,6 +245,7 @@ data:
   - src/DataStructure/SegmentTree_Patricia.hpp
   - src/DataStructure/WeightBalancedTree.hpp
   - src/DataStructure/SplayTree.hpp
+  - src/old/MinimumSpanningAborescense.hpp
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

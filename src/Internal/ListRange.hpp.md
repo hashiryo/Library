@@ -8,12 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/SegmentArrangement.hpp
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
-  - icon: ':warning:'
-    path: src/Graph/BiConnectedComponents.hpp
-    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
-    title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
   - icon: ':x:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
@@ -35,9 +32,9 @@ data:
   - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':warning:'
-    path: src/Graph/Tree.hpp
-    title: "\u6728"
+  - icon: ':x:'
+    path: src/Graph/bipartite_edge_coloring.hpp
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
   - icon: ':x:'
     path: src/Graph/block_cut_tree.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
@@ -68,10 +65,22 @@ data:
   - icon: ':x:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
+  - icon: ':warning:'
+    path: src/old/BipartiteGraph.hpp
+    title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
+  - icon: ':warning:'
+    path: src/old/DulmageMendelsohn.hpp
+    title: "Dulmage-Mendelsohn \u5206\u89E3"
+  - icon: ':warning:'
+    path: src/old/Tree.hpp
+    title: "\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0273.test.cpp
     title: test/aoj/0273.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/0334.test.cpp
+    title: test/aoj/0334.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
@@ -97,6 +106,9 @@ data:
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
   - icon: ':heavy_check_mark:'
@@ -111,7 +123,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,6 +132,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3198.general_matching.test.cpp
     title: test/aoj/3198.general_matching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3198.test.cpp
+    title: test/aoj/3198.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
@@ -168,10 +183,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
@@ -202,11 +217,14 @@ data:
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
   - icon: ':x:'
-    path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-    title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
+    path: test/yosupo/bipartite_edge_coloring.test.cpp
+    title: test/yosupo/bipartite_edge_coloring.test.cpp
   - icon: ':x:'
     path: test/yosupo/bipartitematching.general_matching.test.cpp
     title: test/yosupo/bipartitematching.general_matching.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/bipartitematching.test.cpp
+    title: test/yosupo/bipartitematching.test.cpp
   - icon: ':x:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
@@ -334,6 +352,9 @@ data:
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/421.test.cpp
+    title: test/yukicoder/421.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   - icon: ':x:'
@@ -395,18 +416,20 @@ data:
   - src/Graph/general_matching.hpp
   - src/Graph/Rerooting.hpp
   - src/Graph/RangeToRangeGraph.hpp
-  - src/Graph/Tree.hpp
+  - src/Graph/bipartite_edge_coloring.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/minimum_spanning_aborescence.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/Graph.hpp
-  - src/Graph/BiConnectedComponents.hpp
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
   - src/DataStructure/CsrArray.hpp
+  - src/old/BipartiteGraph.hpp
+  - src/old/Tree.hpp
+  - src/old/DulmageMendelsohn.hpp
   timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
@@ -433,6 +456,7 @@ data:
   - test/yukicoder/1745.test.cpp
   - test/yukicoder/1718.test.cpp
   - test/yukicoder/1813.test.cpp
+  - test/yukicoder/421.test.cpp
   - test/yukicoder/1170.test.cpp
   - test/yukicoder/922.test.cpp
   - test/yukicoder/1242.test.cpp
@@ -447,6 +471,7 @@ data:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
+  - test/yosupo/bipartitematching.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/lca.HLD.test.cpp
   - test/yosupo/counting_primes.test.cpp
@@ -454,15 +479,16 @@ data:
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/yosupo/bipartite_edge_coloring.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/directedmst.test.cpp
-  - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/yosupo/bipartitematching.general_matching.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/2448.test.cpp
+  - test/aoj/3198.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/1050.test.cpp
   - test/aoj/3198.general_matching.test.cpp
@@ -479,6 +505,8 @@ data:
   - test/aoj/3168.bm.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
+  - test/aoj/2423.test.cpp
+  - test/aoj/0334.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/1033.test.cpp
   - test/aoj/2647.test.cpp

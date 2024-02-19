@@ -2,31 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0334.test.cpp
-    title: test/aoj/0334.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2423.test.cpp
-    title: test/aoj/2423.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3198.test.cpp
-    title: test/aoj/3198.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/bipartitematching.test.cpp
-    title: test/yosupo/bipartitematching.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1615.bm.test.cpp
-    title: test/yukicoder/1615.bm.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/421.test.cpp
-    title: test/yukicoder/421.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/BipartiteMatching.hpp\"\n#include <vector>\n#include\
+  bundledCode: "#line 2 \"src/old/BipartiteMatching.hpp\"\n#include <vector>\n#include\
     \ <array>\n#include <algorithm>\n#include <cassert>\nclass BipartiteMatching {\n\
     \ std::vector<std::array<int, 2>> es;\n std::vector<int> lmate, rmate, rt;\npublic:\n\
     \ BipartiteMatching() {}\n BipartiteMatching(int L, int R): lmate(L, -1), rmate(R,\
@@ -92,18 +74,12 @@ data:
     \ r != -1 && rt[r] != -1; }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/BipartiteMatching.hpp
+  path: src/old/BipartiteMatching.hpp
   requiredBy: []
-  timestamp: '2023-03-16 02:01:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yukicoder/421.test.cpp
-  - test/yukicoder/1615.bm.test.cpp
-  - test/yosupo/bipartitematching.test.cpp
-  - test/aoj/3198.test.cpp
-  - test/aoj/2423.test.cpp
-  - test/aoj/0334.test.cpp
-documentation_of: src/Graph/BipartiteMatching.hpp
+  timestamp: '2024-02-19 22:51:27+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: src/old/BipartiteMatching.hpp
 layout: document
 title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
 ---

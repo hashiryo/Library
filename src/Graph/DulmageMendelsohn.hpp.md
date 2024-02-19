@@ -2,11 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/Graph/BipartiteGraph.hpp
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
+  - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc223_g.dm.test.cpp
+    title: test/atcoder/abc223_g.dm.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1744.test.cpp
     title: test/yukicoder/1744.test.cpp
@@ -18,14 +27,15 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
-    \ <algorithm>\n#include <numeric>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
-    \ <vector>\n#include <iostream>\n#include <iterator>\n#include <type_traits>\n\
-    #define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using Iterator=\
-    \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
-    \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
-    \ const { return std::distance(bg, ed); } \\\n  CT &operator[](int i) const {\
-    \ return bg[i]; } \\\n }\n_LR(ListRange, iterator, T);\n_LR(ConstListRange, const_iterator,\
+  bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <algorithm>\n\
+    #include <numeric>\n#line 2 \"src/Graph/BipartiteGraph.hpp\"\n#include <cassert>\n\
+    #include <tuple>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
+    #include <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name,\
+    \ IT, CT) \\\n template <class T> struct name { \\\n  using Iterator= typename\
+    \ std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return\
+    \ bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size() const {\
+    \ return std::distance(bg, ed); } \\\n  CT &operator[](int i) const { return bg[i];\
+    \ } \\\n }\n_LR(ListRange, iterator, T);\n_LR(ConstListRange, const_iterator,\
     \ const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T>\
     \ dat;\n std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n\
     \ ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i\
@@ -35,119 +45,146 @@ data:
     \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
     \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
     \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
-    \ << ']';\n}\n#line 6 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn\
-    \ {\n std::vector<int> blg[2], mate[2], pos[2];\n std::vector<std::array<int,\
-    \ 2>> es;\npublic:\n DulmageMendelsohn(int L, int R): blg{std::vector(L, -3),\
-    \ std::vector(R, -3)} {}\n void add_edge(int l, int r) { es.push_back({l, r});\
-    \ }\n void build() {\n  const int n[]= {(int)blg[0].size(), (int)blg[1].size()};\n\
-    \  std::vector<int> g[2], rt, pre, que(std::max(n[0], n[1]));\n  for (int b= 2;\
-    \ b--;) g[b].resize(es.size()), pos[b].resize(n[b] + 1), mate[b].assign(n[b],\
-    \ -1);\n  for (auto [l, r]: es) ++pos[0][l], ++pos[1][r];\n  for (int b= 2; b--;)\
-    \ std::partial_sum(pos[b].begin(), pos[b].end(), pos[b].begin());\n  for (auto\
-    \ [l, r]: es) g[0][--pos[0][l]]= r, g[1][--pos[1][r]]= l;\n  int t= 0, k= 0;\n\
-    \  for (bool upd= true; upd; t= 0) {\n   upd= false, rt.assign(n[0], -1), pre.assign(n[0],\
-    \ -1);\n   for (int l= n[0]; l--;)\n    if (mate[0][l] == -1) que[t++]= rt[l]=\
-    \ pre[l]= l;\n   for (int i= 0; i < t; ++i)\n    if (int l= que[i]; mate[0][rt[l]]\
-    \ == -1)\n     for (int j= pos[0][l], r, nl; j < pos[0][l + 1]; ++j) {\n     \
-    \ if (nl= mate[1][r= g[0][j]]; nl == -1) {\n       for (upd= true; r != -1; l=\
-    \ pre[l]) mate[1][r]= l, std::swap(mate[0][l], r);\n       break;\n      }\n \
-    \     if (pre[nl] == -1) rt[que[t++]= nl]= rt[pre[nl]= l];\n     }\n  }\n  for\
-    \ (int s= n[0], v; s--;)\n   if (rt[s] != -1)\n    if (blg[0][s]= -1, v= mate[0][s];\
-    \ v != -1) blg[1][v]= -1;\n  for (int s= n[1]; s--;)\n   if (mate[1][s] == -1)\
-    \ blg[1][que[t++]= s]= 0;\n  for (int i= 0; i < t; ++i)\n   for (int v= que[i],\
-    \ j= pos[1][v], u, w; j < pos[1][v + 1]; ++j)\n    if (blg[0][u= g[1][j]] == -3)\n\
-    \     if (w= mate[0][u], blg[0][u]= 0; w != -1 && blg[1][w] == -3) blg[1][que[t++]=\
-    \ w]= 0;\n  pre.assign(pos[0].begin(), pos[0].begin() + n[0]), t= 0;\n  for (int\
-    \ s= n[0], v; s--;)\n   if (blg[0][s] == -3)\n    for (blg[0][v= s]= -4; v >=\
-    \ 0;) {\n     if (pre[v] == pos[0][v + 1]) rt[t++]= v, v= blg[0][v];\n     else\
-    \ if (int w= mate[1][g[0][pre[v]++]]; blg[0][w] == -3) blg[0][w]= v, v= w;\n \
-    \   }\n  for (int i= 0, e= 0; t--;)\n   if (int s= rt[t], p= mate[0][s]; blg[1][p]\
-    \ == -3)\n    for (que[e++]= p, blg[0][s]= blg[1][p]= ++k; i < e; ++i)\n     for\
-    \ (int v= que[i], j= pos[1][v]; j < pos[1][v + 1]; ++j)\n      if (int u= g[1][j],\
-    \ w= mate[0][u]; blg[1][w] == -3) que[e++]= w, blg[0][u]= blg[1][w]= k;\n  ++k;\n\
-    \  for (int b= 2, s; b--;) {\n   for (pos[b].assign(k + 2, 0), s= n[b]; s--; ++pos[b][blg[b][s]])\n\
-    \    if (blg[b][s] == -1) blg[b][s]= k;\n   for (std::partial_sum(pos[b].begin(),\
-    \ pos[b].end(), pos[b].begin()), s= n[b]; s--;) mate[b][--pos[b][blg[b][s]]]=\
-    \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
-    \ left_belong(int l) const { return blg[0][l]; }\n int right_belong(int r) const\
-    \ { return blg[1][r]; }\n ConstListRange<int> left_block(int k) const { return\
-    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n ConstListRange<int>\
-    \ right_block(int k) const { return {mate[1].cbegin() + pos[1][k], mate[1].cbegin()\
-    \ + pos[1][k + 1]}; }\n};\n"
-  code: "#pragma once\n#include <array>\n#include <algorithm>\n#include <numeric>\n\
-    #include \"src/Internal/ListRange.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
-    \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
-    \ L, int R): blg{std::vector(L, -3), std::vector(R, -3)} {}\n void add_edge(int\
-    \ l, int r) { es.push_back({l, r}); }\n void build() {\n  const int n[]= {(int)blg[0].size(),\
-    \ (int)blg[1].size()};\n  std::vector<int> g[2], rt, pre, que(std::max(n[0], n[1]));\n\
-    \  for (int b= 2; b--;) g[b].resize(es.size()), pos[b].resize(n[b] + 1), mate[b].assign(n[b],\
-    \ -1);\n  for (auto [l, r]: es) ++pos[0][l], ++pos[1][r];\n  for (int b= 2; b--;)\
-    \ std::partial_sum(pos[b].begin(), pos[b].end(), pos[b].begin());\n  for (auto\
-    \ [l, r]: es) g[0][--pos[0][l]]= r, g[1][--pos[1][r]]= l;\n  int t= 0, k= 0;\n\
-    \  for (bool upd= true; upd; t= 0) {\n   upd= false, rt.assign(n[0], -1), pre.assign(n[0],\
-    \ -1);\n   for (int l= n[0]; l--;)\n    if (mate[0][l] == -1) que[t++]= rt[l]=\
-    \ pre[l]= l;\n   for (int i= 0; i < t; ++i)\n    if (int l= que[i]; mate[0][rt[l]]\
-    \ == -1)\n     for (int j= pos[0][l], r, nl; j < pos[0][l + 1]; ++j) {\n     \
-    \ if (nl= mate[1][r= g[0][j]]; nl == -1) {\n       for (upd= true; r != -1; l=\
-    \ pre[l]) mate[1][r]= l, std::swap(mate[0][l], r);\n       break;\n      }\n \
-    \     if (pre[nl] == -1) rt[que[t++]= nl]= rt[pre[nl]= l];\n     }\n  }\n  for\
-    \ (int s= n[0], v; s--;)\n   if (rt[s] != -1)\n    if (blg[0][s]= -1, v= mate[0][s];\
-    \ v != -1) blg[1][v]= -1;\n  for (int s= n[1]; s--;)\n   if (mate[1][s] == -1)\
-    \ blg[1][que[t++]= s]= 0;\n  for (int i= 0; i < t; ++i)\n   for (int v= que[i],\
-    \ j= pos[1][v], u, w; j < pos[1][v + 1]; ++j)\n    if (blg[0][u= g[1][j]] == -3)\n\
-    \     if (w= mate[0][u], blg[0][u]= 0; w != -1 && blg[1][w] == -3) blg[1][que[t++]=\
-    \ w]= 0;\n  pre.assign(pos[0].begin(), pos[0].begin() + n[0]), t= 0;\n  for (int\
-    \ s= n[0], v; s--;)\n   if (blg[0][s] == -3)\n    for (blg[0][v= s]= -4; v >=\
-    \ 0;) {\n     if (pre[v] == pos[0][v + 1]) rt[t++]= v, v= blg[0][v];\n     else\
-    \ if (int w= mate[1][g[0][pre[v]++]]; blg[0][w] == -3) blg[0][w]= v, v= w;\n \
-    \   }\n  for (int i= 0, e= 0; t--;)\n   if (int s= rt[t], p= mate[0][s]; blg[1][p]\
-    \ == -3)\n    for (que[e++]= p, blg[0][s]= blg[1][p]= ++k; i < e; ++i)\n     for\
-    \ (int v= que[i], j= pos[1][v]; j < pos[1][v + 1]; ++j)\n      if (int u= g[1][j],\
-    \ w= mate[0][u]; blg[1][w] == -3) que[e++]= w, blg[0][u]= blg[1][w]= k;\n  ++k;\n\
-    \  for (int b= 2, s; b--;) {\n   for (pos[b].assign(k + 2, 0), s= n[b]; s--; ++pos[b][blg[b][s]])\n\
-    \    if (blg[b][s] == -1) blg[b][s]= k;\n   for (std::partial_sum(pos[b].begin(),\
-    \ pos[b].end(), pos[b].begin()), s= n[b]; s--;) mate[b][--pos[b][blg[b][s]]]=\
-    \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
-    \ left_belong(int l) const { return blg[0][l]; }\n int right_belong(int r) const\
-    \ { return blg[1][r]; }\n ConstListRange<int> left_block(int k) const { return\
-    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n ConstListRange<int>\
-    \ right_block(int k) const { return {mate[1].cbegin() + pos[1][k], mate[1].cbegin()\
-    \ + pos[1][k + 1]}; }\n};"
+    \ << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int, int>\
+    \ {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 6 \"src/Graph/BipartiteGraph.hpp\"\
+    \n// [0, L) is left, [L, n) is right\nstruct BipartiteGraph: Graph {\n size_t\
+    \ L;\n BipartiteGraph() {}\n BipartiteGraph(size_t L, size_t R, size_t m= 0):\
+    \ Graph(L + R, m), L(L) {}\n size_t left_size() const { return L; }\n size_t right_size()\
+    \ const { return this->n - L; }\n};\nstd::vector<int> paint_in_2_color(const CSRArray<int>\
+    \ &adj) {\n const int n= adj.size();\n std::vector<int> col(n, -1);\n for (int\
+    \ s= n; s--;)\n  if (col[s] == -1) {\n   std::vector<int> q= {s};\n   for (int\
+    \ i= col[s]= 0, v; i < (int)q.size(); ++i)\n    for (int u: adj[v= q[i]])\n  \
+    \   if (int c= col[v]; col[u] == c) return {};\n     else if (col[u] == -1) col[u]=\
+    \ c ^ 1, q.push_back(u);\n  }\n return col;\n}\nstd::vector<int> paint_in_2_color(const\
+    \ Graph &g) { return paint_in_2_color(g.adjacency_vertex(0)); }\n// { BipartiteGraph\
+    \ , original to new, new to original }\n// {{},{},{}} if not bipartite\nstd::tuple<BipartiteGraph,\
+    \ std::vector<int>, std::vector<int>> graph_to_bipartite(const Graph &g, std::vector<int>\
+    \ color= {}) {\n if (color.empty()) color= paint_in_2_color(g);\n if (color.empty())\
+    \ return {};\n const int n= g.vertex_size(), m= g.edge_size();\n std::vector<int>\
+    \ a(n), b(n);\n int l= 0, r= n;\n for (int i= n; i--;) b[a[i]= color[i] ? --r\
+    \ : l++]= i;\n BipartiteGraph bg(l, n - l, m);\n for (int i= m; i--;) {\n  auto\
+    \ [u, v]= g[i];\n  bg[i]= std::minmax(a[u], a[v]);\n }\n return {bg, a, b};\n\
+    }\nnamespace _bg_internal {\nstd::vector<int> _bm(int L, const CSRArray<int> &adj,\
+    \ std::vector<int> &m) {\n std::vector<int> a, p, q(L);\n for (bool u= true; u;)\
+    \ {\n  u= false, a.assign(L, -1), p.assign(L, -1);\n  int t= 0;\n  for (int l=\
+    \ L; l--;)\n   if (m[l] == -1) q[t++]= a[l]= p[l]= l;\n  for (int i= 0; i < t;\
+    \ ++i)\n   if (int l= q[i], x; m[a[l]] == -1)\n    for (int r: adj[l]) {\n   \
+    \  if (x= m[r]; x == -1) {\n      for (u= true; r != -1; l= p[l]) m[r]= l, std::swap(m[l],\
+    \ r);\n      break;\n     }\n     if (p[x] == -1) a[q[t++]= x]= a[p[x]= l];\n\
+    \    }\n }\n return a;\n}\n}\ntemplate <bool lexical= false> std::pair<std::vector<int>,\
+    \ std::vector<int>> bipartite_matching(const BipartiteGraph &g, std::vector<int>\
+    \ partner= {}) {\n const int L= g.left_size(), M= g.edge_size();\n if (partner.empty())\
+    \ partner.assign(g.vertex_size(), -1);\n assert(partner.size() == g.vertex_size());\n\
+    \ {\n  CSRArray<int> adj{std::vector<int>(M), std::vector<int>(L + 1)};\n  for\
+    \ (auto [l, r]: g) ++adj.p[l];\n  for (int i= 0; i < L; ++i) adj.p[i + 1]+= adj.p[i];\n\
+    \  for (auto [l, r]: g) adj.dat[--adj.p[l]]= r;\n  if constexpr (lexical) {\n\
+    \   for (int l= L; l--;) std::sort(adj[l].begin(), adj[l].end());\n   _bg_internal::_bm(L,\
+    \ adj, partner);\n   std::vector<char> a(L, 1);\n   for (int l= 0; l < L; ++l)\n\
+    \    if (int r= partner[l], v= l; r != -1) {\n     std::vector<int> p(L, partner[v]=\
+    \ partner[r]= -1), c(adj.p.begin(), adj.p.begin() + L);\n     for (p[v]= -2;;)\
+    \ {\n      if (c[v] == adj.p[v + 1]) v= p[v];\n      else if (int u= partner[r=\
+    \ adj.dat[c[v]++]]; u == -1) {\n       for (; r != -1; v= p[v]) partner[r]= v,\
+    \ std::swap(partner[v], r);\n       break;\n      } else if (a[u] && p[u] == -1)\
+    \ p[u]= v, v= u;\n     }\n     a[l]= 0;\n    }\n  } else _bg_internal::_bm(L,\
+    \ adj, partner);\n }\n std::vector<int> c;\n std::vector<char> p(L);\n for (int\
+    \ i= 0; i < M; ++i)\n  if (auto [l, r]= g[i]; partner[l] == r && !p[l]) c.push_back(i),\
+    \ p[l]= 1;\n return {c, partner};\n}\n#line 5 \"src/Graph/DulmageMendelsohn.hpp\"\
+    \nclass DulmageMendelsohn {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int>\
+    \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &g): L(g.left_size())\
+    \ {\n  auto adj= g.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
+    \ -1), b.assign(n, -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n\
+    \ - L);\n  int t= 0, k= 0;\n  for (int l= L; l--;)\n   if (a[l] != -1)\n    if\
+    \ (b[l]= -1; m[l] != -1) b[m[l]]= -1;\n  for (int r= n; r-- > L;)\n   if (m[r]\
+    \ == -1) b[q[t++]= r]= 0;\n  for (int i= 0, r, w; i < t; ++i)\n   for (int l:\
+    \ adj[r= q[i]])\n    if (b[l] == -3)\n     if (b[l]= 0, w= m[l]; w != -1 && b[w]\
+    \ == -3) b[q[t++]= w]= 0;\n  t= 0;\n  {\n   std::vector<int> c(adj.p.begin(),\
+    \ adj.p.begin() + L);\n   for (int l= L; l--;)\n    if (int v= l; b[v] == -3)\n\
+    \     for (b[v]= -2; v >= 0;) {\n      if (c[v] == adj.p[v + 1]) a[t++]= v, v=\
+    \ b[v];\n      else if (int w= m[adj.dat[c[v]++]]; b[w] == -3) b[w]= v, v= w;\n\
+    \     }\n  }\n  for (int i= 0, e= 0, r; t--;)\n   if (int s= a[t], p= m[s]; b[p]\
+    \ == -3)\n    for (b[q[e++]= p]= b[s]= ++k; i < e; ++i)\n     for (int l: adj[r=\
+    \ q[i]])\n      if (b[m[l]] == -3) b[q[e++]= m[l]]= b[l]= k;\n  ++k;\n  for (int\
+    \ l= L; l--;)\n   if (b[l] == -1)\n    if (b[l]= k; m[l] != -1) b[m[l]]= k;\n\
+    \  a.assign(k + 2, 0);\n  for (int i= n; i--;) ++a[b[i]];\n  for (int i= 0; i\
+    \ <= k; ++i) a[i + 1]+= a[i];\n  for (int i= n; i--;) m[--a[b[i]]]= i;\n  Graph\
+    \ h(k + 1);\n  for (auto [l, r]: g)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n\
+    \  std::sort(h.begin(), h.end()), h.erase(std::unique(h.begin(), h.end()), h.end()),\
+    \ dag[0]= h.adjacency_vertex(1), dag[1]= h.adjacency_vertex(-1);\n }\n size_t\
+    \ size() const { return a.size() - 1; }\n ConstListRange<int> block(int k) const\
+    \ { return {m.cbegin() + a[k], m.cbegin() + a[k + 1]}; }\n int operator()(int\
+    \ i) const { return b[i]; }\n std::vector<int> min_vertex_cover(std::vector<int>\
+    \ ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()), std::iota(ord.begin(),\
+    \ ord.end(), 0);\n  std::vector<char> z(size(), -1);\n  std::vector<int> q(size()),\
+    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= v < L, k= b[v],\
+    \ s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]= k]= s= !c];\n    for\
+    \ (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n      if (z[u] ==\
+    \ -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n  }\n  return\
+    \ vc;\n }\n};\n"
+  code: "#pragma once\n#include <algorithm>\n#include <numeric>\n#include \"src/Graph/BipartiteGraph.hpp\"\
+    \nclass DulmageMendelsohn {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int>\
+    \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &g): L(g.left_size())\
+    \ {\n  auto adj= g.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
+    \ -1), b.assign(n, -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n\
+    \ - L);\n  int t= 0, k= 0;\n  for (int l= L; l--;)\n   if (a[l] != -1)\n    if\
+    \ (b[l]= -1; m[l] != -1) b[m[l]]= -1;\n  for (int r= n; r-- > L;)\n   if (m[r]\
+    \ == -1) b[q[t++]= r]= 0;\n  for (int i= 0, r, w; i < t; ++i)\n   for (int l:\
+    \ adj[r= q[i]])\n    if (b[l] == -3)\n     if (b[l]= 0, w= m[l]; w != -1 && b[w]\
+    \ == -3) b[q[t++]= w]= 0;\n  t= 0;\n  {\n   std::vector<int> c(adj.p.begin(),\
+    \ adj.p.begin() + L);\n   for (int l= L; l--;)\n    if (int v= l; b[v] == -3)\n\
+    \     for (b[v]= -2; v >= 0;) {\n      if (c[v] == adj.p[v + 1]) a[t++]= v, v=\
+    \ b[v];\n      else if (int w= m[adj.dat[c[v]++]]; b[w] == -3) b[w]= v, v= w;\n\
+    \     }\n  }\n  for (int i= 0, e= 0, r; t--;)\n   if (int s= a[t], p= m[s]; b[p]\
+    \ == -3)\n    for (b[q[e++]= p]= b[s]= ++k; i < e; ++i)\n     for (int l: adj[r=\
+    \ q[i]])\n      if (b[m[l]] == -3) b[q[e++]= m[l]]= b[l]= k;\n  ++k;\n  for (int\
+    \ l= L; l--;)\n   if (b[l] == -1)\n    if (b[l]= k; m[l] != -1) b[m[l]]= k;\n\
+    \  a.assign(k + 2, 0);\n  for (int i= n; i--;) ++a[b[i]];\n  for (int i= 0; i\
+    \ <= k; ++i) a[i + 1]+= a[i];\n  for (int i= n; i--;) m[--a[b[i]]]= i;\n  Graph\
+    \ h(k + 1);\n  for (auto [l, r]: g)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n\
+    \  std::sort(h.begin(), h.end()), h.erase(std::unique(h.begin(), h.end()), h.end()),\
+    \ dag[0]= h.adjacency_vertex(1), dag[1]= h.adjacency_vertex(-1);\n }\n size_t\
+    \ size() const { return a.size() - 1; }\n ConstListRange<int> block(int k) const\
+    \ { return {m.cbegin() + a[k], m.cbegin() + a[k + 1]}; }\n int operator()(int\
+    \ i) const { return b[i]; }\n std::vector<int> min_vertex_cover(std::vector<int>\
+    \ ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()), std::iota(ord.begin(),\
+    \ ord.end(), 0);\n  std::vector<char> z(size(), -1);\n  std::vector<int> q(size()),\
+    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= v < L, k= b[v],\
+    \ s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]= k]= s= !c];\n    for\
+    \ (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n      if (z[u] ==\
+    \ -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n  }\n  return\
+    \ vc;\n }\n};"
   dependsOn:
+  - src/Graph/BipartiteGraph.hpp
+  - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
+  - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/Graph/DulmageMendelsohn.hpp
 layout: document
 title: "Dulmage-Mendelsohn \u5206\u89E3"
 ---
-明示的に二部グラフを表現する \
-頂点の添字は左右それぞれ [0,L), [0,R) で表現 \
-K+1 個 に分割された集合(0~K)が得られたとして
-- 左側の頂点： 0~K-1番目のいずれかの集合に属する $\iff$ マッチングに必ず使う
-- 右側の頂点： 1~K番目のいずれかの集合に属する $\iff$ マッチングに必ず使う
-- 左側の頂点lがa番目の集合, 右側の頂点rがb番目の集合に属する: 辺(l,r)が存在 $\implies$ a $\le$ b
 
-## メンバ関数
-
-| 関数名                   | 内容                                                | 計算量                              |
-| ------------------------ | --------------------------------------------------- | ----------------------------------- |
-| `DulmageMendelsohn(L,R)` | コンストラクタ. 二部グラフの左右のサイズ L, Rを渡す |                                     |
-| `add_edge(l,r)`          | 辺 (l,r) を追加                                     |                                     |
-| `build()`                | DM分解を実行                                        | $\mathcal{O}\left(E\sqrt{V}\right)$ |
-| `component_num()`        | 分割された集合の個数(K+1)を返す                     |                                     |
-| `left_belong(l)`         | 左側の頂点 l の所属先を返す                         |                                     |
-| `right_belong(r)`        | 右側の頂点 r の所属先を返す                         |                                     |
-| `left_block(k)`          | 左側の k 番目の集合を返す                           |                                     |
-| `right_block(k)`         | 右側の k 番目の集合を返す                           |                                     |
-
-## 参考
-[https://en.wikipedia.org/wiki/Dulmage%E2%80%93Mendelsohn_decomposition](https://en.wikipedia.org/wiki/Dulmage%E2%80%93Mendelsohn_decomposition) \
-[http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-ouyousurigaku/dm050410.pdf](http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-ouyousurigaku/dm050410.pdf) \
-[https://hitonanode.github.io/cplib-cpp/graph/dulmage_mendelsohn_decomposition.hpp.html](https://hitonanode.github.io/cplib-cpp/graph/dulmage_mendelsohn_decomposition.hpp.html)
+## 問題例
+[東京大学プログラミングコンテスト2013 K - 辞書順最小頂点被覆](https://atcoder.jp/contests/utpc2013/tasks/utpc2013_11) (辞書順最小頂点被覆のverify)\
+[HackerRank Drawing Rectangles](https://www.hackerrank.com/contests/university-codesprint-4/challenges/drawing-rectangles) (最小頂点被覆, 頂点:3e5+3e5, 辺:3e5)

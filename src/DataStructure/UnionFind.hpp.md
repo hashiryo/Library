@@ -3,17 +3,20 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':x:'
-    path: src/Graph/BipartiteEdgeColoring.hpp
-    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
-  - icon: ':x:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
     title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206)"
-  - icon: ':warning:'
-    path: src/Graph/MinimumSpanningAborescense.hpp
-    title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
+  - icon: ':x:'
+    path: src/Graph/bipartite_edge_coloring.hpp
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
   - icon: ':question:'
     path: src/Graph/minimum_spanning_aborescence.hpp
     title: src/Graph/minimum_spanning_aborescence.hpp
+  - icon: ':warning:'
+    path: src/old/BipartiteEdgeColoring.hpp
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
+  - icon: ':warning:'
+    path: src/old/MinimumSpanningAborescense.hpp
+    title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
@@ -101,10 +104,11 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
-  - src/Graph/MinimumSpanningAborescense.hpp
-  - src/Graph/BipartiteEdgeColoring.hpp
+  - src/Graph/bipartite_edge_coloring.hpp
   - src/Graph/IncrementalBridgeConnectivity.hpp
   - src/Graph/minimum_spanning_aborescence.hpp
+  - src/old/MinimumSpanningAborescense.hpp
+  - src/old/BipartiteEdgeColoring.hpp
   timestamp: '2024-02-17 10:13:57+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

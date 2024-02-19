@@ -18,7 +18,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/MinimumSpanningAborescense.hpp\"\n#include <cstddef>\n\
+  bundledCode: "#line 2 \"src/old/MinimumSpanningAborescense.hpp\"\n#include <cstddef>\n\
     #line 2 \"src/DataStructure/UnionFind.hpp\"\n#include <vector>\n#include <algorithm>\n\
     #include <cassert>\ntemplate <bool undoable= false> class UnionFind {\n std::vector<int>\
     \ par;\n std::vector<std::pair<int, int>> his;\npublic:\n UnionFind(int n): par(n,\
@@ -68,7 +68,7 @@ data:
     \ bool empty() { return !root; }\n void apply(E v) {\n  static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n  propagate(root, v);\n }\n SkewHeap\
     \ &operator+=(SkewHeap r) { return root= merge(root, r.root), *this; }\n SkewHeap\
-    \ operator+(SkewHeap r) { return SkewHeap(*this)+= r; }\n};\n#line 5 \"src/Graph/MinimumSpanningAborescense.hpp\"\
+    \ operator+(SkewHeap r) { return SkewHeap(*this)+= r; }\n};\n#line 5 \"src/old/MinimumSpanningAborescense.hpp\"\
     \ntemplate <typename cost_t> class MinimumSpanningAborescense {\n struct Edge\
     \ {\n  size_t src, dst, id;\n  cost_t cost;\n  bool operator>(const Edge &r) const\
     \ { return this->cost > r.cost; }\n };\n struct Op_Edge_add {\n  using E= cost_t;\n\
@@ -123,12 +123,12 @@ data:
   - src/DataStructure/SkewHeap.hpp
   - src/Internal/HAS_CHECK.hpp
   isVerificationFile: false
-  path: src/Graph/MinimumSpanningAborescense.hpp
+  path: src/old/MinimumSpanningAborescense.hpp
   requiredBy: []
-  timestamp: '2024-02-17 10:13:57+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/Graph/MinimumSpanningAborescense.hpp
+documentation_of: src/old/MinimumSpanningAborescense.hpp
 layout: document
 title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
 ---

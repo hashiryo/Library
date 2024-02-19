@@ -5,17 +5,14 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/Graph/BiConnectedComponents.hpp
-    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
+  bundledCode: "#line 2 \"src/old/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
     #include <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n\
     #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
     #include <iostream>\n#include <iterator>\n#line 6 \"src/Internal/ListRange.hpp\"\
@@ -33,7 +30,7 @@ data:
     \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
     \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
     \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
-    \ << ']';\n}\n#line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool\
+    \ << ']';\n}\n#line 10 \"src/old/Tree.hpp\"\ntemplate <class Cost= void, bool\
     \ weight= false> class Tree {\n template <class D, class T> struct Edge_B {\n\
     \  int to;\n  T cost;\n  operator int() const { return to; }\n };\n template <class\
     \ D> struct Edge_B<D, void> {\n  int to;\n  operator int() const { return to;\
@@ -180,13 +177,12 @@ data:
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
-  path: src/Graph/Tree.hpp
-  requiredBy:
-  - src/Graph/BiConnectedComponents.hpp
-  timestamp: '2024-02-19 15:31:52+09:00'
+  path: src/old/Tree.hpp
+  requiredBy: []
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/Graph/Tree.hpp
+documentation_of: src/old/Tree.hpp
 layout: document
 title: "\u6728"
 ---

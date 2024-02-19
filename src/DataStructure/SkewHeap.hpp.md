@@ -7,7 +7,7 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: src/Graph/MinimumSpanningAborescense.hpp
+    path: src/old/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -83,7 +83,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SkewHeap.hpp
   requiredBy:
-  - src/Graph/MinimumSpanningAborescense.hpp
+  - src/old/MinimumSpanningAborescense.hpp
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

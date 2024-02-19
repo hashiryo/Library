@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/LinearSystemIncidence.hpp\"\n#include <vector>\n\
+  bundledCode: "#line 2 \"src/old/LinearSystemIncidence.hpp\"\n#include <vector>\n\
     #include <tuple>\n#include <array>\n#include <cassert>\n#include <type_traits>\n\
     template <typename T> class LinearSystemIncidence {\n const int n;\n std::vector<std::array<int,\
     \ 2>> es;\npublic:\n LinearSystemIncidence(int n): n(n) {}\n void add_edge(int\
@@ -44,12 +44,12 @@ data:
     };"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/LinearSystemIncidence.hpp
+  path: src/old/LinearSystemIncidence.hpp
   requiredBy: []
-  timestamp: '2023-03-08 02:35:54+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: src/Graph/LinearSystemIncidence.hpp
+documentation_of: src/old/LinearSystemIncidence.hpp
 layout: document
 title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
 ---

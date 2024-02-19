@@ -85,10 +85,10 @@ data:
     \ v);\n  auto &[l, r]= lr[u];\n  return push(u), r= rec(rec, r, v), std::swap(l,\
     \ r), u;\n };\n for (int i= m; i--;) {\n  auto [s, d]= g[i];\n  top[d]= merge(merge,\
     \ top[d], i);\n }\n cost_t sum= 0;\n for (int i= n; i--;) {\n  if (i == root)\
-    \ continue;\n  for (int v= i;;) {\n   if (top[v] == -1) return {cost_t(), std::vector<int>()};\n\
-    \   int x= uf2.root(g[es[v]= top[v]].first);\n   if (sum+= w[es[v]], upd(es[v],\
-    \ w[es[v]]); uf.unite(v, x)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v,\
-    \ x); v= r, x= uf2.root(g[es[x]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
+    \ continue;\n  for (int v= i;;) {\n   if (top[v] == -1) return {};\n   int x=\
+    \ uf2.root(g[es[v]= top[v]].first);\n   if (sum+= w[es[v]], upd(es[v], w[es[v]]);\
+    \ uf.unite(v, x)) break;\n   int t= uf2.time();\n   for (int r; uf2.unite(v, x);\
+    \ v= r, x= uf2.root(g[es[x]].first)) top[r= uf2.root(v)]= merge(merge, top[v],\
     \ top[x]);\n   cyc.emplace_back(es[v], t);\n   while (top[v] != -1 && uf2.same(v,\
     \ g[top[v]].first)) {\n    auto [l, r]= lr[top[v]];\n    push(top[v]), top[v]=\
     \ merge(merge, l, r);\n   }\n  }\n }\n for (auto it= cyc.rbegin(); it != cyc.rend();\
@@ -118,7 +118,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 15:51:18+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp

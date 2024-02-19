@@ -3,7 +3,13 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
-    title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
+  - icon: ':x:'
+    path: src/Graph/DulmageMendelsohn.hpp
+    title: "Dulmage-Mendelsohn \u5206\u89E3"
+  - icon: ':question:'
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
@@ -19,109 +25,137 @@ data:
     links:
     - https://atcoder.jp/contests/abc223/tasks/abc223_g
   bundledCode: "#line 1 \"test/atcoder/abc223_g.dm.test.cpp\"\n#define PROBLEM \"\
-    https://atcoder.jp/contests/abc223/tasks/abc223_g\"\n// DM\u5206\u89E3\u306Everify\n\
-    #include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/Graph/BipartiteGraph.hpp\"\
-    \n#include <array>\n#line 4 \"src/Graph/BipartiteGraph.hpp\"\n#include <numeric>\n\
-    #include <cassert>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
-    #include <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct\
-    \ name { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg,\
-    \ ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const {\
-    \ return ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n\
-    \  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator,\
-    \ T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate <class\
-    \ T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t size()\
-    \ const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return {dat.begin()\
-    \ + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const\
-    \ { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template\
-    \ <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    https://atcoder.jp/contests/abc223/tasks/abc223_g\"\n#include <iostream>\n#include\
+    \ <vector>\n#include <algorithm>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include\
+    \ <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n template\
+    \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
+    \n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
+    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
     \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
     \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
     \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
-    \ return os << ']';\n}\n#line 7 \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph\
-    \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> col, pos, ord, pre,\
-    \ mate, blg;\n CSRArray<int> dag_[2];\n int l;\npublic:\n BipartiteGraph(int n):\
-    \ col(n, -1), pos(n + 1), ord(n), mate(n, -1), blg(n, -3), l(0) {}\n void add_edge(int\
-    \ u, int v) { es.push_back({u, v}); }\n void build() {\n  const int n= col.size();\n\
-    \  std::vector<int> rt, que(n), g(es.size() * 2);\n  for (auto [u, v]: es) ++pos[u],\
-    \ ++pos[v];\n  for (int i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for (auto [u,\
-    \ v]: es) g[--pos[u]]= v, g[--pos[v]]= u;\n  for (int s= n, i= 0, t= 0, r= n;\
-    \ s--;)\n   if (col[s] == -1)\n    for (col[s]= 0, ord[l++]= que[t++]= s; i <\
-    \ t; ++i)\n     for (int v= que[i], c= col[v], j= pos[v], u; j < pos[v + 1]; ++j)\n\
-    \      if (assert(col[u= g[j]] != c); col[u] == -1) col[u]= !c, ord[(c ? l++ :\
-    \ --r)]= que[t++]= u;\n  int t= 0, k= 0;\n  for (bool upd= true; upd; t= 0) {\n\
-    \   upd= false, rt.assign(n, -1), pre.assign(n, -1);\n   for (int i= l; i--;)\n\
-    \    if (int v= ord[i]; mate[v] == -1) que[t++]= rt[v]= pre[v]= v;\n   for (int\
-    \ i= 0; i < t; ++i)\n    if (int v= que[i]; mate[rt[v]] == -1)\n     for (int\
-    \ j= pos[v], u, w; j < pos[v + 1]; ++j) {\n      if (w= mate[u= g[j]]; w == -1)\
-    \ {\n       for (upd= true; u != -1; v= pre[v]) mate[u]= v, std::swap(mate[v],\
-    \ u);\n       break;\n      }\n      if (pre[w] == -1) rt[que[t++]= w]= rt[pre[w]=\
-    \ v];\n     }\n  }\n  for (int i= l; i--;)\n   if (int s= ord[i]; rt[s] != -1)\n\
-    \    if (blg[s]= -1, s= mate[s]; s != -1) blg[s]= -1;\n  for (int i= l; i < n;\
-    \ ++i)\n   if (int s= ord[i]; mate[s] == -1) blg[que[t++]= s]= 0;\n  for (int\
-    \ i= 0; i < t; ++i)\n   for (int v= que[i], j= pos[v], u, w; j < pos[v + 1]; ++j)\n\
-    \    if (blg[u= g[j]] == -3)\n     if (w= mate[u], blg[u]= 0; w != -1 && blg[w]\
-    \ == -3) blg[que[t++]= w]= 0;\n  pre.assign(pos.begin(), pos.begin() + n), t=\
-    \ 0;\n  for (int i= l; i--;)\n   if (int v= ord[i]; blg[v] == -3)\n    for (blg[v]=\
-    \ -4; v >= 0;) {\n     if (pre[v] == pos[v + 1]) rt[t++]= v, v= blg[v];\n    \
-    \ else if (int w= mate[g[pre[v]++]]; blg[w] == -3) blg[w]= v, v= w;\n    }\n \
-    \ for (int i= 0, e= 0; t--;)\n   if (int s= rt[t], p= mate[s]; blg[p] == -3)\n\
-    \    for (que[e++]= p, blg[s]= blg[p]= ++k; i < e; ++i)\n     for (int v= que[i],\
-    \ j= pos[v]; j < pos[v + 1]; ++j)\n      if (int u= g[j], w= mate[u]; blg[w] ==\
-    \ -3) que[e++]= w, blg[u]= blg[w]= k;\n  pos.assign(++k + 2, 0);\n  for (int v=\
-    \ n; v--; ++pos[blg[v]])\n   if (blg[v] == -1) blg[v]= k;\n  for (int i= 0; i\
-    \ <= k; ++i) pos[i + 1]+= pos[i];\n  for (int v= n; v--;) pre[--pos[blg[v]]]=\
-    \ v;\n  std::vector<std::array<int, 2>> es_;\n  for (auto &[u, v]: es) {\n   if\
-    \ (col[u]) std::swap(u, v);\n   if (int a= blg[u], b= blg[v]; a != b) es_.push_back({a,\
-    \ b});\n  }\n  std::sort(es_.begin(), es_.end()), es_.erase(std::unique(es_.begin(),\
-    \ es_.end()), es_.end());\n  std::vector<int> dg0(es_.size()), dg1(es_.size()),\
-    \ sp0(k + 2), sp1(k + 2);\n  for (auto [u, v]: es_) ++sp0[u], ++sp1[v];\n  std::partial_sum(sp0.begin(),\
-    \ sp0.end(), sp0.begin()), std::partial_sum(sp1.begin(), sp1.end(), sp1.begin());\n\
-    \  for (auto [u, v]: es_) dg0[--sp0[u]]= v, dg1[--sp1[v]]= u;\n  dag_[0]= {dg0,\
-    \ sp0}, dag_[1]= {dg1, sp1};\n }\n const std::vector<std::array<int, 2>> &edges()\
-    \ const { return es; }\n bool color(int v) const { return col[v]; }\n ConstListRange<int>\
-    \ left_vertices() const { return {ord.cbegin(), ord.cbegin() + l}; }\n ConstListRange<int>\
-    \ right_vertices() const { return {ord.cbegin() + l, ord.cend()}; }\n int match(int\
-    \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
-    \ - 1; }\n int belong(int v) const { return blg[v]; }\n ConstListRange<int> block(int\
-    \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
-    \ <bool rev> const CSRArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
-    \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
-    \ i= l; i--;)\n   if (int v= ord[i], u= mate[v]; u != -1) ret.push_back({v, u});\n\
-    \  return ret;\n }\n std::vector<int> min_vertex_cover() const {\n  const int\
-    \ n= col.size(), m= component_num();\n  std::vector<int> sel(m, -1), ret, que(m);\n\
-    \  sel[0]= 1, sel.back()= 0;\n  for (int v= 0, k, s, c, i, t; v < n; ++v) {\n\
-    \   if (c= col[v], s= sel[k= blg[v]]; s == -1)\n    for (sel[que[0]= k]= s= !c,\
-    \ i= 0, t= 1; i < t; ++i)\n     for (int u: dag_[s][que[i]])\n      if (sel[u]\
-    \ == -1) sel[u]= s, que[t++]= u;\n   if (c ^ s) ret.push_back(v);\n  }\n  return\
-    \ ret;\n }\n std::vector<int> max_independent_set() const {\n  const int n= col.size(),\
-    \ m= component_num();\n  std::vector<int> sel(m, -1), ret, que(m);\n  sel[0]=\
-    \ 0, sel.back()= 1;\n  for (int v= 0, k, s, c, i, t; v < n; ++v) {\n   if (c=\
-    \ col[v], s= sel[k= blg[v]]; s == -1)\n    for (sel[que[0]= k]= s= !c, i= 0, t=\
-    \ 1; i < t; ++i)\n     for (int u: dag_[c][que[i]])\n      if (sel[u] == -1) sel[u]=\
-    \ s, que[t++]= u;\n   if (c ^ s) ret.push_back(v);\n  }\n  return ret;\n }\n};\n\
-    #line 7 \"test/atcoder/abc223_g.dm.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n BipartiteGraph\
-    \ graph(N);\n for (int i= 0; i < N - 1; ++i) {\n  int u, v;\n  cin >> u >> v;\n\
-    \  graph.add_edge(--u, --v);\n }\n graph.build();\n int k= graph.component_num();\n\
-    \ int ans= 0;\n for (int v: graph.block(0))\n  if (graph.color(v)) ++ans;\n for\
-    \ (int v: graph.block(k - 1))\n  if (!graph.color(v)) ++ans;\n cout << ans <<\
-    \ '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc223/tasks/abc223_g\"\n//\
-    \ DM\u5206\u89E3\u306Everify\n#include <iostream>\n#include <vector>\n#include\
-    \ <algorithm>\n#include \"src/Graph/BipartiteGraph.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n\
-    \ BipartiteGraph graph(N);\n for (int i= 0; i < N - 1; ++i) {\n  int u, v;\n \
-    \ cin >> u >> v;\n  graph.add_edge(--u, --v);\n }\n graph.build();\n int k= graph.component_num();\n\
-    \ int ans= 0;\n for (int v: graph.block(0))\n  if (graph.color(v)) ++ans;\n for\
-    \ (int v: graph.block(k - 1))\n  if (!graph.color(v)) ++ans;\n cout << ans <<\
-    \ '\\n';\n return 0;\n}"
+    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int,\
+    \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 2 \"src/Graph/BipartiteGraph.hpp\"\
+    \n#include <cassert>\n#include <tuple>\n#line 6 \"src/Graph/BipartiteGraph.hpp\"\
+    \n// [0, L) is left, [L, n) is right\nstruct BipartiteGraph: Graph {\n size_t\
+    \ L;\n BipartiteGraph() {}\n BipartiteGraph(size_t L, size_t R, size_t m= 0):\
+    \ Graph(L + R, m), L(L) {}\n size_t left_size() const { return L; }\n size_t right_size()\
+    \ const { return this->n - L; }\n};\nstd::vector<int> paint_in_2_color(const CSRArray<int>\
+    \ &adj) {\n const int n= adj.size();\n std::vector<int> col(n, -1);\n for (int\
+    \ s= n; s--;)\n  if (col[s] == -1) {\n   std::vector<int> q= {s};\n   for (int\
+    \ i= col[s]= 0, v; i < (int)q.size(); ++i)\n    for (int u: adj[v= q[i]])\n  \
+    \   if (int c= col[v]; col[u] == c) return {};\n     else if (col[u] == -1) col[u]=\
+    \ c ^ 1, q.push_back(u);\n  }\n return col;\n}\nstd::vector<int> paint_in_2_color(const\
+    \ Graph &g) { return paint_in_2_color(g.adjacency_vertex(0)); }\n// { BipartiteGraph\
+    \ , original to new, new to original }\n// {{},{},{}} if not bipartite\nstd::tuple<BipartiteGraph,\
+    \ std::vector<int>, std::vector<int>> graph_to_bipartite(const Graph &g, std::vector<int>\
+    \ color= {}) {\n if (color.empty()) color= paint_in_2_color(g);\n if (color.empty())\
+    \ return {};\n const int n= g.vertex_size(), m= g.edge_size();\n std::vector<int>\
+    \ a(n), b(n);\n int l= 0, r= n;\n for (int i= n; i--;) b[a[i]= color[i] ? --r\
+    \ : l++]= i;\n BipartiteGraph bg(l, n - l, m);\n for (int i= m; i--;) {\n  auto\
+    \ [u, v]= g[i];\n  bg[i]= std::minmax(a[u], a[v]);\n }\n return {bg, a, b};\n\
+    }\nnamespace _bg_internal {\nstd::vector<int> _bm(int L, const CSRArray<int> &adj,\
+    \ std::vector<int> &m) {\n std::vector<int> a, p, q(L);\n for (bool u= true; u;)\
+    \ {\n  u= false, a.assign(L, -1), p.assign(L, -1);\n  int t= 0;\n  for (int l=\
+    \ L; l--;)\n   if (m[l] == -1) q[t++]= a[l]= p[l]= l;\n  for (int i= 0; i < t;\
+    \ ++i)\n   if (int l= q[i], x; m[a[l]] == -1)\n    for (int r: adj[l]) {\n   \
+    \  if (x= m[r]; x == -1) {\n      for (u= true; r != -1; l= p[l]) m[r]= l, std::swap(m[l],\
+    \ r);\n      break;\n     }\n     if (p[x] == -1) a[q[t++]= x]= a[p[x]= l];\n\
+    \    }\n }\n return a;\n}\n}\ntemplate <bool lexical= false> std::pair<std::vector<int>,\
+    \ std::vector<int>> bipartite_matching(const BipartiteGraph &g, std::vector<int>\
+    \ partner= {}) {\n const int L= g.left_size(), M= g.edge_size();\n if (partner.empty())\
+    \ partner.assign(g.vertex_size(), -1);\n assert(partner.size() == g.vertex_size());\n\
+    \ {\n  CSRArray<int> adj{std::vector<int>(M), std::vector<int>(L + 1)};\n  for\
+    \ (auto [l, r]: g) ++adj.p[l];\n  for (int i= 0; i < L; ++i) adj.p[i + 1]+= adj.p[i];\n\
+    \  for (auto [l, r]: g) adj.dat[--adj.p[l]]= r;\n  if constexpr (lexical) {\n\
+    \   for (int l= L; l--;) std::sort(adj[l].begin(), adj[l].end());\n   _bg_internal::_bm(L,\
+    \ adj, partner);\n   std::vector<char> a(L, 1);\n   for (int l= 0; l < L; ++l)\n\
+    \    if (int r= partner[l], v= l; r != -1) {\n     std::vector<int> p(L, partner[v]=\
+    \ partner[r]= -1), c(adj.p.begin(), adj.p.begin() + L);\n     for (p[v]= -2;;)\
+    \ {\n      if (c[v] == adj.p[v + 1]) v= p[v];\n      else if (int u= partner[r=\
+    \ adj.dat[c[v]++]]; u == -1) {\n       for (; r != -1; v= p[v]) partner[r]= v,\
+    \ std::swap(partner[v], r);\n       break;\n      } else if (a[u] && p[u] == -1)\
+    \ p[u]= v, v= u;\n     }\n     a[l]= 0;\n    }\n  } else _bg_internal::_bm(L,\
+    \ adj, partner);\n }\n std::vector<int> c;\n std::vector<char> p(L);\n for (int\
+    \ i= 0; i < M; ++i)\n  if (auto [l, r]= g[i]; partner[l] == r && !p[l]) c.push_back(i),\
+    \ p[l]= 1;\n return {c, partner};\n}\n#line 3 \"src/Graph/DulmageMendelsohn.hpp\"\
+    \n#include <numeric>\n#line 5 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn\
+    \ {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int> dag[2];\npublic:\n\
+    \ DulmageMendelsohn(const BipartiteGraph &g): L(g.left_size()) {\n  auto adj=\
+    \ g.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n, -1), b.assign(n,\
+    \ -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n - L);\n  int t=\
+    \ 0, k= 0;\n  for (int l= L; l--;)\n   if (a[l] != -1)\n    if (b[l]= -1; m[l]\
+    \ != -1) b[m[l]]= -1;\n  for (int r= n; r-- > L;)\n   if (m[r] == -1) b[q[t++]=\
+    \ r]= 0;\n  for (int i= 0, r, w; i < t; ++i)\n   for (int l: adj[r= q[i]])\n \
+    \   if (b[l] == -3)\n     if (b[l]= 0, w= m[l]; w != -1 && b[w] == -3) b[q[t++]=\
+    \ w]= 0;\n  t= 0;\n  {\n   std::vector<int> c(adj.p.begin(), adj.p.begin() + L);\n\
+    \   for (int l= L; l--;)\n    if (int v= l; b[v] == -3)\n     for (b[v]= -2; v\
+    \ >= 0;) {\n      if (c[v] == adj.p[v + 1]) a[t++]= v, v= b[v];\n      else if\
+    \ (int w= m[adj.dat[c[v]++]]; b[w] == -3) b[w]= v, v= w;\n     }\n  }\n  for (int\
+    \ i= 0, e= 0, r; t--;)\n   if (int s= a[t], p= m[s]; b[p] == -3)\n    for (b[q[e++]=\
+    \ p]= b[s]= ++k; i < e; ++i)\n     for (int l: adj[r= q[i]])\n      if (b[m[l]]\
+    \ == -3) b[q[e++]= m[l]]= b[l]= k;\n  ++k;\n  for (int l= L; l--;)\n   if (b[l]\
+    \ == -1)\n    if (b[l]= k; m[l] != -1) b[m[l]]= k;\n  a.assign(k + 2, 0);\n  for\
+    \ (int i= n; i--;) ++a[b[i]];\n  for (int i= 0; i <= k; ++i) a[i + 1]+= a[i];\n\
+    \  for (int i= n; i--;) m[--a[b[i]]]= i;\n  Graph h(k + 1);\n  for (auto [l, r]:\
+    \ g)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n  std::sort(h.begin(), h.end()),\
+    \ h.erase(std::unique(h.begin(), h.end()), h.end()), dag[0]= h.adjacency_vertex(1),\
+    \ dag[1]= h.adjacency_vertex(-1);\n }\n size_t size() const { return a.size()\
+    \ - 1; }\n ConstListRange<int> block(int k) const { return {m.cbegin() + a[k],\
+    \ m.cbegin() + a[k + 1]}; }\n int operator()(int i) const { return b[i]; }\n std::vector<int>\
+    \ min_vertex_cover(std::vector<int> ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()),\
+    \ std::iota(ord.begin(), ord.end(), 0);\n  std::vector<char> z(size(), -1);\n\
+    \  std::vector<int> q(size()), vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord)\
+    \ {\n   int c= v < L, k= b[v], s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]=\
+    \ k]= s= !c];\n    for (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n\
+    \      if (z[u] == -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n\
+    \  }\n  return vc;\n }\n};\n#line 8 \"test/atcoder/abc223_g.dm.test.cpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
+    \ N;\n cin >> N;\n Graph g(N);\n for (int i= 0; i < N; ++i) cin >> g[i], --g[i];\n\
+    \ auto [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n DulmageMendelsohn\
+    \ dm(bg);\n int k= dm.size();\n int ans= 0;\n for (int v: dm.block(0))\n  if (v\
+    \ >= L) ++ans;\n for (int v: dm.block(k - 1))\n  if (v < L) ++ans;\n cout << ans\
+    \ << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc223/tasks/abc223_g\"\n#include\
+    \ <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Graph/Graph.hpp\"\
+    \n#include \"src/Graph/BipartiteGraph.hpp\"\n#include \"src/Graph/DulmageMendelsohn.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n Graph g(N);\n for (int i= 0; i < N; ++i) cin >> g[i], --g[i];\n\
+    \ auto [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n DulmageMendelsohn\
+    \ dm(bg);\n int k= dm.size();\n int ans= 0;\n for (int v: dm.block(0))\n  if (v\
+    \ >= L) ++ans;\n for (int v: dm.block(k - 1))\n  if (v < L) ++ans;\n cout << ans\
+    \ << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Graph/BipartiteGraph.hpp
+  - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
+  - src/Graph/BipartiteGraph.hpp
+  - src/Graph/DulmageMendelsohn.hpp
   isVerificationFile: true
   path: test/atcoder/abc223_g.dm.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
+  timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.dm.test.cpp
