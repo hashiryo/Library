@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/block_cut_tree.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
       \u5F35))"

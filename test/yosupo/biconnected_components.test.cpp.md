@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/block_cut_tree.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
       \u5F35))"

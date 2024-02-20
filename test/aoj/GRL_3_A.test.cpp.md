@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/block_cut_tree.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
       \u5F35))"
@@ -72,15 +72,15 @@ data:
     \ ret;\n}\nGraph block_cut_tree(const Graph &g) { return block_cut_tree(g.adjacency_vertex(0));\
     \ }\n#line 5 \"test/aoj/GRL_3_A.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E;\n cin >> V >> E;\n Graph\
-    \ g(E);\n for (int i= 0; i < E; ++i) cin >> g[i];\n g.build(V, 0);\n auto bct=\
-    \ block_cut_tree(g);\n for (int v= 0; v < V; ++v)\n  if (bct(v).size() > 1) cout\
-    \ << v << '\\n';\n return 0;\n}\n"
+    \ g(E);\n for (int i= 0; i < E; ++i) cin >> g[i];\n auto bct= block_cut_tree(g).adjacency_vertex(0);\n\
+    \ for (int v= 0; v < V; ++v)\n  if (bct[v].size() > 1) cout << v << '\\n';\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_A\"\
     \n#include <iostream>\n#include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/block_cut_tree.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int V, E;\n cin >> V >> E;\n Graph g(E);\n for (int i= 0; i < E; ++i) cin >>\
-    \ g[i];\n g.build(V, 0);\n auto bct= block_cut_tree(g);\n for (int v= 0; v < V;\
-    \ ++v)\n  if (bct(v).size() > 1) cout << v << '\\n';\n return 0;\n}"
+    \ g[i];\n auto bct= block_cut_tree(g).adjacency_vertex(0);\n for (int v= 0; v\
+    \ < V; ++v)\n  if (bct[v].size() > 1) cout << v << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
@@ -88,7 +88,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_3_A.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
+  timestamp: '2024-02-20 11:36:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_3_A.test.cpp

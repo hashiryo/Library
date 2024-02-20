@@ -6,10 +6,10 @@ data:
     title: Union-Find
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2893.test.cpp
     title: test/aoj/2893.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_B.test.cpp
     title: test/aoj/GRL_3_B.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/yukicoder/529.LCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\n#include\
@@ -39,7 +39,7 @@ data:
     \ par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable,\
     \ \"\\'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
     \ > t) undo();\n }\n};\n#line 4 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
-    \nclass IncrementalBridgeConnectivity {\n UnionFind cc, bcc;\n std::vector<int>\
+    \nclass IncrementalBridgeConnectivity {\n UnionFind<> cc, bcc;\n std::vector<int>\
     \ bbf;\n inline int parent(int v) { return bbf[v] < 0 ? -1 : bcc.root(bbf[v]);\
     \ }\n int lca(int u, int v) {\n  for (std::unordered_set<int> reached;; std::swap(u,\
     \ v))\n   if (u != -1) {\n    if (!reached.insert(u).second) return u;\n    u=\
@@ -53,7 +53,7 @@ data:
     \ v);\n   for (cc.unite(u, v); u != -1;) w= parent(u), bbf[u]= v, v= u, u= w;\n\
     \  }\n }\n};\n"
   code: "#pragma once\n#include <unordered_set>\n#include \"src/DataStructure/UnionFind.hpp\"\
-    \nclass IncrementalBridgeConnectivity {\n UnionFind cc, bcc;\n std::vector<int>\
+    \nclass IncrementalBridgeConnectivity {\n UnionFind<> cc, bcc;\n std::vector<int>\
     \ bbf;\n inline int parent(int v) { return bbf[v] < 0 ? -1 : bcc.root(bbf[v]);\
     \ }\n int lca(int u, int v) {\n  for (std::unordered_set<int> reached;; std::swap(u,\
     \ v))\n   if (u != -1) {\n    if (!reached.insert(u).second) return u;\n    u=\
@@ -71,8 +71,8 @@ data:
   isVerificationFile: false
   path: src/Graph/IncrementalBridgeConnectivity.hpp
   requiredBy: []
-  timestamp: '2024-02-17 10:13:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-20 11:36:31+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
   - test/yosupo/two_edge_connected_components.test.cpp

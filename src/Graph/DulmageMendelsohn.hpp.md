@@ -14,6 +14,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
+    path: test/aoj/3168.bm.test.cpp
+    title: test/aoj/3168.bm.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
   - icon: ':x:'
@@ -179,6 +182,7 @@ data:
   verifiedWith:
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
+  - test/aoj/3168.bm.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/Graph/DulmageMendelsohn.hpp
 layout: document

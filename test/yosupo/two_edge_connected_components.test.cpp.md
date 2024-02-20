@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
     title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206)"
   _extendedRequiredBy: []
@@ -35,7 +35,7 @@ data:
     \ par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n  static_assert(undoable,\
     \ \"\\'rollback\\' is not enabled\");\n  assert(t <= his.size());\n  while (his.size()\
     \ > t) undo();\n }\n};\n#line 4 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
-    \nclass IncrementalBridgeConnectivity {\n UnionFind cc, bcc;\n std::vector<int>\
+    \nclass IncrementalBridgeConnectivity {\n UnionFind<> cc, bcc;\n std::vector<int>\
     \ bbf;\n inline int parent(int v) { return bbf[v] < 0 ? -1 : bcc.root(bbf[v]);\
     \ }\n int lca(int u, int v) {\n  for (std::unordered_set<int> reached;; std::swap(u,\
     \ v))\n   if (u != -1) {\n    if (!reached.insert(u).second) return u;\n    u=\
@@ -72,7 +72,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/two_edge_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2024-02-17 10:13:57+09:00'
+  timestamp: '2024-02-20 11:36:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/two_edge_connected_components.test.cpp

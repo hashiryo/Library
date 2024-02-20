@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SparseTable.hpp
     title: Sparse-Table
   - icon: ':question:'
@@ -20,14 +20,14 @@ data:
   - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc141/tasks/abc141_e
@@ -193,7 +193,7 @@ data:
     \ int, int, int>> node;\n std::vector<int> suf;\n template <class String> SuffixTree(const\
     \ SuffixArray<String> &sa, const LCPArray &lcp): suf(sa.size()) {\n  const int\
     \ n= sa.size();\n  node.emplace_back(0, n, 0, 0);\n  if (n == 1) {\n   graph.add_edge(0,\
-    \ 1), graph.n= 2, tree= HeavyLightDecomposition(graph.adjecency_vertex(1), 0),\
+    \ 1), graph.n= 2, tree= HeavyLightDecomposition(graph.adjacency_vertex(1), 0),\
     \ node.emplace_back(0, 1, 0, 1), suf[0]= 1;\n   return;\n  }\n  CartesianTree\
     \ ct(lcp);\n  auto dfs= [&](auto dfs, int p, int idx, int h) -> void {\n   auto\
     \ [l, r]= ct.range(idx);\n   ++r;\n   int hh= lcp[idx];\n   if (h < hh) graph.add_edge(p,\
@@ -206,7 +206,7 @@ data:
     \ + 1]);\n    else suf[sa[idx + 1]]= p;\n   } else dfs(dfs, p, rch, hh);\n  };\n\
     \  if (int r= ct.root(); lcp[r] > 0) graph.add_edge(0, 1), node.emplace_back(0,\
     \ n, 0, lcp[r]), dfs(dfs, 1, r, lcp[r]);\n  else dfs(dfs, 0, r, 0);\n  graph.n=\
-    \ node.size(), tree= HeavyLightDecomposition(graph.adjecency_vertex(1), 0);\n\
+    \ node.size(), tree= HeavyLightDecomposition(graph.adjacency_vertex(1), 0);\n\
     \ }\n int size() const { return node.size(); }\n auto &operator[](int i) const\
     \ { return node[i]; }\n auto begin() const { return node.begin(); }\n auto end()\
     \ const { return node.end(); }\n int substr(int l) const { return suf[l]; }\n\
@@ -249,8 +249,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc141_e.SuffixTree.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-20 11:36:31+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc141_e.SuffixTree.test.cpp
 layout: document

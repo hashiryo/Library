@@ -19,10 +19,10 @@ data:
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
   - icon: ':x:'
@@ -30,7 +30,7 @@ data:
     title: test/yukicoder/2361.SuffixTree.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n#include\
@@ -183,7 +183,7 @@ data:
     \ int, int, int>> node;\n std::vector<int> suf;\n template <class String> SuffixTree(const\
     \ SuffixArray<String> &sa, const LCPArray &lcp): suf(sa.size()) {\n  const int\
     \ n= sa.size();\n  node.emplace_back(0, n, 0, 0);\n  if (n == 1) {\n   graph.add_edge(0,\
-    \ 1), graph.n= 2, tree= HeavyLightDecomposition(graph.adjecency_vertex(1), 0),\
+    \ 1), graph.n= 2, tree= HeavyLightDecomposition(graph.adjacency_vertex(1), 0),\
     \ node.emplace_back(0, 1, 0, 1), suf[0]= 1;\n   return;\n  }\n  CartesianTree\
     \ ct(lcp);\n  auto dfs= [&](auto dfs, int p, int idx, int h) -> void {\n   auto\
     \ [l, r]= ct.range(idx);\n   ++r;\n   int hh= lcp[idx];\n   if (h < hh) graph.add_edge(p,\
@@ -196,7 +196,7 @@ data:
     \ + 1]);\n    else suf[sa[idx + 1]]= p;\n   } else dfs(dfs, p, rch, hh);\n  };\n\
     \  if (int r= ct.root(); lcp[r] > 0) graph.add_edge(0, 1), node.emplace_back(0,\
     \ n, 0, lcp[r]), dfs(dfs, 1, r, lcp[r]);\n  else dfs(dfs, 0, r, 0);\n  graph.n=\
-    \ node.size(), tree= HeavyLightDecomposition(graph.adjecency_vertex(1), 0);\n\
+    \ node.size(), tree= HeavyLightDecomposition(graph.adjacency_vertex(1), 0);\n\
     \ }\n int size() const { return node.size(); }\n auto &operator[](int i) const\
     \ { return node[i]; }\n auto begin() const { return node.begin(); }\n auto end()\
     \ const { return node.end(); }\n int substr(int l) const { return suf[l]; }\n\
@@ -217,7 +217,7 @@ data:
     \ HeavyLightDecomposition tree;\n std::vector<std::tuple<int, int, int, int>>\
     \ node;\n std::vector<int> suf;\n template <class String> SuffixTree(const SuffixArray<String>\
     \ &sa, const LCPArray &lcp): suf(sa.size()) {\n  const int n= sa.size();\n  node.emplace_back(0,\
-    \ n, 0, 0);\n  if (n == 1) {\n   graph.add_edge(0, 1), graph.n= 2, tree= HeavyLightDecomposition(graph.adjecency_vertex(1),\
+    \ n, 0, 0);\n  if (n == 1) {\n   graph.add_edge(0, 1), graph.n= 2, tree= HeavyLightDecomposition(graph.adjacency_vertex(1),\
     \ 0), node.emplace_back(0, 1, 0, 1), suf[0]= 1;\n   return;\n  }\n  CartesianTree\
     \ ct(lcp);\n  auto dfs= [&](auto dfs, int p, int idx, int h) -> void {\n   auto\
     \ [l, r]= ct.range(idx);\n   ++r;\n   int hh= lcp[idx];\n   if (h < hh) graph.add_edge(p,\
@@ -230,7 +230,7 @@ data:
     \ + 1]);\n    else suf[sa[idx + 1]]= p;\n   } else dfs(dfs, p, rch, hh);\n  };\n\
     \  if (int r= ct.root(); lcp[r] > 0) graph.add_edge(0, 1), node.emplace_back(0,\
     \ n, 0, lcp[r]), dfs(dfs, 1, r, lcp[r]);\n  else dfs(dfs, 0, r, 0);\n  graph.n=\
-    \ node.size(), tree= HeavyLightDecomposition(graph.adjecency_vertex(1), 0);\n\
+    \ node.size(), tree= HeavyLightDecomposition(graph.adjacency_vertex(1), 0);\n\
     \ }\n int size() const { return node.size(); }\n auto &operator[](int i) const\
     \ { return node[i]; }\n auto begin() const { return node.begin(); }\n auto end()\
     \ const { return node.end(); }\n int substr(int l) const { return suf[l]; }\n\
@@ -255,8 +255,8 @@ data:
   isVerificationFile: false
   path: src/String/SuffixTree.hpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-20 11:36:31+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/2361.SuffixTree.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp

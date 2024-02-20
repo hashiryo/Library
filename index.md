@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SortedPerBucket.hpp
       title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SparseTable.hpp
       title: Sparse-Table
     - icon: ':question:'
@@ -202,7 +202,7 @@ data:
     - icon: ':question:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "\u91CD\u8EFD\u5206\u89E3"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206\
         )"
@@ -222,7 +222,7 @@ data:
     - icon: ':x:'
       path: src/Graph/bipartite_edge_coloring.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/block_cut_tree.hpp
       title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\
         \u5F35))"
@@ -464,7 +464,7 @@ data:
     - icon: ':question:'
       path: src/String/SuffixArray.hpp
       title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/String/SuffixTree.hpp
       title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
     - icon: ':question:'
@@ -844,13 +844,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2893.onlinedicon.test.cpp
       title: test/aoj/2893.onlinedicon.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2893.test.cpp
       title: test/aoj/2893.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3022.test.cpp
       title: test/aoj/3022.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1054,7 +1054,7 @@ data:
     - icon: ':x:'
       path: test/aoj/GRL_3_A.test.cpp
       title: test/aoj/GRL_3_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_3_B.test.cpp
       title: test/aoj/GRL_3_B.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1152,7 +1152,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc141_e.RH.test.cpp
       title: test/atcoder/abc141_e.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc141_e.SuffixTree.test.cpp
       title: test/atcoder/abc141_e.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1236,7 +1236,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SA.test.cpp
       title: test/atcoder/abc213_f.SA.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1308,7 +1308,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc239_ex.test.cpp
       title: test/atcoder/abc239_ex.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1320,7 +1320,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.test.cpp
       title: test/atcoder/abc250_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc253_ex.test.cpp
       title: test/atcoder/abc253_ex.test.cpp
     - icon: ':heavy_check_mark:'
