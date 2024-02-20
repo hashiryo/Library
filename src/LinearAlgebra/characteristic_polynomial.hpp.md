@@ -9,7 +9,7 @@ data:
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc323_g.test.cpp
     title: test/atcoder/abc323_g.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/yukicoder/1907.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
@@ -213,7 +213,7 @@ data:
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
   timestamp: '2024-02-18 22:00:56+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1303.test.cpp
   - test/yukicoder/1907.test.cpp

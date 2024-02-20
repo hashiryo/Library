@@ -45,7 +45,7 @@ data:
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
   - icon: ':question:'
     path: src/Graph/minimum_spanning_aborescence.hpp
-    title: src/Graph/minimum_spanning_aborescence.hpp
+    title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
@@ -118,6 +118,9 @@ data:
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2893.test.cpp
+    title: test/aoj/2893.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,6 +147,9 @@ data:
   - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_3_B.test.cpp
+    title: test/aoj/GRL_3_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
@@ -198,6 +204,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc282_d.test.cpp
+    title: test/atcoder/abc282_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc327_d.test.cpp
+    title: test/atcoder/abc327_d.test.cpp
   - icon: ':x:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
@@ -355,6 +367,9 @@ data:
     path: test/yukicoder/421.test.cpp
     title: test/yukicoder/421.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/529.LCT.test.cpp
+    title: test/yukicoder/529.LCT.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   - icon: ':x:'
@@ -460,6 +475,7 @@ data:
   - test/yukicoder/1170.test.cpp
   - test/yukicoder/922.test.cpp
   - test/yukicoder/1242.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/768.test.cpp
   - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
@@ -487,9 +503,11 @@ data:
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/aoj/2893.test.cpp
   - test/aoj/2448.test.cpp
   - test/aoj/3198.test.cpp
   - test/aoj/2667.HLD.test.cpp
+  - test/aoj/GRL_3_B.test.cpp
   - test/aoj/1050.test.cpp
   - test/aoj/3198.general_matching.test.cpp
   - test/aoj/1198.test.cpp
@@ -512,6 +530,8 @@ data:
   - test/aoj/2647.test.cpp
   - test/aoj/0273.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc282_d.test.cpp
+  - test/atcoder/abc327_d.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc220_f.test.cpp

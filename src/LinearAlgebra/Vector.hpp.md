@@ -11,7 +11,7 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   _extendedVerifiedWith:
@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc323_g.test.cpp
     title: test/atcoder/abc323_g.test.cpp
   - icon: ':x:'

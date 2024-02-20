@@ -235,7 +235,7 @@ data:
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
     - icon: ':question:'
       path: src/Graph/minimum_spanning_aborescence.hpp
-      title: src/Graph/minimum_spanning_aborescence.hpp
+      title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   - name: src/Internal
     pages:
     - icon: ':question:'
@@ -278,7 +278,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Vector.hpp
       title: "\u30D9\u30AF\u30C8\u30EB"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - name: src/Math
@@ -1360,6 +1360,9 @@ data:
       path: test/atcoder/abc280_f.test.cpp
       title: test/atcoder/abc280_f.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc282_d.test.cpp
+      title: test/atcoder/abc282_d.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc296_g.test.cpp
       title: test/atcoder/abc296_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1374,12 +1377,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc323_g.test.cpp
       title: test/atcoder/abc323_g.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc324_g.WM.test.cpp
       title: test/atcoder/abc324_g.WM.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc327_d.test.cpp
+      title: test/atcoder/abc327_d.test.cpp
     - icon: ':x:'
       path: test/atcoder/abc335_g.test.cpp
       title: test/atcoder/abc335_g.test.cpp

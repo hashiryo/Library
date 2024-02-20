@@ -36,9 +36,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2114.test.cpp
     title: test/yukicoder/2114.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/529.LCT.test.cpp
-    title: test/yukicoder/529.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.BIT.test.cpp
     title: test/yukicoder/649.BIT.test.cpp
@@ -71,7 +68,6 @@ data:
   - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/2114.test.cpp
   - test/yukicoder/1467.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp

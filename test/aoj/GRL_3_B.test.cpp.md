@@ -2,11 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/UnionFind.hpp
-    title: Union-Find
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
     title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206)"
+  - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,58 +23,77 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B
   bundledCode: "#line 1 \"test/aoj/GRL_3_B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B\"\
     \n#include <iostream>\n#include <vector>\n#include <array>\n#include <algorithm>\n\
-    #line 2 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\n#include <unordered_set>\n\
-    #line 4 \"src/DataStructure/UnionFind.hpp\"\n#include <cassert>\ntemplate <bool\
-    \ undoable= false> class UnionFind {\n std::vector<int> par;\n std::vector<std::pair<int,\
-    \ int>> his;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int\
-    \ v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v])\
-    \ std::swap(u, v);\n  if constexpr (undoable) his.emplace_back(v, par[v]);\n \
-    \ return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u, int v) { return\
-    \ root(u) == root(v); }\n int root(int u) {\n  if constexpr (undoable) return\
-    \ par[u] < 0 ? u : root(par[u]);\n  else return par[u] < 0 ? u : par[u]= root(par[u]);\n\
-    \ }\n int size(int u) { return -par[root(u)]; }\n int time() const {\n  static_assert(undoable,\
-    \ \"\\'time\\' is not enabled\");\n  return his.size();\n }\n void undo() {\n\
-    \  static_assert(undoable, \"\\'undo\\' is not enabled\");\n  auto [u, s]= his.back();\n\
-    \  his.pop_back(), par[par[u]]-= s, par[u]= s;\n }\n void rollback(size_t t) {\n\
-    \  static_assert(undoable, \"\\'rollback\\' is not enabled\");\n  assert(t <=\
-    \ his.size());\n  while (his.size() > t) undo();\n }\n};\n#line 4 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
-    \nclass IncrementalBridgeConnectivity {\n UnionFind<> cc, bcc;\n std::vector<int>\
-    \ bbf;\n inline int parent(int v) { return bbf[v] < 0 ? -1 : bcc.root(bbf[v]);\
-    \ }\n int lca(int u, int v) {\n  for (std::unordered_set<int> reached;; std::swap(u,\
-    \ v))\n   if (u != -1) {\n    if (!reached.insert(u).second) return u;\n    u=\
-    \ parent(u);\n   }\n }\n void condense_path(int u, int v) {\n  for (int n; !bcc.same(u,\
-    \ v);) n= parent(u), bbf[u]= bbf[v], bcc.unite(u, v), u= n;\n }\npublic:\n IncrementalBridgeConnectivity(int\
-    \ n): cc(n), bcc(n), bbf(n, -1) {}\n int represent(int v) { return bcc.root(v);\
-    \ }\n bool two_edge_connected(int u, int v) { return bcc.same(u, v); }\n bool\
-    \ connected(int u, int v) { return cc.same(u, v); }\n void add_edge(int u, int\
-    \ v) {\n  if (int w; cc.same(u= bcc.root(u), v= bcc.root(v))) w= lca(u, v), condense_path(u,\
-    \ w), condense_path(v, w);\n  else {\n   if (cc.size(u) > cc.size(v)) std::swap(u,\
-    \ v);\n   for (cc.unite(u, v); u != -1;) w= parent(u), bbf[u]= v, v= u, u= w;\n\
-    \  }\n }\n};\n#line 7 \"test/aoj/GRL_3_B.test.cpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E;\n cin >> V >>\
-    \ E;\n IncrementalBridgeConnectivity ibc(V);\n int s[E], t[E];\n for (int i= 0;\
-    \ i < E; ++i) {\n  cin >> s[i] >> t[i];\n  ibc.add_edge(s[i], t[i]);\n }\n vector<array<int,\
-    \ 2>> ans;\n for (int i= 0; i < E; ++i)\n  if (ibc.connected(s[i], t[i]) && !ibc.two_edge_connected(s[i],\
-    \ t[i])) {\n   auto [a, b]= minmax(s[i], t[i]);\n   ans.push_back({a, b});\n \
-    \ }\n sort(ans.begin(), ans.end());\n for (auto [a, b]: ans) cout << a << \" \"\
-    \ << b << '\\n';\n return 0;\n}\n"
+    #line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n#include <type_traits>\n\
+    #define _LR(name, IT, CT) \\\n template <class T> struct name { \\\n  using Iterator=\
+    \ typename std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const\
+    \ { return bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size()\
+    \ const { return std::distance(bg, ed); } \\\n  CT &operator[](int i) const {\
+    \ return bg[i]; } \\\n }\n_LR(ListRange, iterator, T);\n_LR(ConstListRange, const_iterator,\
+    \ const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T>\
+    \ dat;\n std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n\
+    \ ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i\
+    \ + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
+    \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
+    \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
+    \ &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n for (int _=\
+    \ 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n return os\
+    \ << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int, int>\
+    \ {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 2 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
+    \n#include <utility>\n#line 4 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\n\
+    class IncrementalBridgeConnectivity {\n std::vector<int> cp, bp, bbf, z;\n int\
+    \ t;\n inline int crt(int v) { return cp[v] < 0 ? v : cp[v]= crt(cp[v]); }\n inline\
+    \ int par(int v) { return bbf[v] < 0 ? -1 : leader(bbf[v]); }\npublic:\n IncrementalBridgeConnectivity(int\
+    \ n): cp(n, -1), bp(n, -1), bbf(n, -1), z(n), t(0) {}\n inline int leader(int\
+    \ v) { return bp[v] < 0 ? v : bp[v]= leader(bp[v]); }\n int size(int v) { return\
+    \ -bp[leader(v)]; }\n bool two_edge_connected(int u, int v) { return leader(u)\
+    \ == leader(v); }\n bool connected(int u, int v) { return crt(u) == crt(v); }\n\
+    \ void add_edge(int u, int v) {\n  int a= crt(u= leader(u)), b= crt(v= leader(v));\n\
+    \  if (a == b)\n   for (++t, a= u, b= v;;) {\n    if (z[a] == t) {\n     for (int\
+    \ w: {u, v})\n      for (int p; w= leader(w), w != a; bp[a]+= bp[w], bp[w]= a,\
+    \ w= p)\n       if (p= bbf[w], bbf[w]= bbf[a]; bp[a] > bp[w]) std::swap(w, a);\n\
+    \     return;\n    }\n    if (z[a]= t, a= par(a); b != -1) std::swap(a, b);\n\
+    \   }\n  if (cp[a] < cp[b]) std::swap(u, v), cp[a]+= cp[b], cp[b]= a;\n  else\
+    \ cp[b]+= cp[a], cp[a]= b;\n  for (int p; u != -1; u= p) p= par(u), bbf[u]= v,\
+    \ v= u;\n }\n};\n#line 8 \"test/aoj/GRL_3_B.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E;\n cin >>\
+    \ V >> E;\n Graph g(V, E);\n for (int i= 0; i < E; ++i) cin >> g[i];\n IncrementalBridgeConnectivity\
+    \ ibc(V);\n for (auto [u, v]: g) ibc.add_edge(u, v);\n vector<Edge> ans;\n for\
+    \ (auto [u, v]: g)\n  if (!ibc.two_edge_connected(u, v)) ans.emplace_back(minmax(u,\
+    \ v));\n sort(ans.begin(), ans.end());\n for (auto [a, b]: ans) cout << a << \"\
+    \ \" << b << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_B\"\
     \n#include <iostream>\n#include <vector>\n#include <array>\n#include <algorithm>\n\
-    #include \"src/Graph/IncrementalBridgeConnectivity.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E;\n cin >>\
-    \ V >> E;\n IncrementalBridgeConnectivity ibc(V);\n int s[E], t[E];\n for (int\
-    \ i= 0; i < E; ++i) {\n  cin >> s[i] >> t[i];\n  ibc.add_edge(s[i], t[i]);\n }\n\
-    \ vector<array<int, 2>> ans;\n for (int i= 0; i < E; ++i)\n  if (ibc.connected(s[i],\
-    \ t[i]) && !ibc.two_edge_connected(s[i], t[i])) {\n   auto [a, b]= minmax(s[i],\
-    \ t[i]);\n   ans.push_back({a, b});\n  }\n sort(ans.begin(), ans.end());\n for\
-    \ (auto [a, b]: ans) cout << a << \" \" << b << '\\n';\n return 0;\n}"
+    #include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/IncrementalBridgeConnectivity.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int V, E;\n cin >> V >> E;\n Graph g(V, E);\n for (int i= 0; i < E; ++i) cin\
+    \ >> g[i];\n IncrementalBridgeConnectivity ibc(V);\n for (auto [u, v]: g) ibc.add_edge(u,\
+    \ v);\n vector<Edge> ans;\n for (auto [u, v]: g)\n  if (!ibc.two_edge_connected(u,\
+    \ v)) ans.emplace_back(minmax(u, v));\n sort(ans.begin(), ans.end());\n for (auto\
+    \ [a, b]: ans) cout << a << \" \" << b << '\\n';\n return 0;\n}"
   dependsOn:
+  - src/Graph/Graph.hpp
+  - src/Internal/ListRange.hpp
   - src/Graph/IncrementalBridgeConnectivity.hpp
-  - src/DataStructure/UnionFind.hpp
   isVerificationFile: true
   path: test/aoj/GRL_3_B.test.cpp
   requiredBy: []
-  timestamp: '2024-02-20 11:36:31+09:00'
+  timestamp: '2024-02-20 18:08:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_3_B.test.cpp

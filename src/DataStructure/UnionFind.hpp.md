@@ -2,15 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
-    path: src/Graph/IncrementalBridgeConnectivity.hpp
-    title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206)"
   - icon: ':x:'
     path: src/Graph/bipartite_edge_coloring.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
   - icon: ':question:'
     path: src/Graph/minimum_spanning_aborescence.hpp
-    title: src/Graph/minimum_spanning_aborescence.hpp
+    title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   - icon: ':warning:'
     path: src/old/BipartiteEdgeColoring.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
@@ -28,9 +25,6 @@ data:
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2893.test.cpp
-    title: test/aoj/2893.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
   - icon: ':heavy_check_mark:'
@@ -43,17 +37,14 @@ data:
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_3_B.test.cpp
-    title: test/aoj/GRL_3_B.test.cpp
+    path: test/atcoder/abc282_d.test.cpp
+    title: test/atcoder/abc282_d.test.cpp
   - icon: ':x:'
     path: test/yosupo/bipartite_edge_coloring.test.cpp
     title: test/yosupo/bipartite_edge_coloring.test.cpp
   - icon: ':x:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/two_edge_connected_components.test.cpp
-    title: test/yosupo/two_edge_connected_components.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
@@ -63,9 +54,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1600.Seg2D.test.cpp
     title: test/yukicoder/1600.Seg2D.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/529.LCT.test.cpp
-    title: test/yukicoder/529.LCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -105,7 +93,6 @@ data:
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
   - src/Graph/bipartite_edge_coloring.hpp
-  - src/Graph/IncrementalBridgeConnectivity.hpp
   - src/Graph/minimum_spanning_aborescence.hpp
   - src/old/MinimumSpanningAborescense.hpp
   - src/old/BipartiteEdgeColoring.hpp
@@ -115,12 +102,8 @@ data:
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1303.test.cpp
   - test/yukicoder/1600.KDT.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yosupo/two_edge_connected_components.test.cpp
   - test/yosupo/bipartite_edge_coloring.test.cpp
   - test/yosupo/directedmst.test.cpp
-  - test/aoj/2893.test.cpp
-  - test/aoj/GRL_3_B.test.cpp
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/3506.test.cpp
   - test/aoj/DSL_1_A.test.cpp
@@ -128,6 +111,7 @@ data:
   - test/aoj/GRL_2_A.kruskal.test.cpp
   - test/aoj/2647.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
+  - test/atcoder/abc282_d.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document
 title: Union-Find

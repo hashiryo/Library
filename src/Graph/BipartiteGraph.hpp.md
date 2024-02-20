@@ -31,6 +31,12 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc282_d.test.cpp
+    title: test/atcoder/abc282_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc327_d.test.cpp
+    title: test/atcoder/abc327_d.test.cpp
   - icon: ':x:'
     path: test/yosupo/bipartite_edge_coloring.test.cpp
     title: test/yosupo/bipartite_edge_coloring.test.cpp
@@ -191,6 +197,8 @@ data:
   - test/aoj/3168.bm.test.cpp
   - test/aoj/2423.test.cpp
   - test/aoj/0334.test.cpp
+  - test/atcoder/abc282_d.test.cpp
+  - test/atcoder/abc327_d.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/Graph/BipartiteGraph.hpp
 layout: document
@@ -229,5 +237,6 @@ title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
 二部グラフの最小頂点被覆は [Dulmage-Mendelsohn 分解](DulmageMendelsohn.hpp) で実装．
 
 ## 問題例
+[CODE FESTIVAL 2017 qual B C - 3 Steps](https://atcoder.jp/contests/code-festival-2017-qualb/tasks/code_festival_2017_qualb_c) (二部グラフ塗り分け)\
 [アルゴリズムと数学　演習問題集 047 - Bipartite Graph](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_ao) (二部グラフ判定)\
 [Chokudai SpeedRun 002 K - 種類数 β](https://atcoder.jp/contests/chokudai_S002/tasks/chokudai_S002_k) (二部マッチング, 頂点:2e5+4e5, 辺:4e5)

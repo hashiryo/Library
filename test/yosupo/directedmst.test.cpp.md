@@ -9,7 +9,7 @@ data:
     title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/minimum_spanning_aborescence.hpp
-    title: src/Graph/minimum_spanning_aborescence.hpp
+    title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
