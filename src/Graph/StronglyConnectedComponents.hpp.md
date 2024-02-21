@@ -17,6 +17,9 @@ data:
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc256_e.test.cpp
+    title: test/atcoder/abc256_e.test.cpp
+  - icon: ':x:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
   - icon: ':x:'
@@ -118,6 +121,7 @@ data:
   - test/yosupo/scc.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/aoj/0366.test.cpp
+  - test/atcoder/abc256_e.test.cpp
 documentation_of: src/Graph/StronglyConnectedComponents.hpp
 layout: document
 title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   - icon: ':question:'
@@ -16,9 +16,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_e
@@ -89,17 +89,16 @@ data:
     \ P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k\
     \ > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int\
     \ depth(int v) const { return D[v]; }\n int dist(int u, int v) const { return\
-    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n std::array<int,\
-    \ 2> subtree(int v) const { return std::array{L[v], R[v]}; }\n // sequence of\
-    \ closed intervals\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
-    \ u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u]\
-    \ != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}),\
-    \ v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n\
-    \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
-    \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
-    \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};\n#line\
-    \ 3 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <algorithm>\n#line 6 \"\
-    src/DataStructure/WaveletMatrix.hpp\"\ntemplate <class T> class WaveletMatrix\
+    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n std::pair<int, int>\
+    \ subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\n\
+    \ template <bool edge= 0> std::vector<std::pair<int, int>> path(int u, int v)\
+    \ const {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v])\
+    \ {\n   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
+    \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
+    \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
+    \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
+    };\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <algorithm>\n#line\
+    \ 6 \"src/DataStructure/WaveletMatrix.hpp\"\ntemplate <class T> class WaveletMatrix\
     \ {\n struct SuccinctIndexableDictionary {\n  size_t len, blocks, zeros;\n  std::vector<unsigned>\
     \ bit, sum;\n  SuccinctIndexableDictionary(size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
@@ -155,8 +154,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc202_e.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 15:31:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-21 22:41:13+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc202_e.test.cpp
 layout: document
