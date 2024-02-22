@@ -13,7 +13,7 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yukicoder/1745.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <algorithm>\n\
@@ -107,7 +107,7 @@ data:
     \ adj, partner);\n }\n std::vector<int> c;\n std::vector<char> p(L);\n for (int\
     \ i= 0; i < M; ++i)\n  if (auto [l, r]= bg[i]; partner[l] == r && !p[l]) c.push_back(i),\
     \ p[l]= 1;\n return {c, partner};\n}\n#line 5 \"src/Graph/DulmageMendelsohn.hpp\"\
-    \nclass DulmageMendelsohn {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int>\
+    \nclass DulmageMendelsohn {\n int L;\n std::vector<int> b, m, a;\n CSRArray<int>\
     \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &bg): L(bg.left_size())\
     \ {\n  auto adj= bg.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
     \ -1), b.assign(n, -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n\
@@ -133,13 +133,13 @@ data:
     \ i) const { return b[i]; }\n std::vector<int> min_vertex_cover(std::vector<int>\
     \ ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()), std::iota(ord.begin(),\
     \ ord.end(), 0);\n  std::vector<char> z(size(), -1);\n  std::vector<int> q(size()),\
-    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= v < L, k= b[v],\
+    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= (v >= L), k= b[v],\
     \ s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]= k]= s= !c];\n    for\
     \ (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n      if (z[u] ==\
     \ -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n  }\n  return\
     \ vc;\n }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <numeric>\n#include \"src/Graph/BipartiteGraph.hpp\"\
-    \nclass DulmageMendelsohn {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int>\
+    \nclass DulmageMendelsohn {\n int L;\n std::vector<int> b, m, a;\n CSRArray<int>\
     \ dag[2];\npublic:\n DulmageMendelsohn(const BipartiteGraph &bg): L(bg.left_size())\
     \ {\n  auto adj= bg.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n,\
     \ -1), b.assign(n, -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n\
@@ -165,7 +165,7 @@ data:
     \ i) const { return b[i]; }\n std::vector<int> min_vertex_cover(std::vector<int>\
     \ ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()), std::iota(ord.begin(),\
     \ ord.end(), 0);\n  std::vector<char> z(size(), -1);\n  std::vector<int> q(size()),\
-    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= v < L, k= b[v],\
+    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= (v >= L), k= b[v],\
     \ s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]= k]= s= !c];\n    for\
     \ (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n      if (z[u] ==\
     \ -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n  }\n  return\
@@ -177,8 +177,8 @@ data:
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2024-02-20 00:09:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-22 13:37:48+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp

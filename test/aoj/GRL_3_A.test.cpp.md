@@ -14,9 +14,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_A
@@ -72,15 +72,15 @@ data:
     \ ret;\n}\nGraph block_cut_tree(const Graph &g) { return block_cut_tree(g.adjacency_vertex(0));\
     \ }\n#line 5 \"test/aoj/GRL_3_A.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E;\n cin >> V >> E;\n Graph\
-    \ g(E);\n for (int i= 0; i < E; ++i) cin >> g[i];\n auto bct= block_cut_tree(g).adjacency_vertex(0);\n\
+    \ g(V, E);\n for (int i= 0; i < E; ++i) cin >> g[i];\n auto bct= block_cut_tree(g).adjacency_vertex(0);\n\
     \ for (int v= 0; v < V; ++v)\n  if (bct[v].size() > 1) cout << v << '\\n';\n return\
     \ 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_3_A\"\
     \n#include <iostream>\n#include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/block_cut_tree.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int V, E;\n cin >> V >> E;\n Graph g(E);\n for (int i= 0; i < E; ++i) cin >>\
-    \ g[i];\n auto bct= block_cut_tree(g).adjacency_vertex(0);\n for (int v= 0; v\
-    \ < V; ++v)\n  if (bct[v].size() > 1) cout << v << '\\n';\n return 0;\n}"
+    \ int V, E;\n cin >> V >> E;\n Graph g(V, E);\n for (int i= 0; i < E; ++i) cin\
+    \ >> g[i];\n auto bct= block_cut_tree(g).adjacency_vertex(0);\n for (int v= 0;\
+    \ v < V; ++v)\n  if (bct[v].size() > 1) cout << v << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
@@ -88,8 +88,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_3_A.test.cpp
   requiredBy: []
-  timestamp: '2024-02-20 11:36:31+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-22 13:37:48+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_3_A.test.cpp
 layout: document

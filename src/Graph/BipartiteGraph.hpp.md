@@ -9,7 +9,7 @@ data:
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
   - icon: ':x:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
   - icon: ':heavy_check_mark:'

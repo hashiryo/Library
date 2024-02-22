@@ -12,7 +12,7 @@ data:
   - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Misc/Period.hpp
     title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   - icon: ':question:'
@@ -37,7 +37,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -46,22 +46,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
@@ -91,6 +91,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1097.test.cpp
+    title: test/yukicoder/1097.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
@@ -308,6 +311,7 @@ data:
   - test/yukicoder/768.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/1097.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp

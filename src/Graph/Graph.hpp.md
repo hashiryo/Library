@@ -9,7 +9,7 @@ data:
   - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
   - icon: ':question:'
@@ -44,7 +44,7 @@ data:
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Misc/Period.hpp
     title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   - icon: ':question:'
@@ -87,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
   - icon: ':heavy_check_mark:'
@@ -102,7 +102,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
   - icon: ':heavy_check_mark:'
@@ -111,7 +111,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,22 +120,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
@@ -204,6 +204,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1097.test.cpp
+    title: test/yukicoder/1097.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
@@ -397,6 +400,7 @@ data:
   - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/1097.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/scc.test.cpp

@@ -23,7 +23,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Misc/Period.hpp
     title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
@@ -115,7 +115,8 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Misc/Period.hpp\"\
+    \n#include <map>\n#include <unordered_map>\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\
     \n#include <array>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
     #line 6 \"src/Internal/ListRange.hpp\"\n#define _LR(name, IT, CT) \\\n template\
     \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
@@ -187,10 +188,10 @@ data:
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Misc/Period.hpp\"\nnamespace period_internal {\ntemplate <class\
+    };\n#line 5 \"src/Misc/Period.hpp\"\nnamespace period_internal {\ntemplate <class\
     \ Map> struct PeriodB {\n using Iter= typename Map::const_iterator;\n Map mp;\n\
     };\ntemplate <class T> using PerB= std::conditional_t<std::is_integral_v<T>, PeriodB<std::unordered_map<T,\
-    \ int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate <class T= int> struct Period:\
+    \ int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate <class T= int> class Period:\
     \ period_internal::PerB<T> {\n using typename period_internal::PerB<T>::Iter;\n\
     \ using Path= std::vector<std::pair<int, int>>;\n std::vector<int> t, rt;\n std::vector<T>\
     \ dc;\n HeavyLightDecomposition hld;\n static std::vector<int> iota(int n) {\n\
@@ -258,7 +259,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc310_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-22 11:37:15+09:00'
+  timestamp: '2024-02-22 13:37:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc310_g.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
   - icon: ':question:'
@@ -102,39 +102,39 @@ data:
     \ i= 0; i < M; ++i)\n  if (auto [l, r]= bg[i]; partner[l] == r && !p[l]) c.push_back(i),\
     \ p[l]= 1;\n return {c, partner};\n}\n#line 3 \"src/Graph/DulmageMendelsohn.hpp\"\
     \n#include <numeric>\n#line 5 \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn\
-    \ {\n size_t L;\n std::vector<int> b, m, a;\n CSRArray<int> dag[2];\npublic:\n\
-    \ DulmageMendelsohn(const BipartiteGraph &bg): L(bg.left_size()) {\n  auto adj=\
-    \ bg.adjacency_vertex(0);\n  const int n= adj.size();\n  m.assign(n, -1), b.assign(n,\
-    \ -3), a= _bg_internal::_bm(L, adj, m);\n  std::vector<int> q(n - L);\n  int t=\
-    \ 0, k= 0;\n  for (int l= L; l--;)\n   if (a[l] != -1)\n    if (b[l]= -1; m[l]\
-    \ != -1) b[m[l]]= -1;\n  for (int r= n; r-- > L;)\n   if (m[r] == -1) b[q[t++]=\
-    \ r]= 0;\n  for (int i= 0, r, w; i < t; ++i)\n   for (int l: adj[r= q[i]])\n \
-    \   if (b[l] == -3)\n     if (b[l]= 0, w= m[l]; w != -1 && b[w] == -3) b[q[t++]=\
-    \ w]= 0;\n  t= 0;\n  {\n   std::vector<int> c(adj.p.begin(), adj.p.begin() + L);\n\
-    \   for (int l= L; l--;)\n    if (int v= l; b[v] == -3)\n     for (b[v]= -2; v\
-    \ >= 0;) {\n      if (c[v] == adj.p[v + 1]) a[t++]= v, v= b[v];\n      else if\
-    \ (int w= m[adj.dat[c[v]++]]; b[w] == -3) b[w]= v, v= w;\n     }\n  }\n  for (int\
-    \ i= 0, e= 0, r; t--;)\n   if (int s= a[t], p= m[s]; b[p] == -3)\n    for (b[q[e++]=\
-    \ p]= b[s]= ++k; i < e; ++i)\n     for (int l: adj[r= q[i]])\n      if (b[m[l]]\
-    \ == -3) b[q[e++]= m[l]]= b[l]= k;\n  ++k;\n  for (int l= L; l--;)\n   if (b[l]\
-    \ == -1)\n    if (b[l]= k; m[l] != -1) b[m[l]]= k;\n  a.assign(k + 2, 0);\n  for\
-    \ (int i= n; i--;) ++a[b[i]];\n  for (int i= 0; i <= k; ++i) a[i + 1]+= a[i];\n\
-    \  for (int i= n; i--;) m[--a[b[i]]]= i;\n  Graph h(k + 1);\n  for (auto [l, r]:\
-    \ bg)\n   if (b[l] != b[r]) h.add_edge(b[l], b[r]);\n  std::sort(h.begin(), h.end()),\
-    \ h.erase(std::unique(h.begin(), h.end()), h.end()), dag[0]= h.adjacency_vertex(1),\
-    \ dag[1]= h.adjacency_vertex(-1);\n }\n size_t size() const { return a.size()\
-    \ - 1; }\n ConstListRange<int> block(int k) const { return {m.cbegin() + a[k],\
-    \ m.cbegin() + a[k + 1]}; }\n int operator()(int i) const { return b[i]; }\n std::vector<int>\
-    \ min_vertex_cover(std::vector<int> ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()),\
-    \ std::iota(ord.begin(), ord.end(), 0);\n  std::vector<char> z(size(), -1);\n\
-    \  std::vector<int> q(size()), vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord)\
-    \ {\n   int c= v < L, k= b[v], s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]=\
-    \ k]= s= !c];\n    for (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n\
-    \      if (z[u] == -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n\
-    \  }\n  return vc;\n }\n};\n#line 8 \"test/atcoder/abc223_g.dm.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
-    \ N;\n cin >> N;\n Graph g(N);\n for (int i= 0; i < N; ++i) cin >> g[i], --g[i];\n\
-    \ auto [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n DulmageMendelsohn\
+    \ {\n int L;\n std::vector<int> b, m, a;\n CSRArray<int> dag[2];\npublic:\n DulmageMendelsohn(const\
+    \ BipartiteGraph &bg): L(bg.left_size()) {\n  auto adj= bg.adjacency_vertex(0);\n\
+    \  const int n= adj.size();\n  m.assign(n, -1), b.assign(n, -3), a= _bg_internal::_bm(L,\
+    \ adj, m);\n  std::vector<int> q(n - L);\n  int t= 0, k= 0;\n  for (int l= L;\
+    \ l--;)\n   if (a[l] != -1)\n    if (b[l]= -1; m[l] != -1) b[m[l]]= -1;\n  for\
+    \ (int r= n; r-- > L;)\n   if (m[r] == -1) b[q[t++]= r]= 0;\n  for (int i= 0,\
+    \ r, w; i < t; ++i)\n   for (int l: adj[r= q[i]])\n    if (b[l] == -3)\n     if\
+    \ (b[l]= 0, w= m[l]; w != -1 && b[w] == -3) b[q[t++]= w]= 0;\n  t= 0;\n  {\n \
+    \  std::vector<int> c(adj.p.begin(), adj.p.begin() + L);\n   for (int l= L; l--;)\n\
+    \    if (int v= l; b[v] == -3)\n     for (b[v]= -2; v >= 0;) {\n      if (c[v]\
+    \ == adj.p[v + 1]) a[t++]= v, v= b[v];\n      else if (int w= m[adj.dat[c[v]++]];\
+    \ b[w] == -3) b[w]= v, v= w;\n     }\n  }\n  for (int i= 0, e= 0, r; t--;)\n \
+    \  if (int s= a[t], p= m[s]; b[p] == -3)\n    for (b[q[e++]= p]= b[s]= ++k; i\
+    \ < e; ++i)\n     for (int l: adj[r= q[i]])\n      if (b[m[l]] == -3) b[q[e++]=\
+    \ m[l]]= b[l]= k;\n  ++k;\n  for (int l= L; l--;)\n   if (b[l] == -1)\n    if\
+    \ (b[l]= k; m[l] != -1) b[m[l]]= k;\n  a.assign(k + 2, 0);\n  for (int i= n; i--;)\
+    \ ++a[b[i]];\n  for (int i= 0; i <= k; ++i) a[i + 1]+= a[i];\n  for (int i= n;\
+    \ i--;) m[--a[b[i]]]= i;\n  Graph h(k + 1);\n  for (auto [l, r]: bg)\n   if (b[l]\
+    \ != b[r]) h.add_edge(b[l], b[r]);\n  std::sort(h.begin(), h.end()), h.erase(std::unique(h.begin(),\
+    \ h.end()), h.end()), dag[0]= h.adjacency_vertex(1), dag[1]= h.adjacency_vertex(-1);\n\
+    \ }\n size_t size() const { return a.size() - 1; }\n ConstListRange<int> block(int\
+    \ k) const { return {m.cbegin() + a[k], m.cbegin() + a[k + 1]}; }\n int operator()(int\
+    \ i) const { return b[i]; }\n std::vector<int> min_vertex_cover(std::vector<int>\
+    \ ord= {}) const {\n  if (ord.empty()) ord.resize(b.size()), std::iota(ord.begin(),\
+    \ ord.end(), 0);\n  std::vector<char> z(size(), -1);\n  std::vector<int> q(size()),\
+    \ vc;\n  z[0]= 1, z.back()= 0;\n  for (int v: ord) {\n   int c= (v >= L), k= b[v],\
+    \ s= z[k];\n   if (s == -1) {\n    auto &adj= dag[z[q[0]= k]= s= !c];\n    for\
+    \ (int i= 0, t= 1; i < t; ++i)\n     for (int u: adj[q[i]])\n      if (z[u] ==\
+    \ -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n  }\n  return\
+    \ vc;\n }\n};\n#line 8 \"test/atcoder/abc223_g.dm.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin\
+    \ >> N;\n Graph g(N);\n for (int i= 0; i < N; ++i) cin >> g[i], --g[i];\n auto\
+    \ [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n DulmageMendelsohn\
     \ dm(bg);\n int k= dm.size();\n int ans= 0;\n for (int v: dm.block(0))\n  if (v\
     \ >= L) ++ans;\n for (int v: dm.block(k - 1))\n  if (v < L) ++ans;\n cout << ans\
     \ << '\\n';\n return 0;\n}\n"
@@ -155,7 +155,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc223_g.dm.test.cpp
   requiredBy: []
-  timestamp: '2024-02-20 00:09:10+09:00'
+  timestamp: '2024-02-22 13:37:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.dm.test.cpp

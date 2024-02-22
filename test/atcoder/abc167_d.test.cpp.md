@@ -11,21 +11,22 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Misc/Period.hpp
     title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc167/tasks/abc167_d
     links:
     - https://atcoder.jp/contests/abc167/tasks/abc167_d
   bundledCode: "#line 1 \"test/atcoder/abc167_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc167/tasks/abc167_d\"\
-    \n#include <iostream>\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\n#include\
+    \n#include <iostream>\n#line 2 \"src/Misc/Period.hpp\"\n#include <map>\n#include\
+    \ <unordered_map>\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\n#include\
     \ <array>\n#include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
     \ <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n#include\
     \ <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct name\
@@ -98,10 +99,10 @@ data:
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Misc/Period.hpp\"\nnamespace period_internal {\ntemplate <class\
+    };\n#line 5 \"src/Misc/Period.hpp\"\nnamespace period_internal {\ntemplate <class\
     \ Map> struct PeriodB {\n using Iter= typename Map::const_iterator;\n Map mp;\n\
     };\ntemplate <class T> using PerB= std::conditional_t<std::is_integral_v<T>, PeriodB<std::unordered_map<T,\
-    \ int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate <class T= int> struct Period:\
+    \ int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate <class T= int> class Period:\
     \ period_internal::PerB<T> {\n using typename period_internal::PerB<T>::Iter;\n\
     \ using Path= std::vector<std::pair<int, int>>;\n std::vector<int> t, rt;\n std::vector<T>\
     \ dc;\n HeavyLightDecomposition hld;\n static std::vector<int> iota(int n) {\n\
@@ -152,8 +153,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc167_d.test.cpp
   requiredBy: []
-  timestamp: '2024-02-22 11:37:15+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-22 13:37:48+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc167_d.test.cpp
 layout: document
