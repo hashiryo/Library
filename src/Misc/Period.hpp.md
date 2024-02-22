@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc310_g.test.cpp
     title: test/atcoder/abc310_g.test.cpp
   - icon: ':x:'
@@ -153,17 +153,22 @@ data:
     \  int v= it->second, n= t.size(), d= hld.depth(v) - 1;\n  if (k <= d) return\
     \ dc[hld.la(v, (int)k)];\n  int b= t[v= rt[v]], l= (k-= d) % hld.depth(b);\n \
     \ if (l == 0) return dc[v];\n  return dc[hld.la(b, l - 1)];\n }\n // x, f(x),\
-    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x loop,\
+    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x cycle,\
     \ (f^j(x),...,f^k(x))\n // sequence of half-open intervals [l,r)\n template <class\
     \ Int, class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>>\
     \ std::tuple<Path, Path, Int, Path> path(const T &x, Int k) const {\n  Iter it=\
     \ this->mp.find(x);\n  assert(it != this->mp.end());\n  int v= it->second, n=\
     \ t.size(), d= hld.depth(v) - 1;\n  std::array<Path, 3> pth;\n  Int cnt= 0;\n\
-    \  if (k > d) {\n   int b= t[rt[v]], c= hld.depth(b), l= (k-= d) % c;\n   if (pth[0]=\
-    \ hld.path(v, hld.la(v, d)), pth[1]= hld.path(b, hld.la(b, c - 1)), cnt= k / c;\
-    \ l) pth[2]= hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v,\
-    \ (int)k));\n  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r=\
-    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};\n"
+    \  if (k > d) {\n   int r= rt[v], b= t[r], c= hld.depth(b), l= (k-= d) % c;\n\
+    \   if (pth[0]= hld.path(v, r), pth[1]= hld.path(b, r), cnt= k / c; l) pth[2]=\
+    \ hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v, (int)k));\n\
+    \  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r= n - r + 1;\n\
+    \  return {pth[0], pth[1], cnt, pth[2]};\n }\n Path path_upto_cycle(const T &x)\
+    \ const {\n  Iter it= this->mp.find(x);\n  assert(it != this->mp.end());\n  int\
+    \ v= it->second, n= t.size(), r= rt[v], b= t[r], w= hld.lca(b, v);\n  auto p1=\
+    \ hld.path(v, r);\n  if (b != w) {\n   auto p2= hld.path(b, hld.jump(w, b, 1));\n\
+    \   p1.insert(p1.end(), p2.begin(), p2.end());\n  }\n  for (auto &[l, r]: p1)\
+    \ l= n - l, r= n - r + 1;\n  return p1;\n }\n};\n"
   code: "#pragma once\n#include <map>\n#include <unordered_map>\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\
     \nnamespace period_internal {\ntemplate <class Map> struct PeriodB {\n using Iter=\
     \ typename Map::const_iterator;\n Map mp;\n};\ntemplate <class T> using PerB=\
@@ -191,17 +196,22 @@ data:
     \  int v= it->second, n= t.size(), d= hld.depth(v) - 1;\n  if (k <= d) return\
     \ dc[hld.la(v, (int)k)];\n  int b= t[v= rt[v]], l= (k-= d) % hld.depth(b);\n \
     \ if (l == 0) return dc[v];\n  return dc[hld.la(b, l - 1)];\n }\n // x, f(x),\
-    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x loop,\
+    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x cycle,\
     \ (f^j(x),...,f^k(x))\n // sequence of half-open intervals [l,r)\n template <class\
     \ Int, class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>>\
     \ std::tuple<Path, Path, Int, Path> path(const T &x, Int k) const {\n  Iter it=\
     \ this->mp.find(x);\n  assert(it != this->mp.end());\n  int v= it->second, n=\
     \ t.size(), d= hld.depth(v) - 1;\n  std::array<Path, 3> pth;\n  Int cnt= 0;\n\
-    \  if (k > d) {\n   int b= t[rt[v]], c= hld.depth(b), l= (k-= d) % c;\n   if (pth[0]=\
-    \ hld.path(v, hld.la(v, d)), pth[1]= hld.path(b, hld.la(b, c - 1)), cnt= k / c;\
-    \ l) pth[2]= hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v,\
-    \ (int)k));\n  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r=\
-    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};"
+    \  if (k > d) {\n   int r= rt[v], b= t[r], c= hld.depth(b), l= (k-= d) % c;\n\
+    \   if (pth[0]= hld.path(v, r), pth[1]= hld.path(b, r), cnt= k / c; l) pth[2]=\
+    \ hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v, (int)k));\n\
+    \  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r= n - r + 1;\n\
+    \  return {pth[0], pth[1], cnt, pth[2]};\n }\n Path path_upto_cycle(const T &x)\
+    \ const {\n  Iter it= this->mp.find(x);\n  assert(it != this->mp.end());\n  int\
+    \ v= it->second, n= t.size(), r= rt[v], b= t[r], w= hld.lca(b, v);\n  auto p1=\
+    \ hld.path(v, r);\n  if (b != w) {\n   auto p2= hld.path(b, hld.jump(w, b, 1));\n\
+    \   p1.insert(p1.end(), p2.begin(), p2.end());\n  }\n  for (auto &[l, r]: p1)\
+    \ l= n - l, r= n - r + 1;\n  return p1;\n }\n};"
   dependsOn:
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/Graph.hpp
@@ -209,7 +219,7 @@ data:
   isVerificationFile: false
   path: src/Misc/Period.hpp
   requiredBy: []
-  timestamp: '2024-02-22 13:37:48+09:00'
+  timestamp: '2024-02-22 21:50:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1211.test.cpp
@@ -254,7 +264,9 @@ $x_i$ として取りうる状態の数が有限であるときに周期性を�
 |`size()`|状態の数 $n$ を返す．||
 |`operator()(x)`| $x$ に対応するラベルを返す．<br> 戻り値は `int`. |
 | `jump(x,k)`          | $f^k(x)=\overbrace{f(\cdots f(f}^{k}(x)))$ を返す. <br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は `T`.| $O(\log n)$ |
-| `path(x,k)`          | $x,f(x),\dots,f^k(x)$ という軌道を表す 半開区間の列 を返す．<br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は4つのデータをラッピングした`tuple`．<br> 一つ目はループに至るまでの軌道．<br> 二つ目はループ一回分を表す軌道．<br> 三つ目はループの回数 `Int`. <br> 四つ目はループの余りの軌道．<br> 軌道は `vector<pair<int,int>>` で表現する半開区間の列 $\lbrack a_0, b_0 ),\dots,\lbrack a_m, b_m )$ であり, $f^i(x)$ のラベルに対応している． | $O(\log n)$ |
+| `path(x,k)`          | $x,f(x),\dots,f^k(x)$ という軌道を表す 半開区間の列 を返す．<br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は4つのデータをラッピングした`tuple`．<br> 一つ目はサイクルに至るまでの軌道．<br> 二つ目はサイクル一周分を表す軌道．<br> 三つ目はサイクルの周回数 `Int`. <br> 四つ目はサイクルの余りの軌道．<br> 軌道は `vector<pair<int,int>>` で表現する半開区間の列 $\lbrack a_0, b_0 ),\dots,\lbrack a_m, b_m )$ であり, `operator()` のラベルに対応している． | $O(\log n)$ |
+| `path_upto_cycle(x)`          | 同じ値が出るまでの軌道を返す．<br> 軌道は `vector<pair<int,int>>` で表現する半開区間の列 $\lbrack a_0, b_0 ),\dots,\lbrack a_m, b_m )$ であり, `operator()` のラベルに対応している． | $O(\log n)$ |
 
 ## 問題例
-[AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)
+[AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)\
+[JOI 2010-2011 日本代表選手選考会 (春合宿代替措置) 過去問 report - 報告 (Report)](https://atcoder.jp/contests/joisc2011/tasks/joisc2011_report) (`path_upto_cycle`)

@@ -1383,7 +1383,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc310_g.test.cpp
       title: test/atcoder/abc310_g.test.cpp
     - icon: ':heavy_check_mark:'
