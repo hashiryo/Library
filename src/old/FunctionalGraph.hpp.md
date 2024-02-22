@@ -12,31 +12,10 @@ data:
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc136_d.test.cpp
-    title: test/atcoder/abc136_d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc167_d.test.cpp
-    title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc179_e.test.cpp
-    title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc241_e.test.cpp
-    title: test/atcoder/abc241_e.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1211.test.cpp
-    title: test/yukicoder/1211.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1242.test.cpp
-    title: test/yukicoder/1242.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/2122.test.cpp
-    title: test/yukicoder/2122.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\n#include <array>\n\
@@ -104,15 +83,15 @@ data:
     \ P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k\
     \ > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int\
     \ depth(int v) const { return D[v]; }\n int dist(int u, int v) const { return\
-    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n std::pair<int, int>\
-    \ subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::pair<int, int>> path(int u, int v)\
-    \ const {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v])\
-    \ {\n   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
+    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval [l,r)\n std::pair<int,\
+    \ int> subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\
+    \ [l,r]\n std::vector<std::pair<int, int>> path(int u, int v, bool edge= 0) const\
+    \ {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v]) {\n\
+    \   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/FunctionalGraph.hpp\"\nclass FunctionalGraph {\n std::vector<int>\
+    };\n#line 3 \"src/old/FunctionalGraph.hpp\"\nclass FunctionalGraph {\n std::vector<int>\
     \ t, rt;\n HeavyLightDecomposition hld;\npublic:\n FunctionalGraph(const std::vector<int>\
     \ &to): t(to) {\n  const int n= t.size();\n  rt.assign(n, -1);\n  for (int u,\
     \ w, v= n; v--;)\n   if (rt[v] == -1) {\n    for (rt[v]= -2, w= t[v];; rt[w]=\
@@ -161,30 +140,15 @@ data:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
-  path: src/Graph/FunctionalGraph.hpp
+  path: src/old/FunctionalGraph.hpp
   requiredBy: []
-  timestamp: '2024-02-21 22:41:13+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/yukicoder/1211.test.cpp
-  - test/yukicoder/2122.test.cpp
-  - test/yukicoder/1242.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc241_e.test.cpp
-documentation_of: src/Graph/FunctionalGraph.hpp
+  timestamp: '2024-02-22 11:37:15+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: src/old/FunctionalGraph.hpp
 layout: document
-title: "Functional\u30B0\u30E9\u30D5"
+redirect_from:
+- /library/src/old/FunctionalGraph.hpp
+- /library/src/old/FunctionalGraph.hpp.html
+title: src/old/FunctionalGraph.hpp
 ---
-
-## メンバ関数
-
-| 名前 | 概要 | 計算量 |
-| --- | --- | --- |
-| `FunctionalGraph(to)` | コンストラクタ. <br> 各頂点の移動先を表す配列を渡す． <br> 引数は `vector<int>`. ||
-| `jump(v,k)`          | 頂点 v から k ステップ 進んだ先の頂点を返す.  | $O(\log V)$ |
-| `path(v,k)`          | 頂点 v から k ステップ 進むときの頂点のパスを返す.<br> ただし パスは (サイクルに入るまで, サイクル, 余り) の3つに分解し, それぞれ何周するかの情報も持たせる. (1,3 番目の成分は 高々 1周) <br> 返り値は `array<pair<vector<int>,Int>,3>` | 出力に線形 |
-
-## 問題例
-[AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)

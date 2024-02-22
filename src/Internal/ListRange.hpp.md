@@ -12,9 +12,6 @@ data:
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
   - icon: ':question:'
-    path: src/Graph/FunctionalGraph.hpp
-    title: "Functional\u30B0\u30E9\u30D5"
-  - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -49,6 +46,9 @@ data:
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
+  - icon: ':x:'
+    path: src/Misc/Period.hpp
+    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
@@ -71,6 +71,9 @@ data:
   - icon: ':warning:'
     path: src/old/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
+  - icon: ':warning:'
+    path: src/old/FunctionalGraph.hpp
+    title: src/old/FunctionalGraph.hpp
   - icon: ':warning:'
     path: src/old/Tree.hpp
     title: "\u6728"
@@ -153,7 +156,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -165,7 +168,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -210,6 +213,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc282_d.test.cpp
     title: test/atcoder/abc282_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc310_g.test.cpp
+    title: test/atcoder/abc310_g.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc327_d.test.cpp
     title: test/atcoder/abc327_d.test.cpp
@@ -352,6 +358,9 @@ data:
     path: test/yukicoder/1868.test.cpp
     title: test/yukicoder/1868.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1935.test.cpp
+    title: test/yukicoder/1935.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
   - icon: ':x:'
@@ -435,7 +444,6 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/RangeToRangeGraph.hpp
   - src/Graph/bipartite_edge_coloring.hpp
-  - src/Graph/FunctionalGraph.hpp
   - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/minimum_spanning_aborescence.hpp
   - src/Graph/HeavyLightDecomposition.hpp
@@ -443,10 +451,12 @@ data:
   - src/Graph/Graph.hpp
   - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
+  - src/Misc/Period.hpp
   - src/Math/TwoSatisfiability.hpp
   - src/old/BipartiteGraph.hpp
   - src/old/CsrArray.hpp
   - src/old/Tree.hpp
+  - src/old/FunctionalGraph.hpp
   - src/old/DulmageMendelsohn.hpp
   timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
@@ -461,6 +471,7 @@ data:
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
+  - test/yukicoder/1935.test.cpp
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/644.test.cpp
@@ -534,6 +545,7 @@ data:
   - test/aoj/0273.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc256_e.test.cpp
+  - test/atcoder/abc310_g.test.cpp
   - test/atcoder/abc282_d.test.cpp
   - test/atcoder/abc327_d.test.cpp
   - test/atcoder/abc136_d.test.cpp

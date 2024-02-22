@@ -194,9 +194,6 @@ data:
       path: src/Graph/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
     - icon: ':question:'
-      path: src/Graph/FunctionalGraph.hpp
-      title: "Functional\u30B0\u30E9\u30D5"
-    - icon: ':question:'
       path: src/Graph/Graph.hpp
       title: "\u30B0\u30E9\u30D5"
     - icon: ':question:'
@@ -352,13 +349,16 @@ data:
     pages:
     - icon: ':question:'
       path: src/Misc/Automaton.hpp
-      title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
+      title: "\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\u4E0A\u306EDP"
     - icon: ':question:'
       path: src/Misc/CartesianTree.hpp
       title: Cartesian-Tree
     - icon: ':heavy_check_mark:'
       path: src/Misc/Mo.hpp
       title: Mo's Algorithm
+    - icon: ':x:'
+      path: src/Misc/Period.hpp
+      title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
     - icon: ':question:'
       path: src/Misc/Pointwise.hpp
       title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\\
@@ -490,6 +490,9 @@ data:
     - icon: ':warning:'
       path: src/old/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
+    - icon: ':warning:'
+      path: src/old/FunctionalGraph.hpp
+      title: src/old/FunctionalGraph.hpp
     - icon: ':warning:'
       path: src/old/LinearSystemIncidence.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
@@ -1143,7 +1146,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc135_f.RH.test.cpp
       title: test/atcoder/abc135_f.RH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc136_d.test.cpp
       title: test/atcoder/abc136_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1170,7 +1173,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc162_e.test.cpp
       title: test/atcoder/abc162_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1380,6 +1383,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc310_g.test.cpp
+      title: test/atcoder/abc310_g.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc323_g.test.cpp
       title: test/atcoder/abc323_g.test.cpp
@@ -2087,6 +2093,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1907.test.cpp
       title: test/yukicoder/1907.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1935.test.cpp
+      title: test/yukicoder/1935.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1939.test.cpp
       title: test/yukicoder/1939.test.cpp

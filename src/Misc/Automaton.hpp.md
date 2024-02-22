@@ -265,7 +265,7 @@ data:
   - test/atcoder/arc127_a.test.cpp
 documentation_of: src/Misc/Automaton.hpp
 layout: document
-title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
+title: "\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\u4E0A\u306EDP"
 ---
 
 桁DPを解く. DPの最終的な答えのみを求める仕様なので、DPテーブルの途中の値は手に入らない.

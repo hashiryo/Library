@@ -10,14 +10,17 @@ data:
       \ \u4ED6"
   _extendedRequiredBy:
   - icon: ':question:'
-    path: src/Graph/FunctionalGraph.hpp
-    title: "Functional\u30B0\u30E9\u30D5"
-  - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
+  - icon: ':x:'
+    path: src/Misc/Period.hpp
+    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
+  - icon: ':warning:'
+    path: src/old/FunctionalGraph.hpp
+    title: src/old/FunctionalGraph.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
@@ -34,7 +37,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -43,7 +46,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
   - icon: ':x:'
@@ -67,6 +70,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc310_g.test.cpp
+    title: test/atcoder/abc310_g.test.cpp
   - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
@@ -124,6 +130,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1935.test.cpp
+    title: test/yukicoder/1935.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
@@ -215,11 +224,11 @@ data:
     \ P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k\
     \ > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int\
     \ depth(int v) const { return D[v]; }\n int dist(int u, int v) const { return\
-    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n std::pair<int, int>\
-    \ subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::pair<int, int>> path(int u, int v)\
-    \ const {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v])\
-    \ {\n   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
+    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval [l,r)\n std::pair<int,\
+    \ int> subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\
+    \ [l,r]\n std::vector<std::pair<int, int>> path(int u, int v, bool edge= 0) const\
+    \ {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v]) {\n\
+    \   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
@@ -256,11 +265,11 @@ data:
     \ P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k\
     \ > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int\
     \ depth(int v) const { return D[v]; }\n int dist(int u, int v) const { return\
-    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n std::pair<int, int>\
-    \ subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::pair<int, int>> path(int u, int v)\
-    \ const {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v])\
-    \ {\n   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
+    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval [l,r)\n std::pair<int,\
+    \ int> subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\
+    \ [l,r]\n std::vector<std::pair<int, int>> path(int u, int v, bool edge= 0) const\
+    \ {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v]) {\n\
+    \   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
@@ -272,9 +281,10 @@ data:
   path: src/Graph/HeavyLightDecomposition.hpp
   requiredBy:
   - src/Graph/Rerooting.hpp
-  - src/Graph/FunctionalGraph.hpp
   - src/String/SuffixTree.hpp
-  timestamp: '2024-02-21 22:41:13+09:00'
+  - src/Misc/Period.hpp
+  - src/old/FunctionalGraph.hpp
+  timestamp: '2024-02-22 11:37:15+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1216.KDT.test.cpp
@@ -285,6 +295,7 @@ data:
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
+  - test/yukicoder/1935.test.cpp
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1600.KDT.test.cpp
@@ -309,6 +320,7 @@ data:
   - test/aoj/1595.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc310_g.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
   - test/atcoder/abc167_d.test.cpp

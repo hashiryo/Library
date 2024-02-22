@@ -8,9 +8,6 @@ data:
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
-    path: src/Graph/Rerooting.hpp
-    title: "\u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
@@ -26,6 +23,9 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':x:'
+    path: src/Misc/Period.hpp
+    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -33,11 +33,11 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1124
+    PROBLEM: https://atcoder.jp/contests/abc310/tasks/abc310_g
     links:
-    - https://yukicoder.me/problems/no/1124
-  bundledCode: "#line 1 \"test/yukicoder/1124.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/1124\"\
-    \n#include <iostream>\n#include <array>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
+    - https://atcoder.jp/contests/abc310/tasks/abc310_g
+  bundledCode: "#line 1 \"test/atcoder/abc310_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc310/tasks/abc310_g\"\
+    \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
     \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
     \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
     \ y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b),\
@@ -115,8 +115,8 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Internal/ListRange.hpp\"\
-    \n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\
+    \n#include <array>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
     #line 6 \"src/Internal/ListRange.hpp\"\n#define _LR(name, IT, CT) \\\n template\
     \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
     \n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
@@ -187,80 +187,84 @@ data:
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/Rerooting.hpp\"\n// put_edge(int v, int e, T t) -> U\n\
-    // op(U l, U r) -> U\n// ui(:U) is the identity element of op\n// put_vertex(int\
-    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n const HeavyLightDecomposition\
-    \ &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
-    \ class F2, class F3> Rerooting(const Graph &g, const CSRArray<int> &adje, const\
-    \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
-    \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
-    \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
-    \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
-    \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
-    \  dp.resize(n), dp1.resize(n), dp2.resize(n);\n  for (int i= n, v; i--;) {\n\
-    \   U sum= ui;\n   for (int e: adje[v= hld.to_vertex(i)])\n    if (int u= g[e].to(v);\
-    \ u != hld.parent(v)) sum= op(sum, put_edge(v, e, dp1[u]));\n   dp1[v]= put_vertex(v,\
-    \ sum);\n  }\n  for (int i= 0, v; i < n; ++i) {\n   auto gv= adje[v= hld.to_vertex(i)];\n\
-    \   int dg= gv.size();\n   std::vector<U> f(dg + 1), b(dg + 1);\n   for (int j=\
-    \ 0, e, u; j < dg; ++j) u= g[e= gv[j]].to(v), f[j + 1]= put_edge(v, e, u == hld.parent(v)\
-    \ ? dp2[v] : dp1[u]);\n   f[0]= b[dg]= ui;\n   for (int j= dg; j--;) b[j]= op(f[j\
-    \ + 1], b[j + 1]);\n   for (int j= 0; j < dg; ++j) f[j + 1]= op(f[j], f[j + 1]);\n\
-    \   for (int j= 0; j < dg; ++j)\n    if (int u= g[gv[j]].to(v); u != hld.parent(v))\
-    \ dp2[u]= put_vertex(v, op(f[j], b[j + 1]));\n   dp[v]= put_vertex(v, f[dg]);\n\
-    \  }\n }\n template <class U, class F1, class F2, class F3> Rerooting(const Graph\
-    \ &g, const CSRArray<int> &adje, const F1 &put_edge, const F2 &op, const U &ui,\
-    \ const F3 &put_vertex): Rerooting(g, adje, HeavyLightDecomposition(g), put_edge,\
-    \ op, ui, put_vertex) {}\n template <class U, class F1, class F2, class F3> Rerooting(const\
-    \ Graph &g, const HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op,\
-    \ const U &ui, const F3 &put_vertex): Rerooting(g, g.adjacency_edge(0), hld, put_edge,\
-    \ op, ui, put_vertex) {}\n template <class U, class F1, class F2, class F3> Rerooting(const\
-    \ Graph &g, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex):\
-    \ Rerooting(g, g.adjacency_edge(0), HeavyLightDecomposition(g), put_edge, op,\
-    \ ui, put_vertex) {}\n const T &operator[](int v) const { return dp[v]; }\n auto\
-    \ begin() const { return dp.cbegin(); }\n auto end() const { return dp.cend();\
-    \ }\n const T &operator()(int root, int v) const { return root == v ? dp[v] :\
-    \ hld.in_subtree(root, v) ? dp2[hld.jump(v, root, 1)] : dp1[v]; }\n};\n#line 7\
-    \ \"test/yukicoder/1124.test.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n using Mint= ModInt<int(1e9 + 7)>;\n int N;\n cin\
-    \ >> N;\n Graph g(N, N - 1);\n for (int i= 0; i < N - 1; ++i) cin >> g[i], --g[i];\n\
-    \ using Data= array<Mint, 2>;\n static constexpr Mint iv2= Mint(1) / 2;\n auto\
-    \ put_edge= [&](int, int, const Data &d) { return Data{d[0] * iv2, d[1] * iv2};\
-    \ };\n auto op= [&](const Data &l, const Data &r) { return Data{l[0] + r[0], l[1]\
-    \ + l[0] * r[0] * 2 + r[1]}; };\n auto put_vertex= [&](int, const Data &d) { return\
-    \ Data{d[0] + 1, d[1] + d[0] * 2 + 1}; };\n Mint ans= 0;\n for (auto [_, x]: Rerooting<Data>(g,\
-    \ put_edge, op, Data{0, 0}, put_vertex)) ans+= x;\n ans*= Mint(2).pow(N - 1);\n\
-    \ cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1124\"\n#include <iostream>\n\
-    #include <array>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Graph/Graph.hpp\"\
-    \n#include \"src/Graph/Rerooting.hpp\"\nusing namespace std;\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<int(1e9 + 7)>;\n\
-    \ int N;\n cin >> N;\n Graph g(N, N - 1);\n for (int i= 0; i < N - 1; ++i) cin\
-    \ >> g[i], --g[i];\n using Data= array<Mint, 2>;\n static constexpr Mint iv2=\
-    \ Mint(1) / 2;\n auto put_edge= [&](int, int, const Data &d) { return Data{d[0]\
-    \ * iv2, d[1] * iv2}; };\n auto op= [&](const Data &l, const Data &r) { return\
-    \ Data{l[0] + r[0], l[1] + l[0] * r[0] * 2 + r[1]}; };\n auto put_vertex= [&](int,\
-    \ const Data &d) { return Data{d[0] + 1, d[1] + d[0] * 2 + 1}; };\n Mint ans=\
-    \ 0;\n for (auto [_, x]: Rerooting<Data>(g, put_edge, op, Data{0, 0}, put_vertex))\
-    \ ans+= x;\n ans*= Mint(2).pow(N - 1);\n cout << ans << '\\n';\n return 0;\n}"
+    };\n#line 3 \"src/Misc/Period.hpp\"\nnamespace period_internal {\ntemplate <class\
+    \ Map> struct PeriodB {\n using Iter= typename Map::const_iterator;\n Map mp;\n\
+    };\ntemplate <class T> using PerB= std::conditional_t<std::is_integral_v<T>, PeriodB<std::unordered_map<T,\
+    \ int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate <class T= int> struct Period:\
+    \ period_internal::PerB<T> {\n using typename period_internal::PerB<T>::Iter;\n\
+    \ using Path= std::vector<std::pair<int, int>>;\n std::vector<int> t, rt;\n std::vector<T>\
+    \ dc;\n HeavyLightDecomposition hld;\n static std::vector<int> iota(int n) {\n\
+    \  std::vector<int> v(n);\n  for (int i= n; i--;) v[i]= i;\n  return v;\n }\n\
+    public:\n Period()= default;\n template <class F> Period(const F &f, const std::vector<T>\
+    \ &inits) {\n  int n= 0;\n  auto id= [&](const T &x) {\n   if (auto it= this->mp.find(x);\
+    \ it != this->mp.end()) return it->second;\n   return dc.emplace_back(x), t.push_back(-1),\
+    \ rt.push_back(-1), this->mp[x]= n++;\n  };\n  for (const T &s: inits)\n   if\
+    \ (int v= id(s), w; rt[v] == -1) {\n    for (w= v;; rt[w]= -2, w= t[w]= id(f(dc[w])))\n\
+    \     if (rt[w] != -1) {\n      if (rt[w] != -2) w= rt[w];\n      break;\n   \
+    \  }\n    for (int u= v; rt[u] == -2; u= t[u]) rt[u]= w;\n   }\n  Graph g(n +\
+    \ 1, n);\n  for (int v= n; v--;) g[v]= {(rt[v] == v ? n : t[v]), v};\n  hld= HeavyLightDecomposition(g.adjacency_vertex(1),\
+    \ n);\n }\n Period(const std::vector<int> &functional): Period([&](int x) { return\
+    \ functional[x]; }, iota(functional.size())) { static_assert(std::is_same_v<T,\
+    \ int>); }\n int operator()(const T &x) const {\n  Iter it= this->mp.find(x);\n\
+    \  assert(it != this->mp.end());\n  return t.size() - hld.to_seq(it->second);\n\
+    \ }\n size_t size() const { return t.size(); }\n // f^k(x)\n template <class Int,\
+    \ class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>> T jump(const\
+    \ T &x, Int k) const {\n  Iter it= this->mp.find(x);\n  assert(it != this->mp.end());\n\
+    \  int v= it->second, n= t.size(), d= hld.depth(v) - 1;\n  if (k <= d) return\
+    \ dc[hld.la(v, (int)k)];\n  int b= t[v= rt[v]], l= (k-= d) % hld.depth(b);\n \
+    \ if (l == 0) return dc[v];\n  return dc[hld.la(b, l - 1)];\n }\n // x, f(x),\
+    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x loop,\
+    \ (f^j(x),...,f^k(x))\n // sequence of half-open intervals [l,r)\n template <class\
+    \ Int, class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>>\
+    \ std::tuple<Path, Path, Int, Path> path(const T &x, Int k) const {\n  Iter it=\
+    \ this->mp.find(x);\n  assert(it != this->mp.end());\n  int v= it->second, n=\
+    \ t.size(), d= hld.depth(v) - 1;\n  std::array<Path, 3> pth;\n  Int cnt= 0;\n\
+    \  if (k > d) {\n   int b= t[rt[v]], c= hld.depth(b), l= (k-= d) % c;\n   if (pth[0]=\
+    \ hld.path(v, hld.la(v, d)), pth[1]= hld.path(b, hld.la(b, c - 1)), cnt= k / c;\
+    \ l) pth[2]= hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v,\
+    \ (int)k));\n  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r=\
+    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};\n#line 6 \"test/atcoder/abc310_g.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n long long K;\n cin >> N >> K;\n vector<int>\
+    \ A(N), B(N);\n for (int i= 0; i < N; ++i) cin >> A[i], --A[i];\n for (int i=\
+    \ 0; i < N; ++i) cin >> B[i];\n Period p(A);\n vector<Mint> sum(N + 1);\n for\
+    \ (int i= N; i--;) {\n  auto [p1, p2, c, p3]= p.path(i, K);\n  for (auto [l, r]:\
+    \ p1) sum[l]+= B[i], sum[r]-= B[i];\n  for (auto [l, r]: p2) sum[l]+= Mint(c)\
+    \ * B[i], sum[r]-= Mint(c) * B[i];\n  for (auto [l, r]: p3) sum[l]+= B[i], sum[r]-=\
+    \ B[i];\n }\n for (int i= 0; i < N; ++i) sum[i + 1]+= sum[i];\n for (int i= N;\
+    \ i--;) sum[p(i)]-= B[i];\n Mint iv= Mint(1) / K;\n for (int i= 0; i < N; ++i)\
+    \ cout << sum[p(i)] * iv << \" \\n\"[i + 1 == N];\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc310/tasks/abc310_g\"\n#include\
+    \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
+    src/Misc/Period.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n long long K;\n cin >> N >> K;\n vector<int>\
+    \ A(N), B(N);\n for (int i= 0; i < N; ++i) cin >> A[i], --A[i];\n for (int i=\
+    \ 0; i < N; ++i) cin >> B[i];\n Period p(A);\n vector<Mint> sum(N + 1);\n for\
+    \ (int i= N; i--;) {\n  auto [p1, p2, c, p3]= p.path(i, K);\n  for (auto [l, r]:\
+    \ p1) sum[l]+= B[i], sum[r]-= B[i];\n  for (auto [l, r]: p2) sum[l]+= Mint(c)\
+    \ * B[i], sum[r]-= Mint(c) * B[i];\n  for (auto [l, r]: p3) sum[l]+= B[i], sum[r]-=\
+    \ B[i];\n }\n for (int i= 0; i < N; ++i) sum[i + 1]+= sum[i];\n for (int i= N;\
+    \ i--;) sum[p(i)]-= B[i];\n Mint iv= Mint(1) / K;\n for (int i= 0; i < N; ++i)\
+    \ cout << sum[p(i)] * iv << \" \\n\"[i + 1 == N];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
+  - src/Misc/Period.hpp
+  - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
-  - src/Graph/Rerooting.hpp
-  - src/Graph/HeavyLightDecomposition.hpp
   isVerificationFile: true
-  path: test/yukicoder/1124.test.cpp
+  path: test/atcoder/abc310_g.test.cpp
   requiredBy: []
   timestamp: '2024-02-22 11:37:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yukicoder/1124.test.cpp
+documentation_of: test/atcoder/abc310_g.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/1124.test.cpp
-- /verify/test/yukicoder/1124.test.cpp.html
-title: test/yukicoder/1124.test.cpp
+- /verify/test/atcoder/abc310_g.test.cpp
+- /verify/test/atcoder/abc310_g.test.cpp.html
+title: test/atcoder/abc310_g.test.cpp
 ---

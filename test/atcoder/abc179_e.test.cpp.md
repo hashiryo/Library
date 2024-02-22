@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Graph/FunctionalGraph.hpp
-    title: "Functional\u30B0\u30E9\u30D5"
-  - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -14,6 +11,9 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
+  - icon: ':x:'
+    path: src/Misc/Period.hpp
+    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -90,58 +90,78 @@ data:
     \ P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k\
     \ > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int\
     \ depth(int v) const { return D[v]; }\n int dist(int u, int v) const { return\
-    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n std::pair<int, int>\
-    \ subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::pair<int, int>> path(int u, int v)\
-    \ const {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v])\
-    \ {\n   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
+    \ D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval [l,r)\n std::pair<int,\
+    \ int> subtree(int v) const { return {L[v], R[v]}; }\n // sequence of closed intervals\
+    \ [l,r]\n std::vector<std::pair<int, int>> path(int u, int v, bool edge= 0) const\
+    \ {\n  std::vector<std::pair<int, int>> up, down;\n  while (PP[u] != PP[v]) {\n\
+    \   if (L[u] < L[v]) down.emplace_back(L[PP[v]], L[v]), v= P[PP[v]];\n   else\
     \ up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(L[u]\
     \ + edge, L[v]);\n  else if (L[v] + edge <= L[u]) up.emplace_back(L[u], L[v] +\
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/FunctionalGraph.hpp\"\nclass FunctionalGraph {\n std::vector<int>\
-    \ t, rt;\n HeavyLightDecomposition hld;\npublic:\n FunctionalGraph(const std::vector<int>\
-    \ &to): t(to) {\n  const int n= t.size();\n  rt.assign(n, -1);\n  for (int u,\
-    \ w, v= n; v--;)\n   if (rt[v] == -1) {\n    for (rt[v]= -2, w= t[v];; rt[w]=\
-    \ -2, w= t[w])\n     if (assert(0 <= w && w < n); rt[w] != -1) {\n      if (rt[w]\
-    \ != -2) w= rt[w];\n      break;\n     }\n    for (u= v; rt[u] == -2; u= t[u])\
-    \ rt[u]= w;\n   }\n  Graph g(n + 1, n);\n  for (int v= n; v--;) g[v]= {(rt[v]\
-    \ == v ? n : t[v]), v};\n  hld= HeavyLightDecomposition(g.adjacency_vertex(1),\
-    \ n);\n }\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
-    \ int> jump(int v, Int k) const {\n  int n= t.size(), d= hld.depth(v) - 1;\n \
-    \ if (k <= d) return hld.jump(v, n, (int)k);\n  int b= t[v= rt[v]], l= (k-= d)\
-    \ % hld.depth(b);\n  if (l == 0) return v;\n  return hld.jump(b, n, l - 1);\n\
-    \ }\n // ((a_0,...,a_{i-1}) x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x\
-    \ 1)\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
-    \ std::array<std::pair<std::vector<int>, Int>, 3>> path(int v, Int k) const {\n\
-    \  std::array<std::pair<std::vector<int>, Int>, 3> ret;\n  int d= hld.depth(v)\
-    \ - 1;\n  if (ret[0].second= 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \   return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
-    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
-    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
-    };\n#line 4 \"test/atcoder/abc179_e.test.cpp\"\nusing namespace std;\nsigned main()\
+    };\n#line 3 \"src/Misc/Period.hpp\"\nnamespace period_internal {\ntemplate <class\
+    \ Map> struct PeriodB {\n using Iter= typename Map::const_iterator;\n Map mp;\n\
+    };\ntemplate <class T> using PerB= std::conditional_t<std::is_integral_v<T>, PeriodB<std::unordered_map<T,\
+    \ int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate <class T= int> struct Period:\
+    \ period_internal::PerB<T> {\n using typename period_internal::PerB<T>::Iter;\n\
+    \ using Path= std::vector<std::pair<int, int>>;\n std::vector<int> t, rt;\n std::vector<T>\
+    \ dc;\n HeavyLightDecomposition hld;\n static std::vector<int> iota(int n) {\n\
+    \  std::vector<int> v(n);\n  for (int i= n; i--;) v[i]= i;\n  return v;\n }\n\
+    public:\n Period()= default;\n template <class F> Period(const F &f, const std::vector<T>\
+    \ &inits) {\n  int n= 0;\n  auto id= [&](const T &x) {\n   if (auto it= this->mp.find(x);\
+    \ it != this->mp.end()) return it->second;\n   return dc.emplace_back(x), t.push_back(-1),\
+    \ rt.push_back(-1), this->mp[x]= n++;\n  };\n  for (const T &s: inits)\n   if\
+    \ (int v= id(s), w; rt[v] == -1) {\n    for (w= v;; rt[w]= -2, w= t[w]= id(f(dc[w])))\n\
+    \     if (rt[w] != -1) {\n      if (rt[w] != -2) w= rt[w];\n      break;\n   \
+    \  }\n    for (int u= v; rt[u] == -2; u= t[u]) rt[u]= w;\n   }\n  Graph g(n +\
+    \ 1, n);\n  for (int v= n; v--;) g[v]= {(rt[v] == v ? n : t[v]), v};\n  hld= HeavyLightDecomposition(g.adjacency_vertex(1),\
+    \ n);\n }\n Period(const std::vector<int> &functional): Period([&](int x) { return\
+    \ functional[x]; }, iota(functional.size())) { static_assert(std::is_same_v<T,\
+    \ int>); }\n int operator()(const T &x) const {\n  Iter it= this->mp.find(x);\n\
+    \  assert(it != this->mp.end());\n  return t.size() - hld.to_seq(it->second);\n\
+    \ }\n size_t size() const { return t.size(); }\n // f^k(x)\n template <class Int,\
+    \ class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>> T jump(const\
+    \ T &x, Int k) const {\n  Iter it= this->mp.find(x);\n  assert(it != this->mp.end());\n\
+    \  int v= it->second, n= t.size(), d= hld.depth(v) - 1;\n  if (k <= d) return\
+    \ dc[hld.la(v, (int)k)];\n  int b= t[v= rt[v]], l= (k-= d) % hld.depth(b);\n \
+    \ if (l == 0) return dc[v];\n  return dc[hld.la(b, l - 1)];\n }\n // x, f(x),\
+    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x loop,\
+    \ (f^j(x),...,f^k(x))\n // sequence of half-open intervals [l,r)\n template <class\
+    \ Int, class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>>\
+    \ std::tuple<Path, Path, Int, Path> path(const T &x, Int k) const {\n  Iter it=\
+    \ this->mp.find(x);\n  assert(it != this->mp.end());\n  int v= it->second, n=\
+    \ t.size(), d= hld.depth(v) - 1;\n  std::array<Path, 3> pth;\n  Int cnt= 0;\n\
+    \  if (k > d) {\n   int b= t[rt[v]], c= hld.depth(b), l= (k-= d) % c;\n   if (pth[0]=\
+    \ hld.path(v, hld.la(v, d)), pth[1]= hld.path(b, hld.la(b, c - 1)), cnt= k / c;\
+    \ l) pth[2]= hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v,\
+    \ (int)k));\n  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r=\
+    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};\n#line 4 \"test/atcoder/abc179_e.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ long long N, X, M;\n cin >> N >> X >> M;\n vector<int> to(M);\n for (long long\
+    \ i= 0; i < M; ++i) to[i]= i * i % M;\n Period p(to);\n vector<long long> sum(M\
+    \ + 1);\n for (int i= M; i--;) sum[p(i) + 1]= i;\n for (int i= 0; i < M; ++i)\
+    \ sum[i + 1]+= sum[i];\n long long ans= 0;\n auto [p1, p2, c, p3]= p.path(X, N\
+    \ - 1);\n for (auto [l, r]: p1) ans+= sum[r] - sum[l];\n for (auto [l, r]: p2)\
+    \ ans+= (sum[r] - sum[l]) * c;\n for (auto [l, r]: p3) ans+= sum[r] - sum[l];\n\
+    \ cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_e\"\n#include\
+    \ <iostream>\n#include \"src/Misc/Period.hpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N, X, M;\n cin >> N >>\
     \ X >> M;\n vector<int> to(M);\n for (long long i= 0; i < M; ++i) to[i]= i * i\
-    \ % M;\n auto [a, b, c]= FunctionalGraph(to).path(X, N);\n long long ans= 0;\n\
-    \ for (int x: b.first) ans+= x;\n ans*= b.second;\n for (int x: a.first) ans+=\
-    \ x;\n for (int x: c.first) ans+= x;\n cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_e\"\n#include\
-    \ <iostream>\n#include \"src/Graph/FunctionalGraph.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N, X, M;\n\
-    \ cin >> N >> X >> M;\n vector<int> to(M);\n for (long long i= 0; i < M; ++i)\
-    \ to[i]= i * i % M;\n auto [a, b, c]= FunctionalGraph(to).path(X, N);\n long long\
-    \ ans= 0;\n for (int x: b.first) ans+= x;\n ans*= b.second;\n for (int x: a.first)\
-    \ ans+= x;\n for (int x: c.first) ans+= x;\n cout << ans << '\\n';\n return 0;\n\
+    \ % M;\n Period p(to);\n vector<long long> sum(M + 1);\n for (int i= M; i--;)\
+    \ sum[p(i) + 1]= i;\n for (int i= 0; i < M; ++i) sum[i + 1]+= sum[i];\n long long\
+    \ ans= 0;\n auto [p1, p2, c, p3]= p.path(X, N - 1);\n for (auto [l, r]: p1) ans+=\
+    \ sum[r] - sum[l];\n for (auto [l, r]: p2) ans+= (sum[r] - sum[l]) * c;\n for\
+    \ (auto [l, r]: p3) ans+= sum[r] - sum[l];\n cout << ans << '\\n';\n return 0;\n\
     }"
   dependsOn:
-  - src/Graph/FunctionalGraph.hpp
+  - src/Misc/Period.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: true
   path: test/atcoder/abc179_e.test.cpp
   requiredBy: []
-  timestamp: '2024-02-21 22:41:13+09:00'
+  timestamp: '2024-02-22 11:37:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc179_e.test.cpp

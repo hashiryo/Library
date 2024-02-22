@@ -149,7 +149,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_f.RH.test.cpp
     title: test/atcoder/abc135_f.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -230,6 +230,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc310_g.test.cpp
+    title: test/atcoder/abc310_g.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc323_g.test.cpp
     title: test/atcoder/abc323_g.test.cpp
@@ -877,6 +880,7 @@ data:
   - test/atcoder/agc047_b.RH.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/abc212_g.test.cpp
+  - test/atcoder/abc310_g.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp

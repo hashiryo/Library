@@ -11,32 +11,52 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  - icon: ':x:'
-    path: src/Misc/Period.hpp
-    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc136_d.test.cpp
+    title: test/atcoder/abc136_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc167_d.test.cpp
+    title: test/atcoder/abc167_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc179_e.test.cpp
+    title: test/atcoder/abc179_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc241_e.test.cpp
+    title: test/atcoder/abc241_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc310_g.test.cpp
+    title: test/atcoder/abc310_g.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1211.test.cpp
+    title: test/yukicoder/1211.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1242.test.cpp
+    title: test/yukicoder/1242.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1935.test.cpp
+    title: test/yukicoder/1935.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2122.test.cpp
+    title: test/yukicoder/2122.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/abc167/tasks/abc167_d
-    links:
-    - https://atcoder.jp/contests/abc167/tasks/abc167_d
-  bundledCode: "#line 1 \"test/atcoder/abc167_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc167/tasks/abc167_d\"\
-    \n#include <iostream>\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\n#include\
-    \ <array>\n#include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
-    \ <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n#include\
-    \ <type_traits>\n#define _LR(name, IT, CT) \\\n template <class T> struct name\
-    \ { \\\n  using Iterator= typename std::vector<T>::IT; \\\n  Iterator bg, ed;\
-    \ \\\n  Iterator begin() const { return bg; } \\\n  Iterator end() const { return\
-    \ ed; } \\\n  size_t size() const { return std::distance(bg, ed); } \\\n  CT &operator[](int\
-    \ i) const { return bg[i]; } \\\n }\n_LR(ListRange, iterator, T);\n_LR(ConstListRange,\
-    \ const_iterator, const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n\
-    \ std::vector<T> dat;\n std::vector<int> p;\n size_t size() const { return p.size()\
-    \ - 1; }\n ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin()\
-    \ + p[i + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
+    links: []
+  bundledCode: "#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\n#include <array>\n\
+    #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
+    #include <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name,\
+    \ IT, CT) \\\n template <class T> struct name { \\\n  using Iterator= typename\
+    \ std::vector<T>::IT; \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return\
+    \ bg; } \\\n  Iterator end() const { return ed; } \\\n  size_t size() const {\
+    \ return std::distance(bg, ed); } \\\n  CT &operator[](int i) const { return bg[i];\
+    \ } \\\n }\n_LR(ListRange, iterator, T);\n_LR(ConstListRange, const_iterator,\
+    \ const T);\n#undef _LR\ntemplate <class T> struct CSRArray {\n std::vector<T>\
+    \ dat;\n std::vector<int> p;\n size_t size() const { return p.size() - 1; }\n\
+    \ ListRange<T> operator[](int i) { return {dat.begin() + p[i], dat.begin() + p[i\
+    \ + 1]}; }\n ConstListRange<T> operator[](int i) const { return {dat.cbegin()\
     \ + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate <template <class> class F,\
     \ class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>, ListRange<T>>,\
     \ std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>, std::ostream\
@@ -134,31 +154,94 @@ data:
     \ hld.path(v, hld.la(v, d)), pth[1]= hld.path(b, hld.la(b, c - 1)), cnt= k / c;\
     \ l) pth[2]= hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v,\
     \ (int)k));\n  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r=\
-    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};\n#line 4 \"test/atcoder/abc167_d.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N;\n long long K;\n cin >> N >> K;\n vector<int> A(N);\n for (int i= 0;\
-    \ i < N; ++i) cin >> A[i], --A[i];\n cout << Period(A).jump(0, K) + 1 << '\\n';\n\
-    \ return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc167/tasks/abc167_d\"\n#include\
-    \ <iostream>\n#include \"src/Misc/Period.hpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n long long K;\n cin >>\
-    \ N >> K;\n vector<int> A(N);\n for (int i= 0; i < N; ++i) cin >> A[i], --A[i];\n\
-    \ cout << Period(A).jump(0, K) + 1 << '\\n';\n return 0;\n}"
+    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};\n"
+  code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\nnamespace\
+    \ period_internal {\ntemplate <class Map> struct PeriodB {\n using Iter= typename\
+    \ Map::const_iterator;\n Map mp;\n};\ntemplate <class T> using PerB= std::conditional_t<std::is_integral_v<T>,\
+    \ PeriodB<std::unordered_map<T, int>>, PeriodB<std::map<T, int>>>;\n}\ntemplate\
+    \ <class T= int> struct Period: period_internal::PerB<T> {\n using typename period_internal::PerB<T>::Iter;\n\
+    \ using Path= std::vector<std::pair<int, int>>;\n std::vector<int> t, rt;\n std::vector<T>\
+    \ dc;\n HeavyLightDecomposition hld;\n static std::vector<int> iota(int n) {\n\
+    \  std::vector<int> v(n);\n  for (int i= n; i--;) v[i]= i;\n  return v;\n }\n\
+    public:\n Period()= default;\n template <class F> Period(const F &f, const std::vector<T>\
+    \ &inits) {\n  int n= 0;\n  auto id= [&](const T &x) {\n   if (auto it= this->mp.find(x);\
+    \ it != this->mp.end()) return it->second;\n   return dc.emplace_back(x), t.push_back(-1),\
+    \ rt.push_back(-1), this->mp[x]= n++;\n  };\n  for (const T &s: inits)\n   if\
+    \ (int v= id(s), w; rt[v] == -1) {\n    for (w= v;; rt[w]= -2, w= t[w]= id(f(dc[w])))\n\
+    \     if (rt[w] != -1) {\n      if (rt[w] != -2) w= rt[w];\n      break;\n   \
+    \  }\n    for (int u= v; rt[u] == -2; u= t[u]) rt[u]= w;\n   }\n  Graph g(n +\
+    \ 1, n);\n  for (int v= n; v--;) g[v]= {(rt[v] == v ? n : t[v]), v};\n  hld= HeavyLightDecomposition(g.adjacency_vertex(1),\
+    \ n);\n }\n Period(const std::vector<int> &functional): Period([&](int x) { return\
+    \ functional[x]; }, iota(functional.size())) { static_assert(std::is_same_v<T,\
+    \ int>); }\n int operator()(const T &x) const {\n  Iter it= this->mp.find(x);\n\
+    \  assert(it != this->mp.end());\n  return t.size() - hld.to_seq(it->second);\n\
+    \ }\n size_t size() const { return t.size(); }\n // f^k(x)\n template <class Int,\
+    \ class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>> T jump(const\
+    \ T &x, Int k) const {\n  Iter it= this->mp.find(x);\n  assert(it != this->mp.end());\n\
+    \  int v= it->second, n= t.size(), d= hld.depth(v) - 1;\n  if (k <= d) return\
+    \ dc[hld.la(v, (int)k)];\n  int b= t[v= rt[v]], l= (k-= d) % hld.depth(b);\n \
+    \ if (l == 0) return dc[v];\n  return dc[hld.la(b, l - 1)];\n }\n // x, f(x),\
+    \ f(f(x)), ... f^k(x)\n // (x,...,f^i(x)), (f^(i+1)(x),...,f^(j-1)(x)) x loop,\
+    \ (f^j(x),...,f^k(x))\n // sequence of half-open intervals [l,r)\n template <class\
+    \ Int, class= std::void_t<decltype(std::declval<Int>() % std::declval<int>())>>\
+    \ std::tuple<Path, Path, Int, Path> path(const T &x, Int k) const {\n  Iter it=\
+    \ this->mp.find(x);\n  assert(it != this->mp.end());\n  int v= it->second, n=\
+    \ t.size(), d= hld.depth(v) - 1;\n  std::array<Path, 3> pth;\n  Int cnt= 0;\n\
+    \  if (k > d) {\n   int b= t[rt[v]], c= hld.depth(b), l= (k-= d) % c;\n   if (pth[0]=\
+    \ hld.path(v, hld.la(v, d)), pth[1]= hld.path(b, hld.la(b, c - 1)), cnt= k / c;\
+    \ l) pth[2]= hld.path(b, hld.la(b, l - 1));\n  } else pth[0]= hld.path(v, hld.la(v,\
+    \ (int)k));\n  for (int s= 3; s--;)\n   for (auto &[l, r]: pth[s]) l= n - l, r=\
+    \ n - r + 1;\n  return {pth[0], pth[1], cnt, pth[2]};\n }\n};"
   dependsOn:
-  - src/Misc/Period.hpp
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
-  isVerificationFile: true
-  path: test/atcoder/abc167_d.test.cpp
+  isVerificationFile: false
+  path: src/Misc/Period.hpp
   requiredBy: []
   timestamp: '2024-02-22 11:37:15+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/atcoder/abc167_d.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yukicoder/1211.test.cpp
+  - test/yukicoder/2122.test.cpp
+  - test/yukicoder/1935.test.cpp
+  - test/yukicoder/1242.test.cpp
+  - test/atcoder/abc310_g.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc241_e.test.cpp
+documentation_of: src/Misc/Period.hpp
 layout: document
-redirect_from:
-- /verify/test/atcoder/abc167_d.test.cpp
-- /verify/test/atcoder/abc167_d.test.cpp.html
-title: test/atcoder/abc167_d.test.cpp
+title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
 ---
+
+## `Period<T>` クラス
+
+初期状態が $x_0\in T$ な列 $(x_i)_i$ が次の漸化式で定まっているとする．
+
+$
+\displaystyle x_{i+1} = f(x_i)
+$
+
+$x_i$ として取りうる状態の数が有限であるときに周期性を利用して巨大な数 $k$ に対する $x_k$ を求める　
+
+などするクラス．
+
+初期状態が複数ある場合でも Functional グラフを重軽分解することで頑張る．
+
+状態 $x$ をいい感じに並び替えて，ラベリングする．
+
+状態の数を $n$ とする．
+
+| メンバ関数 | 概要 | 計算量 |
+| --- | --- | --- |
+| `Period(f, init)` | コンストラクタ. <br> 関数 $f:T\to T$ と初期状態の集合 $X_0 \subset T $ を渡す． <br> 第二引数は `vector<T>`. |$O(An\log n)$ <br> ただし $f(x)$ の計算に $O(A)$ とかかるとした．<br> $\log$ は連想配列を用いたため．|
+| `Period(functional)` | コンストラクタ. <br> 全状態の集合が $V＝\lbrace 0,\dots,n-1\rbrace$ だとして，それぞれの状態の移り先を表す配列 ( $V\to V$ ) を渡す．<br> 引数は `vector<int>`. <br> `T == int` でないと呼べない．| $O(n)$|
+|`size()`|状態の数 $n$ を返す．||
+|`operator()(x)`| $x$ に対応するラベルを返す．<br> 戻り値は `int`. |
+| `jump(x,k)`          | $f^k(x)=\overbrace{f(\cdots f(f}^{k}(x)))$ を返す. <br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は `T`.| $O(\log n)$ |
+| `path(x,k)`          | $x,f(x),\dots,f^k(x)$ という軌道を表す 半開区間の列 を返す．<br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は4つのデータをラッピングした`tuple`．<br> 一つ目はループに至るまでの軌道．<br> 二つ目はループ一回分を表す軌道．<br> 三つ目はループの回数 `Int`. <br> 四つ目はループの余りの軌道．<br> 軌道は `vector<pair<int,int>>` で表現する半開区間の列 $\lbrack a_0, b_0 ),\dots,\lbrack a_m, b_m )$ であり, $f^i(x)$ のラベルに対応している． | $O(\log n)$ |
+
+## 問題例
+[AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)
