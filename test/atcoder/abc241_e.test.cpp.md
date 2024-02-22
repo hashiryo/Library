@@ -13,12 +13,12 @@ data:
       \ \u4ED6"
   - icon: ':question:'
     path: src/Misc/Period.hpp
-    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
+    title: "\u5468\u671F\u6027\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc241/tasks/abc241_e
@@ -164,7 +164,7 @@ data:
   path: test/atcoder/abc241_e.test.cpp
   requiredBy: []
   timestamp: '2024-02-22 13:37:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc241_e.test.cpp
 layout: document

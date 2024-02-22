@@ -226,7 +226,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc310_g.test.cpp
     title: test/atcoder/abc310_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -533,6 +533,9 @@ data:
     path: test/yukicoder/1573.enum_quo.test.cpp
     title: test/yukicoder/1573.enum_quo.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1595.linear_rec.test.cpp
+    title: test/yukicoder/1595.linear_rec.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
   - icon: ':x:'
@@ -623,8 +626,8 @@ data:
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/658.test.cpp
-    title: test/yukicoder/658.test.cpp
+    path: test/yukicoder/658.linear_rec.test.cpp
+    title: test/yukicoder/658.linear_rec.test.cpp
   - icon: ':x:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
@@ -697,7 +700,6 @@ data:
   timestamp: '2023-08-05 18:38:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/658.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
@@ -740,6 +742,7 @@ data:
   - test/yukicoder/685.test.cpp
   - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/1075.test.cpp
+  - test/yukicoder/1595.linear_rec.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
@@ -751,6 +754,7 @@ data:
   - test/yukicoder/42.test.cpp
   - test/yukicoder/1848.zalgo.test.cpp
   - test/yukicoder/1269.test.cpp
+  - test/yukicoder/658.linear_rec.test.cpp
   - test/yukicoder/2264.test.cpp
   - test/yukicoder/1740.test.cpp
   - test/yukicoder/235.HLD.test.cpp

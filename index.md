@@ -358,7 +358,7 @@ data:
       title: Mo's Algorithm
     - icon: ':question:'
       path: src/Misc/Period.hpp
-      title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
+      title: "\u5468\u671F\u6027\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
     - icon: ':question:'
       path: src/Misc/Pointwise.hpp
       title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\\
@@ -1272,7 +1272,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.rerooting.test.cpp
       title: test/atcoder/abc223_g.rerooting.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1311,7 +1311,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc239_ex.test.cpp
       title: test/atcoder/abc239_ex.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1329,7 +1329,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_d.test.cpp
       title: test/atcoder/abc256_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_e.test.cpp
       title: test/atcoder/abc256_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1383,7 +1383,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc310_g.test.cpp
       title: test/atcoder/abc310_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2028,6 +2028,12 @@ data:
       path: test/yukicoder/1573.enum_quo.test.cpp
       title: test/yukicoder/1573.enum_quo.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/1595.linear_rec.test.cpp
+      title: test/yukicoder/1595.linear_rec.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1595.period.test.cpp
+      title: test/yukicoder/1595.period.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/1600.KDT.test.cpp
       title: test/yukicoder/1600.KDT.test.cpp
     - icon: ':x:'
@@ -2238,8 +2244,11 @@ data:
       path: test/yukicoder/650.LCT.test.cpp
       title: test/yukicoder/650.LCT.test.cpp
     - icon: ':x:'
-      path: test/yukicoder/658.test.cpp
-      title: test/yukicoder/658.test.cpp
+      path: test/yukicoder/658.linear_rec.test.cpp
+      title: test/yukicoder/658.linear_rec.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/658.period.test.cpp
+      title: test/yukicoder/658.period.test.cpp
     - icon: ':x:'
       path: test/yukicoder/665.test.cpp
       title: test/yukicoder/665.test.cpp

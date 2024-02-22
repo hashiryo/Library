@@ -13,7 +13,7 @@ data:
       \ \u4ED6"
   - icon: ':question:'
     path: src/Misc/Period.hpp
-    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
+    title: "\u5468\u671F\u6027\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

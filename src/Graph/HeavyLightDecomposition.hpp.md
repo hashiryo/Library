@@ -14,7 +14,7 @@ data:
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':question:'
     path: src/Misc/Period.hpp
-    title: "\u5468\u671F\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
+    title: "\u5468\u671F\u6027\u306E\u5229\u7528 (Functional\u30B0\u30E9\u30D5)"
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
@@ -64,13 +64,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc310_g.test.cpp
     title: test/atcoder/abc310_g.test.cpp
   - icon: ':x:'
@@ -125,6 +125,9 @@ data:
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1595.period.test.cpp
+    title: test/yukicoder/1595.period.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
   - icon: ':x:'
@@ -151,6 +154,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/658.period.test.cpp
+    title: test/yukicoder/658.period.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
@@ -303,10 +309,12 @@ data:
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1418.test.cpp
+  - test/yukicoder/658.period.test.cpp
   - test/yukicoder/1295.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
   - test/yukicoder/922.test.cpp
+  - test/yukicoder/1595.period.test.cpp
   - test/yukicoder/1242.test.cpp
   - test/yukicoder/768.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
