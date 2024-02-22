@@ -70,7 +70,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc310_g.test.cpp
     title: test/atcoder/abc310_g.test.cpp
   - icon: ':x:'

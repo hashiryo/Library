@@ -7,6 +7,9 @@ data:
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1569.Nimber.test.cpp
+    title: test/yukicoder/1569.Nimber.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1595.linear_rec.test.cpp
     title: test/yukicoder/1595.linear_rec.test.cpp
   - icon: ':x:'
@@ -73,6 +76,7 @@ data:
   timestamp: '2024-02-22 16:45:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1569.Nimber.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1595.linear_rec.test.cpp
   - test/yukicoder/658.linear_rec.test.cpp

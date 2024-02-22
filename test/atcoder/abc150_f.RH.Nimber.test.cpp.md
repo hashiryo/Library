@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   - icon: ':question:'
@@ -137,28 +137,29 @@ data:
     \ Nimber operator+(const Nimber &r) const { return Nimber(x ^ r.x); }\n Nimber\
     \ operator-(const Nimber &r) const { return Nimber(x ^ r.x); }\n Nimber operator*(const\
     \ Nimber &r) const { return Nimber(mul(x, r.x)); }\n Nimber operator/(const Nimber\
-    \ &r) const { return Nimber(mul(x, inv(r.x))); }\n Nimber inv() const { return\
-    \ Nimber(inv(x)); }\n Nimber square() const { return Nimber(square(x)); }\n Nimber\
-    \ sqrt() const {\n  u16 a0= u16(x), a1= u16(x >> 16), a2= u16(x >> 32), a3= x\
-    \ >> 48;\n  return a1^= half(a3 ^ a2), a2^= half(a3), a0^= half(a1) ^ half<6>(a3),\
-    \ Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) << 32) | (u32(sqrt(a1)) << 16)\
-    \ | sqrt(a0));\n }\n u64 val() const { return x; }\n Nimber pow(u64 k) const {\
-    \ return Nimber(pow(x, k)); }\n u64 log(const Nimber &r) const { return log(x,\
-    \ r.x); }\n bool operator==(const Nimber &r) const { return x == r.x; }\n bool\
-    \ operator!=(const Nimber &r) const { return x != r.x; }\n bool operator<(const\
-    \ Nimber &r) const { return x < r.x; }\n bool operator>(const Nimber &r) const\
-    \ { return x > r.x; }\n bool operator<=(const Nimber &r) const { return x <= r.x;\
-    \ }\n bool operator>=(const Nimber &r) const { return x >= r.x; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const Nimber &r) { return os << r.x; }\n friend\
-    \ std::istream &operator>>(std::istream &is, Nimber &r) { return is >> r.x, is;\
-    \ }\n};\n#line 7 \"test/atcoder/abc150_f.RH.Nimber.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n Nimber::init();\n\
-    \ using RH= RollingHash<Nimber, Nimber>;\n Nimber base= rng(2, 1ll << 60);\n RH::init(base);\n\
-    \ int N;\n cin >> N;\n vector<Nimber> a(N), b(N);\n for (int i= 0; i < N; ++i)\
-    \ cin >> a[i];\n for (int i= 0; i < N; ++i) cin >> b[i];\n RH ra(a), rb(b);\n\
-    \ auto X= (base.pow(N) - 1) / (base - 1);\n auto bh= rb.hash();\n for (int k=\
-    \ 0; k < N; ++k) {\n  auto x= a[k] + b[0];\n  if (concat_hash(ra.sub(k), ra.sub(0,\
-    \ k)) + x * X == bh) cout << k << \" \" << x << '\\n';\n }\n return 0;\n}\n"
+    \ &r) const { return Nimber(mul(x, inv(r.x))); }\n Nimber operator-() const {\
+    \ return *this; }\n Nimber inv() const { return Nimber(inv(x)); }\n Nimber square()\
+    \ const { return Nimber(square(x)); }\n Nimber sqrt() const {\n  u16 a0= u16(x),\
+    \ a1= u16(x >> 16), a2= u16(x >> 32), a3= x >> 48;\n  return a1^= half(a3 ^ a2),\
+    \ a2^= half(a3), a0^= half(a1) ^ half<6>(a3), Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2))\
+    \ << 32) | (u32(sqrt(a1)) << 16) | sqrt(a0));\n }\n u64 val() const { return x;\
+    \ }\n Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n u64 log(const Nimber\
+    \ &r) const { return log(x, r.x); }\n bool operator==(const Nimber &r) const {\
+    \ return x == r.x; }\n bool operator!=(const Nimber &r) const { return x != r.x;\
+    \ }\n bool operator<(const Nimber &r) const { return x < r.x; }\n bool operator>(const\
+    \ Nimber &r) const { return x > r.x; }\n bool operator<=(const Nimber &r) const\
+    \ { return x <= r.x; }\n bool operator>=(const Nimber &r) const { return x >=\
+    \ r.x; }\n friend std::ostream &operator<<(std::ostream &os, const Nimber &r)\
+    \ { return os << r.x; }\n friend std::istream &operator>>(std::istream &is, Nimber\
+    \ &r) { return is >> r.x, is; }\n};\n#line 7 \"test/atcoder/abc150_f.RH.Nimber.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ Nimber::init();\n using RH= RollingHash<Nimber, Nimber>;\n Nimber base= rng(2,\
+    \ 1ll << 60);\n RH::init(base);\n int N;\n cin >> N;\n vector<Nimber> a(N), b(N);\n\
+    \ for (int i= 0; i < N; ++i) cin >> a[i];\n for (int i= 0; i < N; ++i) cin >>\
+    \ b[i];\n RH ra(a), rb(b);\n auto X= (base.pow(N) - 1) / (base - 1);\n auto bh=\
+    \ rb.hash();\n for (int k= 0; k < N; ++k) {\n  auto x= a[k] + b[0];\n  if (concat_hash(ra.sub(k),\
+    \ ra.sub(0, k)) + x * X == bh) cout << k << \" \" << x << '\\n';\n }\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc150/tasks/abc150_f\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/String/RollingHash.hpp\"\n#include\
     \ \"src/Misc/rng.hpp\"\n#include \"src/Math/Nimber.hpp\"\nusing namespace std;\n\
@@ -176,7 +177,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc150_f.RH.Nimber.test.cpp
   requiredBy: []
-  timestamp: '2023-11-17 14:39:53+09:00'
+  timestamp: '2024-02-23 00:06:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc150_f.RH.Nimber.test.cpp

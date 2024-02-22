@@ -302,7 +302,7 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':heavy_check_mark:'
@@ -1383,7 +1383,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc310_g.test.cpp
       title: test/atcoder/abc310_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1492,13 +1492,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_rational.test.cpp
       title: test/unit_test/constexpr_rational.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/nimber_log.test.cpp
       title: test/unit_test/nimber_log.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/nimber_sqrt.test.cpp
       title: test/unit_test/nimber_sqrt.test.cpp
   - name: test/yosupo
@@ -1710,7 +1710,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/multivariate_convolution.test.cpp
       title: test/yosupo/multivariate_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/nim_product_64.test.cpp
       title: test/yosupo/nim_product_64.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2021,6 +2021,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1569.Nimber.test.cpp
+      title: test/yukicoder/1569.Nimber.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1573.Dirichlet.test.cpp
       title: test/yukicoder/1573.Dirichlet.test.cpp

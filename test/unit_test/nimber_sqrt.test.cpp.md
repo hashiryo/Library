@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -88,24 +88,25 @@ data:
     \ Nimber(x ^ r.x); }\n Nimber operator-(const Nimber &r) const { return Nimber(x\
     \ ^ r.x); }\n Nimber operator*(const Nimber &r) const { return Nimber(mul(x, r.x));\
     \ }\n Nimber operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x)));\
-    \ }\n Nimber inv() const { return Nimber(inv(x)); }\n Nimber square() const {\
-    \ return Nimber(square(x)); }\n Nimber sqrt() const {\n  u16 a0= u16(x), a1= u16(x\
-    \ >> 16), a2= u16(x >> 32), a3= x >> 48;\n  return a1^= half(a3 ^ a2), a2^= half(a3),\
-    \ a0^= half(a1) ^ half<6>(a3), Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) <<\
-    \ 32) | (u32(sqrt(a1)) << 16) | sqrt(a0));\n }\n u64 val() const { return x; }\n\
-    \ Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n u64 log(const Nimber\
-    \ &r) const { return log(x, r.x); }\n bool operator==(const Nimber &r) const {\
-    \ return x == r.x; }\n bool operator!=(const Nimber &r) const { return x != r.x;\
-    \ }\n bool operator<(const Nimber &r) const { return x < r.x; }\n bool operator>(const\
-    \ Nimber &r) const { return x > r.x; }\n bool operator<=(const Nimber &r) const\
-    \ { return x <= r.x; }\n bool operator>=(const Nimber &r) const { return x >=\
-    \ r.x; }\n friend std::ostream &operator<<(std::ostream &os, const Nimber &r)\
-    \ { return os << r.x; }\n friend std::istream &operator>>(std::istream &is, Nimber\
-    \ &r) { return is >> r.x, is; }\n};\n#line 6 \"test/unit_test/nimber_sqrt.test.cpp\"\
-    \nusing namespace std;\nvoid test(int X) {\n mt19937 mt(X);\n uniform_int_distribution<uint64_t>\
-    \ rng(0, uint64_t(-1));\n static constexpr int N= 100000;\n static Nimber a[N],\
-    \ b[N];\n for (int i= 0; i < N; i++) a[i]= rng(mt), b[i]= a[i] * a[i];\n for (int\
-    \ i= 0; i < N; i++) {\n  Nimber ans= b[i].sqrt();\n  assert(ans == a[i]);\n  assert(ans.val()\
+    \ }\n Nimber operator-() const { return *this; }\n Nimber inv() const { return\
+    \ Nimber(inv(x)); }\n Nimber square() const { return Nimber(square(x)); }\n Nimber\
+    \ sqrt() const {\n  u16 a0= u16(x), a1= u16(x >> 16), a2= u16(x >> 32), a3= x\
+    \ >> 48;\n  return a1^= half(a3 ^ a2), a2^= half(a3), a0^= half(a1) ^ half<6>(a3),\
+    \ Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) << 32) | (u32(sqrt(a1)) << 16)\
+    \ | sqrt(a0));\n }\n u64 val() const { return x; }\n Nimber pow(u64 k) const {\
+    \ return Nimber(pow(x, k)); }\n u64 log(const Nimber &r) const { return log(x,\
+    \ r.x); }\n bool operator==(const Nimber &r) const { return x == r.x; }\n bool\
+    \ operator!=(const Nimber &r) const { return x != r.x; }\n bool operator<(const\
+    \ Nimber &r) const { return x < r.x; }\n bool operator>(const Nimber &r) const\
+    \ { return x > r.x; }\n bool operator<=(const Nimber &r) const { return x <= r.x;\
+    \ }\n bool operator>=(const Nimber &r) const { return x >= r.x; }\n friend std::ostream\
+    \ &operator<<(std::ostream &os, const Nimber &r) { return os << r.x; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Nimber &r) { return is >> r.x, is;\
+    \ }\n};\n#line 6 \"test/unit_test/nimber_sqrt.test.cpp\"\nusing namespace std;\n\
+    void test(int X) {\n mt19937 mt(X);\n uniform_int_distribution<uint64_t> rng(0,\
+    \ uint64_t(-1));\n static constexpr int N= 100000;\n static Nimber a[N], b[N];\n\
+    \ for (int i= 0; i < N; i++) a[i]= rng(mt), b[i]= a[i] * a[i];\n for (int i= 0;\
+    \ i < N; i++) {\n  Nimber ans= b[i].sqrt();\n  assert(ans == a[i]);\n  assert(ans.val()\
     \ == a[i].val());\n }\n}\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ Nimber::init();\n int A, B;\n cin >> A >> B;\n test(A), test(B);\n cout << A\
     \ + B << '\\n';\n return 0;\n}\n"
@@ -123,8 +124,8 @@ data:
   isVerificationFile: true
   path: test/unit_test/nimber_sqrt.test.cpp
   requiredBy: []
-  timestamp: '2023-08-06 16:57:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-23 00:06:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/nimber_sqrt.test.cpp
 layout: document

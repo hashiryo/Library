@@ -6,21 +6,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc150_f.RH.Nimber.test.cpp
     title: test/atcoder/abc150_f.RH.Nimber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/nimber_inv.test.cpp
     title: test/unit_test/nimber_inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/nimber_log.test.cpp
     title: test/unit_test/nimber_log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/nimber_sqrt.test.cpp
     title: test/unit_test/nimber_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/nim_product_64.test.cpp
     title: test/yosupo/nim_product_64.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/1569.Nimber.test.cpp
+    title: test/yukicoder/1569.Nimber.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include <numeric>\n\
@@ -94,21 +97,21 @@ data:
     \ Nimber operator+(const Nimber &r) const { return Nimber(x ^ r.x); }\n Nimber\
     \ operator-(const Nimber &r) const { return Nimber(x ^ r.x); }\n Nimber operator*(const\
     \ Nimber &r) const { return Nimber(mul(x, r.x)); }\n Nimber operator/(const Nimber\
-    \ &r) const { return Nimber(mul(x, inv(r.x))); }\n Nimber inv() const { return\
-    \ Nimber(inv(x)); }\n Nimber square() const { return Nimber(square(x)); }\n Nimber\
-    \ sqrt() const {\n  u16 a0= u16(x), a1= u16(x >> 16), a2= u16(x >> 32), a3= x\
-    \ >> 48;\n  return a1^= half(a3 ^ a2), a2^= half(a3), a0^= half(a1) ^ half<6>(a3),\
-    \ Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) << 32) | (u32(sqrt(a1)) << 16)\
-    \ | sqrt(a0));\n }\n u64 val() const { return x; }\n Nimber pow(u64 k) const {\
-    \ return Nimber(pow(x, k)); }\n u64 log(const Nimber &r) const { return log(x,\
-    \ r.x); }\n bool operator==(const Nimber &r) const { return x == r.x; }\n bool\
-    \ operator!=(const Nimber &r) const { return x != r.x; }\n bool operator<(const\
-    \ Nimber &r) const { return x < r.x; }\n bool operator>(const Nimber &r) const\
-    \ { return x > r.x; }\n bool operator<=(const Nimber &r) const { return x <= r.x;\
-    \ }\n bool operator>=(const Nimber &r) const { return x >= r.x; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const Nimber &r) { return os << r.x; }\n friend\
-    \ std::istream &operator>>(std::istream &is, Nimber &r) { return is >> r.x, is;\
-    \ }\n};\n"
+    \ &r) const { return Nimber(mul(x, inv(r.x))); }\n Nimber operator-() const {\
+    \ return *this; }\n Nimber inv() const { return Nimber(inv(x)); }\n Nimber square()\
+    \ const { return Nimber(square(x)); }\n Nimber sqrt() const {\n  u16 a0= u16(x),\
+    \ a1= u16(x >> 16), a2= u16(x >> 32), a3= x >> 48;\n  return a1^= half(a3 ^ a2),\
+    \ a2^= half(a3), a0^= half(a1) ^ half<6>(a3), Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2))\
+    \ << 32) | (u32(sqrt(a1)) << 16) | sqrt(a0));\n }\n u64 val() const { return x;\
+    \ }\n Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n u64 log(const Nimber\
+    \ &r) const { return log(x, r.x); }\n bool operator==(const Nimber &r) const {\
+    \ return x == r.x; }\n bool operator!=(const Nimber &r) const { return x != r.x;\
+    \ }\n bool operator<(const Nimber &r) const { return x < r.x; }\n bool operator>(const\
+    \ Nimber &r) const { return x > r.x; }\n bool operator<=(const Nimber &r) const\
+    \ { return x <= r.x; }\n bool operator>=(const Nimber &r) const { return x >=\
+    \ r.x; }\n friend std::ostream &operator<<(std::ostream &os, const Nimber &r)\
+    \ { return os << r.x; }\n friend std::istream &operator>>(std::istream &is, Nimber\
+    \ &r) { return is >> r.x, is; }\n};\n"
   code: "#pragma once\n#include <array>\n#include <numeric>\n#include <utility>\n\
     #include <cassert>\nclass Nimber {\n using u64= uint64_t;\n using u32= uint32_t;\n\
     \ using u16= uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
@@ -180,28 +183,29 @@ data:
     \ Nimber operator+(const Nimber &r) const { return Nimber(x ^ r.x); }\n Nimber\
     \ operator-(const Nimber &r) const { return Nimber(x ^ r.x); }\n Nimber operator*(const\
     \ Nimber &r) const { return Nimber(mul(x, r.x)); }\n Nimber operator/(const Nimber\
-    \ &r) const { return Nimber(mul(x, inv(r.x))); }\n Nimber inv() const { return\
-    \ Nimber(inv(x)); }\n Nimber square() const { return Nimber(square(x)); }\n Nimber\
-    \ sqrt() const {\n  u16 a0= u16(x), a1= u16(x >> 16), a2= u16(x >> 32), a3= x\
-    \ >> 48;\n  return a1^= half(a3 ^ a2), a2^= half(a3), a0^= half(a1) ^ half<6>(a3),\
-    \ Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) << 32) | (u32(sqrt(a1)) << 16)\
-    \ | sqrt(a0));\n }\n u64 val() const { return x; }\n Nimber pow(u64 k) const {\
-    \ return Nimber(pow(x, k)); }\n u64 log(const Nimber &r) const { return log(x,\
-    \ r.x); }\n bool operator==(const Nimber &r) const { return x == r.x; }\n bool\
-    \ operator!=(const Nimber &r) const { return x != r.x; }\n bool operator<(const\
-    \ Nimber &r) const { return x < r.x; }\n bool operator>(const Nimber &r) const\
-    \ { return x > r.x; }\n bool operator<=(const Nimber &r) const { return x <= r.x;\
-    \ }\n bool operator>=(const Nimber &r) const { return x >= r.x; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const Nimber &r) { return os << r.x; }\n friend\
-    \ std::istream &operator>>(std::istream &is, Nimber &r) { return is >> r.x, is;\
-    \ }\n};"
+    \ &r) const { return Nimber(mul(x, inv(r.x))); }\n Nimber operator-() const {\
+    \ return *this; }\n Nimber inv() const { return Nimber(inv(x)); }\n Nimber square()\
+    \ const { return Nimber(square(x)); }\n Nimber sqrt() const {\n  u16 a0= u16(x),\
+    \ a1= u16(x >> 16), a2= u16(x >> 32), a3= x >> 48;\n  return a1^= half(a3 ^ a2),\
+    \ a2^= half(a3), a0^= half(a1) ^ half<6>(a3), Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2))\
+    \ << 32) | (u32(sqrt(a1)) << 16) | sqrt(a0));\n }\n u64 val() const { return x;\
+    \ }\n Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n u64 log(const Nimber\
+    \ &r) const { return log(x, r.x); }\n bool operator==(const Nimber &r) const {\
+    \ return x == r.x; }\n bool operator!=(const Nimber &r) const { return x != r.x;\
+    \ }\n bool operator<(const Nimber &r) const { return x < r.x; }\n bool operator>(const\
+    \ Nimber &r) const { return x > r.x; }\n bool operator<=(const Nimber &r) const\
+    \ { return x <= r.x; }\n bool operator>=(const Nimber &r) const { return x >=\
+    \ r.x; }\n friend std::ostream &operator<<(std::ostream &os, const Nimber &r)\
+    \ { return os << r.x; }\n friend std::istream &operator>>(std::istream &is, Nimber\
+    \ &r) { return is >> r.x, is; }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/Nimber.hpp
   requiredBy: []
-  timestamp: '2023-08-06 16:57:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-02-23 00:06:46+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1569.Nimber.test.cpp
   - test/yosupo/nim_product_64.test.cpp
   - test/unit_test/nimber_inv.test.cpp
   - test/unit_test/nimber_log.test.cpp
