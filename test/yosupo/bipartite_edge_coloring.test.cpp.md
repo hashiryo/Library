@@ -144,10 +144,10 @@ data:
     \ adj, mate);\n   for (int e: idx) {\n    auto [l, r]= bg[e];\n    if (mate[l]\
     \ == r) {\n     if (mate[l]= mate[r]= -1; e < m) color[e]= col;\n    } else rm.push_back(e);\n\
     \   }\n   return ++col, rc(rc, d - 1, rm);\n  }\n  const int mm= idx.size();\n\
-    \  std::vector<int> circuit;\n  {\n   std::vector<int> c(mm), p(n + 1);\n   for\
-    \ (int e: idx) {\n    auto [l, r]= bg[e];\n    ++p[l], ++p[r];\n   }\n   for (int\
-    \ i= 0; i < L; ++i) p[i + 1]+= p[i];\n   for (int i= mm; i--;) {\n    auto [l,\
-    \ r]= bg[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int>\
+    \  std::vector<int> circuit;\n  {\n   std::vector<int> c(mm * 2), p(n + 1);\n\
+    \   for (int e: idx) {\n    auto [l, r]= bg[e];\n    ++p[l], ++p[r];\n   }\n \
+    \  for (int i= 0; i < n; ++i) p[i + 1]+= p[i];\n   for (int i= mm; i--;) {\n \
+    \   auto [l, r]= bg[idx[i]];\n    c[--p[l]]= i, c[--p[r]]= i;\n   }\n   std::vector<int>\
     \ it(p.begin(), p.begin() + n);\n   std::vector<char> used1(n), used2(mm);\n \
     \  for (int v= n; v--;)\n    if (!used1[v]) {\n     for (std::vector<std::pair<int,\
     \ int>> st= {{v, -1}}; st.size();) {\n      auto [u, e]= st.back();\n      if\
@@ -156,7 +156,7 @@ data:
     \ i);\n     }\n     circuit.pop_back();\n    }\n  }\n  std::vector<int> half1(mm\
     \ / 2), half2(mm / 2);\n  for (int i= mm / 2; i--;) half1[i]= idx[circuit[i *\
     \ 2]], half2[i]= idx[circuit[i * 2 + 1]];\n  rc(rc, d / 2, half1), rc(rc, d /\
-    \ 2, half2);\n };\n std::vector<int> idx(m * D);\n return std::iota(idx.begin(),\
+    \ 2, half2);\n };\n std::vector<int> idx(L * D);\n return std::iota(idx.begin(),\
     \ idx.end(), 0), rc(rc, D, idx), color;\n}\n#line 6 \"test/yosupo/bipartite_edge_coloring.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int L, R, M;\n cin >> L >> R >> M;\n BipartiteGraph bg(L, R, M);\n for (int\
@@ -180,7 +180,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartite_edge_coloring.test.cpp
   requiredBy: []
-  timestamp: '2024-02-20 00:09:10+09:00'
+  timestamp: '2024-02-23 13:09:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartite_edge_coloring.test.cpp

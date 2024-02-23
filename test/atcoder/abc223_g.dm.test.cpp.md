@@ -16,9 +16,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc223/tasks/abc223_g
@@ -133,7 +133,7 @@ data:
     \ -1) z[u]= s, q[t++]= u;\n   }\n   if (c ^ s) vc.push_back(v);\n  }\n  return\
     \ vc;\n }\n};\n#line 8 \"test/atcoder/abc223_g.dm.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin\
-    \ >> N;\n Graph g(N, N - 1);\n for (int i= 0; i < N; ++i) cin >> g[i], --g[i];\n\
+    \ >> N;\n Graph g(N, N - 1);\n for (int i= 0; i < N - 1; ++i) cin >> g[i], --g[i];\n\
     \ auto [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n DulmageMendelsohn\
     \ dm(bg);\n int k= dm.size();\n int ans= 0;\n for (int v: dm.block(0))\n  if (v\
     \ >= L) ++ans;\n for (int v: dm.block(k - 1))\n  if (v < L) ++ans;\n cout << ans\
@@ -142,8 +142,8 @@ data:
     \ <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Graph/Graph.hpp\"\
     \n#include \"src/Graph/BipartiteGraph.hpp\"\n#include \"src/Graph/DulmageMendelsohn.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N;\n cin >> N;\n Graph g(N, N - 1);\n for (int i= 0; i < N; ++i) cin >>\
-    \ g[i], --g[i];\n auto [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n\
+    \ int N;\n cin >> N;\n Graph g(N, N - 1);\n for (int i= 0; i < N - 1; ++i) cin\
+    \ >> g[i], --g[i];\n auto [bg, nw, ori]= graph_to_bipartite(g);\n int L= bg.left_size();\n\
     \ DulmageMendelsohn dm(bg);\n int k= dm.size();\n int ans= 0;\n for (int v: dm.block(0))\n\
     \  if (v >= L) ++ans;\n for (int v: dm.block(k - 1))\n  if (v < L) ++ans;\n cout\
     \ << ans << '\\n';\n return 0;\n}"
@@ -155,8 +155,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc223_g.dm.test.cpp
   requiredBy: []
-  timestamp: '2024-02-23 11:54:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-23 13:09:01+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.dm.test.cpp
 layout: document

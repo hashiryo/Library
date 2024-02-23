@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc272_f.RH.test.cpp
     title: test/atcoder/abc272_f.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
   - icon: ':x:'
