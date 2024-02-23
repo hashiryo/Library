@@ -27,55 +27,56 @@ data:
     links:
     - https://atcoder.jp/contests/abc212/tasks/abc212_h
   bundledCode: "#line 1 \"test/atcoder/abc212_h.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc212/tasks/abc212_h\"\
-    \n#include <iostream>\n#include <algorithm>\n#line 2 \"src/Math/mod_inv.hpp\"\n\
-    #include <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline\
-    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
-    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a\
-    \ / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
-    \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
-    \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
-    \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
-    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
-    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return\
-    \ l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l,\
-    \ U r) const { return l-= r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static\
-    \ CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\
-    \n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE\
-    \ MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t mul(u_t\
-    \ l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n DIFF(u_t,\
-    \ A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n CE IL u_t\
-    \ get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t n) const\
-    \ { NORM; }\nprivate:\n u_t iv, r2;\n static CE u_t inv(u_t n, int e= 6, u_t x=\
-    \ 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE IL u_t reduce(const\
-    \ du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w) * iv) * mod) >> B);\
-    \ }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m):\
-    \ mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n\
-    \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n\
-    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(95\
-    \ - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32\
-    \ l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod)\
-    \ SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x)\
-    \ * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\n\
-    struct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0)\
-    \ {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64\
-    \ l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64,\
-    \ 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64\
-    \ n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
-    \ CE IL u128 quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const\
-    \ u128 &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n\
-    \ u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64\
-    \ m): s(__builtin_clzll(m)), mod(m), d(m << s), v(u128(-1) / d) {}\n CE IL u64\
-    \ mul(u64 l, u64 r) const { return rem((u128(l) * r) << s) >> s; }\n PLUS(u64,\
-    \ mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const u128 &u) const\
-    \ {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64) * d - d;\n  if\
-    \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
-    \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
-    \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
-    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Internal/modint_traits.hpp\"\nnamespace math_internal {\nstruct m_b {};\n\
-    struct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b,\
-    \ mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \n// \u30A2\u30C0\u30DE\u30FC\u30EB\u5909\u63DB\n#include <iostream>\n#include\
+    \ <algorithm>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
+    \ <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod)\
+    \ {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for (Int\
+    \ q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b), z= a, a= b, b= z - b * q;\n\
+    \ return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\
+    \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
+    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
+    using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
+    \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
+    \ l, U r) const { return l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M)\
+    \ \\\n CE IL U diff(U l, U r) const { return l-= r, l >> C ? l + (M) : l; }\n\
+    #define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U\
+    \ get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
+    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n u_t iv, r2;\n static CE\
+    \ u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n))\
+    \ : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod -\
+    \ ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na():\
+    \ mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const {\
+    \ return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\n\
+    struct MP_Br {  // mod < 2^31\n u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n\
+    \ CE MP_Br(u32 m): mod(m), s(95 - __builtin_clz(m - 1)), x(((u128(1) << s) + m\
+    \ - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n\
+    \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: u8 s;\n u64 x;\n CE IL u64\
+    \ quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const\
+    \ { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n u64\
+    \ mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) <<\
+    \ 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n\
+    \ PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n)\
+    \ { return n; }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n)\
+    \ const { NORM; }\nprivate:\n u64 x;\n CE IL u128 quo(const u128 &n) const { return\
+    \ (n * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) *\
+    \ mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n u64 mod, d, v;\n CE MP_D2B1(): s(0),\
+    \ mod(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): s(__builtin_clzll(m)), mod(m), d(m\
+    \ << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
+    \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
+    \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/Internal/modint_traits.hpp\"\nnamespace math_internal\
+    \ {\nstruct m_b {};\nstruct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr\
+    \ bool is_modint_v= std::is_base_of_v<math_internal::m_b, mod_t>;\ntemplate <class\
+    \ mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
     \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
     \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
@@ -211,7 +212,7 @@ data:
     \ }\n return h;\n}\n// log(f) , \"f[empty] = 1\" is required,  O(n^2 2^n)\ntemplate\
     \ <class T> vector<T> log(const vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N),\
     \ e= min(n, 12);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n vector<T> h= f;\n\
-    \ int i= 0, l= 1;\n for (; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
+    \ int i= 0, l= 1;\n for (h[0]= 0; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
     \ l);\n if (i < n) {\n  vector<T> G(n << (n - 1));\n  rnk_zeta(f.data(), G.data(),\
     \ n - 1);\n  for (; i < n; l<<= 1, ++i) {\n   vector<T> F((i + 1) << i, 0);\n\
     \   if constexpr (is_floating_point_v<T>) {\n    fill_n(F.data(), l, h[l]= f[l]);\n\
@@ -267,22 +268,22 @@ data:
     \ _sps_internal::convolve, _sps_internal::semi_relaxed_convolve, _sps_internal::self_relaxed_convolve,\
     \ _sps_internal::inv, _sps_internal::div, _sps_internal::exp, _sps_internal::log,\
     \ _sps_internal::egf_comp, _sps_internal::poly_comp, _sps_internal::egf_T;\n}\n\
-    #line 6 \"test/atcoder/abc212_h.test.cpp\"\nusing namespace std;\nsigned main()\
+    #line 7 \"test/atcoder/abc212_h.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
     \ constexpr int n= 1 << 16;\n int N, K;\n cin >> N >> K;\n vector<Mint> a(n);\n\
     \ for (int i= 0, A; i < K; ++i) cin >> A, a[A]+= 1;\n sps::hadamard(a);\n for\
     \ (auto &x: a) x= x == 1 ? N : (x.pow(N) - 1) / (x - 1) * x;\n sps::hadamard(a);\n\
     \ Mint all= K == 1 ? N : (Mint(K).pow(N) - 1) / (K - 1) * K;\n cout << all - a[0]\
     \ / n << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc212/tasks/abc212_h\"\n#include\
-    \ <iostream>\n#include <algorithm>\n#include \"src/Math/ModInt.hpp\"\n#include\
-    \ \"src/Math/set_power_series.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n constexpr int\
-    \ n= 1 << 16;\n int N, K;\n cin >> N >> K;\n vector<Mint> a(n);\n for (int i=\
-    \ 0, A; i < K; ++i) cin >> A, a[A]+= 1;\n sps::hadamard(a);\n for (auto &x: a)\
-    \ x= x == 1 ? N : (x.pow(N) - 1) / (x - 1) * x;\n sps::hadamard(a);\n Mint all=\
-    \ K == 1 ? N : (Mint(K).pow(N) - 1) / (K - 1) * K;\n cout << all - a[0] / n <<\
-    \ '\\n';\n return 0;\n}"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc212/tasks/abc212_h\"\n//\
+    \ \u30A2\u30C0\u30DE\u30FC\u30EB\u5909\u63DB\n#include <iostream>\n#include <algorithm>\n\
+    #include \"src/Math/ModInt.hpp\"\n#include \"src/Math/set_power_series.hpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n constexpr int n= 1 << 16;\n int N, K;\n cin\
+    \ >> N >> K;\n vector<Mint> a(n);\n for (int i= 0, A; i < K; ++i) cin >> A, a[A]+=\
+    \ 1;\n sps::hadamard(a);\n for (auto &x: a) x= x == 1 ? N : (x.pow(N) - 1) / (x\
+    \ - 1) * x;\n sps::hadamard(a);\n Mint all= K == 1 ? N : (Mint(K).pow(N) - 1)\
+    \ / (K - 1) * K;\n cout << all - a[0] / n << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -292,7 +293,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc212_h.test.cpp
   requiredBy: []
-  timestamp: '2024-02-18 22:00:56+09:00'
+  timestamp: '2024-02-23 11:54:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc212_h.test.cpp

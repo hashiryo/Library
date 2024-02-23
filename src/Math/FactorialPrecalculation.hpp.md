@@ -37,6 +37,9 @@ data:
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc321_g.test.cpp
+    title: test/atcoder/abc321_g.test.cpp
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
     title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
   - icon: ':x:'
@@ -149,6 +152,7 @@ data:
   - test/aoj/DPL_5_E.test.cpp
   - test/aoj/DPL_5_B.test.cpp
   - test/aoj/DPL_5_F.test.cpp
+  - test/atcoder/abc321_g.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc236_ex.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp

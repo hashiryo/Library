@@ -8,6 +8,10 @@ data:
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
+    path: src/Math/FactorialPrecalculation.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
+      mathbb{F}_p$)"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -23,10 +27,10 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1753
+    PROBLEM: https://atcoder.jp/contests/abc321/tasks/abc321_g
     links:
-    - https://yukicoder.me/problems/no/1753
-  bundledCode: "#line 1 \"test/yukicoder/1753.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/1753\"\
+    - https://atcoder.jp/contests/abc321/tasks/abc321_g
+  bundledCode: "#line 1 \"test/atcoder/abc321_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc321/tasks/abc321_g\"\
     \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
     \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
     \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
@@ -105,7 +109,23 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Math/set_power_series.hpp\"\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 5 \"src/Math/FactorialPrecalculation.hpp\"\
+    \ntemplate <class mod_t> class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset()\
+    \ { iv.clear(), fct.clear(), fiv.clear(); }\n static inline mod_t inv(int n) {\n\
+    \  assert(0 < n);\n  if (int k= iv.size(); k <= n) {\n   if (iv.resize(n + 1);\
+    \ !k) iv[1]= 1, k= 2;\n   for (int mod= mod_t::mod(), q; k <= n; ++k) q= (mod\
+    \ + k - 1) / k, iv[k]= iv[k * q - mod] * q;\n  }\n  return iv[n];\n }\n static\
+    \ inline mod_t fact(int n) {\n  assert(0 <= n);\n  if (int k= fct.size(); k <=\
+    \ n) {\n   if (fct.resize(n + 1); !k) fct[0]= 1, k= 1;\n   for (; k <= n; ++k)\
+    \ fct[k]= fct[k - 1] * k;\n  }\n  return fct[n];\n }\n static inline mod_t finv(int\
+    \ n) {\n  assert(0 <= n);\n  if (int k= fiv.size(); k <= n) {\n   if (fiv.resize(n\
+    \ + 1); !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
+    \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
+    \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
+    \ inline mod_t nCr(int n, int r) { return r < 0 || n < r ? mod_t(0) : fact(n)\
+    \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
+    \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n#line 2 \"src/Math/set_power_series.hpp\"\
     \n#include <algorithm>\n#line 5 \"src/Math/set_power_series.hpp\"\nnamespace sps\
     \ {\nnamespace _sps_internal {\nusing namespace std;\n#define _ZETA(s, l) \\\n\
     \ if constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s + l]-=\
@@ -267,42 +287,43 @@ data:
     \ _sps_internal::convolve, _sps_internal::semi_relaxed_convolve, _sps_internal::self_relaxed_convolve,\
     \ _sps_internal::inv, _sps_internal::div, _sps_internal::exp, _sps_internal::log,\
     \ _sps_internal::egf_comp, _sps_internal::poly_comp, _sps_internal::egf_T;\n}\n\
-    #line 6 \"test/yukicoder/1753.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
-    \ int N;\n cin >> N;\n vector<Mint> A(N + 1);\n Mint sum= 0;\n for (int i= 0;\
-    \ i <= N; ++i) cin >> A[i], sum+= A[i];\n Mint iv= Mint(1) / sum;\n for (int i=\
-    \ 0; i <= N; ++i) A[i]*= iv;\n Mint ans= 0;\n vector<Mint> b(1024);\n b[0]= A[0],\
-    \ sps::hadamard(b);\n for (int X= 1; X < 1024; ++X) {\n  vector<Mint> a(1024);\n\
-    \  for (int i= 1; i <= N; ++i)\n   if (i != X) a[i]= A[i];\n  sps::hadamard(a);\n\
-    \  for (int i= 0; i < 1024; ++i) a[i]= b[i] / (Mint(1) - a[i]);\n  sps::hadamard(a);\n\
-    \  ans+= a[X];\n }\n ans/= 1024;\n cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1753\"\n#include <iostream>\n\
-    #include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/set_power_series.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> A(N + 1);\n\
-    \ Mint sum= 0;\n for (int i= 0; i <= N; ++i) cin >> A[i], sum+= A[i];\n Mint iv=\
-    \ Mint(1) / sum;\n for (int i= 0; i <= N; ++i) A[i]*= iv;\n Mint ans= 0;\n vector<Mint>\
-    \ b(1024);\n b[0]= A[0], sps::hadamard(b);\n for (int X= 1; X < 1024; ++X) {\n\
-    \  vector<Mint> a(1024);\n  for (int i= 1; i <= N; ++i)\n   if (i != X) a[i]=\
-    \ A[i];\n  sps::hadamard(a);\n  for (int i= 0; i < 1024; ++i) a[i]= b[i] / (Mint(1)\
-    \ - a[i]);\n  sps::hadamard(a);\n  ans+= a[X];\n }\n ans/= 1024;\n cout << ans\
-    \ << '\\n';\n return 0;\n}"
+    #line 7 \"test/atcoder/abc321_g.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ using F= FactorialPrecalculation<Mint>;\n int N, M;\n cin >> N >> M;\n int n=\
+    \ 1 << N;\n vector<int> r(n), b(n);\n for (int i= 0, R; i < M; ++i) cin >> R,\
+    \ --R, r[1 << R]+= 1;\n for (int i= 0, B; i < M; ++i) cin >> B, --B, b[1 << B]+=\
+    \ 1;\n sps::subset_zeta(r), sps::subset_zeta(b);\n vector<Mint> f(n);\n for (int\
+    \ s= n; s--;) {\n  if (r[s] != b[s]) continue;\n  f[s]= F::fact(r[s]);\n }\n auto\
+    \ ans= sps::convolve(f, sps::log(f));\n cout << ans[n - 1] * F::finv(M) << '\\\
+    n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc321/tasks/abc321_g\"\n#include\
+    \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
+    src/Math/FactorialPrecalculation.hpp\"\n#include \"src/Math/set_power_series.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n using F= FactorialPrecalculation<Mint>;\n int\
+    \ N, M;\n cin >> N >> M;\n int n= 1 << N;\n vector<int> r(n), b(n);\n for (int\
+    \ i= 0, R; i < M; ++i) cin >> R, --R, r[1 << R]+= 1;\n for (int i= 0, B; i < M;\
+    \ ++i) cin >> B, --B, b[1 << B]+= 1;\n sps::subset_zeta(r), sps::subset_zeta(b);\n\
+    \ vector<Mint> f(n);\n for (int s= n; s--;) {\n  if (r[s] != b[s]) continue;\n\
+    \  f[s]= F::fact(r[s]);\n }\n auto ans= sps::convolve(f, sps::log(f));\n cout\
+    \ << ans[n - 1] * F::finv(M) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
+  - src/Math/FactorialPrecalculation.hpp
   - src/Math/set_power_series.hpp
   isVerificationFile: true
-  path: test/yukicoder/1753.test.cpp
+  path: test/atcoder/abc321_g.test.cpp
   requiredBy: []
   timestamp: '2024-02-23 11:54:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yukicoder/1753.test.cpp
+documentation_of: test/atcoder/abc321_g.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/1753.test.cpp
-- /verify/test/yukicoder/1753.test.cpp.html
-title: test/yukicoder/1753.test.cpp
+- /verify/test/atcoder/abc321_g.test.cpp
+- /verify/test/atcoder/abc321_g.test.cpp.html
+title: test/atcoder/abc321_g.test.cpp
 ---

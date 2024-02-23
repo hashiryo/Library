@@ -215,7 +215,7 @@ data:
     \ }\n return h;\n}\n// log(f) , \"f[empty] = 1\" is required,  O(n^2 2^n)\ntemplate\
     \ <class T> vector<T> log(const vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N),\
     \ e= min(n, 12);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n vector<T> h= f;\n\
-    \ int i= 0, l= 1;\n for (; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
+    \ int i= 0, l= 1;\n for (h[0]= 0; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
     \ l);\n if (i < n) {\n  vector<T> G(n << (n - 1));\n  rnk_zeta(f.data(), G.data(),\
     \ n - 1);\n  for (; i < n; l<<= 1, ++i) {\n   vector<T> F((i + 1) << i, 0);\n\
     \   if constexpr (is_floating_point_v<T>) {\n    fill_n(F.data(), l, h[l]= f[l]);\n\
@@ -407,22 +407,22 @@ data:
     \ cyc_pth<T>();\n  auto ret= sps::egf_T(pth, sps::exp(cyc));\n  return std::reverse(ret.begin(),\
     \ ret.end()), ret.resize(n / 2 + 1), ret;\n }\n};\n#line 7 \"test/atcoder/abc213_g.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries\
-    \ g(N);\n for (int i= 0, a, b; i < M; i++) cin >> a >> b, g.add_edge(--a, --b);\n\
-    \ auto tmp= g.graph<Mint>();\n auto tmp2= g.connected_graph<Mint>();\n for (int\
-    \ k= 1; k < N; k++) {\n  Mint ans= 0;\n  for (int s= 1; s < (1 << N); s+= 2)\n\
-    \   if ((s >> k) & 1) ans+= tmp2[s] * tmp[((1 << N) - 1) ^ s];\n  cout << ans\
-    \ << '\\n';\n }\n return 0;\n}\n"
+    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n int all= (1 <<\
+    \ N) - 1;\n UndirectedGraphSetPowerSeries g(N);\n for (int i= 0, a, b; i < M;\
+    \ i++) cin >> a >> b, g.add_edge(--a, --b);\n auto x= g.graph<Mint>();\n auto\
+    \ y= g.connected_graph<Mint>();\n for (int k= 1; k < N; ++k) {\n  Mint ans= 0;\n\
+    \  for (int s= 1; s <= all; s+= 2)\n   if ((s >> k) & 1) ans+= y[s] * x[all ^\
+    \ s];\n  cout << ans << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_g\"\n//\
     \ \u9023\u7D50\u30B0\u30E9\u30D5\n#include <iostream>\n#include \"src/Math/ModInt.hpp\"\
     \n#include \"src/Math/set_power_series.hpp\"\n#include \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries\
-    \ g(N);\n for (int i= 0, a, b; i < M; i++) cin >> a >> b, g.add_edge(--a, --b);\n\
-    \ auto tmp= g.graph<Mint>();\n auto tmp2= g.connected_graph<Mint>();\n for (int\
-    \ k= 1; k < N; k++) {\n  Mint ans= 0;\n  for (int s= 1; s < (1 << N); s+= 2)\n\
-    \   if ((s >> k) & 1) ans+= tmp2[s] * tmp[((1 << N) - 1) ^ s];\n  cout << ans\
-    \ << '\\n';\n }\n return 0;\n}\n"
+    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n int all= (1 <<\
+    \ N) - 1;\n UndirectedGraphSetPowerSeries g(N);\n for (int i= 0, a, b; i < M;\
+    \ i++) cin >> a >> b, g.add_edge(--a, --b);\n auto x= g.graph<Mint>();\n auto\
+    \ y= g.connected_graph<Mint>();\n for (int k= 1; k < N; ++k) {\n  Mint ans= 0;\n\
+    \  for (int s= 1; s <= all; s+= 2)\n   if ((s >> k) & 1) ans+= y[s] * x[all ^\
+    \ s];\n  cout << ans << '\\n';\n }\n return 0;\n}\n"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -433,7 +433,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-18 22:00:56+09:00'
+  timestamp: '2024-02-23 11:54:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp

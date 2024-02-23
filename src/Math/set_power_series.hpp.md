@@ -26,6 +26,9 @@ data:
     path: test/atcoder/abc253_ex.test.cpp
     title: test/atcoder/abc253_ex.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc321_g.test.cpp
+    title: test/atcoder/abc321_g.test.cpp
+  - icon: ':x:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
   - icon: ':x:'
@@ -168,7 +171,7 @@ data:
     \ }\n return h;\n}\n// log(f) , \"f[empty] = 1\" is required,  O(n^2 2^n)\ntemplate\
     \ <class T> vector<T> log(const vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N),\
     \ e= min(n, 12);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n vector<T> h= f;\n\
-    \ int i= 0, l= 1;\n for (; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
+    \ int i= 0, l= 1;\n for (h[0]= 0; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
     \ l);\n if (i < n) {\n  vector<T> G(n << (n - 1));\n  rnk_zeta(f.data(), G.data(),\
     \ n - 1);\n  for (; i < n; l<<= 1, ++i) {\n   vector<T> F((i + 1) << i, 0);\n\
     \   if constexpr (is_floating_point_v<T>) {\n    fill_n(F.data(), l, h[l]= f[l]);\n\
@@ -329,7 +332,7 @@ data:
     \ }\n return h;\n}\n// log(f) , \"f[empty] = 1\" is required,  O(n^2 2^n)\ntemplate\
     \ <class T> vector<T> log(const vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N),\
     \ e= min(n, 12);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n vector<T> h= f;\n\
-    \ int i= 0, l= 1;\n for (; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
+    \ int i= 0, l= 1;\n for (h[0]= 0; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
     \ l);\n if (i < n) {\n  vector<T> G(n << (n - 1));\n  rnk_zeta(f.data(), G.data(),\
     \ n - 1);\n  for (; i < n; l<<= 1, ++i) {\n   vector<T> F((i + 1) << i, 0);\n\
     \   if constexpr (is_floating_point_v<T>) {\n    fill_n(F.data(), l, h[l]= f[l]);\n\
@@ -390,7 +393,7 @@ data:
   path: src/Math/set_power_series.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2024-02-18 22:00:56+09:00'
+  timestamp: '2024-02-23 11:54:34+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1901.test.cpp
@@ -404,6 +407,7 @@ data:
   - test/yosupo/bitwise_xor_convolution.test.cpp
   - test/yosupo/exp_of_set_power_series.test.cpp
   - test/aoj/2345.test.cpp
+  - test/atcoder/abc321_g.test.cpp
   - test/atcoder/abc236_ex.test.cpp
   - test/atcoder/abc199_d.test.cpp
   - test/atcoder/abc213_g.test.cpp
