@@ -244,7 +244,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
   - icon: ':x:'

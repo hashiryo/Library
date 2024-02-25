@@ -383,7 +383,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/OrderFp.hpp
       title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
     - icon: ':question:'
@@ -1401,7 +1401,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc327_d.test.cpp
       title: test/atcoder/abc327_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc335_g.test.cpp
       title: test/atcoder/abc335_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1419,7 +1419,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc047_b.RH.test.cpp
       title: test/atcoder/agc047_b.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':x:'

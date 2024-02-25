@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc248_g.test.cpp
     title: test/atcoder/abc248_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc335_g.test.cpp
     title: test/atcoder/abc335_g.test.cpp
   - icon: ':x:'
@@ -143,101 +143,101 @@ data:
     \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
     \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
     \ }\n#line 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\ntemplate <class Int, class\
-    \ T> struct ArrayOnDivisors {\n Int n;\n uint8_t shift;\n std::vector<int> os,\
-    \ id;\n std::vector<std::pair<Int, T>> dat;\n unsigned hash(uint64_t i) const\
-    \ { return (i * 11995408973635179863ULL) >> shift; }\n#define _UP for (int j=\
-    \ k; j < a; ++j)\n#define _DWN for (int j= a; j-- > k;)\n#define _OP(J, K, op)\
-    \ dat[i + J].second op##= dat[i + K].second\n#define _FUN(J, K, name) name(dat[i\
-    \ + J].second, dat[i + K].second)\n#define _ZETA(op) \\\n int k= 1; \\\n for (auto\
-    \ [p, e]: factors) { \\\n  int a= k * (e + 1); \\\n  for (int i= 0, d= dat.size();\
-    \ i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n Factors factors;\n ArrayOnDivisors()\
-    \ {}\n template <class Uint> ArrayOnDivisors(Int N, const Factors &factors, const\
-    \ std::vector<Uint> &divisors): n(N), shift(__builtin_clzll(divisors.size()) -\
-    \ 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
-    \ factors(factors) {\n  static_assert(std::is_integral_v<Uint>, \"Uint must be\
-    \ integral\");\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
-    \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
-    \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
-    \ i;\n }\n ArrayOnDivisors(Int N, const Factors &factors): ArrayOnDivisors(N,\
-    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(Int N): ArrayOnDivisors(N,\
-    \ Factors(N)) {}\n T &operator[](Int i) {\n  assert(i && n % i == 0);\n  for (unsigned\
+    \ T> struct ArrayOnDivisors {\n using Hint= std::conditional_t<sizeof(Int) ==\
+    \ 64, unsigned, uint16_t>;\n Int n;\n uint8_t shift;\n std::vector<Hint> os, id;\n\
+    \ std::vector<std::pair<Int, T>> dat;\n Hint hash(uint64_t i) const { return (i\
+    \ * 11995408973635179863ULL) >> shift; }\n#define _UP for (int j= k; j < a; ++j)\n\
+    #define _DWN for (int j= a; j-- > k;)\n#define _OP(J, K, op) dat[i + J].second\
+    \ op##= dat[i + K].second\n#define _FUN(J, K, name) name(dat[i + J].second, dat[i\
+    \ + K].second)\n#define _ZETA(op) \\\n int k= 1; \\\n for (auto [p, e]: factors)\
+    \ { \\\n  int a= k * (e + 1); \\\n  for (int i= 0, d= dat.size(); i < d; i+= a)\
+    \ op; \\\n  k= a; \\\n }\npublic:\n Factors factors;\n ArrayOnDivisors() {}\n\
+    \ template <class Uint> ArrayOnDivisors(Int N, const Factors &factors, const std::vector<Uint>\
+    \ &divisors): n(N), shift(__builtin_clzll(divisors.size()) - 1), os((1 << (64\
+    \ - shift)) + 1), id(divisors.size()), dat(divisors.size()), factors(factors)\
+    \ {\n  static_assert(std::is_integral_v<Uint>, \"Uint must be integral\");\n \
+    \ for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n  for (auto d:\
+    \ divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(), os.begin());\n\
+    \  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]= i;\n }\n ArrayOnDivisors(Int\
+    \ N, const Factors &factors): ArrayOnDivisors(N, factors, enumerate_divisors(factors))\
+    \ {}\n ArrayOnDivisors(Int N): ArrayOnDivisors(N, Factors(N)) {}\n T &operator[](Int\
+    \ i) {\n  assert(i && n % i == 0);\n  for (unsigned a= hash(i), j= os[a]; j <\
+    \ os[a + 1]; ++j)\n   if (auto &[d, v]= dat[id[j]]; d == i) return v;\n  assert(0);\n\
+    \ }\n const T &operator[](Int i) const {\n  assert(i && n % i == 0);\n  for (unsigned\
     \ a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]= dat[id[j]];\
-    \ d == i) return v;\n  assert(0);\n }\n const T &operator[](Int i) const {\n \
-    \ assert(i && n % i == 0);\n  for (unsigned a= hash(i), j= os[a]; j < os[a + 1];\
-    \ ++j)\n   if (auto &[d, v]= dat[id[j]]; d == i) return v;\n  assert(0);\n }\n\
-    \ size_t size() const { return dat.size(); }\n auto begin() { return dat.begin();\
-    \ }\n auto begin() const { return dat.begin(); }\n auto end() { return dat.begin()\
-    \ + os.back(); }\n auto end() const { return dat.begin() + os.back(); }\n /* f\
-    \ -> g s.t. g(n) = sum_{m|n} f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j,\
-    \ j - k, +)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m) */\n void divisor_mobius()\
-    \ { _ZETA(_DWN _OP(j, j - k, -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n\
-    \ void multiple_zeta() { _ZETA(_DWN _OP(j - k, j, +)) }\n /* f -> h s.t. f(n)\
-    \ = sum_{n|m} h(m) */\n void multiple_mobius() { _ZETA(_UP _OP(j - k, j, -)) }\n\
-    \ /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T& a, T b): a+=b */\n template <class\
-    \ F> void divisor_zeta(const F &add) { _ZETA(_UP _FUN(j, j - k, add)) }\n /* f\
-    \ -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b): a-=b */\n template <class F>\
-    \ void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j, j - k, sub)) }\n /* f\
-    \ -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b */\n template <class F>\
-    \ void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j - k, j, add)) }\n /* f ->\
-    \ h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b */\n template <class F> void\
-    \ multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j - k, j, sub)) }\n#undef _UP\n\
-    #undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e): multiplicative function of\
-    \ p^e\n template <typename F> void set_multiplicative(const F &f) {\n  int k=\
-    \ 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n   for (int m= k, d=\
-    \ 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second\
-    \ * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second= 1;\n  for\
-    \ (auto [p, e]: factors) {\n   Int b= p - 1;\n   for (int m= k; e--; b*= p)\n\
-    \    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n  }\n }\n void\
-    \ set_mobius() {\n  set_multiplicative([](auto, auto e) { return e == 1 ? -1 :\
-    \ 0; });\n }\n};\n"
+    \ d == i) return v;\n  assert(0);\n }\n size_t size() const { return dat.size();\
+    \ }\n auto begin() { return dat.begin(); }\n auto begin() const { return dat.begin();\
+    \ }\n auto end() { return dat.begin() + os.back(); }\n auto end() const { return\
+    \ dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n} f(m) */\n void\
+    \ divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t. f(n) = sum_{m|n}\
+    \ h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k, -)) }\n /* f -> g\
+    \ s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN _OP(j - k,\
+    \ j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
+    \ { _ZETA(_UP _OP(j - k, j, -)) }\n /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T&\
+    \ a, T b): a+=b */\n template <class F> void divisor_zeta(const F &add) { _ZETA(_UP\
+    \ _FUN(j, j - k, add)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b):\
+    \ a-=b */\n template <class F> void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j,\
+    \ j - k, sub)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b\
+    \ */\n template <class F> void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j\
+    \ - k, j, add)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b\
+    \ */\n template <class F> void multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j\
+    \ - k, j, sub)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e):\
+    \ multiplicative function of p^e\n template <typename F> void set_multiplicative(const\
+    \ F &f) {\n  int k= 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n  \
+    \ for (int m= k, d= 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second=\
+    \ dat[i++].second * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second=\
+    \ 1;\n  for (auto [p, e]: factors) {\n   Int b= p - 1;\n   for (int m= k; e--;\
+    \ b*= p)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n \
+    \ }\n }\n void set_mobius() {\n  set_multiplicative([](auto, auto e) { return\
+    \ e == 1 ? -1 : 0; });\n }\n};\n"
   code: "#pragma once\n#include \"src/NumberTheory/Factors.hpp\"\ntemplate <class\
-    \ Int, class T> struct ArrayOnDivisors {\n Int n;\n uint8_t shift;\n std::vector<int>\
-    \ os, id;\n std::vector<std::pair<Int, T>> dat;\n unsigned hash(uint64_t i) const\
-    \ { return (i * 11995408973635179863ULL) >> shift; }\n#define _UP for (int j=\
-    \ k; j < a; ++j)\n#define _DWN for (int j= a; j-- > k;)\n#define _OP(J, K, op)\
-    \ dat[i + J].second op##= dat[i + K].second\n#define _FUN(J, K, name) name(dat[i\
-    \ + J].second, dat[i + K].second)\n#define _ZETA(op) \\\n int k= 1; \\\n for (auto\
-    \ [p, e]: factors) { \\\n  int a= k * (e + 1); \\\n  for (int i= 0, d= dat.size();\
-    \ i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n Factors factors;\n ArrayOnDivisors()\
-    \ {}\n template <class Uint> ArrayOnDivisors(Int N, const Factors &factors, const\
-    \ std::vector<Uint> &divisors): n(N), shift(__builtin_clzll(divisors.size()) -\
-    \ 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
-    \ factors(factors) {\n  static_assert(std::is_integral_v<Uint>, \"Uint must be\
-    \ integral\");\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
-    \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
-    \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
-    \ i;\n }\n ArrayOnDivisors(Int N, const Factors &factors): ArrayOnDivisors(N,\
-    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(Int N): ArrayOnDivisors(N,\
-    \ Factors(N)) {}\n T &operator[](Int i) {\n  assert(i && n % i == 0);\n  for (unsigned\
+    \ Int, class T> struct ArrayOnDivisors {\n using Hint= std::conditional_t<sizeof(Int)\
+    \ == 64, unsigned, uint16_t>;\n Int n;\n uint8_t shift;\n std::vector<Hint> os,\
+    \ id;\n std::vector<std::pair<Int, T>> dat;\n Hint hash(uint64_t i) const { return\
+    \ (i * 11995408973635179863ULL) >> shift; }\n#define _UP for (int j= k; j < a;\
+    \ ++j)\n#define _DWN for (int j= a; j-- > k;)\n#define _OP(J, K, op) dat[i + J].second\
+    \ op##= dat[i + K].second\n#define _FUN(J, K, name) name(dat[i + J].second, dat[i\
+    \ + K].second)\n#define _ZETA(op) \\\n int k= 1; \\\n for (auto [p, e]: factors)\
+    \ { \\\n  int a= k * (e + 1); \\\n  for (int i= 0, d= dat.size(); i < d; i+= a)\
+    \ op; \\\n  k= a; \\\n }\npublic:\n Factors factors;\n ArrayOnDivisors() {}\n\
+    \ template <class Uint> ArrayOnDivisors(Int N, const Factors &factors, const std::vector<Uint>\
+    \ &divisors): n(N), shift(__builtin_clzll(divisors.size()) - 1), os((1 << (64\
+    \ - shift)) + 1), id(divisors.size()), dat(divisors.size()), factors(factors)\
+    \ {\n  static_assert(std::is_integral_v<Uint>, \"Uint must be integral\");\n \
+    \ for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n  for (auto d:\
+    \ divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(), os.begin());\n\
+    \  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]= i;\n }\n ArrayOnDivisors(Int\
+    \ N, const Factors &factors): ArrayOnDivisors(N, factors, enumerate_divisors(factors))\
+    \ {}\n ArrayOnDivisors(Int N): ArrayOnDivisors(N, Factors(N)) {}\n T &operator[](Int\
+    \ i) {\n  assert(i && n % i == 0);\n  for (unsigned a= hash(i), j= os[a]; j <\
+    \ os[a + 1]; ++j)\n   if (auto &[d, v]= dat[id[j]]; d == i) return v;\n  assert(0);\n\
+    \ }\n const T &operator[](Int i) const {\n  assert(i && n % i == 0);\n  for (unsigned\
     \ a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]= dat[id[j]];\
-    \ d == i) return v;\n  assert(0);\n }\n const T &operator[](Int i) const {\n \
-    \ assert(i && n % i == 0);\n  for (unsigned a= hash(i), j= os[a]; j < os[a + 1];\
-    \ ++j)\n   if (auto &[d, v]= dat[id[j]]; d == i) return v;\n  assert(0);\n }\n\
-    \ size_t size() const { return dat.size(); }\n auto begin() { return dat.begin();\
-    \ }\n auto begin() const { return dat.begin(); }\n auto end() { return dat.begin()\
-    \ + os.back(); }\n auto end() const { return dat.begin() + os.back(); }\n /* f\
-    \ -> g s.t. g(n) = sum_{m|n} f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j,\
-    \ j - k, +)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m) */\n void divisor_mobius()\
-    \ { _ZETA(_DWN _OP(j, j - k, -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n\
-    \ void multiple_zeta() { _ZETA(_DWN _OP(j - k, j, +)) }\n /* f -> h s.t. f(n)\
-    \ = sum_{n|m} h(m) */\n void multiple_mobius() { _ZETA(_UP _OP(j - k, j, -)) }\n\
-    \ /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T& a, T b): a+=b */\n template <class\
-    \ F> void divisor_zeta(const F &add) { _ZETA(_UP _FUN(j, j - k, add)) }\n /* f\
-    \ -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b): a-=b */\n template <class F>\
-    \ void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j, j - k, sub)) }\n /* f\
-    \ -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b */\n template <class F>\
-    \ void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j - k, j, add)) }\n /* f ->\
-    \ h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b */\n template <class F> void\
-    \ multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j - k, j, sub)) }\n#undef _UP\n\
-    #undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e): multiplicative function of\
-    \ p^e\n template <typename F> void set_multiplicative(const F &f) {\n  int k=\
-    \ 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n   for (int m= k, d=\
-    \ 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second\
-    \ * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second= 1;\n  for\
-    \ (auto [p, e]: factors) {\n   Int b= p - 1;\n   for (int m= k; e--; b*= p)\n\
-    \    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n  }\n }\n void\
-    \ set_mobius() {\n  set_multiplicative([](auto, auto e) { return e == 1 ? -1 :\
-    \ 0; });\n }\n};"
+    \ d == i) return v;\n  assert(0);\n }\n size_t size() const { return dat.size();\
+    \ }\n auto begin() { return dat.begin(); }\n auto begin() const { return dat.begin();\
+    \ }\n auto end() { return dat.begin() + os.back(); }\n auto end() const { return\
+    \ dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n} f(m) */\n void\
+    \ divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t. f(n) = sum_{m|n}\
+    \ h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k, -)) }\n /* f -> g\
+    \ s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN _OP(j - k,\
+    \ j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
+    \ { _ZETA(_UP _OP(j - k, j, -)) }\n /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T&\
+    \ a, T b): a+=b */\n template <class F> void divisor_zeta(const F &add) { _ZETA(_UP\
+    \ _FUN(j, j - k, add)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b):\
+    \ a-=b */\n template <class F> void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j,\
+    \ j - k, sub)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b\
+    \ */\n template <class F> void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j\
+    \ - k, j, add)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b\
+    \ */\n template <class F> void multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j\
+    \ - k, j, sub)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e):\
+    \ multiplicative function of p^e\n template <typename F> void set_multiplicative(const\
+    \ F &f) {\n  int k= 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n  \
+    \ for (int m= k, d= 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second=\
+    \ dat[i++].second * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second=\
+    \ 1;\n  for (auto [p, e]: factors) {\n   Int b= p - 1;\n   for (int m= k; e--;\
+    \ b*= p)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n \
+    \ }\n }\n void set_mobius() {\n  set_multiplicative([](auto, auto e) { return\
+    \ e == 1 ? -1 : 0; });\n }\n};"
   dependsOn:
   - src/NumberTheory/Factors.hpp
   - src/NumberTheory/is_prime.hpp
@@ -246,7 +246,7 @@ data:
   isVerificationFile: false
   path: src/NumberTheory/ArrayOnDivisors.hpp
   requiredBy: []
-  timestamp: '2024-02-25 20:59:42+09:00'
+  timestamp: '2024-02-26 00:40:09+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/2578.test.cpp

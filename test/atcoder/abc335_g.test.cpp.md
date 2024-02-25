@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/NumberTheory/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/OrderFp.hpp
     title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc335/tasks/abc335_g
@@ -153,8 +153,9 @@ data:
     \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
     \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;\n#line\
     \ 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\ntemplate <class Int, class T> struct\
-    \ ArrayOnDivisors {\n Int n;\n uint8_t shift;\n std::vector<int> os, id;\n std::vector<std::pair<Int,\
-    \ T>> dat;\n unsigned hash(uint64_t i) const { return (i * 11995408973635179863ULL)\
+    \ ArrayOnDivisors {\n using Hint= std::conditional_t<sizeof(Int) == 64, unsigned,\
+    \ uint16_t>;\n Int n;\n uint8_t shift;\n std::vector<Hint> os, id;\n std::vector<std::pair<Int,\
+    \ T>> dat;\n Hint hash(uint64_t i) const { return (i * 11995408973635179863ULL)\
     \ >> shift; }\n#define _UP for (int j= k; j < a; ++j)\n#define _DWN for (int j=\
     \ a; j-- > k;)\n#define _OP(J, K, op) dat[i + J].second op##= dat[i + K].second\n\
     #define _FUN(J, K, name) name(dat[i + J].second, dat[i + K].second)\n#define _ZETA(op)\
@@ -223,8 +224,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc335_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-25 20:59:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-26 00:40:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc335_g.test.cpp
 layout: document
