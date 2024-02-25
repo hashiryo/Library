@@ -15,7 +15,7 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc335_g.test.cpp
     title: test/atcoder/abc335_g.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/yosupo/primitive_root.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/OrderFp.hpp\"\n#include <array>\n#line\
@@ -183,7 +183,7 @@ data:
   path: src/NumberTheory/OrderFp.hpp
   requiredBy: []
   timestamp: '2024-02-06 20:21:12+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/primitive_root.test.cpp
   - test/unit_test/constexpr_orderfp.test.cpp

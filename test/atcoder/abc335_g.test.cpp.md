@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/NumberTheory/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/OrderFp.hpp
     title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc335/tasks/abc335_g
@@ -152,63 +152,67 @@ data:
     \ (x == 1) return 1;\n  if (p < (1 << 30)) return ord<u32, MP_Mo<u32, u64, 32,\
     \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
     \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;\n#line\
-    \ 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\ntemplate <class T> struct ArrayOnDivisors\
-    \ {\n uint64_t n;\n uint8_t shift;\n std::vector<int> os, id;\n std::vector<std::pair<uint64_t,\
+    \ 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\ntemplate <class Int, class T> struct\
+    \ ArrayOnDivisors {\n Int n;\n uint8_t shift;\n std::vector<int> os, id;\n std::vector<std::pair<Int,\
     \ T>> dat;\n unsigned hash(uint64_t i) const { return (i * 11995408973635179863ULL)\
     \ >> shift; }\n#define _UP for (int j= k; j < a; ++j)\n#define _DWN for (int j=\
     \ a; j-- > k;)\n#define _OP(J, K, op) dat[i + J].second op##= dat[i + K].second\n\
     #define _FUN(J, K, name) name(dat[i + J].second, dat[i + K].second)\n#define _ZETA(op)\
     \ \\\n int k= 1; \\\n for (auto [p, e]: factors) { \\\n  int a= k * (e + 1); \\\
     \n  for (int i= 0, d= dat.size(); i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n\
-    \ Factors factors;\n ArrayOnDivisors() {}\n template <class Uint> ArrayOnDivisors(uint64_t\
+    \ Factors factors;\n ArrayOnDivisors() {}\n template <class Uint> ArrayOnDivisors(Int\
     \ N, const Factors &factors, const std::vector<Uint> &divisors): n(N), shift(__builtin_clzll(divisors.size())\
     \ - 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
-    \ factors(factors) {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
+    \ factors(factors) {\n  static_assert(std::is_integral_v<Uint>, \"Uint must be\
+    \ integral\");\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
     \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
     \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
-    \ i;\n }\n ArrayOnDivisors(uint64_t N, const Factors &factors): ArrayOnDivisors(N,\
-    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(uint64_t N): ArrayOnDivisors(N,\
-    \ Factors(N)) {}\n T &operator[](uint64_t i) {\n  assert(i && n % i == 0);\n \
-    \ for (unsigned a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]=\
-    \ dat[id[j]]; d == i) return v;\n  assert(0);\n }\n size_t size() const { return\
-    \ dat.size(); }\n auto begin() { return dat.begin(); }\n auto begin() const {\
-    \ return dat.begin(); }\n auto end() { return dat.begin() + os.back(); }\n auto\
-    \ end() const { return dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n}\
-    \ f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t.\
-    \ f(n) = sum_{m|n} h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k,\
-    \ -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN\
-    \ _OP(j - k, j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
-    \ { _ZETA(_UP _OP(j - k, j, -)) }\n /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T&\
-    \ a, T b): a+=b */\n template <class F> void divisor_zeta(const F &add) { _ZETA(_UP\
-    \ _FUN(j, j - k, add)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b):\
-    \ a-=b */\n template <class F> void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j,\
-    \ j - k, sub)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b\
-    \ */\n template <class F> void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j\
-    \ - k, j, add)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b\
-    \ */\n template <class F> void multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j\
-    \ - k, j, sub)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e):\
-    \ multiplicative function of p^e\n template <typename F> void set_multiplicative(const\
-    \ F &f) {\n  int k= 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n  \
-    \ for (int m= k, d= 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second=\
-    \ dat[i++].second * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second=\
-    \ 1;\n  for (auto [p, e]: factors) {\n   uint64_t b= p - 1;\n   for (int m= k;\
-    \ e--; b*= p)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n\
-    \  }\n }\n void set_mobius() {\n  set_multiplicative([](auto, auto e) { return\
-    \ e == 1 ? -1 : 0; });\n }\n};\n#line 5 \"test/atcoder/abc335_g.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ long long N, P;\n cin >> N >> P;\n vector<long long> a(N);\n OrderFp ord(P);\n\
-    \ for (int i= 0; i < N; i++) {\n  long long A;\n  cin >> A;\n  a[i]= ord(A);\n\
-    \ }\n ArrayOnDivisors<long long> x(P - 1, ord.factors);\n for (int i= 0; i < N;\
-    \ ++i) ++x[a[i]];\n x.divisor_zeta();\n long long ans= 0;\n for (int i= 0; i <\
-    \ N; ++i) ans+= x[a[i]];\n cout << ans << '\\n';\n return 0;\n}\n"
+    \ i;\n }\n ArrayOnDivisors(Int N, const Factors &factors): ArrayOnDivisors(N,\
+    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(Int N): ArrayOnDivisors(N,\
+    \ Factors(N)) {}\n T &operator[](Int i) {\n  assert(i && n % i == 0);\n  for (unsigned\
+    \ a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]= dat[id[j]];\
+    \ d == i) return v;\n  assert(0);\n }\n const T &operator[](Int i) const {\n \
+    \ assert(i && n % i == 0);\n  for (unsigned a= hash(i), j= os[a]; j < os[a + 1];\
+    \ ++j)\n   if (auto &[d, v]= dat[id[j]]; d == i) return v;\n  assert(0);\n }\n\
+    \ size_t size() const { return dat.size(); }\n auto begin() { return dat.begin();\
+    \ }\n auto begin() const { return dat.begin(); }\n auto end() { return dat.begin()\
+    \ + os.back(); }\n auto end() const { return dat.begin() + os.back(); }\n /* f\
+    \ -> g s.t. g(n) = sum_{m|n} f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j,\
+    \ j - k, +)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m) */\n void divisor_mobius()\
+    \ { _ZETA(_DWN _OP(j, j - k, -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n\
+    \ void multiple_zeta() { _ZETA(_DWN _OP(j - k, j, +)) }\n /* f -> h s.t. f(n)\
+    \ = sum_{n|m} h(m) */\n void multiple_mobius() { _ZETA(_UP _OP(j - k, j, -)) }\n\
+    \ /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T& a, T b): a+=b */\n template <class\
+    \ F> void divisor_zeta(const F &add) { _ZETA(_UP _FUN(j, j - k, add)) }\n /* f\
+    \ -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b): a-=b */\n template <class F>\
+    \ void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j, j - k, sub)) }\n /* f\
+    \ -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b */\n template <class F>\
+    \ void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j - k, j, add)) }\n /* f ->\
+    \ h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b */\n template <class F> void\
+    \ multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j - k, j, sub)) }\n#undef _UP\n\
+    #undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e): multiplicative function of\
+    \ p^e\n template <typename F> void set_multiplicative(const F &f) {\n  int k=\
+    \ 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n   for (int m= k, d=\
+    \ 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second\
+    \ * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second= 1;\n  for\
+    \ (auto [p, e]: factors) {\n   Int b= p - 1;\n   for (int m= k; e--; b*= p)\n\
+    \    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n  }\n }\n void\
+    \ set_mobius() {\n  set_multiplicative([](auto, auto e) { return e == 1 ? -1 :\
+    \ 0; });\n }\n};\n#line 5 \"test/atcoder/abc335_g.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n long long\
+    \ N, P;\n cin >> N >> P;\n vector<long long> a(N);\n OrderFp ord(P);\n for (int\
+    \ i= 0; i < N; i++) {\n  long long A;\n  cin >> A;\n  a[i]= ord(A);\n }\n ArrayOnDivisors<long\
+    \ long, long long> x(P - 1, ord.factors);\n for (int i= 0; i < N; ++i) ++x[a[i]];\n\
+    \ x.divisor_zeta();\n long long ans= 0;\n for (int i= 0; i < N; ++i) ans+= x[a[i]];\n\
+    \ cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc335/tasks/abc335_g\"\n#include\
     \ <iostream>\n#include \"src/NumberTheory/OrderFp.hpp\"\n#include \"src/NumberTheory/ArrayOnDivisors.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ long long N, P;\n cin >> N >> P;\n vector<long long> a(N);\n OrderFp ord(P);\n\
     \ for (int i= 0; i < N; i++) {\n  long long A;\n  cin >> A;\n  a[i]= ord(A);\n\
-    \ }\n ArrayOnDivisors<long long> x(P - 1, ord.factors);\n for (int i= 0; i < N;\
-    \ ++i) ++x[a[i]];\n x.divisor_zeta();\n long long ans= 0;\n for (int i= 0; i <\
-    \ N; ++i) ans+= x[a[i]];\n cout << ans << '\\n';\n return 0;\n}"
+    \ }\n ArrayOnDivisors<long long, long long> x(P - 1, ord.factors);\n for (int\
+    \ i= 0; i < N; ++i) ++x[a[i]];\n x.divisor_zeta();\n long long ans= 0;\n for (int\
+    \ i= 0; i < N; ++i) ans+= x[a[i]];\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/NumberTheory/OrderFp.hpp
   - src/NumberTheory/Factors.hpp
@@ -219,8 +223,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc335_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-09 15:18:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-25 20:59:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc335_g.test.cpp
 layout: document

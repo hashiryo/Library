@@ -99,8 +99,8 @@ data:
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
     };\n#line 3 \"src/Graph/Rerooting.hpp\"\n// put_edge(int v, int e, T t) -> U\n\
     // op(U l, U r) -> U\n// ui(:U) is the identity element of op\n// put_vertex(int\
-    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n const HeavyLightDecomposition\
-    \ &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
+    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n HeavyLightDecomposition\
+    \ hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
     \ class F2, class F3> Rerooting(const Graph &g, const CSRArray<int> &adje, const\
     \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
     \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
@@ -154,7 +154,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2024-02-22 11:37:15+09:00'
+  timestamp: '2024-02-25 20:59:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_5_A.test.cpp

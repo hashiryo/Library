@@ -31,6 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc248_g.test.cpp
+    title: test/atcoder/abc248_g.test.cpp
   - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
@@ -59,8 +62,14 @@ data:
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1833.test.cpp
+    title: test/yukicoder/1833.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2360.test.cpp
+    title: test/yukicoder/2360.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
@@ -147,8 +156,8 @@ data:
     \ edge);\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
     };\n#line 3 \"src/Graph/Rerooting.hpp\"\n// put_edge(int v, int e, T t) -> U\n\
     // op(U l, U r) -> U\n// ui(:U) is the identity element of op\n// put_vertex(int\
-    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n const HeavyLightDecomposition\
-    \ &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
+    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n HeavyLightDecomposition\
+    \ hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
     \ class F2, class F3> Rerooting(const Graph &g, const CSRArray<int> &adje, const\
     \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
     \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
@@ -181,10 +190,10 @@ data:
   code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\n// put_edge(int\
     \ v, int e, T t) -> U\n// op(U l, U r) -> U\n// ui(:U) is the identity element\
     \ of op\n// put_vertex(int v, U sum) -> T\ntemplate <class T> class Rerooting\
-    \ {\n const HeavyLightDecomposition &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n\
-    \ template <class U, class F1, class F2, class F3> Rerooting(const Graph &g, const\
-    \ CSRArray<int> &adje, const HeavyLightDecomposition &hld, const F1 &put_edge,\
-    \ const F2 &op, const U &ui, const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
+    \ {\n HeavyLightDecomposition hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template\
+    \ <class U, class F1, class F2, class F3> Rerooting(const Graph &g, const CSRArray<int>\
+    \ &adje, const HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op,\
+    \ const U &ui, const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
     \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
     \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
     \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
@@ -218,13 +227,15 @@ data:
   isVerificationFile: false
   path: src/Graph/Rerooting.hpp
   requiredBy: []
-  timestamp: '2024-02-22 11:37:15+09:00'
+  timestamp: '2024-02-25 20:59:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1494.test.cpp
+  - test/yukicoder/2360.test.cpp
   - test/yukicoder/1976.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1833.test.cpp
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1295.test.cpp
   - test/yukicoder/1075.test.cpp
@@ -236,6 +247,7 @@ data:
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
   - test/atcoder/abc220_f.test.cpp
+  - test/atcoder/abc248_g.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc160_f.test.cpp
@@ -277,15 +289,23 @@ Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, CSRArray<int> adje,  HeavyLightDeco
 |`operator()(int root, int v)`|頂点 root が根である場合の 頂点 v を根とする部分木のDP値を返す.|
 
 ## 問題例
-[AtCoder Regular Contest 097 F - Monochrome Cat](https://atcoder.jp/contests/arc097/tasks/arc097_d) \
 [AtCoder Regular Contest 022 C - ロミオとジュリエット](https://atcoder.jp/contests/arc022/tasks/arc022_3) \
 [AtCoder Regular Contest 028 C - 高橋王国の分割統治](https://atcoder.jp/contests/arc028/tasks/arc028_3) \
+[AtCoder Regular Contest 097 F - Monochrome Cat](https://atcoder.jp/contests/arc097/tasks/arc097_d) \
 [Educational DP Contest V - Subtree](https://atcoder.jp/contests/dp/tasks/dp_v) \
 [Typical DP Contest N - 木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree) \
 [square869120Contest #4 D - Driving on a Tree](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_d)\
 [NJPC2017 E - 限界集落](https://atcoder.jp/contests/njpc2017/tasks/njpc2017_e)\
-[第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ) \
-[yukicoder No.1153 ねこちゃんゲーム](https://yukicoder.me/problems/no/1153) (sp judge)
-
+[第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ, 二つの全方位木DP, `operator()`) \
+[yukicoder No.1153 ねこちゃんゲーム](https://yukicoder.me/problems/no/1153) (`operator()`,sp judge)\
+[Codeforces Round 302 (Div. 1) D. Road Improvement](https://codeforces.com/contest/543/problem/D)\
+[Codeforces Round 395 (Div. 1) D. Timofey and a flat tree](https://codeforces.com/contest/763/problem/D) (根付き木ハッシュ)\
+[Codeforces Round 397 (Div. 1 + Div. 2 combined) E. Tree Folding](https://codeforces.com/contest/765/problem/E)\
+[Codeforces Round 405 (Div. 2) D. Bear and Tree Jumps](https://codeforces.com/contest/791/problem/D)\
+[Codeforces Round 615 (Div. 3) F. Three Paths on a Tree](https://codeforces.com/contest/1294/problem/F)\
+[Codeforces Round 627 (Div. 3) F. Maximum White Subtree](https://codeforces.com/contest/1324/problem/F)\
+[Codeforces Round 695 (Div. 2) E. Distinctive Roots in a Tree](https://codeforces.com/contest/1467/problem/E)\
+[Codeforces Round 711 (Div. 2) F. Christmas Game](https://codeforces.com/contest/1498/problem/F) (staircase nim)\
+[AIM Tech Round 3 (Div. 1) C. Centroids](https://codeforces.com/contest/708/problem/C) (`operator()`)
 ## 参考
 [https://trap.jp/post/1702/](https://trap.jp/post/1702/)

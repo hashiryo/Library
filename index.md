@@ -383,7 +383,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/NumberTheory/OrderFp.hpp
       title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
     - icon: ':question:'
@@ -1318,6 +1318,9 @@ data:
       path: test/atcoder/abc244_ex.test.cpp
       title: test/atcoder/abc244_ex.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc248_g.test.cpp
+      title: test/atcoder/abc248_g.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1398,7 +1401,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc327_d.test.cpp
       title: test/atcoder/abc327_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc335_g.test.cpp
       title: test/atcoder/abc335_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2091,6 +2094,9 @@ data:
       path: test/yukicoder/1813.test.cpp
       title: test/yukicoder/1813.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/1833.test.cpp
+      title: test/yukicoder/1833.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':x:'
@@ -2159,6 +2165,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2360.test.cpp
+      title: test/yukicoder/2360.test.cpp
     - icon: ':x:'
       path: test/yukicoder/2361.SuffixTree.test.cpp
       title: test/yukicoder/2361.SuffixTree.test.cpp

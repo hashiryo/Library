@@ -148,6 +148,9 @@ data:
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc248_g.test.cpp
+    title: test/atcoder/abc248_g.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_e.test.cpp
     title: test/atcoder/abc256_e.test.cpp
   - icon: ':heavy_check_mark:'
@@ -265,6 +268,9 @@ data:
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1833.test.cpp
+    title: test/yukicoder/1833.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1868.test.cpp
     title: test/yukicoder/1868.test.cpp
   - icon: ':x:'
@@ -282,6 +288,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2360.test.cpp
+    title: test/yukicoder/2360.test.cpp
   - icon: ':x:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
@@ -380,6 +389,7 @@ data:
   - test/yukicoder/1216.KDT.test.cpp
   - test/yukicoder/1494.test.cpp
   - test/yukicoder/1211.test.cpp
+  - test/yukicoder/2360.test.cpp
   - test/yukicoder/1976.test.cpp
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1868.test.cpp
@@ -388,6 +398,7 @@ data:
   - test/yukicoder/2361.SuffixTree.test.cpp
   - test/yukicoder/1935.test.cpp
   - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1833.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1418.test.cpp
@@ -450,6 +461,7 @@ data:
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
   - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc248_g.test.cpp
   - test/atcoder/arc106_b.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc179_e.test.cpp

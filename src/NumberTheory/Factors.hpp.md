@@ -27,7 +27,7 @@ data:
   - icon: ':question:'
     path: src/NumberTheory/ArrayOnDivisors.hpp
     title: "\u7D04\u6570\u914D\u5217"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/OrderFp.hpp
     title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
   _extendedVerifiedWith:
@@ -41,6 +41,9 @@ data:
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc248_g.test.cpp
+    title: test/atcoder/abc248_g.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc335_g.test.cpp
     title: test/atcoder/abc335_g.test.cpp
   - icon: ':x:'
@@ -257,6 +260,7 @@ data:
   - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/atcoder/abc335_g.test.cpp
   - test/atcoder/abc212_g.test.cpp
+  - test/atcoder/abc248_g.test.cpp
   - test/atcoder/abc228_e.test.cpp
 documentation_of: src/NumberTheory/Factors.hpp
 layout: document
