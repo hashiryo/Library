@@ -78,7 +78,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/924.Seg2D.test.cpp
     title: test/yukicoder/924.Seg2D.test.cpp
   _isVerificationFailed: true

@@ -163,6 +163,9 @@ data:
     path: test/atcoder/abc327_d.test.cpp
     title: test/atcoder/abc327_d.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc337_g.test.cpp
+    title: test/atcoder/abc337_g.test.cpp
+  - icon: ':x:'
     path: test/atcoder/arc106_b.test.cpp
     title: test/atcoder/arc106_b.test.cpp
   - icon: ':x:'
@@ -471,6 +474,7 @@ data:
   - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/atcoder/abc160_f.test.cpp
+  - test/atcoder/abc337_g.test.cpp
 documentation_of: src/Graph/Graph.hpp
 layout: document
 title: "\u30B0\u30E9\u30D5"

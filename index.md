@@ -79,7 +79,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -1404,6 +1404,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc335_g.test.cpp
       title: test/atcoder/abc335_g.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc337_g.test.cpp
+      title: test/atcoder/abc337_g.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc015_d.test.cpp
       title: test/atcoder/agc015_d.test.cpp
@@ -1782,7 +1785,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
     - icon: ':x:'
@@ -1830,7 +1833,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
       title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2006,7 +2009,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/137.div_at.test.cpp
       title: test/yukicoder/137.div_at.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1371.WM.test.cpp
       title: test/yukicoder/1371.WM.test.cpp
     - icon: ':x:'
@@ -2291,7 +2294,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/705.LiCT.test.cpp
       title: test/yukicoder/705.LiCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
     - icon: ':x:'
@@ -2327,13 +2330,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/913.monotone_minima.test.cpp
       title: test/yukicoder/913.monotone_minima.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/919.WM.test.cpp
       title: test/yukicoder/919.WM.test.cpp
     - icon: ':x:'
       path: test/yukicoder/922.test.cpp
       title: test/yukicoder/922.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/924.Seg2D.test.cpp
       title: test/yukicoder/924.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
