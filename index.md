@@ -275,7 +275,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Vector.hpp
       title: "\u30D9\u30AF\u30C8\u30EB"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - name: src/Math
@@ -1392,10 +1392,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc321_g.test.cpp
       title: test/atcoder/abc321_g.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc323_g.test.cpp
       title: test/atcoder/abc323_g.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc324_g.WM.test.cpp
       title: test/atcoder/abc324_g.WM.test.cpp
     - icon: ':heavy_check_mark:'

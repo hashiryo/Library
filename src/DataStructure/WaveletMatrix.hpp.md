@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc324_g.WM.test.cpp
     title: test/atcoder/abc324_g.WM.test.cpp
   - icon: ':x:'
@@ -60,26 +60,27 @@ data:
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  int rank0(int k) const { return k - rank(k);\
     \ }\n };\n int len, lg;\n std::vector<SuccinctIndexableDictionary> mat;\n std::vector<T>\
     \ vec;\npublic:\n WaveletMatrix(const std::vector<T> &v): len(v.size()), lg(len\
-    \ ? 32 - __builtin_clz(len) : 1), mat(lg, len), vec(v) {\n  std::sort(vec.begin(),\
-    \ vec.end()), vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n  std::vector<unsigned>\
-    \ cur(len), nex(len);\n  for (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(),\
-    \ vec.end(), v[i]) - vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n\
-    \   for (int i= 0; i < len; ++i)\n    if ((cur[i] >> h) & 1) mat[h].set(i);\n\
-    \   mat[h].build();\n   std::array it{nex.begin(), nex.begin() + mat[h].zeros};\n\
-    \   for (int i= 0; i < len; ++i) *it[mat[h][i]]++= cur[i];\n  }\n }\n // k-th(0-indexed)\
-    \ smallest number in v[l,r)\n T kth_smallest(int l, int r, int k) const {\n  assert(k\
-    \ < r - l);\n  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l),\
-    \ r0= mat[h].rank0(r); k >= r0 - l0) k-= r0 - l0, ret|= 1 << h, l+= mat[h].zeros\
-    \ - l0, r+= mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return vec[ret];\n }\n\
-    \ // k-th(0-indexed) largest number in v[l,r)\n T kth_largest(int l, int r, int\
-    \ k) const { return kth_smallest(l, r, r - l - k - 1); }\n // count i s.t. (l\
-    \ <= i < r) && (v[i] < ub)\n int count(int l, int r, T ub) const {\n  int x= std::lower_bound(vec.begin(),\
-    \ vec.end(), ub) - vec.begin();\n  if (x >= 1u << lg) return r - l;\n  if (x ==\
-    \ 0) return 0;\n  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l),\
-    \ r0= mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+=\
-    \ mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t.\
-    \ (l <= i < r) && (lb <= v[i] < ub)\n int count(int l, int r, T lb, T ub) const\
-    \ { return count(l, r, ub) - count(l, r, lb); }\n};\n"
+    \ ? 32 - __builtin_clz(len) : 1), mat(lg, SuccinctIndexableDictionary(len)), vec(v)\
+    \ {\n  std::sort(vec.begin(), vec.end()), vec.erase(std::unique(vec.begin(), vec.end()),\
+    \ vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for (int i= len;\
+    \ i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) - vec.begin();\n\
+    \  for (auto h= lg; h--; cur.swap(nex)) {\n   for (int i= 0; i < len; ++i)\n \
+    \   if ((cur[i] >> h) & 1) mat[h].set(i);\n   mat[h].build();\n   std::array it{nex.begin(),\
+    \ nex.begin() + mat[h].zeros};\n   for (int i= 0; i < len; ++i) *it[mat[h][i]]++=\
+    \ cur[i];\n  }\n }\n // k-th(0-indexed) smallest number in v[l,r)\n T kth_smallest(int\
+    \ l, int r, int k) const {\n  assert(k < r - l);\n  int ret= 0;\n  for (auto h=\
+    \ lg; h--;)\n   if (auto l0= mat[h].rank0(l), r0= mat[h].rank0(r); k >= r0 - l0)\
+    \ k-= r0 - l0, ret|= 1 << h, l+= mat[h].zeros - l0, r+= mat[h].zeros - r0;\n \
+    \  else l= l0, r= r0;\n  return vec[ret];\n }\n // k-th(0-indexed) largest number\
+    \ in v[l,r)\n T kth_largest(int l, int r, int k) const { return kth_smallest(l,\
+    \ r, r - l - k - 1); }\n // count i s.t. (l <= i < r) && (v[i] < ub)\n int count(int\
+    \ l, int r, T ub) const {\n  int x= std::lower_bound(vec.begin(), vec.end(), ub)\
+    \ - vec.begin();\n  if (x >= 1u << lg) return r - l;\n  if (x == 0) return 0;\n\
+    \  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l), r0=\
+    \ mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+= mat[h].zeros\
+    \ - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t. (l <= i <\
+    \ r) && (lb <= v[i] < ub)\n int count(int l, int r, T lb, T ub) const { return\
+    \ count(l, r, ub) - count(l, r, lb); }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <array>\n\
     #include <cassert>\ntemplate <class T> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
     \ {\n  int len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary(int\
@@ -91,32 +92,33 @@ data:
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  int rank0(int k) const { return k - rank(k);\
     \ }\n };\n int len, lg;\n std::vector<SuccinctIndexableDictionary> mat;\n std::vector<T>\
     \ vec;\npublic:\n WaveletMatrix(const std::vector<T> &v): len(v.size()), lg(len\
-    \ ? 32 - __builtin_clz(len) : 1), mat(lg, len), vec(v) {\n  std::sort(vec.begin(),\
-    \ vec.end()), vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n  std::vector<unsigned>\
-    \ cur(len), nex(len);\n  for (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(),\
-    \ vec.end(), v[i]) - vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n\
-    \   for (int i= 0; i < len; ++i)\n    if ((cur[i] >> h) & 1) mat[h].set(i);\n\
-    \   mat[h].build();\n   std::array it{nex.begin(), nex.begin() + mat[h].zeros};\n\
-    \   for (int i= 0; i < len; ++i) *it[mat[h][i]]++= cur[i];\n  }\n }\n // k-th(0-indexed)\
-    \ smallest number in v[l,r)\n T kth_smallest(int l, int r, int k) const {\n  assert(k\
-    \ < r - l);\n  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l),\
-    \ r0= mat[h].rank0(r); k >= r0 - l0) k-= r0 - l0, ret|= 1 << h, l+= mat[h].zeros\
-    \ - l0, r+= mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return vec[ret];\n }\n\
-    \ // k-th(0-indexed) largest number in v[l,r)\n T kth_largest(int l, int r, int\
-    \ k) const { return kth_smallest(l, r, r - l - k - 1); }\n // count i s.t. (l\
-    \ <= i < r) && (v[i] < ub)\n int count(int l, int r, T ub) const {\n  int x= std::lower_bound(vec.begin(),\
-    \ vec.end(), ub) - vec.begin();\n  if (x >= 1u << lg) return r - l;\n  if (x ==\
-    \ 0) return 0;\n  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l),\
-    \ r0= mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+=\
-    \ mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t.\
-    \ (l <= i < r) && (lb <= v[i] < ub)\n int count(int l, int r, T lb, T ub) const\
-    \ { return count(l, r, ub) - count(l, r, lb); }\n};"
+    \ ? 32 - __builtin_clz(len) : 1), mat(lg, SuccinctIndexableDictionary(len)), vec(v)\
+    \ {\n  std::sort(vec.begin(), vec.end()), vec.erase(std::unique(vec.begin(), vec.end()),\
+    \ vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for (int i= len;\
+    \ i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) - vec.begin();\n\
+    \  for (auto h= lg; h--; cur.swap(nex)) {\n   for (int i= 0; i < len; ++i)\n \
+    \   if ((cur[i] >> h) & 1) mat[h].set(i);\n   mat[h].build();\n   std::array it{nex.begin(),\
+    \ nex.begin() + mat[h].zeros};\n   for (int i= 0; i < len; ++i) *it[mat[h][i]]++=\
+    \ cur[i];\n  }\n }\n // k-th(0-indexed) smallest number in v[l,r)\n T kth_smallest(int\
+    \ l, int r, int k) const {\n  assert(k < r - l);\n  int ret= 0;\n  for (auto h=\
+    \ lg; h--;)\n   if (auto l0= mat[h].rank0(l), r0= mat[h].rank0(r); k >= r0 - l0)\
+    \ k-= r0 - l0, ret|= 1 << h, l+= mat[h].zeros - l0, r+= mat[h].zeros - r0;\n \
+    \  else l= l0, r= r0;\n  return vec[ret];\n }\n // k-th(0-indexed) largest number\
+    \ in v[l,r)\n T kth_largest(int l, int r, int k) const { return kth_smallest(l,\
+    \ r, r - l - k - 1); }\n // count i s.t. (l <= i < r) && (v[i] < ub)\n int count(int\
+    \ l, int r, T ub) const {\n  int x= std::lower_bound(vec.begin(), vec.end(), ub)\
+    \ - vec.begin();\n  if (x >= 1u << lg) return r - l;\n  if (x == 0) return 0;\n\
+    \  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l), r0=\
+    \ mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+= mat[h].zeros\
+    \ - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t. (l <= i <\
+    \ r) && (lb <= v[i] < ub)\n int count(int l, int r, T lb, T ub) const { return\
+    \ count(l, r, ub) - count(l, r, lb); }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/WaveletMatrix.hpp
   requiredBy:
   - src/DataStructure/DQuery.hpp
-  timestamp: '2024-02-27 21:21:00+09:00'
+  timestamp: '2024-03-03 04:26:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/919.WM.test.cpp

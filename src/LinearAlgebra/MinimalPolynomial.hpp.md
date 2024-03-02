@@ -52,28 +52,33 @@ data:
     \ continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j -\
     \ m];\n  if (2 * d <= i) d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d +\
     \ 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n return c;\n}\n#line 2 \"\
-    src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include <valarray>\nnamespace\
-    \ _la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
-    \ valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
-    using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
-    \ *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >>\
-    \ i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
-    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
-    \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
-    \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
-    \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n valarray<u128>\
-    \ dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >>\
-    \ 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref\
-    \ operator[](int i) {\n  u128 *ref= begin(dat) + (i >> 7);\n  u8 j= i & 127;\n\
-    \  bool val= (*ref >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int\
-    \ i) const { return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const\
-    \ Vector &r) { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector\
-    \ &r) { return dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b)\
-    \ dat= 0;\n  return *this;\n }\n Vector operator+(const Vector &r) const { return\
-    \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
-    \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
-    \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing _la_internal::Vector;\n\
+    src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include <iostream>\n#include\
+    \ <valarray>\nnamespace _la_internal {\nusing namespace std;\ntemplate <class\
+    \ R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n friend\
+    \ ostream &operator<<(ostream &os, const Vector &v) {\n  os << '[';\n  for (int\
+    \ _= 0, __= v.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << v[_];\n  return\
+    \ os << ']';\n }\n};\nusing u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref\
+    \ {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r),\
+    \ i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) <<\
+    \ i;\n }\n Ref &operator=(const Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool\
+    \ b) { return val= b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this;\
+    \ }\n Ref &operator&=(bool b) { return val&= b, *this; }\n Ref &operator^=(bool\
+    \ b) { return val^= b, *this; }\n operator bool() const { return val; }\n};\n\
+    template <> class Vector<bool> {\n size_t n;\n valarray<u128> dat;\npublic:\n\
+    \ Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >> 7) {}\n Vector(bool\
+    \ b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref operator[](int i)\
+    \ {\n  u128 *ref= begin(dat) + (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref\
+    \ >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int i) const {\
+    \ return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const Vector &r)\
+    \ { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector &r) { return\
+    \ dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b) dat= 0;\n  return\
+    \ *this;\n }\n Vector operator+(const Vector &r) const { return Vector(*this)+=\
+    \ r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-= r; }\n\
+    \ Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t size()\
+    \ const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector operator*(bool\
+    \ b, const Vector &r) { return r * b; }\n friend ostream &operator<<(ostream &os,\
+    \ const Vector &v) {\n  os << '[';\n  for (int _= 0, __= v.size(); _ < __; ++_)\
+    \ os << (_ ? \", \" : \"\") << v[_];\n  return os << ']';\n }\n};\n}\nusing _la_internal::Vector;\n\
     #line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#line 4 \"src/Misc/rng.hpp\"\n\
     uint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
     \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
@@ -159,7 +164,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
-  timestamp: '2024-02-18 22:00:56+09:00'
+  timestamp: '2024-03-03 04:26:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1750.MinPoly.test.cpp

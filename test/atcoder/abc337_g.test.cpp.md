@@ -40,26 +40,27 @@ data:
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  int rank0(int k) const { return k - rank(k);\
     \ }\n };\n int len, lg;\n std::vector<SuccinctIndexableDictionary> mat;\n std::vector<T>\
     \ vec;\npublic:\n WaveletMatrix(const std::vector<T> &v): len(v.size()), lg(len\
-    \ ? 32 - __builtin_clz(len) : 1), mat(lg, len), vec(v) {\n  std::sort(vec.begin(),\
-    \ vec.end()), vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n  std::vector<unsigned>\
-    \ cur(len), nex(len);\n  for (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(),\
-    \ vec.end(), v[i]) - vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n\
-    \   for (int i= 0; i < len; ++i)\n    if ((cur[i] >> h) & 1) mat[h].set(i);\n\
-    \   mat[h].build();\n   std::array it{nex.begin(), nex.begin() + mat[h].zeros};\n\
-    \   for (int i= 0; i < len; ++i) *it[mat[h][i]]++= cur[i];\n  }\n }\n // k-th(0-indexed)\
-    \ smallest number in v[l,r)\n T kth_smallest(int l, int r, int k) const {\n  assert(k\
-    \ < r - l);\n  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l),\
-    \ r0= mat[h].rank0(r); k >= r0 - l0) k-= r0 - l0, ret|= 1 << h, l+= mat[h].zeros\
-    \ - l0, r+= mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return vec[ret];\n }\n\
-    \ // k-th(0-indexed) largest number in v[l,r)\n T kth_largest(int l, int r, int\
-    \ k) const { return kth_smallest(l, r, r - l - k - 1); }\n // count i s.t. (l\
-    \ <= i < r) && (v[i] < ub)\n int count(int l, int r, T ub) const {\n  int x= std::lower_bound(vec.begin(),\
-    \ vec.end(), ub) - vec.begin();\n  if (x >= 1u << lg) return r - l;\n  if (x ==\
-    \ 0) return 0;\n  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l),\
-    \ r0= mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+=\
-    \ mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t.\
-    \ (l <= i < r) && (lb <= v[i] < ub)\n int count(int l, int r, T lb, T ub) const\
-    \ { return count(l, r, ub) - count(l, r, lb); }\n};\n#line 4 \"src/Internal/ListRange.hpp\"\
+    \ ? 32 - __builtin_clz(len) : 1), mat(lg, SuccinctIndexableDictionary(len)), vec(v)\
+    \ {\n  std::sort(vec.begin(), vec.end()), vec.erase(std::unique(vec.begin(), vec.end()),\
+    \ vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for (int i= len;\
+    \ i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) - vec.begin();\n\
+    \  for (auto h= lg; h--; cur.swap(nex)) {\n   for (int i= 0; i < len; ++i)\n \
+    \   if ((cur[i] >> h) & 1) mat[h].set(i);\n   mat[h].build();\n   std::array it{nex.begin(),\
+    \ nex.begin() + mat[h].zeros};\n   for (int i= 0; i < len; ++i) *it[mat[h][i]]++=\
+    \ cur[i];\n  }\n }\n // k-th(0-indexed) smallest number in v[l,r)\n T kth_smallest(int\
+    \ l, int r, int k) const {\n  assert(k < r - l);\n  int ret= 0;\n  for (auto h=\
+    \ lg; h--;)\n   if (auto l0= mat[h].rank0(l), r0= mat[h].rank0(r); k >= r0 - l0)\
+    \ k-= r0 - l0, ret|= 1 << h, l+= mat[h].zeros - l0, r+= mat[h].zeros - r0;\n \
+    \  else l= l0, r= r0;\n  return vec[ret];\n }\n // k-th(0-indexed) largest number\
+    \ in v[l,r)\n T kth_largest(int l, int r, int k) const { return kth_smallest(l,\
+    \ r, r - l - k - 1); }\n // count i s.t. (l <= i < r) && (v[i] < ub)\n int count(int\
+    \ l, int r, T ub) const {\n  int x= std::lower_bound(vec.begin(), vec.end(), ub)\
+    \ - vec.begin();\n  if (x >= 1u << lg) return r - l;\n  if (x == 0) return 0;\n\
+    \  int ret= 0;\n  for (auto h= lg; h--;)\n   if (auto l0= mat[h].rank0(l), r0=\
+    \ mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+= mat[h].zeros\
+    \ - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t. (l <= i <\
+    \ r) && (lb <= v[i] < ub)\n int count(int l, int r, T lb, T ub) const { return\
+    \ count(l, r, ub) - count(l, r, lb); }\n};\n#line 4 \"src/Internal/ListRange.hpp\"\
     \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n\
     \ template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
     \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
@@ -166,30 +167,28 @@ data:
     \ \"test/atcoder/abc337_g.test.cpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n Graph g(N, N -\
     \ 1);\n for (auto &e: g) cin >> e, --e;\n HeavyLightDecomposition hld(g);\n vector<int>\
-    \ a(N);\n for (int v= N; v--;) a[hld.to_seq(v)]= v;\n WaveletMatrix wm(a);\n Graph\
-    \ g2(N);\n vector<int> val;\n for (auto [u, v]: g) {\n  if (u != hld.parent(v))\
-    \ swap(u, v);\n  auto [l, r]= hld.subtree(v);\n  g2.add_edge(u, v);\n  val.push_back(wm.count(l,\
-    \ r, v));\n  g2.add_edge(v, u);\n  val.push_back(u - wm.count(l, r, u));\n }\n\
-    \ auto put_edge= [&](int, int e, long long d) { return d + val[e]; };\n auto op=\
-    \ [&](long long a, long long b) { return a + b; };\n auto put_vertex= [&](int,\
-    \ long long d) { return d; };\n Rerooting<long long> dp(g2, g2.adjacency_edge(1),\
-    \ hld, put_edge, op, 0ll, put_vertex);\n for (int i= 0; i < N; ++i) cout << dp[i]\
-    \ + i << \" \\n\"[i == N - 1];\n return 0;\n}\n"
+    \ a(N);\n for (int v= N; v--;) a[hld.to_seq(v)]= v;\n WaveletMatrix wm(a);\n auto\
+    \ put_edge= [&](int v, int e, long long d) -> long long {\n  int u= g[e].to(v);\n\
+    \  if (u == hld.parent(v)) {\n   auto [l, r]= hld.subtree(v);\n   return d + u\
+    \ - wm.count(l, r, u);\n  } else {\n   auto [l, r]= hld.subtree(u);\n   return\
+    \ d + wm.count(l, r, u);\n  }\n };\n auto op= [&](long long l, long long r) {\
+    \ return l + r; };\n auto put_vertex= [&](int, long long d) { return d; };\n Rerooting<long\
+    \ long> dp(g, hld, put_edge, op, 0ll, put_vertex);\n for (int i= 0; i < N; ++i)\
+    \ cout << dp[i] + i << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc337/tasks/abc337_g\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\
     \n#include \"src/Graph/Graph.hpp\"\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\
     \n#include \"src/Graph/Rerooting.hpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n Graph g(N, N -\
     \ 1);\n for (auto &e: g) cin >> e, --e;\n HeavyLightDecomposition hld(g);\n vector<int>\
-    \ a(N);\n for (int v= N; v--;) a[hld.to_seq(v)]= v;\n WaveletMatrix wm(a);\n Graph\
-    \ g2(N);\n vector<int> val;\n for (auto [u, v]: g) {\n  if (u != hld.parent(v))\
-    \ swap(u, v);\n  auto [l, r]= hld.subtree(v);\n  g2.add_edge(u, v);\n  val.push_back(wm.count(l,\
-    \ r, v));\n  g2.add_edge(v, u);\n  val.push_back(u - wm.count(l, r, u));\n }\n\
-    \ auto put_edge= [&](int, int e, long long d) { return d + val[e]; };\n auto op=\
-    \ [&](long long a, long long b) { return a + b; };\n auto put_vertex= [&](int,\
-    \ long long d) { return d; };\n Rerooting<long long> dp(g2, g2.adjacency_edge(1),\
-    \ hld, put_edge, op, 0ll, put_vertex);\n for (int i= 0; i < N; ++i) cout << dp[i]\
-    \ + i << \" \\n\"[i == N - 1];\n return 0;\n}\n"
+    \ a(N);\n for (int v= N; v--;) a[hld.to_seq(v)]= v;\n WaveletMatrix wm(a);\n auto\
+    \ put_edge= [&](int v, int e, long long d) -> long long {\n  int u= g[e].to(v);\n\
+    \  if (u == hld.parent(v)) {\n   auto [l, r]= hld.subtree(v);\n   return d + u\
+    \ - wm.count(l, r, u);\n  } else {\n   auto [l, r]= hld.subtree(u);\n   return\
+    \ d + wm.count(l, r, u);\n  }\n };\n auto op= [&](long long l, long long r) {\
+    \ return l + r; };\n auto put_vertex= [&](int, long long d) { return d; };\n Rerooting<long\
+    \ long> dp(g, hld, put_edge, op, 0ll, put_vertex);\n for (int i= 0; i < N; ++i)\
+    \ cout << dp[i] + i << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   - src/Graph/Graph.hpp
@@ -199,7 +198,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc337_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-27 21:21:00+09:00'
+  timestamp: '2024-03-03 04:26:46+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc337_g.test.cpp
