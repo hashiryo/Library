@@ -99,18 +99,18 @@ data:
   timestamp: '2024-02-17 10:13:57+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1600.Seg2D.test.cpp
-  - test/yukicoder/1303.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
-  - test/yosupo/bipartite_edge_coloring.test.cpp
-  - test/yosupo/directedmst.test.cpp
+  - test/aoj/0342.test.cpp
   - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/3506.test.cpp
   - test/aoj/DSL_1_A.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
   - test/aoj/2647.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
+  - test/yosupo/directedmst.test.cpp
+  - test/yosupo/bipartite_edge_coloring.test.cpp
+  - test/yukicoder/1600.Seg2D.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/1303.test.cpp
   - test/atcoder/abc282_d.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document

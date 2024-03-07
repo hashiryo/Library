@@ -122,16 +122,16 @@ data:
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1216.KDT.test.cpp
-  - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/2342.KDT.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
+  - test/aoj/1023.KDT.test.cpp
+  - test/aoj/DSL_2_C.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
+  - test/aoj/1068.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
-  - test/aoj/1068.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
-  - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/aoj/1023.KDT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
+  - test/yukicoder/2342.KDT.test.cpp
   - test/atcoder/abc309_f.KDT.3D.test.cpp
   - test/atcoder/abc234_ex.KDT.test.cpp
   - test/atcoder/abc309_f.KDT.test.cpp

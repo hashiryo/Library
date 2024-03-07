@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc248_g.test.cpp
     title: test/atcoder/abc248_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc337_g.test.cpp
     title: test/atcoder/abc337_g.test.cpp
   - icon: ':x:'
@@ -233,28 +233,28 @@ data:
   timestamp: '2024-02-25 20:59:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1494.test.cpp
-  - test/yukicoder/2360.test.cpp
-  - test/yukicoder/1976.test.cpp
-  - test/yukicoder/1333.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1833.test.cpp
-  - test/yukicoder/1418.test.cpp
-  - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1075.test.cpp
-  - test/yukicoder/1718.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/768.test.cpp
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
-  - test/aoj/1595.test.cpp
-  - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/abc248_g.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
-  - test/atcoder/abc222_f.test.cpp
-  - test/atcoder/abc160_f.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1494.test.cpp
+  - test/yukicoder/1833.test.cpp
+  - test/yukicoder/1976.test.cpp
+  - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/2360.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1718.test.cpp
+  - test/yukicoder/768.test.cpp
   - test/atcoder/abc337_g.test.cpp
+  - test/atcoder/abc248_g.test.cpp
+  - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc220_f.test.cpp
+  - test/atcoder/abc160_f.test.cpp
 documentation_of: src/Graph/Rerooting.hpp
 layout: document
 title: "\u5168\u65B9\u4F4D\u6728DP"
@@ -320,6 +320,7 @@ Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, CSRArray<int> adje,  HeavyLightDeco
 [AIM Tech Round 3 (Div. 1) C. Centroids](https://codeforces.com/contest/708/problem/C) (`operator()(root,v)`)\
 [2022 China Collegiate Programming Contest (CCPC) Guilin Site G. Group Homework](https://codeforces.com/gym/104008/problem/G) (`operator()(root,v)`)\
 [LibreOJ #2072. 「JSOI2016」独特的树叶](https://loj.ac/p/2072) (根付き木ハッシュ, 二つの全方位木DP, `operator()(root,v)`)\
+[LibreOJ #2192. 「SHOI2014」概率充电器](https://loj.ac/p/2192)\
 [LibreOJ #3350. 「CEOI2020」星际迷航](https://loj.ac/p/3350)\
 [LibreOJ #6699. 然而第六章的 A 面并没有草莓](https://loj.ac/p/6699) ( + LCA )\
 [LibreOJ #10159. 「一本通 5.2 练习 2」旅游规划](https://loj.ac/p/10159) (`operator()(root,v)`)\

@@ -58,10 +58,10 @@ data:
   timestamp: '2024-02-20 18:08:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yosupo/two_edge_connected_components.test.cpp
-  - test/aoj/2893.test.cpp
   - test/aoj/GRL_3_B.test.cpp
+  - test/aoj/2893.test.cpp
+  - test/yosupo/two_edge_connected_components.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
 documentation_of: src/Graph/IncrementalBridgeConnectivity.hpp
 layout: document
 title: "Incremental-Bridge-Connectivity (\u4E8C\u8FBA\u9023\u7D50\u6210\u5206)"

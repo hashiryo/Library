@@ -52,8 +52,8 @@ data:
   verifiedWith:
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
-  - test/atcoder/arc115_e.test.cpp
   - test/atcoder/abc234_g.test.cpp
+  - test/atcoder/arc115_e.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
 layout: document
 title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"

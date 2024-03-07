@@ -163,8 +163,8 @@ data:
   verifiedWith:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/counting_primes.test.cpp
-  - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
+  - test/atcoder/abc172_d.mul_sum.test.cpp
 documentation_of: src/NumberTheory/sum_on_primes.hpp
 layout: document
 title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
