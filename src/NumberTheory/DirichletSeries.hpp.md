@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc239_ex.test.cpp
     title: test/atcoder/abc239_ex.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.Dirichlet.test.cpp
     title: test/atcoder/arc116_c.Dirichlet.test.cpp
   - icon: ':x:'

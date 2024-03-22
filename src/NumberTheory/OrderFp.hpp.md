@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc335_g.test.cpp
     title: test/atcoder/abc335_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_orderfp.test.cpp
     title: test/unit_test/constexpr_orderfp.test.cpp
   - icon: ':x:'

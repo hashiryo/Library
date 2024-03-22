@@ -108,16 +108,16 @@ data:
     - icon: ':x:'
       path: src/FFT/bostan_mori.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
     - icon: ':x:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
     - icon: ':question:'
@@ -132,7 +132,7 @@ data:
     - icon: ':x:'
       path: src/FFT/sample_points_shift.hpp
       title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/sequences.hpp
       title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
         \u7528)"
@@ -338,7 +338,7 @@ data:
     - icon: ':question:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
@@ -1090,19 +1090,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.WBT.test.cpp
       title: test/aoj/ITP2_4_A.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.WBT.test.cpp
       title: test/aoj/ITP2_4_B.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.WBT.test.cpp
       title: test/aoj/ITP2_4_C.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1446,7 +1446,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.Dirichlet.test.cpp
       title: test/atcoder/arc116_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1463,13 +1463,13 @@ data:
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/hackerrank
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/bonnie-and-clyde.test.cpp
       title: test/hackerrank/bonnie-and-clyde.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1486,37 +1486,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_binary_gcd.test.cpp
       title: test/unit_test/constexpr_binary_gcd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_factors.test.cpp
       title: test/unit_test/constexpr_factors.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_is_prime.test.cpp
       title: test/unit_test/constexpr_is_prime.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_inv.test.cpp
       title: test/unit_test/constexpr_mod_inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_sqrt.test.cpp
       title: test/unit_test/constexpr_mod_sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_tetration.test.cpp
       title: test/unit_test/constexpr_mod_tetration.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_modint.test.cpp
       title: test/unit_test/constexpr_modint.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_orderfp.test.cpp
       title: test/unit_test/constexpr_orderfp.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_rational.test.cpp
       title: test/unit_test/constexpr_rational.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_log.test.cpp
       title: test/unit_test/nimber_log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_sqrt.test.cpp
       title: test/unit_test/nimber_sqrt.test.cpp
   - name: test/yosupo
@@ -1527,7 +1527,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
     - icon: ':x:'

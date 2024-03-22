@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"

@@ -231,13 +231,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc106_b.test.cpp
     title: test/atcoder/arc106_b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   - icon: ':x:'

@@ -6,13 +6,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc150_f.RH.Nimber.test.cpp
     title: test/atcoder/abc150_f.RH.Nimber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_inv.test.cpp
     title: test/unit_test/nimber_inv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_log.test.cpp
     title: test/unit_test/nimber_log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_sqrt.test.cpp
     title: test/unit_test/nimber_sqrt.test.cpp
   - icon: ':x:'

@@ -30,8 +30,8 @@ data:
     links:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\n// \u9045\
-    \u5EF6\u4F1D\u642C\u306Everify\n\n#include <iostream>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\n// apply,\
+    \ fold \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n#include <vector>\n#include <array>\n#include <string>\n#include <tuple>\n#include\
     \ <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n\
     #include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
@@ -67,17 +67,16 @@ data:
     \ static inline T sum(int i) noexcept { return i < 0 ? nl[-i] : nm[i].sum; }\n\
     \ static inline T rsum(int i) noexcept { return i < 0 ? nl[-i] : nm[i].rsum; }\n\
     \ static inline void update(int i) noexcept {\n  auto t= nm + i;\n  auto [l, r]=\
-    \ t->ch;\n  if constexpr (dual_v<M> || reversible) t->sz= (size(l) + size(r))\
-    \ | (t->sz & 0xc0000000);\n  else t->sz= size(l) + size(r);\n  if constexpr (semigroup_v<M>)\
-    \ {\n   t->sum= M::op(sum(l), sum(r));\n   if constexpr (reversible && !commute_v<M>)\
-    \ t->rsum= M::op(rsum(r), rsum(l));\n  }\n }\n static inline void propagate(int\
-    \ &i, const E &x) noexcept {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
-    \  auto t= nm + i;\n  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n\
-    \  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n\
-    \   if constexpr (reversible && !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n\
-    \  }\n  t->sz|= 0x80000000;\n }\n static inline void push_prop(int i) noexcept\
-    \ {\n  if (auto t= nm + i; t->sz >> 31) {\n   auto &[l, r]= t->ch;\n   if (l <\
-    \ 0) {\n    if constexpr (persistent) nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l],\
+    \ t->ch;\n  t->sz= size(l) + size(r);\n  if constexpr (semigroup_v<M>) {\n   t->sum=\
+    \ M::op(sum(l), sum(r));\n   if constexpr (reversible && !commute_v<M>) t->rsum=\
+    \ M::op(rsum(r), rsum(l));\n  }\n }\n static inline void propagate(int &i, const\
+    \ E &x) noexcept {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto\
+    \ t= nm + i;\n  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr\
+    \ (semigroup_v<M>) {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr\
+    \ (reversible && !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n\
+    \  t->sz|= 0x80000000;\n }\n static inline void push_prop(int i) noexcept {\n\
+    \  if (auto t= nm + i; t->sz >> 31) {\n   auto &[l, r]= t->ch;\n   if (l < 0)\
+    \ {\n    if constexpr (persistent) nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l],\
     \ t->laz, 1);\n   } else propagate(l, t->laz);\n   if (r < 0) {\n    if constexpr\
     \ (persistent) nl[nli]= nl[-r], r= -nli++;\n    M::mp(nl[-r], t->laz, 1);\n  \
     \ } else propagate(r, t->laz);\n   t->sz^= 0x80000000;\n  }\n }\n static inline\
@@ -107,8 +106,8 @@ data:
     \ size(i)) return {i, 0};\n  return _split(i, k);\n }\n template <class S> int\
     \ build(size_t l, size_t r, const S &bg) noexcept {\n  if (r - l == 1) {\n   if\
     \ constexpr (std::is_same_v<S, T>) return nl[nli]= bg, -nli++;\n   else return\
-    \ nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r) / 2;\n  return nm[nmi]=\
-    \ NodeM{build(l, m, bg), build(m, r, bg)}, update(nmi), nmi++;\n }\n void dump(int\
+    \ nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r) / 2, i= nmi++;\n  return\
+    \ nm[i]= NodeM{build(l, m, bg), build(m, r, bg)}, update(i), i;\n }\n void dump(int\
     \ i, typename std::vector<T>::iterator it) noexcept {\n  if (i < 0) *it= nl[-i];\n\
     \  else {\n   if constexpr (dual_v<M>) push_prop(i);\n   if constexpr (reversible)\
     \ push_tog(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1], it + size(nm[i].ch[0]));\n\
@@ -272,25 +271,22 @@ data:
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >>\
     \ Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n using WBT= WeightBalancedTree<RaffineQ_RsumQ>;\n\
     \ WBT wbt(v, v + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >>\
-    \ l >> r;\n  if (op) {\n   cout << wbt.fold(l, r) << endl;\n  } else {\n   Mint\
-    \ b, c;\n   cin >> b >> c;\n   wbt.apply(l, r, {b, c});\n  }\n  if (WBT::pool_empty())\
-    \ {\n   auto dump= wbt.dump();\n   WBT::reset();\n   wbt= WBT(dump);\n  }\n }\n\
-    \ return 0;\n}\n"
+    \ l >> r;\n  if (op) {\n   cout << wbt.fold(l, r) << '\\n';\n  } else {\n   Mint\
+    \ b, c;\n   cin >> b >> c;\n   wbt.apply(l, r, {b, c});\n  }\n }\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n\n// \u9045\u5EF6\u4F1D\u642C\u306Everify\n\n#include <iostream>\n#include \"\
-    src/DataStructure/WeightBalancedTree.hpp\"\n#include \"src/Math/ModInt.hpp\"\n\
-    using namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineQ_RsumQ\
-    \ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static T op(const T &l, const\
-    \ T &r) { return l + r; }\n static void mp(T &v, const E &f, std::size_t sz) {\
-    \ v= f.first * v + f.second * sz; }\n static void cp(E &pre, const E &suf) { pre=\
-    \ {suf.first * pre.first, suf.first * pre.second + suf.second}; }\n};\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >>\
-    \ Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n using WBT= WeightBalancedTree<RaffineQ_RsumQ>;\n\
-    \ WBT wbt(v, v + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >>\
-    \ l >> r;\n  if (op) {\n   cout << wbt.fold(l, r) << endl;\n  } else {\n   Mint\
-    \ b, c;\n   cin >> b >> c;\n   wbt.apply(l, r, {b, c});\n  }\n  if (WBT::pool_empty())\
-    \ {\n   auto dump= wbt.dump();\n   WBT::reset();\n   wbt= WBT(dump);\n  }\n }\n\
-    \ return 0;\n}"
+    \n\n// apply, fold \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
+    struct RaffineQ_RsumQ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static\
+    \ T op(const T &l, const T &r) { return l + r; }\n static void mp(T &v, const\
+    \ E &f, std::size_t sz) { v= f.first * v + f.second * sz; }\n static void cp(E\
+    \ &pre, const E &suf) { pre= {suf.first * pre.first, suf.first * pre.second +\
+    \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >>\
+    \ v[i];\n using WBT= WeightBalancedTree<RaffineQ_RsumQ>;\n WBT wbt(v, v + N);\n\
+    \ while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n\
+    \   cout << wbt.fold(l, r) << '\\n';\n  } else {\n   Mint b, c;\n   cin >> b >>\
+    \ c;\n   wbt.apply(l, r, {b, c});\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   - src/Internal/detection_idiom.hpp
@@ -301,7 +297,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-22 14:55:14+09:00'
+  timestamp: '2024-03-22 15:43:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

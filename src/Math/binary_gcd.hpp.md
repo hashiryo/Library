@@ -14,7 +14,7 @@ data:
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
@@ -61,13 +61,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_binary_gcd.test.cpp
     title: test/unit_test/constexpr_binary_gcd.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_factors.test.cpp
     title: test/unit_test/constexpr_factors.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_mod_tetration.test.cpp
     title: test/unit_test/constexpr_mod_tetration.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_orderfp.test.cpp
     title: test/unit_test/constexpr_orderfp.test.cpp
   - icon: ':heavy_check_mark:'

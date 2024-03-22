@@ -9,9 +9,9 @@ data:
     title: detection idiom
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C
@@ -54,17 +54,16 @@ data:
     \ static inline T sum(int i) noexcept { return i < 0 ? nl[-i] : nm[i].sum; }\n\
     \ static inline T rsum(int i) noexcept { return i < 0 ? nl[-i] : nm[i].rsum; }\n\
     \ static inline void update(int i) noexcept {\n  auto t= nm + i;\n  auto [l, r]=\
-    \ t->ch;\n  if constexpr (dual_v<M> || reversible) t->sz= (size(l) + size(r))\
-    \ | (t->sz & 0xc0000000);\n  else t->sz= size(l) + size(r);\n  if constexpr (semigroup_v<M>)\
-    \ {\n   t->sum= M::op(sum(l), sum(r));\n   if constexpr (reversible && !commute_v<M>)\
-    \ t->rsum= M::op(rsum(r), rsum(l));\n  }\n }\n static inline void propagate(int\
-    \ &i, const E &x) noexcept {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
-    \  auto t= nm + i;\n  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n\
-    \  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n\
-    \   if constexpr (reversible && !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n\
-    \  }\n  t->sz|= 0x80000000;\n }\n static inline void push_prop(int i) noexcept\
-    \ {\n  if (auto t= nm + i; t->sz >> 31) {\n   auto &[l, r]= t->ch;\n   if (l <\
-    \ 0) {\n    if constexpr (persistent) nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l],\
+    \ t->ch;\n  t->sz= size(l) + size(r);\n  if constexpr (semigroup_v<M>) {\n   t->sum=\
+    \ M::op(sum(l), sum(r));\n   if constexpr (reversible && !commute_v<M>) t->rsum=\
+    \ M::op(rsum(r), rsum(l));\n  }\n }\n static inline void propagate(int &i, const\
+    \ E &x) noexcept {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto\
+    \ t= nm + i;\n  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr\
+    \ (semigroup_v<M>) {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr\
+    \ (reversible && !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n\
+    \  t->sz|= 0x80000000;\n }\n static inline void push_prop(int i) noexcept {\n\
+    \  if (auto t= nm + i; t->sz >> 31) {\n   auto &[l, r]= t->ch;\n   if (l < 0)\
+    \ {\n    if constexpr (persistent) nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l],\
     \ t->laz, 1);\n   } else propagate(l, t->laz);\n   if (r < 0) {\n    if constexpr\
     \ (persistent) nl[nli]= nl[-r], r= -nli++;\n    M::mp(nl[-r], t->laz, 1);\n  \
     \ } else propagate(r, t->laz);\n   t->sz^= 0x80000000;\n  }\n }\n static inline\
@@ -94,8 +93,8 @@ data:
     \ size(i)) return {i, 0};\n  return _split(i, k);\n }\n template <class S> int\
     \ build(size_t l, size_t r, const S &bg) noexcept {\n  if (r - l == 1) {\n   if\
     \ constexpr (std::is_same_v<S, T>) return nl[nli]= bg, -nli++;\n   else return\
-    \ nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r) / 2;\n  return nm[nmi]=\
-    \ NodeM{build(l, m, bg), build(m, r, bg)}, update(nmi), nmi++;\n }\n void dump(int\
+    \ nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r) / 2, i= nmi++;\n  return\
+    \ nm[i]= NodeM{build(l, m, bg), build(m, r, bg)}, update(i), i;\n }\n void dump(int\
     \ i, typename std::vector<T>::iterator it) noexcept {\n  if (i < 0) *it= nl[-i];\n\
     \  else {\n   if constexpr (dual_v<M>) push_prop(i);\n   if constexpr (reversible)\
     \ push_tog(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1], it + size(nm[i].ch[0]));\n\
@@ -196,8 +195,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_C.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-22 14:55:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-03-22 15:43:01+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_C.WBT.test.cpp
 layout: document
