@@ -615,11 +615,11 @@ data:
   timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
   - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document

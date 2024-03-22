@@ -19,26 +19,26 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D
   bundledCode: "#line 1 \"test/aoj/ITP2_2_D.SplayTree.test.cpp\"\n#define PROBLEM\
-    \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D\"\n#include\
-    \ <iostream>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n\
-    #include <string>\n#include <array>\n#include <cstddef>\n#include <cassert>\n\
-    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
-    \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
-    \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
-    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member,\
-    \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
-    \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
-    \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
-    \ type2, using type= decltype(check(mClass))); \\\n template <class tClass> using\
-    \ name##member##_t= typename name##member<tClass>::type\n#define NULLPTR_OR(member)\
-    \ HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member,\
-    \ myself_or_, tClass)\n#line 8 \"src/DataStructure/SplayTree.hpp\"\ntemplate <class\
-    \ M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
-    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class\
-    \ L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n\
-    \ template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
+    \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D\"\n\n\
+    // push_back, operator+= \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\
+    \n#include <vector>\n#include <string>\n#include <array>\n#include <cstddef>\n\
+    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
+    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
+    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
+    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
+    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
+    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
+    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
+    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)));\
+    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type\n\
+    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass)\n#line 8 \"src/DataStructure/SplayTree.hpp\"\
+    \ntemplate <class M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n\
+    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
+    \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
+    \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
     \ has_E<L>, has_mp<L>, has_cp<L>>;\n template <class T, class tDerived> struct\
     \ Node_B {\n  T val;\n  tDerived *ch[2], *par;\n  size_t size;\n };\n template\
     \ <class D, bool sg, bool du, bool rev> struct Node_D: Node_B<M, Node_D<D, sg,\
@@ -136,31 +136,31 @@ data:
     \ nullptr}, nullptr})) + r;\n }\n T pop_back() { return erase(root->size - 1);\
     \ }\n T pop_front() { return erase(0); }\n T erase(size_t k) {\n  assert(root\
     \ && k < root->size);\n  auto [l, c, r]= split3(k, k + 1);\n  return *this= l\
-    \ + r, c.root->val;\n }\n};\n#line 4 \"test/aoj/ITP2_2_D.SplayTree.test.cpp\"\n\
+    \ + r, c.root->val;\n }\n};\n#line 7 \"test/aoj/ITP2_2_D.SplayTree.test.cpp\"\n\
     using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n, q;\n cin >> n >> q;\n SplayTree<int> ar[n];\n for (int i= 0; i < q; i++)\
+    \ int n, q;\n cin >> n >> q;\n SplayTree<int> ar[n];\n for (int i= 0; i < q; ++i)\
     \ {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int t, x;\n   cin >> t >> x;\n\
     \   ar[t].push_back(x);\n  } else if (op == 1) {\n   int t;\n   cin >> t;\n  \
-    \ auto ans= ar[t].dump();\n   for (int i= 0; i < ar[t].size(); i++) cout << (i\
-    \ ? \" \" : \"\") << ans[i];\n   cout << '\\n';\n  } else {\n   int s, t;\n  \
-    \ cin >> s >> t;\n   ar[t]+= ar[s];\n   ar[s].clear();\n  }\n }\n return 0;\n\
-    }\n"
+    \ auto ans= ar[t].dump();\n   for (int i= 0; i < ans.size(); ++i) cout << (i ?\
+    \ \" \" : \"\") << ans[i];\n   cout << '\\n';\n  } else {\n   int s, t;\n   cin\
+    \ >> s >> t;\n   ar[t]+= ar[s];\n   ar[s].clear();\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D\"\
-    \n#include <iostream>\n#include \"src/DataStructure/SplayTree.hpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n\
-    \ cin >> n >> q;\n SplayTree<int> ar[n];\n for (int i= 0; i < q; i++) {\n  int\
-    \ op;\n  cin >> op;\n  if (op == 0) {\n   int t, x;\n   cin >> t >> x;\n   ar[t].push_back(x);\n\
-    \  } else if (op == 1) {\n   int t;\n   cin >> t;\n   auto ans= ar[t].dump();\n\
-    \   for (int i= 0; i < ar[t].size(); i++) cout << (i ? \" \" : \"\") << ans[i];\n\
-    \   cout << '\\n';\n  } else {\n   int s, t;\n   cin >> s >> t;\n   ar[t]+= ar[s];\n\
-    \   ar[s].clear();\n  }\n }\n return 0;\n}"
+    \n\n// push_back, operator+= \u306E verify\n\n#include <iostream>\n#include \"\
+    src/DataStructure/SplayTree.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n SplayTree<int> ar[n];\n\
+    \ for (int i= 0; i < q; ++i) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n  \
+    \ int t, x;\n   cin >> t >> x;\n   ar[t].push_back(x);\n  } else if (op == 1)\
+    \ {\n   int t;\n   cin >> t;\n   auto ans= ar[t].dump();\n   for (int i= 0; i\
+    \ < ans.size(); ++i) cout << (i ? \" \" : \"\") << ans[i];\n   cout << '\\n';\n\
+    \  } else {\n   int s, t;\n   cin >> s >> t;\n   ar[t]+= ar[s];\n   ar[s].clear();\n\
+    \  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SplayTree.hpp
   - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/aoj/ITP2_2_D.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
+  timestamp: '2024-03-21 17:56:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_2_D.SplayTree.test.cpp

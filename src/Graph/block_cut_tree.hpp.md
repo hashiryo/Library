@@ -101,10 +101,10 @@ data:
   timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/GRL_3_A.test.cpp
-  - test/aoj/3022.test.cpp
   - test/yosupo/biconnected_components.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/aoj/GRL_3_A.test.cpp
+  - test/aoj/3022.test.cpp
   - test/yukicoder/1326.test.cpp
 documentation_of: src/Graph/block_cut_tree.hpp
 layout: document

@@ -3,172 +3,197 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
-    title: "\u6C38\u7D9AWeight-Balanced-Tree"
+    title: Weight-Balanced-Tree
   - icon: ':question:'
-    path: src/Internal/HAS_CHECK.hpp
-    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
-      \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
+    path: src/Internal/detection_idiom.hpp
+    title: detection idiom
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
     links:
     - https://judge.yosupo.jp/problem/persistent_queue
   bundledCode: "#line 1 \"test/yosupo/persistent_queue.WBT.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/persistent_queue\"\n// \u6C38\u7D9A\u6027\u306E\
-    verify\n#include <iostream>\n#include <vector>\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \ \"https://judge.yosupo.jp/problem/persistent_queue\"\n\n// \u6C38\u7D9A\u6027\
+    \u306Everify\n\n#include <iostream>\n#include <vector>\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n#include <array>\n#include <string>\n#include <tuple>\n#include <cstddef>\n\
-    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
-    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
-    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
-    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
-    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
-    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
-    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
-    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
-    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)));\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass)\n#line 9 \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \ntemplate <class M, size_t NODE_SIZE= 1 << 22> class WeightBalancedTree {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
-    \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
-    \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct NodeB {\n  size_t sz= 0;\n };\n template\
-    \ <class D, bool sg, bool du> struct NodeD: NodeB {\n  inline size_t size() const\
-    \ { return this->sz; }\n };\n template <class D> struct NodeD<D, 1, 0>: NodeB\
-    \ {\n  typename M::T val;\n  inline size_t size() const { return this->sz; }\n\
-    \ };\n template <class D> struct NodeD<D, 0, 1>: NodeB {\n  typename M::E laz;\n\
-    \  inline bool laz_flg() const { return this->sz >> 31; }\n  inline size_t size()\
-    \ const { return this->sz & 0x7fffffff; }\n };\n template <class D> struct NodeD<D,\
-    \ 1, 1>: NodeB {\n  typename M::T val;\n  typename M::E laz;\n  inline bool laz_flg()\
-    \ const { return this->sz >> 31; }\n  inline size_t size() const { return this->sz\
-    \ & 0x7fffffff; }\n };\n using Node= NodeD<void, semigroup_v<M>, dual_v<M>>;\n\
-    \ using np= Node *;\n struct NodeM: Node {\n  np ch[2];\n  NodeM() {}\n  NodeM(np\
-    \ l, np r): ch{l, r} {}\n };\n template <class D, bool sg, bool du> struct NodeLD:\
-    \ Node {};\n template <class D> struct NodeLD<D, 0, 1>: Node {\n  typename M::T\
-    \ val;\n };\n template <class D> struct NodeLD<D, 0, 0>: Node {\n  M val;\n };\n\
-    \ using NodeL= NodeLD<void, semigroup_v<M>, dual_v<M>>;\n using T= decltype(NodeL::val);\n\
-    \ using E= nullptr_or_E_t<M>;\n using WBT= WeightBalancedTree;\n static inline\
-    \ int nmi= 0, nli= 0;\n static inline NodeM nm[NODE_SIZE];\n static inline NodeL\
-    \ nl[NODE_SIZE];\n np root;\n static inline np &ch(np t, bool rig) { return ((NodeM\
-    \ *)t)->ch[rig]; }\n static inline np new_nm(np l, np r) { return &(nm[nmi++]=\
-    \ NodeM(l, r)); }\n static inline np new_nl(T x) { return nl[nli]= NodeL(), nl[nli].val=\
-    \ x, nl[nli].sz= 1, nl + nli++; }\n static inline np cp_nm(np &t) { return t=\
-    \ &(nm[nmi++]= NodeM(*((NodeM *)t))); }\n static inline np cp_nl(np &t) { return\
-    \ t= &(nl[nli++]= NodeL(*((NodeL *)t))); }\n static inline np cp_node(np &t) {\
-    \ return t->size() == 1 ? cp_nl(t) : cp_nm(t); }\n static inline void update(np\
-    \ t) {\n  if constexpr (dual_v<M>) t->sz= (ch(t, 0)->size() + ch(t, 1)->size())\
-    \ | (t->sz & 0x80000000);\n  else t->sz= ch(t, 0)->size() + ch(t, 1)->size();\n\
-    \  if constexpr (semigroup_v<M>) t->val= M::op(ch(t, 0)->val, ch(t, 1)->val);\n\
-    \ }\n static inline T &reflect(np t) {\n  if constexpr (dual_v<M> && !semigroup_v<M>)\n\
-    \   if (t->laz_flg()) M::mp(((NodeL *)t)->val, t->laz, 1), t->sz&= 0x7fffffff;\n\
-    \  return ((NodeL *)t)->val;\n }\n static inline void propagate(np t, const E\
-    \ &x) {\n  if (t->laz_flg()) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr\
-    \ (semigroup_v<M>) M::mp(t->val, x, t->size());\n  t->sz|= 0x80000000;\n }\n static\
-    \ inline void push(np t) {\n  if (t->laz_flg()) propagate(cp_node(ch(t, 0)), t->laz),\
-    \ propagate(cp_node(ch(t, 1)), t->laz), t->sz&= 0x7fffffff;\n }\n template <bool\
-    \ b> static inline np helper(std::array<np, 2> &m) {\n  if constexpr (dual_v<M>)\
-    \ push(m[b]);\n  np c;\n  if constexpr (b) c= submerge({m[0], ch(m[1], 0)});\n\
-    \  else c= submerge({ch(m[0], 1), m[1]});\n  if (ch(cp_nm(m[b]), b)->size() *\
-    \ 4 >= c->size()) return ch(m[b], !b)= c, update(m[b]), m[b];\n  return ch(m[b],\
-    \ !b)= ch(c, b), update(ch(c, b)= m[b]), update(c), c;\n }\n static inline np\
-    \ submerge(std::array<np, 2> m) {\n  if (m[0]->size() > m[1]->size() * 4) return\
-    \ helper<0>(m);\n  if (m[1]->size() > m[0]->size() * 4) return helper<1>(m);\n\
-    \  auto t= new_nm(m[0], m[1]);\n  return update(t), t;\n }\n static inline np\
-    \ merge(np l, np r) { return !l ? r : !r ? l : submerge({l, r}); }\n static inline\
-    \ std::pair<np, np> split(np t, size_t k) {\n  if (!t) return {nullptr, nullptr};\n\
-    \  if (k == 0) return {nullptr, t};\n  if (k >= t->size()) return {t, nullptr};\n\
-    \  if constexpr (dual_v<M>) push(t);\n  auto l= ch(t, 0), r= ch(t, 1);\n  if (size_t\
-    \ lsz= l->size(); k == lsz) return {l, r};\n  else if (k < lsz) {\n   auto [ll,\
-    \ lr]= split(l, k);\n   return {ll, merge(lr, r)};\n  } else {\n   auto [rl, rr]=\
-    \ split(r, k - lsz);\n   return {merge(l, rl), rr};\n  }\n }\n template <class\
-    \ S> np build(size_t l, size_t r, const S &bg) {\n  if (r - l == 1) {\n   if constexpr\
-    \ (std::is_same_v<S, T>) return new_nl(bg);\n   else return new_nl(*(bg + l));\n\
-    \  }\n  size_t m= (l + r) / 2;\n  auto t= new_nm(build(l, m, bg), build(m, r,\
-    \ bg));\n  return update(t), t;\n }\n void dump(np t, typename std::vector<T>::iterator\
-    \ it) {\n  if (t->size() == 1) *it= reflect(t);\n  else {\n   if constexpr (dual_v<M>)\
-    \ push(t);\n   dump(ch(t, 0), it), dump(ch(t, 1), it + ch(t, 0)->size());\n  }\n\
-    \ }\n T fold(np t, size_t l, size_t r) {\n  if (l <= 0 && t->size() <= r) return\
-    \ t->val;\n  if constexpr (dual_v<M>) push(t);\n  size_t lsz= ch(t, 0)->size();\n\
-    \  if (r <= lsz) return fold(ch(t, 0), l, r);\n  if (lsz <= l) return fold(ch(t,\
-    \ 1), l - lsz, r - lsz);\n  return M::op(fold(ch(t, 0), l, lsz), fold(ch(t, 1),\
-    \ 0, r - lsz));\n }\n void apply(np &t, size_t l, size_t r, const E &x) {\n  if\
-    \ (cp_node(t); l <= 0 && t->size() <= r) return propagate(t, x), void();\n  push(t);\n\
-    \  size_t lsz= ch(t, 0)->size();\n  if (r <= lsz) apply(ch(t, 0), l, r, x);\n\
-    \  else if (lsz <= l) apply(ch(t, 1), l - lsz, r - lsz, x);\n  else apply(ch(t,\
-    \ 0), l, lsz, x), apply(ch(t, 1), 0, r - lsz, x);\n  if constexpr (semigroup_v<M>)\
-    \ update(t);\n }\n void set_val(np &t, size_t k, const T &x) {\n  if (t->size()\
-    \ == 1) return reflect(cp_nl(t))= x, void();\n  if constexpr (dual_v<M>) push(t);\n\
-    \  size_t lsz= ch(cp_nm(t), 0)->size();\n  lsz > k ? set_val(ch(t, 0), k, x) :\
-    \ set_val(ch(t, 1), k - lsz, x);\n  if constexpr (semigroup_v<M>) update(t);\n\
-    \ }\n T get_val(np t, size_t k) {\n  if (t->size() == 1) return reflect(t);\n\
-    \  if constexpr (dual_v<M>) push(t);\n  size_t lsz= ch(t, 0)->size();\n  return\
-    \ lsz > k ? get_val(ch(t, 0), k) : get_val(ch(t, 1), k - lsz);\n }\n T &at_val(np\
-    \ t, size_t k) {\n  if (t->size() == 1) return reflect(cp_nl(t));\n  if constexpr\
-    \ (dual_v<M>) push(t);\n  size_t lsz= ch(cp_nm(t), 0)->size();\n  return lsz >\
-    \ k ? at_val(ch(t, 0), k) : at_val(ch(t, 1), k - lsz);\n }\n static WBT id_to_wbt(np\
-    \ t) {\n  WBT ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree():\
-    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()): root(build(0, n,\
-    \ val)) {}\n WeightBalancedTree(const T *bg, const T *ed): root(build(0, ed -\
-    \ bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
-    \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
-    \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
-    \ std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
-    \ k);\n  return {id_to_wbt(l), id_to_wbt(r)};\n }\n std::tuple<WBT, WBT, WBT>\
-    \ split3(size_t a, size_t b) {\n  assert(root), assert(a <= b);\n  auto [tmp,\
-    \ r]= split(root, b);\n  auto [l, c]= split(tmp, a);\n  return {id_to_wbt(l),\
-    \ id_to_wbt(c), id_to_wbt(r)};\n }\n size_t size() const { return root ? root->size()\
-    \ : 0; }\n void insert(size_t k, T val) {\n  auto [l, r]= split(root, k);\n  root=\
-    \ merge(merge(l, new_nl(val)), r);\n }\n void push_back(T val) { root= merge(root,\
-    \ new_nl(val)); }\n void push_front(T val) { root= merge(new_nl(val), root); }\n\
-    \ T erase(size_t k) {\n  assert(k < size());\n  auto [l, tmp]= split(root, k);\n\
-    \  auto [t, r]= split(tmp, 1);\n  return root= merge(l, r), reflect(t);\n }\n\
-    \ T pop_back() {\n  auto [l, t]= split(root, size() - 1);\n  return root= l, reflect(t);\n\
-    \ }\n T pop_front() {\n  auto [t, r]= split(root, 1);\n  return root= r, reflect(t);\n\
-    \ }\n void set(size_t k, T val) { set_val(root, k, val); }\n T get(size_t k) {\
-    \ return get_val(root, k); }\n T &at(size_t k) {\n  static_assert(!semigroup_v<M>,\
+    #include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n\
+    #define _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name:\
+    \ std::false_type {}; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>:\
+    \ std::true_type {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
+    #define _DETECT_TYPE(name, type1, type2, ...) \\\n template <class T, class= void>\
+    \ struct name { \\\n  using type= type2; \\\n }; \\\n template <class T> struct\
+    \ name<T, std::void_t<__VA_ARGS__>> { \\\n  using type= type1; \\\n }\n#line 9\
+    \ \"src/DataStructure/WeightBalancedTree.hpp\"\nnamespace wbt_internal {\n#ifdef\
+    \ __LOCAL\nstatic constexpr size_t __LEAF_SIZE= 1 << 15;\n#else\nstatic constexpr\
+    \ size_t __LEAF_SIZE= 1 << 20;\n#endif\n}\ntemplate <class M, bool reversible=\
+    \ false, bool persistent= false, size_t LEAF_SIZE= wbt_internal::__LEAF_SIZE>\
+    \ class WeightBalancedTree {\n _DETECT_BOOL(semigroup, typename T::T, decltype(&T::op));\n\
+    \ _DETECT_BOOL(dual, typename T::T, typename T::E, decltype(&T::mp), decltype(&T::cp));\n\
+    \ _DETECT_BOOL(commute, typename T::commute);\n _DETECT_TYPE(nullptr_or_E, typename\
+    \ T::E, std::nullptr_t, typename T::E);\n _DETECT_TYPE(myself_or_T, typename T::T,\
+    \ T, typename T::T);\n struct NodeMB {\n  std::array<int, 2> ch;\n  size_t sz=\
+    \ 0;\n };\n template <class D, bool du> struct NodeMD: NodeMB {};\n template <class\
+    \ D> struct NodeMD<D, 1>: NodeMB {\n  typename M::E laz;\n };\n template <class\
+    \ D, bool sg, bool rev, bool com> struct NodeMS: NodeMD<D, dual_v<M>> {\n  typename\
+    \ M::T sum;\n };\n template <class D, bool rev, bool com> struct NodeMS<D, 0,\
+    \ rev, com>: NodeMD<D, dual_v<M>> {};\n template <class D> struct NodeMS<D, 1,\
+    \ 1, 0>: NodeMD<D, dual_v<M>> {\n  typename M::T sum, rsum;\n };\n using NodeM=\
+    \ NodeMS<void, semigroup_v<M>, reversible, commute_v<M>>;\n using T= typename\
+    \ myself_or_T<M>::type;\n using E= typename nullptr_or_E<M>::type;\n using WBT=\
+    \ WeightBalancedTree;\n static inline int nmi= 1, nli= 1;\n static constexpr size_t\
+    \ M_SIZE= persistent ? LEAF_SIZE * 10 : LEAF_SIZE * 2;\n static constexpr size_t\
+    \ L_SIZE= persistent && (dual_v<M> || reversible) ? LEAF_SIZE * 10 : LEAF_SIZE;\n\
+    \ static inline NodeM nm[M_SIZE];\n static inline T nl[L_SIZE];\n int root;\n\
+    \ static inline size_t msize(int i) noexcept {\n  if constexpr (dual_v<M> || reversible)\
+    \ return nm[i].sz & 0x3fffffff;\n  else return nm[i].sz;\n }\n static inline size_t\
+    \ size(int i) noexcept { return i < 0 ? 1 : msize(i); }\n static inline T sum(int\
+    \ i) noexcept { return i < 0 ? nl[-i] : nm[i].sum; }\n static inline T rsum(int\
+    \ i) noexcept { return i < 0 ? nl[-i] : nm[i].rsum; }\n static inline void update(int\
+    \ i) noexcept {\n  auto t= nm + i;\n  auto [l, r]= t->ch;\n  if constexpr (dual_v<M>\
+    \ || reversible) t->sz= (size(l) + size(r)) | (t->sz & 0xc0000000);\n  else t->sz=\
+    \ size(l) + size(r);\n  if constexpr (semigroup_v<M>) {\n   t->sum= M::op(sum(l),\
+    \ sum(r));\n   if constexpr (reversible && !commute_v<M>) t->rsum= M::op(rsum(r),\
+    \ rsum(l));\n  }\n }\n static inline void propagate(int &i, const E &x) noexcept\
+    \ {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n\
+    \  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>)\
+    \ {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr (reversible &&\
+    \ !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n  t->sz|= 0x80000000;\n\
+    \ }\n static inline void push_prop(int i) noexcept {\n  if (auto t= nm + i; t->sz\
+    \ >> 31) {\n   auto &[l, r]= t->ch;\n   if (l < 0) {\n    if constexpr (persistent)\
+    \ nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l], t->laz, 1);\n   } else propagate(l,\
+    \ t->laz);\n   if (r < 0) {\n    if constexpr (persistent) nl[nli]= nl[-r], r=\
+    \ -nli++;\n    M::mp(nl[-r], t->laz, 1);\n   } else propagate(r, t->laz);\n  \
+    \ t->sz^= 0x80000000;\n  }\n }\n static inline void toggle(int &i) noexcept {\n\
+    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n  std::swap(t->ch[0],\
+    \ t->ch[1]);\n  if constexpr (semigroup_v<M> && !commute_v<M>) std::swap(t->sum,\
+    \ t->rsum);\n  t->sz^= 0x40000000;\n }\n static inline void push_tog(int i) noexcept\
+    \ {\n  if (auto t= nm + i; t->sz & 0x40000000) {\n   auto &[l, r]= t->ch;\n  \
+    \ if (l > 0) toggle(l);\n   if (r > 0) toggle(r);\n   t->sz^= 0x40000000;\n  }\n\
+    \ }\n template <bool b> static inline int helper(std::array<int, 2> &m) noexcept\
+    \ {\n  if constexpr (dual_v<M>) push_prop(m[b]);\n  if constexpr (reversible)\
+    \ push_tog(m[b]);\n  int c;\n  if constexpr (b) c= _merge({m[0], nm[m[1]].ch[0]});\n\
+    \  else c= _merge({nm[m[0]].ch[1], m[1]});\n  if constexpr (persistent) nm[nmi]=\
+    \ nm[m[b]], m[b]= nmi++;\n  if (size(nm[m[b]].ch[b]) * 4 >= msize(c)) return nm[m[b]].ch[!b]=\
+    \ c, update(m[b]), m[b];\n  return nm[m[b]].ch[!b]= nm[c].ch[b], update(nm[c].ch[b]=\
+    \ m[b]), update(c), c;\n }\n static inline int _merge(std::array<int, 2> m) noexcept\
+    \ {\n  int lsz= size(m[0]), rsz= size(m[1]);\n  if (lsz > rsz * 4) return helper<0>(m);\n\
+    \  if (rsz > lsz * 4) return helper<1>(m);\n  return nm[nmi]= NodeM{m[0], m[1]},\
+    \ update(nmi), nmi++;\n }\n static inline int merge(int l, int r) noexcept { return\
+    \ !l ? r : !r ? l : _merge({l, r}); }\n static inline std::pair<int, int> _split(int\
+    \ i, size_t k) noexcept {\n  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr\
+    \ (reversible) push_tog(i);\n  auto t= nm + i;\n  auto [l, r]= t->ch;\n  if (size_t\
+    \ lsz= size(l); k == lsz) return {l, r};\n  else if (k < lsz) {\n   auto [ll,\
+    \ lr]= _split(l, k);\n   return {ll, _merge({lr, r})};\n  } else {\n   auto [rl,\
+    \ rr]= _split(r, k - lsz);\n   return {_merge({l, rl}), rr};\n  }\n }\n static\
+    \ inline std::pair<int, int> split(int i, size_t k) noexcept {\n  if (k == 0)\
+    \ return {0, i};\n  if (k >= size(i)) return {i, 0};\n  return _split(i, k);\n\
+    \ }\n template <class S> int build(size_t l, size_t r, const S &bg) noexcept {\n\
+    \  if (r - l == 1) {\n   if constexpr (std::is_same_v<S, T>) return nl[nli]= bg,\
+    \ -nli++;\n   else return nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r)\
+    \ / 2;\n  return nm[nmi]= NodeM{build(l, m, bg), build(m, r, bg)}, update(nmi),\
+    \ nmi++;\n }\n void dump(int i, typename std::vector<T>::iterator it) noexcept\
+    \ {\n  if (i < 0) *it= nl[-i];\n  else {\n   if constexpr (dual_v<M>) push_prop(i);\n\
+    \   if constexpr (reversible) push_tog(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1],\
+    \ it + size(nm[i].ch[0]));\n  }\n }\n T fold(int i, size_t l, size_t r) noexcept\
+    \ {\n  if (i < 0) return nl[-i];\n  if (l <= 0 && msize(i) <= r) return nm[i].sum;\n\
+    \  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
+    \  auto [n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n  if (r <= lsz) return fold(n0,\
+    \ l, r);\n  if (lsz <= l) return fold(n1, l - lsz, r - lsz);\n  return M::op(fold(n0,\
+    \ l, lsz), fold(n1, 0, r - lsz));\n }\n void apply(int &i, size_t l, size_t r,\
+    \ const E &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) nl[nli]=\
+    \ nl[-i], i= -nli++;\n   M::mp(nl[-i], x, 1);\n   return;\n  }\n  if (l <= 0 &&\
+    \ msize(i) <= r) return propagate(i, x);\n  if constexpr (reversible) push_tog(i);\n\
+    \  push_prop(i);\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto\
+    \ &[n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n  if (r <= lsz) apply(n0, l,\
+    \ r, x);\n  else if (lsz <= l) apply(n1, l - lsz, r - lsz, x);\n  else apply(n0,\
+    \ l, lsz, x), apply(n1, 0, r - lsz, x);\n  if constexpr (semigroup_v<M>) update(i);\n\
+    \ }\n void set_val(int &i, size_t k, const T &x) noexcept {\n  if (i < 0) {\n\
+    \   if constexpr (persistent) nl[nli]= x, i= -nli++;\n   else nl[-i]= x;\n   return;\n\
+    \  }\n  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
+    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n\
+    \  size_t lsz= size(l);\n  lsz > k ? set_val(l, k, x) : set_val(r, k - lsz, x);\n\
+    \  if constexpr (semigroup_v<M>) update(i);\n }\n void mul_val(int &i, size_t\
+    \ k, const T &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) nl[nli]=\
+    \ M::op(nl[-i], x), i= -nli++;\n   else nl[-i]= M::op(nl[-i], x);\n   return;\n\
+    \  }\n  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
+    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n\
+    \  size_t lsz= size(l);\n  lsz > k ? mul_val(l, k, x) : mul_val(r, k - lsz, x);\n\
+    \  if constexpr (semigroup_v<M>) update(i);\n }\n T get_val(int i, size_t k) noexcept\
+    \ {\n  if (i < 0) return nl[-i];\n  if constexpr (dual_v<M>) push_prop(i);\n \
+    \ if constexpr (reversible) push_tog(i);\n  auto [l, r]= nm[i].ch;\n  size_t lsz=\
+    \ size(l);\n  return lsz > k ? get_val(l, k) : get_val(r, k - lsz);\n }\n T &at_val(int\
+    \ i, size_t k) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) return\
+    \ nl[nli++]= nl[-i];\n   else return nl[-i];\n  }\n  if constexpr (dual_v<M>)\
+    \ push_prop(i);\n  if constexpr (reversible) push_tog(i);\n  if constexpr (persistent)\
+    \ nm[nmi]= nm[i], i= nmi++;\n  auto [l, r]= nm[i].ch;\n  size_t lsz= size(l);\n\
+    \  return lsz > k ? at_val(l, k) : at_val(r, k - lsz);\n }\n static WBT id_to_wbt(int\
+    \ t) noexcept {\n  WBT ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree():\
+    \ root(0) {}\n WeightBalancedTree(size_t n, T val= T()): root(n ? build(0, n,\
+    \ val) : 0) {}\n WeightBalancedTree(const T *bg, const T *ed): root(bg == ed ?\
+    \ 0 : build(0, ed - bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar):\
+    \ WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n WBT &operator+=(WBT\
+    \ rhs) { return root= merge(root, rhs.root), *this; }\n WBT operator+(WBT rhs)\
+    \ { return WBT(*this)+= rhs; }\n std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n\
+    \  auto [l, r]= split(root, k);\n  return {id_to_wbt(l), id_to_wbt(r)};\n }\n\
+    \ std::tuple<WBT, WBT, WBT> split3(size_t a, size_t b) {\n  assert(root), assert(a\
+    \ <= b);\n  auto [tmp, r]= split(root, b);\n  auto [l, c]= split(tmp, a);\n  return\
+    \ {id_to_wbt(l), id_to_wbt(c), id_to_wbt(r)};\n }\n size_t size() const { return\
+    \ root ? size(root) : 0; }\n void insert(size_t k, T val) {\n  auto [l, r]= split(root,\
+    \ k);\n  nl[nli]= val, root= merge(merge(l, -nli++), r);\n }\n void push_back(T\
+    \ val) { nl[nli]= val, root= merge(root, -nli++); }\n void push_front(T val) {\
+    \ nl[nli]= val, root= merge(-nli++, root); }\n T erase(size_t k) {\n  assert(k\
+    \ < size());\n  auto [l, tmp]= split(root, k);\n  auto [t, r]= split(tmp, 1);\n\
+    \  return root= merge(l, r), nl[-t];\n }\n T pop_back() {\n  auto [l, t]= split(root,\
+    \ size() - 1);\n  return root= l, nl[-t];\n }\n T pop_front() {\n  auto [t, r]=\
+    \ split(root, 1);\n  return root= r, nl[-t];\n }\n void set(size_t k, T val) {\
+    \ set_val(root, k, val); }\n void mul(size_t k, T val) {\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"mul\\\" is not available\\n\");\n  mul_val(root, k, val);\n }\n T get(size_t\
+    \ k) { return get_val(root, k); }\n T &at(size_t k) {\n  static_assert(!semigroup_v<M>,\
     \ \"\\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template\
     \ <class L= M> std::enable_if_t<semigroup_v<L>, T> operator[](size_t k) { return\
     \ get(k); }\n template <class L= M> std::enable_if_t<!semigroup_v<L>, T> &operator[](size_t\
     \ k) { return at(k); }\n T fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
     \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b);\n }\n void\
     \ apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
-    \ is not available\\n\");\n  apply(root, a, b, x);\n }\n std::vector<T> dump()\
-    \ {\n  if (!root) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
-    \ dump(root, ret.begin()), ret;\n }\n void clear() { root= nullptr; }\n static\
-    \ void reset() { nmi= 0, nli= 0; }\n void rebuild() {\n  auto dmp= dump();\n \
-    \ reset(), *this= WBT(dmp);\n }\n static std::string which_available() {\n  std::string\
-    \ ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"fold\\\" \";\n  else\
-    \ ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \"\
-    ;\n  return ret;\n }\n static double percentage_used() { return 100. * std::max(nmi,\
-    \ nli) / NODE_SIZE; }\n};\n#line 6 \"test/yosupo/persistent_queue.WBT.test.cpp\"\
+    \ is not available\\n\");\n  apply(root, a, b, x);\n }\n void reverse(size_t a,\
+    \ size_t b) {\n  static_assert(reversible, \"\\\"reverse\\\" is not available\\\
+    n\");\n  assert(root), assert(a <= b);\n  auto [tmp, r]= split(root, b);\n  auto\
+    \ [l, c]= split(tmp, a);\n  if (c > 0) toggle(c);\n  root= merge(merge(l, c),\
+    \ r);\n }\n std::vector<T> dump() {\n  if (!root) return std::vector<T>();\n \
+    \ std::vector<T> ret(size());\n  return dump(root, ret.begin()), ret;\n }\n void\
+    \ clear() { root= 0; }\n static void reset() { nmi= 1, nli= 1; }\n static std::string\
+    \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>)\
+    \ ret+= \"\\\"fold\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>)\
+    \ ret+= \"\\\"apply\\\" \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\
+    \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (dual_v<M>)\
+    \ return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE >= L_SIZE;\n  else return\
+    \ nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 8 \"test/yosupo/persistent_queue.WBT.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int Q;\n cin >> Q;\n vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n for\
-    \ (int i= 1; i <= Q; i++) {\n  int op, t;\n  cin >> op >> t;\n  S[i]= S[++t];\n\
-    \  if (op) {\n   cout << S[i].pop_front() << endl;\n  } else {\n   int x;\n  \
-    \ cin >> x;\n   S[i].push_back(x);\n  }\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\n//\
-    \ \u6C38\u7D9A\u6027\u306Everify\n#include <iostream>\n#include <vector>\n#include\
-    \ \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n vector<WeightBalancedTree<int,\
-    \ 1 << 24>> S(Q + 1);\n for (int i= 1; i <= Q; i++) {\n  int op, t;\n  cin >>\
-    \ op >> t;\n  S[i]= S[++t];\n  if (op) {\n   cout << S[i].pop_front() << endl;\n\
-    \  } else {\n   int x;\n   cin >> x;\n   S[i].push_back(x);\n  }\n }\n return\
-    \ 0;\n}"
+    \ int Q;\n cin >> Q;\n vector<WeightBalancedTree<int>> S(Q + 1);\n for (int i=\
+    \ 1; i <= Q; ++i) {\n  int op, t;\n  cin >> op >> t;\n  S[i]= S[++t];\n  if (op)\
+    \ {\n   cout << S[i].pop_front() << '\\n';\n  } else {\n   int x;\n   cin >> x;\n\
+    \   S[i].push_back(x);\n  }\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\n\n\
+    // \u6C38\u7D9A\u6027\u306Everify\n\n#include <iostream>\n#include <vector>\n\
+    #include \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n\
+    \ vector<WeightBalancedTree<int>> S(Q + 1);\n for (int i= 1; i <= Q; ++i) {\n\
+    \  int op, t;\n  cin >> op >> t;\n  S[i]= S[++t];\n  if (op) {\n   cout << S[i].pop_front()\
+    \ << '\\n';\n  } else {\n   int x;\n   cin >> x;\n   S[i].push_back(x);\n  }\n\
+    \ }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
-  - src/Internal/HAS_CHECK.hpp
+  - src/Internal/detection_idiom.hpp
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-03-22 12:03:06+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp
 layout: document

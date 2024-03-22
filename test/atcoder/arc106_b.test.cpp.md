@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/incidence_linear_system.hpp
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc106/tasks/arc106_b
@@ -90,7 +90,7 @@ data:
   path: test/atcoder/arc106_b.test.cpp
   requiredBy: []
   timestamp: '2024-02-23 13:09:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc106_b.test.cpp
 layout: document

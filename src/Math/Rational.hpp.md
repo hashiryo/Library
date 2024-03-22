@@ -161,11 +161,11 @@ data:
   timestamp: '2023-10-30 16:02:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/2159.rational.test.cpp
   - test/aoj/2009.rational.test.cpp
+  - test/aoj/1242.rational.test.cpp
   - test/aoj/0350.test.cpp
   - test/aoj/2003.rational.test.cpp
-  - test/aoj/1242.rational.test.cpp
-  - test/aoj/2159.rational.test.cpp
   - test/yukicoder/1501.test.cpp
   - test/unit_test/constexpr_rational.test.cpp
 documentation_of: src/Math/Rational.hpp

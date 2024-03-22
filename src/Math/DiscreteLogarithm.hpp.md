@@ -101,9 +101,9 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/yukicoder/950.test.cpp
   - test/yukicoder/261.test.cpp
   - test/yukicoder/1339.test.cpp
-  - test/yukicoder/950.test.cpp
   - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc270_g.test.cpp
 documentation_of: src/Math/DiscreteLogarithm.hpp

@@ -84,7 +84,7 @@ data:
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
       path: src/DataStructure/WeightBalancedTree.hpp
-      title: "\u6C38\u7D9AWeight-Balanced-Tree"
+      title: Weight-Balanced-Tree
   - name: src/FFT
     pages:
     - icon: ':question:'
@@ -227,7 +227,7 @@ data:
       path: src/Graph/general_matching.hpp
       title: "\u4E00\u822C\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\
         \u30B0"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/incidence_linear_system.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
     - icon: ':question:'
@@ -246,6 +246,9 @@ data:
     - icon: ':question:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+    - icon: ':question:'
+      path: src/Internal/detection_idiom.hpp
+      title: detection idiom
     - icon: ':question:'
       path: src/Internal/function_traits.hpp
       title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
@@ -505,6 +508,14 @@ data:
     - icon: ':warning:'
       path: src/old/Tree.hpp
       title: "\u6728"
+  - name: test/aoj
+    pages:
+    - icon: ':warning:'
+      path: test/aoj/ITP2_2_D.WBT.cpp
+      title: test/aoj/ITP2_2_D.WBT.cpp
+    - icon: ':warning:'
+      path: test/aoj/ITP2_4_A.WBT.cpp
+      title: test/aoj/ITP2_4_A.WBT.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -655,7 +666,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1508.SplayTree.test.cpp
       title: test/aoj/1508.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1508.WBT.test.cpp
       title: test/aoj/1508.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1087,13 +1098,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_B.WBT.test.cpp
       title: test/aoj/ITP2_4_B.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_C.WBT.test.cpp
       title: test/aoj/ITP2_4_C.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1425,7 +1436,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc106_b.test.cpp
       title: test/atcoder/arc106_b.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1582,8 +1593,11 @@ data:
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':x:'
-      path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-      title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+      path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+      title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
+      title: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
       title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
@@ -1731,7 +1745,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/partition.test.cpp
       title: test/yosupo/partition.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/persistent_queue.WBT.test.cpp
       title: test/yosupo/persistent_queue.WBT.test.cpp
     - icon: ':heavy_check_mark:'

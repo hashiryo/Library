@@ -26,9 +26,6 @@ data:
   - icon: ':question:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
-  - icon: ':question:'
-    path: src/DataStructure/WeightBalancedTree.hpp
-    title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - icon: ':warning:'
     path: src/old/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
@@ -42,9 +39,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1508.SplayTree.test.cpp
     title: test/aoj/1508.SplayTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/1508.WBT.test.cpp
-    title: test/aoj/1508.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
@@ -73,9 +67,6 @@ data:
     path: test/aoj/3024.Patricia.test.cpp
     title: test/aoj/3024.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/3024.WBT.test.cpp
-    title: test/aoj/3024.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
     title: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -94,14 +85,8 @@ data:
     path: test/aoj/ITP2_4_B.SplayTree.test.cpp
     title: test/aoj/ITP2_4_B.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/ITP2_4_B.WBT.test.cpp
-    title: test/aoj/ITP2_4_B.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/ITP2_4_C.WBT.test.cpp
-    title: test/aoj/ITP2_4_C.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
@@ -121,9 +106,6 @@ data:
     path: test/atcoder/abc256_f.SplayTree.test.cpp
     title: test/atcoder/abc256_f.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc256_f.WBT.test.cpp
-    title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.KDT.3D.test.cpp
     title: test/atcoder/abc309_f.KDT.3D.test.cpp
   - icon: ':heavy_check_mark:'
@@ -136,8 +118,8 @@ data:
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - icon: ':x:'
-    path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-    title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+    path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+    title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
@@ -154,17 +136,11 @@ data:
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/persistent_queue.WBT.test.cpp
-    title: test/yosupo/persistent_queue.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/range_affine_range_sum.WBT.test.cpp
-    title: test/yosupo/range_affine_range_sum.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
@@ -236,75 +212,67 @@ data:
   isVerificationFile: false
   path: src/Internal/HAS_CHECK.hpp
   requiredBy:
-  - src/DataStructure/WeightBalancedTree.hpp
-  - src/DataStructure/SplayTree.hpp
-  - src/DataStructure/LinkCutTree.hpp
-  - src/DataStructure/SegmentTree_Dynamic.hpp
-  - src/DataStructure/OnlineDynamicConnectivity.hpp
-  - src/DataStructure/KDTree.hpp
-  - src/DataStructure/SegmentTree_Patricia.hpp
-  - src/DataStructure/SkewHeap.hpp
-  - src/DataStructure/EulerTourTree.hpp
   - src/old/MinimumSpanningAborescense.hpp
+  - src/DataStructure/SkewHeap.hpp
+  - src/DataStructure/OnlineDynamicConnectivity.hpp
+  - src/DataStructure/LinkCutTree.hpp
+  - src/DataStructure/SplayTree.hpp
+  - src/DataStructure/SegmentTree_Patricia.hpp
+  - src/DataStructure/EulerTourTree.hpp
+  - src/DataStructure/KDTree.hpp
+  - src/DataStructure/SegmentTree_Dynamic.hpp
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/3024.Patricia.test.cpp
-  - test/aoj/3024.WBT.test.cpp
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - test/aoj/2235.onlinedicon.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
-  - test/aoj/1023.KDT.test.cpp
-  - test/aoj/1508.WBT.test.cpp
-  - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/aoj/ITP2_4_C.WBT.test.cpp
-  - test/aoj/2893.onlinedicon.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
-  - test/aoj/2842.KDT.test.cpp
-  - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - test/aoj/3024.DynSeg.test.cpp
-  - test/aoj/2450.LCT.test.cpp
-  - test/aoj/DSL_2_I.DynSeg.test.cpp
-  - test/aoj/ITP2_4_B.WBT.test.cpp
-  - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
-  - test/aoj/1068.KDT.test.cpp
-  - test/aoj/1508.SplayTree.test.cpp
-  - test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - test/aoj/2270.Patricia.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - test/yosupo/set_xor_min.Patricia.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
+  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/yosupo/set_xor_min.Patricia.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/persistent_queue.WBT.test.cpp
-  - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/yosupo/lca.LCT.test.cpp
+  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
-  - test/yukicoder/649.Patricia.test.cpp
-  - test/yukicoder/235.LCT.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yukicoder/649.DynSeg.test.cpp
+  - test/aoj/2893.onlinedicon.test.cpp
+  - test/aoj/2450.LCT.test.cpp
+  - test/aoj/3024.Patricia.test.cpp
+  - test/aoj/DSL_2_C.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
+  - test/aoj/1508.SplayTree.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
+  - test/aoj/2270.Patricia.test.cpp
+  - test/aoj/1023.KDT.test.cpp
+  - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/2235.onlinedicon.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
+  - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/1068.KDT.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/1216.KDT.test.cpp
-  - test/yukicoder/828.ETT.test.cpp
-  - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
-  - test/atcoder/abc309_f.KDT.3D.test.cpp
-  - test/atcoder/abc133_f.DynSeg.test.cpp
-  - test/atcoder/abc256_f.WBT.test.cpp
-  - test/atcoder/abc133_f.PerArr.test.cpp
-  - test/atcoder/abc234_ex.KDT.test.cpp
+  - test/yukicoder/828.ETT.test.cpp
+  - test/yukicoder/649.DynSeg.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/649.Patricia.test.cpp
   - test/atcoder/abc309_f.KDT.test.cpp
+  - test/atcoder/abc309_f.KDT.3D.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc256_f.SplayTree.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
+  - test/atcoder/abc133_f.PerArr.test.cpp
+  - test/atcoder/abc234_ex.KDT.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/Internal/HAS_CHECK.hpp
 layout: document
 title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\u30F3\

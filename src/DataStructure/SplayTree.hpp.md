@@ -26,8 +26,8 @@ data:
     path: test/atcoder/abc256_f.SplayTree.test.cpp
     title: test/atcoder/abc256_f.SplayTree.test.cpp
   - icon: ':x:'
-    path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-    title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+    path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+    title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -262,12 +262,12 @@ data:
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
   - test/aoj/1508.SplayTree.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
   - test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
   - test/atcoder/abc256_f.SplayTree.test.cpp
 documentation_of: src/DataStructure/SplayTree.hpp
 layout: document

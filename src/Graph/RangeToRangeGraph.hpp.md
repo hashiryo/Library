@@ -99,8 +99,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3506.test.cpp
-  - test/yukicoder/1170.test.cpp
   - test/yukicoder/1868.test.cpp
+  - test/yukicoder/1170.test.cpp
 documentation_of: src/Graph/RangeToRangeGraph.hpp
 layout: document
 title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"

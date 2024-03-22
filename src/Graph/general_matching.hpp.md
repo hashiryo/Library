@@ -118,10 +118,10 @@ data:
   timestamp: '2024-02-19 18:05:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/bipartitematching.general_matching.test.cpp
+  - test/yosupo/general_matching.test.cpp
   - test/aoj/3198.general_matching.test.cpp
   - test/aoj/3032.test.cpp
-  - test/yosupo/general_matching.test.cpp
-  - test/yosupo/bipartitematching.general_matching.test.cpp
 documentation_of: src/Graph/general_matching.hpp
 layout: document
 title: "\u4E00\u822C\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"

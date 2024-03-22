@@ -103,10 +103,10 @@ data:
   timestamp: '2023-11-24 02:08:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2863.test.cpp
-  - test/aoj/2873.test.cpp
   - test/aoj/2212.test.cpp
   - test/aoj/2257.test.cpp
+  - test/aoj/2873.test.cpp
+  - test/aoj/2863.test.cpp
   - test/yukicoder/430.AhoCora.test.cpp
   - test/yukicoder/1269.test.cpp
 documentation_of: src/String/AhoCorasick.hpp

@@ -11,14 +11,12 @@ data:
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/3024
     links:
-    - https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/3024
-  bundledCode: "#line 1 \"test/aoj/3024.WBT.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/3024\"\
-    \n\n// \u6C38\u7D9A\u6027\u306Everify\n\n#include <iostream>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_A
+  bundledCode: "#line 1 \"test/aoj/ITP2_4_A.WBT.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_A\"\
+    \n\n// reverse \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n#include <vector>\n#include <array>\n#include <string>\n#include <tuple>\n#include\
     \ <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n\
     #include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
@@ -172,40 +170,34 @@ data:
     \ ret+= \"\\\"apply\\\" \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\
     \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (dual_v<M>)\
     \ return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE >= L_SIZE;\n  else return\
-    \ nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 7 \"test/aoj/3024.WBT.test.cpp\"\
-    \nusing namespace std;\nstruct RMQ {\n using T= int;\n static T op(T l, T r) {\
-    \ return min(l, r); }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N;\n cin >> N;\n int A[N], B[N];\n for (int i= 0; i < N; i++) cin >> A[i];\n\
-    \ for (int i= 0; i < N; i++) cin >> B[i];\n using WBT= WeightBalancedTree<RMQ,\
-    \ false, true>;\n WBT wbt[2]= {WBT(A, A + N), WBT(B, B + N)};\n int Q;\n cin >>\
-    \ Q;\n for (int i= 0; i < Q; i++) {\n  int x, y, z;\n  cin >> x >> y >> z;\n \
-    \ if (x <= 2) {\n   x--, y--;\n   wbt[x].set(y, z);\n  } else if (x <= 4) {\n\
-    \   x-= 3, y--;\n   cout << wbt[x].fold(y, z) << '\\n';\n  } else {\n   x-= 5;\n\
-    \   wbt[x]= wbt[!x];\n  }\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/3024\"\
-    \n\n// \u6C38\u7D9A\u6027\u306Everify\n\n#include <iostream>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \nusing namespace std;\nstruct RMQ {\n using T= int;\n static T op(T l, T r) {\
-    \ return min(l, r); }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N;\n cin >> N;\n int A[N], B[N];\n for (int i= 0; i < N; i++) cin >> A[i];\n\
-    \ for (int i= 0; i < N; i++) cin >> B[i];\n using WBT= WeightBalancedTree<RMQ,\
-    \ false, true>;\n WBT wbt[2]= {WBT(A, A + N), WBT(B, B + N)};\n int Q;\n cin >>\
-    \ Q;\n for (int i= 0; i < Q; i++) {\n  int x, y, z;\n  cin >> x >> y >> z;\n \
-    \ if (x <= 2) {\n   x--, y--;\n   wbt[x].set(y, z);\n  } else if (x <= 4) {\n\
-    \   x-= 3, y--;\n   cout << wbt[x].fold(y, z) << '\\n';\n  } else {\n   x-= 5;\n\
-    \   wbt[x]= wbt[!x];\n  }\n }\n return 0;\n}"
+    \ nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 7 \"test/aoj/ITP2_4_A.WBT.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int n;\n cin >> n;\n int a[n];\n for (int i= 0; i < n; i++) cin >> a[i];\n WeightBalancedTree<int,\
+    \ true> ar(a, a + n);\n int q;\n cin >> q;\n for (int i= 0; i < q; ++i) {\n  int\
+    \ b, e;\n  cin >> b >> e;\n  ar.reverse(b, e);\n }\n auto ans= ar.dump();\n for\
+    \ (int i= 0; i < n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n return 0;\n\
+    }\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_A\"\
+    \n\n// reverse \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int n;\n cin >> n;\n int a[n];\n for (int i= 0; i < n; i++) cin >> a[i];\n WeightBalancedTree<int,\
+    \ true> ar(a, a + n);\n int q;\n cin >> q;\n for (int i= 0; i < q; ++i) {\n  int\
+    \ b, e;\n  cin >> b >> e;\n  ar.reverse(b, e);\n }\n auto ans= ar.dump();\n for\
+    \ (int i= 0; i < n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n return 0;\n\
+    }"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   - src/Internal/detection_idiom.hpp
-  isVerificationFile: true
-  path: test/aoj/3024.WBT.test.cpp
+  isVerificationFile: false
+  path: test/aoj/ITP2_4_A.WBT.cpp
   requiredBy: []
   timestamp: '2024-03-22 12:03:06+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: test/aoj/3024.WBT.test.cpp
+documentation_of: test/aoj/ITP2_4_A.WBT.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/3024.WBT.test.cpp
-- /verify/test/aoj/3024.WBT.test.cpp.html
-title: test/aoj/3024.WBT.test.cpp
+- /library/test/aoj/ITP2_4_A.WBT.cpp
+- /library/test/aoj/ITP2_4_A.WBT.cpp.html
+title: test/aoj/ITP2_4_A.WBT.cpp
 ---

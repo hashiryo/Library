@@ -30,16 +30,17 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
     links:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
-  bundledCode: "#line 1 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
+  bundledCode: "#line 1 \"test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n#include <iostream>\n#include <array>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\
-    \n#include <vector>\n#include <string>\n#line 5 \"src/DataStructure/SplayTree.hpp\"\
-    \n#include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
-    \n#include <type_traits>\n#define MEMBER_MACRO(member, Dummy, name, type1, type2,\
-    \ last) \\\n template <class tClass> struct name##member { \\\n  template <class\
-    \ U, Dummy> static type1 check(U *); \\\n  static type2 check(...); \\\n  static\
-    \ tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member,\
-    \ Dummy, has_, std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    \n\n// insert, erase, reverse, apply, fold \u306E verify\n\n#include <iostream>\n\
+    #include <array>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n\
+    #include <string>\n#line 5 \"src/DataStructure/SplayTree.hpp\"\n#include <cstddef>\n\
+    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
+    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
+    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
+    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
+    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
     #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
     \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
     \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
@@ -225,7 +226,7 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 6 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 9 \"test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineRsumQ\
     \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T vl, T vr) { return\
     \ vl + vr; }\n static void mp(T &val, const E &f, int sz) { val= f[0] * val +\
@@ -241,21 +242,22 @@ data:
     \ l, r;\n   cin >> l >> r;\n   cout << splay.fold(l, r) << '\\n';\n  }\n }\n return\
     \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n#include <iostream>\n#include <array>\n#include \"src/DataStructure/SplayTree.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
-    struct RaffineRsumQ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T\
-    \ vl, T vr) { return vl + vr; }\n static void mp(T &val, const E &f, int sz) {\
-    \ val= f[0] * val + f[1] * sz; }\n static void cp(E &pre, const E &suf) { pre[0]*=\
-    \ suf[0], pre[1]= suf[0] * pre[1] + suf[1]; }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int\
-    \ i= 0; i < N; i++) cin >> a[i];\n SplayTree<RaffineRsumQ, true> splay(a, a +\
-    \ N);\n for (int q= 0; q < Q; q++) {\n  int op;\n  cin >> op;\n  if (op == 0)\
-    \ {\n   int i, x;\n   cin >> i >> x;\n   splay.insert(i, x);\n  } else if (op\
-    \ == 1) {\n   int i;\n   cin >> i;\n   splay.erase(i);\n  } else if (op == 2)\
-    \ {\n   int l, r;\n   cin >> l >> r;\n   splay.reverse(l, r);\n  } else if (op\
-    \ == 3) {\n   int l, r, b, c;\n   cin >> l >> r >> b >> c;\n   splay.apply(l,\
-    \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << splay.fold(l,\
-    \ r) << '\\n';\n  }\n }\n return 0;\n}"
+    \n\n// insert, erase, reverse, apply, fold \u306E verify\n\n#include <iostream>\n\
+    #include <array>\n#include \"src/DataStructure/SplayTree.hpp\"\n#include \"src/Math/ModInt.hpp\"\
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineRsumQ\
+    \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T vl, T vr) { return\
+    \ vl + vr; }\n static void mp(T &val, const E &f, int sz) { val= f[0] * val +\
+    \ f[1] * sz; }\n static void cp(E &pre, const E &suf) { pre[0]*= suf[0], pre[1]=\
+    \ suf[0] * pre[1] + suf[1]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
+    \ a[i];\n SplayTree<RaffineRsumQ, true> splay(a, a + N);\n for (int q= 0; q <\
+    \ Q; q++) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int i, x;\n   cin >>\
+    \ i >> x;\n   splay.insert(i, x);\n  } else if (op == 1) {\n   int i;\n   cin\
+    \ >> i;\n   splay.erase(i);\n  } else if (op == 2) {\n   int l, r;\n   cin >>\
+    \ l >> r;\n   splay.reverse(l, r);\n  } else if (op == 3) {\n   int l, r, b, c;\n\
+    \   cin >> l >> r >> b >> c;\n   splay.apply(l, r, {b, c});\n  } else {\n   int\
+    \ l, r;\n   cin >> l >> r;\n   cout << splay.fold(l, r) << '\\n';\n  }\n }\n return\
+    \ 0;\n}"
   dependsOn:
   - src/DataStructure/SplayTree.hpp
   - src/Internal/HAS_CHECK.hpp
@@ -264,15 +266,15 @@ data:
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
   isVerificationFile: true
-  path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+  path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-03-21 17:56:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-- /verify/test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp.html
-title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+- /verify/test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+- /verify/test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp.html
+title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
 ---

@@ -237,31 +237,31 @@ data:
   requiredBy:
   - src/NumberTheory/OrderFp.hpp
   - src/NumberTheory/ArrayOnDivisors.hpp
-  - src/Math/mod_kth_root.hpp
   - src/Math/mod_tetration.hpp
-  - src/Math/BinomialCoefficient.hpp
+  - src/Math/mod_kth_root.hpp
   - src/Math/ModInt_Exp.hpp
+  - src/Math/BinomialCoefficient.hpp
   timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/NTL_1_D.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/factorize.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
   - test/yosupo/primitive_root.test.cpp
-  - test/yukicoder/2578.test.cpp
-  - test/yukicoder/125.multiple_mobius.test.cpp
-  - test/yukicoder/1728.test.cpp
-  - test/yukicoder/2264.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
   - test/yukicoder/125.phi.test.cpp
-  - test/unit_test/constexpr_factors.test.cpp
-  - test/unit_test/constexpr_mod_tetration.test.cpp
-  - test/unit_test/constexpr_orderfp.test.cpp
+  - test/yukicoder/2264.test.cpp
+  - test/yukicoder/125.multiple_mobius.test.cpp
+  - test/yukicoder/2578.test.cpp
+  - test/yukicoder/1728.test.cpp
   - test/atcoder/abc212_g.test.cpp
-  - test/atcoder/abc248_g.test.cpp
   - test/atcoder/abc228_e.test.cpp
+  - test/atcoder/abc248_g.test.cpp
   - test/atcoder/abc335_g.test.cpp
+  - test/unit_test/constexpr_orderfp.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/unit_test/constexpr_factors.test.cpp
 documentation_of: src/NumberTheory/Factors.hpp
 layout: document
 title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"

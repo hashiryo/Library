@@ -181,8 +181,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3168.bm.test.cpp
-  - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
+  - test/yukicoder/1744.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/Graph/DulmageMendelsohn.hpp
 layout: document
