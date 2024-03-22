@@ -9,21 +9,21 @@ data:
     title: detection idiom
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_B
-  bundledCode: "#line 1 \"test/aoj/ITP2_4_B.WBT.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_B\"\
-    \n\n// split, split3, operator+ \u306E verify\n\n#include <iostream>\n#line 2\
-    \ \"src/DataStructure/WeightBalancedTree.hpp\"\n#include <vector>\n#include <array>\n\
-    #include <string>\n#include <tuple>\n#include <cstddef>\n#include <cassert>\n\
-    #line 2 \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n#define\
-    \ _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name: std::false_type\
-    \ {}; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>: std::true_type\
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D
+  bundledCode: "#line 1 \"test/aoj/ITP2_2_D.WBT.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D\"\
+    \n\n// push_back, operator+= \u306E verify\n\n#include <iostream>\n#include <vector>\n\
+    #line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\n#include <array>\n#include\
+    \ <string>\n#include <tuple>\n#include <cstddef>\n#include <cassert>\n#line 2\
+    \ \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n#define _DETECT_BOOL(name,\
+    \ ...) \\\n template <class, class= void> struct name: std::false_type {}; \\\n\
+    \ template <class T> struct name<T, std::void_t<__VA_ARGS__>>: std::true_type\
     \ {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
     #define _DETECT_TYPE(name, type1, type2, ...) \\\n template <class T, class= void>\
     \ struct name { \\\n  using type= type2; \\\n }; \\\n template <class T> struct\
@@ -173,35 +173,38 @@ data:
     \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (persistent\
     \ && (dual_v<M> || reversible)) return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE\
     \ >= L_SIZE;\n  else return nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n\
-    };\n#line 7 \"test/aoj/ITP2_4_B.WBT.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin >> n;\n int a[n];\n\
-    \ for (int i= 0; i < n; ++i) cin >> a[i];\n WeightBalancedTree<int> ar(a, a +\
-    \ n);\n int q;\n cin >> q;\n for (int i= 0; i < q; ++i) {\n  int b, m, e;\n  cin\
-    \ >> b >> m >> e;\n  auto [l, c, r]= ar.split3(b, e);\n  auto [cl, cr]= c.split(m\
-    \ - b);\n  ar= l + cr + cl + r;\n }\n auto ans= ar.dump();\n for (int i= 0; i\
-    \ < n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_B\"\
-    \n\n// split, split3, operator+ \u306E verify\n\n#include <iostream>\n#include\
-    \ \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin >> n;\n int a[n];\n\
-    \ for (int i= 0; i < n; ++i) cin >> a[i];\n WeightBalancedTree<int> ar(a, a +\
-    \ n);\n int q;\n cin >> q;\n for (int i= 0; i < q; ++i) {\n  int b, m, e;\n  cin\
-    \ >> b >> m >> e;\n  auto [l, c, r]= ar.split3(b, e);\n  auto [cl, cr]= c.split(m\
-    \ - b);\n  ar= l + cr + cl + r;\n }\n auto ans= ar.dump();\n for (int i= 0; i\
-    \ < n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n return 0;\n}"
+    };\n#line 8 \"test/aoj/ITP2_2_D.WBT.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n using\
+    \ WBT= WeightBalancedTree<int>;\n WBT ar[n];\n for (int i= 0; i < q; ++i) {\n\
+    \  int op;\n  cin >> op;\n  if (op == 0) {\n   int t, x;\n   cin >> t >> x;\n\
+    \   ar[t].push_back(x);\n  } else if (op == 1) {\n   int t;\n   cin >> t;\n  \
+    \ auto ans= ar[t].dump();\n   for (int i= 0; i < ans.size(); ++i) cout << (i ?\
+    \ \" \" : \"\") << ans[i];\n   cout << '\\n';\n  } else {\n   int s, t;\n   cin\
+    \ >> s >> t;\n   ar[t]+= ar[s];\n   ar[s].clear();\n  }\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D\"\
+    \n\n// push_back, operator+= \u306E verify\n\n#include <iostream>\n#include <vector>\n\
+    #include \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >>\
+    \ n >> q;\n using WBT= WeightBalancedTree<int>;\n WBT ar[n];\n for (int i= 0;\
+    \ i < q; ++i) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int t, x;\n   cin\
+    \ >> t >> x;\n   ar[t].push_back(x);\n  } else if (op == 1) {\n   int t;\n   cin\
+    \ >> t;\n   auto ans= ar[t].dump();\n   for (int i= 0; i < ans.size(); ++i) cout\
+    \ << (i ? \" \" : \"\") << ans[i];\n   cout << '\\n';\n  } else {\n   int s, t;\n\
+    \   cin >> s >> t;\n   ar[t]+= ar[s];\n   ar[s].clear();\n  }\n }\n return 0;\n\
+    }\n"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   - src/Internal/detection_idiom.hpp
   isVerificationFile: true
-  path: test/aoj/ITP2_4_B.WBT.test.cpp
+  path: test/aoj/ITP2_2_D.WBT.test.cpp
   requiredBy: []
   timestamp: '2024-03-22 14:55:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/ITP2_4_B.WBT.test.cpp
+documentation_of: test/aoj/ITP2_2_D.WBT.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/ITP2_4_B.WBT.test.cpp
-- /verify/test/aoj/ITP2_4_B.WBT.test.cpp.html
-title: test/aoj/ITP2_4_B.WBT.test.cpp
+- /verify/test/aoj/ITP2_2_D.WBT.test.cpp
+- /verify/test/aoj/ITP2_2_D.WBT.test.cpp.html
+title: test/aoj/ITP2_2_D.WBT.test.cpp
 ---

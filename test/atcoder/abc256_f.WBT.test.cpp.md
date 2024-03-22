@@ -136,84 +136,84 @@ data:
     \ NodeMS<void, semigroup_v<M>, reversible, commute_v<M>>;\n using T= typename\
     \ myself_or_T<M>::type;\n using E= typename nullptr_or_E<M>::type;\n using WBT=\
     \ WeightBalancedTree;\n static inline int nmi= 1, nli= 1;\n static constexpr size_t\
-    \ M_SIZE= persistent ? LEAF_SIZE * 10 : LEAF_SIZE * 2;\n static constexpr size_t\
-    \ L_SIZE= persistent && (dual_v<M> || reversible) ? LEAF_SIZE * 10 : LEAF_SIZE;\n\
-    \ static inline NodeM nm[M_SIZE];\n static inline T nl[L_SIZE];\n int root;\n\
-    \ static inline size_t msize(int i) noexcept {\n  if constexpr (dual_v<M> || reversible)\
-    \ return nm[i].sz & 0x3fffffff;\n  else return nm[i].sz;\n }\n static inline size_t\
-    \ size(int i) noexcept { return i < 0 ? 1 : msize(i); }\n static inline T sum(int\
-    \ i) noexcept { return i < 0 ? nl[-i] : nm[i].sum; }\n static inline T rsum(int\
-    \ i) noexcept { return i < 0 ? nl[-i] : nm[i].rsum; }\n static inline void update(int\
-    \ i) noexcept {\n  auto t= nm + i;\n  auto [l, r]= t->ch;\n  if constexpr (dual_v<M>\
-    \ || reversible) t->sz= (size(l) + size(r)) | (t->sz & 0xc0000000);\n  else t->sz=\
-    \ size(l) + size(r);\n  if constexpr (semigroup_v<M>) {\n   t->sum= M::op(sum(l),\
-    \ sum(r));\n   if constexpr (reversible && !commute_v<M>) t->rsum= M::op(rsum(r),\
-    \ rsum(l));\n  }\n }\n static inline void propagate(int &i, const E &x) noexcept\
-    \ {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n\
-    \  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>)\
-    \ {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr (reversible &&\
-    \ !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n  t->sz|= 0x80000000;\n\
-    \ }\n static inline void push_prop(int i) noexcept {\n  if (auto t= nm + i; t->sz\
-    \ >> 31) {\n   auto &[l, r]= t->ch;\n   if (l < 0) {\n    if constexpr (persistent)\
-    \ nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l], t->laz, 1);\n   } else propagate(l,\
-    \ t->laz);\n   if (r < 0) {\n    if constexpr (persistent) nl[nli]= nl[-r], r=\
-    \ -nli++;\n    M::mp(nl[-r], t->laz, 1);\n   } else propagate(r, t->laz);\n  \
-    \ t->sz^= 0x80000000;\n  }\n }\n static inline void toggle(int &i) noexcept {\n\
-    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n  std::swap(t->ch[0],\
-    \ t->ch[1]);\n  if constexpr (semigroup_v<M> && !commute_v<M>) std::swap(t->sum,\
-    \ t->rsum);\n  t->sz^= 0x40000000;\n }\n static inline void push_tog(int i) noexcept\
-    \ {\n  if (auto t= nm + i; t->sz & 0x40000000) {\n   auto &[l, r]= t->ch;\n  \
-    \ if (l > 0) toggle(l);\n   if (r > 0) toggle(r);\n   t->sz^= 0x40000000;\n  }\n\
-    \ }\n template <bool b> static inline int helper(std::array<int, 2> &m) noexcept\
-    \ {\n  if constexpr (dual_v<M>) push_prop(m[b]);\n  if constexpr (reversible)\
-    \ push_tog(m[b]);\n  int c;\n  if constexpr (b) c= _merge({m[0], nm[m[1]].ch[0]});\n\
-    \  else c= _merge({nm[m[0]].ch[1], m[1]});\n  if constexpr (persistent) nm[nmi]=\
-    \ nm[m[b]], m[b]= nmi++;\n  if (size(nm[m[b]].ch[b]) * 4 >= msize(c)) return nm[m[b]].ch[!b]=\
-    \ c, update(m[b]), m[b];\n  return nm[m[b]].ch[!b]= nm[c].ch[b], update(nm[c].ch[b]=\
-    \ m[b]), update(c), c;\n }\n static inline int _merge(std::array<int, 2> m) noexcept\
-    \ {\n  int lsz= size(m[0]), rsz= size(m[1]);\n  if (lsz > rsz * 4) return helper<0>(m);\n\
-    \  if (rsz > lsz * 4) return helper<1>(m);\n  return nm[nmi]= NodeM{m[0], m[1]},\
-    \ update(nmi), nmi++;\n }\n static inline int merge(int l, int r) noexcept { return\
-    \ !l ? r : !r ? l : _merge({l, r}); }\n static inline std::pair<int, int> _split(int\
-    \ i, size_t k) noexcept {\n  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr\
-    \ (reversible) push_tog(i);\n  auto t= nm + i;\n  auto [l, r]= t->ch;\n  if (size_t\
-    \ lsz= size(l); k == lsz) return {l, r};\n  else if (k < lsz) {\n   auto [ll,\
-    \ lr]= _split(l, k);\n   return {ll, _merge({lr, r})};\n  } else {\n   auto [rl,\
-    \ rr]= _split(r, k - lsz);\n   return {_merge({l, rl}), rr};\n  }\n }\n static\
-    \ inline std::pair<int, int> split(int i, size_t k) noexcept {\n  if (k == 0)\
-    \ return {0, i};\n  if (k >= size(i)) return {i, 0};\n  return _split(i, k);\n\
-    \ }\n template <class S> int build(size_t l, size_t r, const S &bg) noexcept {\n\
-    \  if (r - l == 1) {\n   if constexpr (std::is_same_v<S, T>) return nl[nli]= bg,\
-    \ -nli++;\n   else return nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r)\
-    \ / 2;\n  return nm[nmi]= NodeM{build(l, m, bg), build(m, r, bg)}, update(nmi),\
-    \ nmi++;\n }\n void dump(int i, typename std::vector<T>::iterator it) noexcept\
-    \ {\n  if (i < 0) *it= nl[-i];\n  else {\n   if constexpr (dual_v<M>) push_prop(i);\n\
-    \   if constexpr (reversible) push_tog(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1],\
-    \ it + size(nm[i].ch[0]));\n  }\n }\n T fold(int i, size_t l, size_t r) noexcept\
-    \ {\n  if (i < 0) return nl[-i];\n  if (l <= 0 && msize(i) <= r) return nm[i].sum;\n\
-    \  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
-    \  auto [n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n  if (r <= lsz) return fold(n0,\
-    \ l, r);\n  if (lsz <= l) return fold(n1, l - lsz, r - lsz);\n  return M::op(fold(n0,\
-    \ l, lsz), fold(n1, 0, r - lsz));\n }\n void apply(int &i, size_t l, size_t r,\
-    \ const E &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) nl[nli]=\
-    \ nl[-i], i= -nli++;\n   M::mp(nl[-i], x, 1);\n   return;\n  }\n  if (l <= 0 &&\
-    \ msize(i) <= r) return propagate(i, x);\n  if constexpr (reversible) push_tog(i);\n\
-    \  push_prop(i);\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto\
-    \ &[n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n  if (r <= lsz) apply(n0, l,\
-    \ r, x);\n  else if (lsz <= l) apply(n1, l - lsz, r - lsz, x);\n  else apply(n0,\
-    \ l, lsz, x), apply(n1, 0, r - lsz, x);\n  if constexpr (semigroup_v<M>) update(i);\n\
-    \ }\n void set_val(int &i, size_t k, const T &x) noexcept {\n  if (i < 0) {\n\
-    \   if constexpr (persistent) nl[nli]= x, i= -nli++;\n   else nl[-i]= x;\n   return;\n\
-    \  }\n  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
-    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n\
-    \  size_t lsz= size(l);\n  lsz > k ? set_val(l, k, x) : set_val(r, k - lsz, x);\n\
-    \  if constexpr (semigroup_v<M>) update(i);\n }\n void mul_val(int &i, size_t\
-    \ k, const T &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) nl[nli]=\
-    \ M::op(nl[-i], x), i= -nli++;\n   else nl[-i]= M::op(nl[-i], x);\n   return;\n\
-    \  }\n  if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
-    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n\
-    \  size_t lsz= size(l);\n  lsz > k ? mul_val(l, k, x) : mul_val(r, k - lsz, x);\n\
-    \  if constexpr (semigroup_v<M>) update(i);\n }\n T get_val(int i, size_t k) noexcept\
+    \ M_SIZE= LEAF_SIZE * 10;\n static constexpr size_t L_SIZE= persistent && (dual_v<M>\
+    \ || reversible) ? LEAF_SIZE * 10 : LEAF_SIZE;\n static inline NodeM nm[M_SIZE];\n\
+    \ static inline T nl[L_SIZE];\n int root;\n static inline size_t msize(int i)\
+    \ noexcept {\n  if constexpr (dual_v<M> || reversible) return nm[i].sz & 0x3fffffff;\n\
+    \  else return nm[i].sz;\n }\n static inline size_t size(int i) noexcept { return\
+    \ i < 0 ? 1 : msize(i); }\n static inline T sum(int i) noexcept { return i < 0\
+    \ ? nl[-i] : nm[i].sum; }\n static inline T rsum(int i) noexcept { return i <\
+    \ 0 ? nl[-i] : nm[i].rsum; }\n static inline void update(int i) noexcept {\n \
+    \ auto t= nm + i;\n  auto [l, r]= t->ch;\n  if constexpr (dual_v<M> || reversible)\
+    \ t->sz= (size(l) + size(r)) | (t->sz & 0xc0000000);\n  else t->sz= size(l) +\
+    \ size(r);\n  if constexpr (semigroup_v<M>) {\n   t->sum= M::op(sum(l), sum(r));\n\
+    \   if constexpr (reversible && !commute_v<M>) t->rsum= M::op(rsum(r), rsum(l));\n\
+    \  }\n }\n static inline void propagate(int &i, const E &x) noexcept {\n  if constexpr\
+    \ (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n  if (t->sz >> 31)\
+    \ M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n  \
+    \ M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr (reversible && !commute_v<M>)\
+    \ M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n  t->sz|= 0x80000000;\n }\n static\
+    \ inline void push_prop(int i) noexcept {\n  if (auto t= nm + i; t->sz >> 31)\
+    \ {\n   auto &[l, r]= t->ch;\n   if (l < 0) {\n    if constexpr (persistent) nl[nli]=\
+    \ nl[-l], l= -nli++;\n    M::mp(nl[-l], t->laz, 1);\n   } else propagate(l, t->laz);\n\
+    \   if (r < 0) {\n    if constexpr (persistent) nl[nli]= nl[-r], r= -nli++;\n\
+    \    M::mp(nl[-r], t->laz, 1);\n   } else propagate(r, t->laz);\n   t->sz^= 0x80000000;\n\
+    \  }\n }\n static inline void toggle(int &i) noexcept {\n  if constexpr (persistent)\
+    \ nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n  std::swap(t->ch[0], t->ch[1]);\n\
+    \  if constexpr (semigroup_v<M> && !commute_v<M>) std::swap(t->sum, t->rsum);\n\
+    \  t->sz^= 0x40000000;\n }\n static inline void push_tog(int i) noexcept {\n \
+    \ if (auto t= nm + i; t->sz & 0x40000000) {\n   auto &[l, r]= t->ch;\n   if (l\
+    \ > 0) toggle(l);\n   if (r > 0) toggle(r);\n   t->sz^= 0x40000000;\n  }\n }\n\
+    \ template <bool b> static inline int helper(std::array<int, 2> &m) noexcept {\n\
+    \  if constexpr (dual_v<M>) push_prop(m[b]);\n  if constexpr (reversible) push_tog(m[b]);\n\
+    \  int c;\n  if constexpr (b) c= _merge({m[0], nm[m[1]].ch[0]});\n  else c= _merge({nm[m[0]].ch[1],\
+    \ m[1]});\n  if constexpr (persistent) nm[nmi]= nm[m[b]], m[b]= nmi++;\n  if (size(nm[m[b]].ch[b])\
+    \ * 4 >= msize(c)) return nm[m[b]].ch[!b]= c, update(m[b]), m[b];\n  return nm[m[b]].ch[!b]=\
+    \ nm[c].ch[b], update(nm[c].ch[b]= m[b]), update(c), c;\n }\n static inline int\
+    \ _merge(std::array<int, 2> m) noexcept {\n  int lsz= size(m[0]), rsz= size(m[1]);\n\
+    \  if (lsz > rsz * 4) return helper<0>(m);\n  if (rsz > lsz * 4) return helper<1>(m);\n\
+    \  return nm[nmi]= NodeM{m[0], m[1]}, update(nmi), nmi++;\n }\n static inline\
+    \ int merge(int l, int r) noexcept { return !l ? r : !r ? l : _merge({l, r});\
+    \ }\n static inline std::pair<int, int> _split(int i, size_t k) noexcept {\n \
+    \ if constexpr (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n\
+    \  auto t= nm + i;\n  auto [l, r]= t->ch;\n  if (size_t lsz= size(l); k == lsz)\
+    \ return {l, r};\n  else if (k < lsz) {\n   auto [ll, lr]= _split(l, k);\n   return\
+    \ {ll, _merge({lr, r})};\n  } else {\n   auto [rl, rr]= _split(r, k - lsz);\n\
+    \   return {_merge({l, rl}), rr};\n  }\n }\n static inline std::pair<int, int>\
+    \ split(int i, size_t k) noexcept {\n  if (k == 0) return {0, i};\n  if (k >=\
+    \ size(i)) return {i, 0};\n  return _split(i, k);\n }\n template <class S> int\
+    \ build(size_t l, size_t r, const S &bg) noexcept {\n  if (r - l == 1) {\n   if\
+    \ constexpr (std::is_same_v<S, T>) return nl[nli]= bg, -nli++;\n   else return\
+    \ nl[nli]= *(bg + l), -nli++;\n  }\n  size_t m= (l + r) / 2;\n  return nm[nmi]=\
+    \ NodeM{build(l, m, bg), build(m, r, bg)}, update(nmi), nmi++;\n }\n void dump(int\
+    \ i, typename std::vector<T>::iterator it) noexcept {\n  if (i < 0) *it= nl[-i];\n\
+    \  else {\n   if constexpr (dual_v<M>) push_prop(i);\n   if constexpr (reversible)\
+    \ push_tog(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1], it + size(nm[i].ch[0]));\n\
+    \  }\n }\n T fold(int i, size_t l, size_t r) noexcept {\n  if (i < 0) return nl[-i];\n\
+    \  if (l <= 0 && msize(i) <= r) return nm[i].sum;\n  if constexpr (dual_v<M>)\
+    \ push_prop(i);\n  if constexpr (reversible) push_tog(i);\n  auto [n0, n1]= nm[i].ch;\n\
+    \  size_t lsz= size(n0);\n  if (r <= lsz) return fold(n0, l, r);\n  if (lsz <=\
+    \ l) return fold(n1, l - lsz, r - lsz);\n  return M::op(fold(n0, l, lsz), fold(n1,\
+    \ 0, r - lsz));\n }\n void apply(int &i, size_t l, size_t r, const E &x) noexcept\
+    \ {\n  if (i < 0) {\n   if constexpr (persistent) nl[nli]= nl[-i], i= -nli++;\n\
+    \   M::mp(nl[-i], x, 1);\n   return;\n  }\n  if (l <= 0 && msize(i) <= r) return\
+    \ propagate(i, x);\n  if constexpr (reversible) push_tog(i);\n  push_prop(i);\n\
+    \  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[n0, n1]= nm[i].ch;\n\
+    \  size_t lsz= size(n0);\n  if (r <= lsz) apply(n0, l, r, x);\n  else if (lsz\
+    \ <= l) apply(n1, l - lsz, r - lsz, x);\n  else apply(n0, l, lsz, x), apply(n1,\
+    \ 0, r - lsz, x);\n  if constexpr (semigroup_v<M>) update(i);\n }\n void set_val(int\
+    \ &i, size_t k, const T &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent)\
+    \ nl[nli]= x, i= -nli++;\n   else nl[-i]= x;\n   return;\n  }\n  if constexpr\
+    \ (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n  if constexpr\
+    \ (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n  size_t\
+    \ lsz= size(l);\n  lsz > k ? set_val(l, k, x) : set_val(r, k - lsz, x);\n  if\
+    \ constexpr (semigroup_v<M>) update(i);\n }\n void mul_val(int &i, size_t k, const\
+    \ T &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) nl[nli]= M::op(nl[-i],\
+    \ x), i= -nli++;\n   else nl[-i]= M::op(nl[-i], x);\n   return;\n  }\n  if constexpr\
+    \ (dual_v<M>) push_prop(i);\n  if constexpr (reversible) push_tog(i);\n  if constexpr\
+    \ (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n  size_t\
+    \ lsz= size(l);\n  lsz > k ? mul_val(l, k, x) : mul_val(r, k - lsz, x);\n  if\
+    \ constexpr (semigroup_v<M>) update(i);\n }\n T get_val(int i, size_t k) noexcept\
     \ {\n  if (i < 0) return nl[-i];\n  if constexpr (dual_v<M>) push_prop(i);\n \
     \ if constexpr (reversible) push_tog(i);\n  auto [l, r]= nm[i].ch;\n  size_t lsz=\
     \ size(l);\n  return lsz > k ? get_val(l, k) : get_val(r, k - lsz);\n }\n T &at_val(int\
@@ -260,15 +260,16 @@ data:
     \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>)\
     \ ret+= \"\\\"fold\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>)\
     \ ret+= \"\\\"apply\\\" \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\
-    \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (dual_v<M>)\
-    \ return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE >= L_SIZE;\n  else return\
-    \ nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 9 \"test/atcoder/abc256_f.WBT.test.cpp\"\
-    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
-    \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
-    \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
-    \ static void mp(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1]\
-    \ * x.coef[1] + mapp[2]; }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0],\
-    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (persistent\
+    \ && (dual_v<M> || reversible)) return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE\
+    \ >= L_SIZE;\n  else return nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n\
+    };\n#line 9 \"test/atcoder/abc256_f.WBT.test.cpp\"\nusing namespace std;\n\nusing\
+    \ Mint= ModInt<998244353>;\nstruct Mono {\n struct T {\n  Mint val, coef[2];\n\
+    \  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id + 1) * (id + 2) / 2,\
+    \ (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n static void mp(T &x,\
+    \ const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\
+    \ }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0], pre[1]+= suf[1],\
+    \ pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ using WBT= WeightBalancedTree<Mono>;\n int N, Q;\n cin >> N >> Q;\n Mint A[N],\
     \ D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for (int j= 0;\
     \ j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n WBT wbt(N);\n for\
@@ -302,7 +303,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-22 12:03:06+09:00'
+  timestamp: '2024-03-22 14:55:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.WBT.test.cpp

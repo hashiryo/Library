@@ -45,38 +45,38 @@ data:
     \ {\n  typename M::T sum, rsum;\n };\n using NodeM= NodeMS<void, semigroup_v<M>,\
     \ reversible, commute_v<M>>;\n using T= typename myself_or_T<M>::type;\n using\
     \ E= typename nullptr_or_E<M>::type;\n using WBT= WeightBalancedTree;\n static\
-    \ inline int nmi= 1, nli= 1;\n static constexpr size_t M_SIZE= persistent ? LEAF_SIZE\
-    \ * 10 : LEAF_SIZE * 2;\n static constexpr size_t L_SIZE= persistent && (dual_v<M>\
-    \ || reversible) ? LEAF_SIZE * 10 : LEAF_SIZE;\n static inline NodeM nm[M_SIZE];\n\
-    \ static inline T nl[L_SIZE];\n int root;\n static inline size_t msize(int i)\
-    \ noexcept {\n  if constexpr (dual_v<M> || reversible) return nm[i].sz & 0x3fffffff;\n\
-    \  else return nm[i].sz;\n }\n static inline size_t size(int i) noexcept { return\
-    \ i < 0 ? 1 : msize(i); }\n static inline T sum(int i) noexcept { return i < 0\
-    \ ? nl[-i] : nm[i].sum; }\n static inline T rsum(int i) noexcept { return i <\
-    \ 0 ? nl[-i] : nm[i].rsum; }\n static inline void update(int i) noexcept {\n \
-    \ auto t= nm + i;\n  auto [l, r]= t->ch;\n  if constexpr (dual_v<M> || reversible)\
-    \ t->sz= (size(l) + size(r)) | (t->sz & 0xc0000000);\n  else t->sz= size(l) +\
-    \ size(r);\n  if constexpr (semigroup_v<M>) {\n   t->sum= M::op(sum(l), sum(r));\n\
-    \   if constexpr (reversible && !commute_v<M>) t->rsum= M::op(rsum(r), rsum(l));\n\
-    \  }\n }\n static inline void propagate(int &i, const E &x) noexcept {\n  if constexpr\
-    \ (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n  if (t->sz >> 31)\
-    \ M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n  \
-    \ M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr (reversible && !commute_v<M>)\
-    \ M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n  t->sz|= 0x80000000;\n }\n static\
-    \ inline void push_prop(int i) noexcept {\n  if (auto t= nm + i; t->sz >> 31)\
-    \ {\n   auto &[l, r]= t->ch;\n   if (l < 0) {\n    if constexpr (persistent) nl[nli]=\
-    \ nl[-l], l= -nli++;\n    M::mp(nl[-l], t->laz, 1);\n   } else propagate(l, t->laz);\n\
-    \   if (r < 0) {\n    if constexpr (persistent) nl[nli]= nl[-r], r= -nli++;\n\
-    \    M::mp(nl[-r], t->laz, 1);\n   } else propagate(r, t->laz);\n   t->sz^= 0x80000000;\n\
-    \  }\n }\n static inline void toggle(int &i) noexcept {\n  if constexpr (persistent)\
-    \ nm[nmi]= nm[i], i= nmi++;\n  auto t= nm + i;\n  std::swap(t->ch[0], t->ch[1]);\n\
-    \  if constexpr (semigroup_v<M> && !commute_v<M>) std::swap(t->sum, t->rsum);\n\
-    \  t->sz^= 0x40000000;\n }\n static inline void push_tog(int i) noexcept {\n \
-    \ if (auto t= nm + i; t->sz & 0x40000000) {\n   auto &[l, r]= t->ch;\n   if (l\
-    \ > 0) toggle(l);\n   if (r > 0) toggle(r);\n   t->sz^= 0x40000000;\n  }\n }\n\
-    \ template <bool b> static inline int helper(std::array<int, 2> &m) noexcept {\n\
-    \  if constexpr (dual_v<M>) push_prop(m[b]);\n  if constexpr (reversible) push_tog(m[b]);\n\
-    \  int c;\n  if constexpr (b) c= _merge({m[0], nm[m[1]].ch[0]});\n  else c= _merge({nm[m[0]].ch[1],\
+    \ inline int nmi= 1, nli= 1;\n static constexpr size_t M_SIZE= LEAF_SIZE * 10;\n\
+    \ static constexpr size_t L_SIZE= persistent && (dual_v<M> || reversible) ? LEAF_SIZE\
+    \ * 10 : LEAF_SIZE;\n static inline NodeM nm[M_SIZE];\n static inline T nl[L_SIZE];\n\
+    \ int root;\n static inline size_t msize(int i) noexcept {\n  if constexpr (dual_v<M>\
+    \ || reversible) return nm[i].sz & 0x3fffffff;\n  else return nm[i].sz;\n }\n\
+    \ static inline size_t size(int i) noexcept { return i < 0 ? 1 : msize(i); }\n\
+    \ static inline T sum(int i) noexcept { return i < 0 ? nl[-i] : nm[i].sum; }\n\
+    \ static inline T rsum(int i) noexcept { return i < 0 ? nl[-i] : nm[i].rsum; }\n\
+    \ static inline void update(int i) noexcept {\n  auto t= nm + i;\n  auto [l, r]=\
+    \ t->ch;\n  if constexpr (dual_v<M> || reversible) t->sz= (size(l) + size(r))\
+    \ | (t->sz & 0xc0000000);\n  else t->sz= size(l) + size(r);\n  if constexpr (semigroup_v<M>)\
+    \ {\n   t->sum= M::op(sum(l), sum(r));\n   if constexpr (reversible && !commute_v<M>)\
+    \ t->rsum= M::op(rsum(r), rsum(l));\n  }\n }\n static inline void propagate(int\
+    \ &i, const E &x) noexcept {\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
+    \  auto t= nm + i;\n  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n\
+    \  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n\
+    \   if constexpr (reversible && !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n\
+    \  }\n  t->sz|= 0x80000000;\n }\n static inline void push_prop(int i) noexcept\
+    \ {\n  if (auto t= nm + i; t->sz >> 31) {\n   auto &[l, r]= t->ch;\n   if (l <\
+    \ 0) {\n    if constexpr (persistent) nl[nli]= nl[-l], l= -nli++;\n    M::mp(nl[-l],\
+    \ t->laz, 1);\n   } else propagate(l, t->laz);\n   if (r < 0) {\n    if constexpr\
+    \ (persistent) nl[nli]= nl[-r], r= -nli++;\n    M::mp(nl[-r], t->laz, 1);\n  \
+    \ } else propagate(r, t->laz);\n   t->sz^= 0x80000000;\n  }\n }\n static inline\
+    \ void toggle(int &i) noexcept {\n  if constexpr (persistent) nm[nmi]= nm[i],\
+    \ i= nmi++;\n  auto t= nm + i;\n  std::swap(t->ch[0], t->ch[1]);\n  if constexpr\
+    \ (semigroup_v<M> && !commute_v<M>) std::swap(t->sum, t->rsum);\n  t->sz^= 0x40000000;\n\
+    \ }\n static inline void push_tog(int i) noexcept {\n  if (auto t= nm + i; t->sz\
+    \ & 0x40000000) {\n   auto &[l, r]= t->ch;\n   if (l > 0) toggle(l);\n   if (r\
+    \ > 0) toggle(r);\n   t->sz^= 0x40000000;\n  }\n }\n template <bool b> static\
+    \ inline int helper(std::array<int, 2> &m) noexcept {\n  if constexpr (dual_v<M>)\
+    \ push_prop(m[b]);\n  if constexpr (reversible) push_tog(m[b]);\n  int c;\n  if\
+    \ constexpr (b) c= _merge({m[0], nm[m[1]].ch[0]});\n  else c= _merge({nm[m[0]].ch[1],\
     \ m[1]});\n  if constexpr (persistent) nm[nmi]= nm[m[b]], m[b]= nmi++;\n  if (size(nm[m[b]].ch[b])\
     \ * 4 >= msize(c)) return nm[m[b]].ch[!b]= c, update(m[b]), m[b];\n  return nm[m[b]].ch[!b]=\
     \ nm[c].ch[b], update(nm[c].ch[b]= m[b]), update(c), c;\n }\n static inline int\
@@ -170,16 +170,17 @@ data:
     \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>)\
     \ ret+= \"\\\"fold\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>)\
     \ ret+= \"\\\"apply\\\" \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\
-    \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (dual_v<M>)\
-    \ return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE >= L_SIZE;\n  else return\
-    \ nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 7 \"test/aoj/ITP2_4_C.WBT.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n;\n cin >> n;\n int a[n];\n for (int i= 0; i < n; ++i) cin >> a[i];\n WeightBalancedTree<int>\
-    \ ar(a, a + n);\n int q;\n cin >> q;\n for (int i= 0; i < q; ++i) {\n  int b,\
-    \ e, t;\n  cin >> b >> e >> t;\n  int f= t + e - b;\n  if (t < b) swap(b, t),\
-    \ swap(e, f);\n  auto [tl, tc, tr]= ar.split3(t, f);\n  auto [bl, bc, br]= tl.split3(b,\
-    \ e);\n  ar= bl + tc + br + bc + tr;\n }\n auto ans= ar.dump();\n for (int i=\
-    \ 0; i < n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n return 0;\n}\n"
+    \" \";\n  return ret;\n }\n static bool pool_empty() {\n  if constexpr (persistent\
+    \ && (dual_v<M> || reversible)) return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE\
+    \ >= L_SIZE;\n  else return nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n\
+    };\n#line 7 \"test/aoj/ITP2_4_C.WBT.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin >> n;\n int a[n];\n\
+    \ for (int i= 0; i < n; ++i) cin >> a[i];\n WeightBalancedTree<int> ar(a, a +\
+    \ n);\n int q;\n cin >> q;\n for (int i= 0; i < q; ++i) {\n  int b, e, t;\n  cin\
+    \ >> b >> e >> t;\n  int f= t + e - b;\n  if (t < b) swap(b, t), swap(e, f);\n\
+    \  auto [tl, tc, tr]= ar.split3(t, f);\n  auto [bl, bc, br]= tl.split3(b, e);\n\
+    \  ar= bl + tc + br + bc + tr;\n }\n auto ans= ar.dump();\n for (int i= 0; i <\
+    \ n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C\"\
     \n\n// split3, operator+ \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -195,7 +196,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_C.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-22 12:03:06+09:00'
+  timestamp: '2024-03-22 14:55:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_C.WBT.test.cpp

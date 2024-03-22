@@ -24,7 +24,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc275_ex.test.cpp
     title: test/atcoder/abc275_ex.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
   - icon: ':heavy_check_mark:'

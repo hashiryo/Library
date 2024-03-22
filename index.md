@@ -9,7 +9,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_2D.hpp
       title: "Binary-Indexed-Tree(2\u6B21\u5143)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     - icon: ':heavy_check_mark:'
@@ -508,14 +508,6 @@ data:
     - icon: ':warning:'
       path: src/old/Tree.hpp
       title: "\u6728"
-  - name: test/aoj
-    pages:
-    - icon: ':warning:'
-      path: test/aoj/ITP2_2_D.WBT.cpp
-      title: test/aoj/ITP2_2_D.WBT.cpp
-    - icon: ':warning:'
-      path: test/aoj/ITP2_4_A.WBT.cpp
-      title: test/aoj/ITP2_4_A.WBT.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -666,7 +658,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1508.SplayTree.test.cpp
       title: test/aoj/1508.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1508.WBT.test.cpp
       title: test/aoj/1508.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1093,8 +1085,14 @@ data:
       path: test/aoj/ITP2_2_D.SplayTree.test.cpp
       title: test/aoj/ITP2_2_D.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/ITP2_2_D.WBT.test.cpp
+      title: test/aoj/ITP2_2_D.WBT.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
+    - icon: ':x:'
+      path: test/aoj/ITP2_4_A.WBT.test.cpp
+      title: test/aoj/ITP2_4_A.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
@@ -1445,7 +1443,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
     - icon: ':x:'

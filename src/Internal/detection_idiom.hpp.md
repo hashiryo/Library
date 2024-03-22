@@ -5,19 +5,19 @@ data:
   - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: Weight-Balanced-Tree
-  - icon: ':warning:'
-    path: test/aoj/ITP2_2_D.WBT.cpp
-    title: test/aoj/ITP2_2_D.WBT.cpp
-  - icon: ':warning:'
-    path: test/aoj/ITP2_4_A.WBT.cpp
-    title: test/aoj/ITP2_4_A.WBT.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1508.WBT.test.cpp
     title: test/aoj/1508.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.WBT.test.cpp
     title: test/aoj/3024.WBT.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_2_D.WBT.test.cpp
+    title: test/aoj/ITP2_2_D.WBT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/ITP2_4_A.WBT.test.cpp
+    title: test/aoj/ITP2_4_A.WBT.test.cpp
   - icon: ':x:'
     path: test/aoj/ITP2_4_B.WBT.test.cpp
     title: test/aoj/ITP2_4_B.WBT.test.cpp
@@ -60,8 +60,6 @@ data:
   path: src/Internal/detection_idiom.hpp
   requiredBy:
   - src/DataStructure/WeightBalancedTree.hpp
-  - test/aoj/ITP2_4_A.WBT.cpp
-  - test/aoj/ITP2_2_D.WBT.cpp
   timestamp: '2024-03-21 17:56:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
@@ -70,6 +68,8 @@ data:
   - test/yosupo/range_affine_range_sum.WBT.test.cpp
   - test/aoj/3024.WBT.test.cpp
   - test/aoj/ITP2_4_B.WBT.test.cpp
+  - test/aoj/ITP2_2_D.WBT.test.cpp
+  - test/aoj/ITP2_4_A.WBT.test.cpp
   - test/aoj/ITP2_4_C.WBT.test.cpp
   - test/aoj/1508.WBT.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
