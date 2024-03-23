@@ -16,12 +16,12 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartite_edge_coloring.test.cpp
     title: test/yosupo/bipartite_edge_coloring.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/bipartite_edge_coloring.hpp\"\n#include <queue>\n\
@@ -202,7 +202,7 @@ data:
   path: src/Graph/bipartite_edge_coloring.hpp
   requiredBy: []
   timestamp: '2024-02-23 13:09:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/bipartite_edge_coloring.test.cpp
 documentation_of: src/Graph/bipartite_edge_coloring.hpp

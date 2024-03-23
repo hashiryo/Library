@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/bipartite_edge_coloring.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
   - icon: ':question:'
@@ -19,9 +19,9 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartite_edge_coloring
@@ -181,7 +181,7 @@ data:
   path: test/yosupo/bipartite_edge_coloring.test.cpp
   requiredBy: []
   timestamp: '2024-02-23 13:09:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/bipartite_edge_coloring.test.cpp
 layout: document

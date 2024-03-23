@@ -11,7 +11,7 @@ data:
     path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
@@ -55,7 +55,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_orderfp.test.cpp
     title: test/unit_test/constexpr_orderfp.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
   - icon: ':x:'
