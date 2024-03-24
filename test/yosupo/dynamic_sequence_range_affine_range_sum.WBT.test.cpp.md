@@ -102,18 +102,19 @@ data:
     \  } else {\n   auto [rl, rr]= _split(r, k - lsz);\n   return {_merge({l, rl}),\
     \ rr};\n  }\n }\n static inline std::pair<int, int> split(int i, size_t k) noexcept\
     \ {\n  if (k == 0) return {0, i};\n  if (k >= size(i)) return {i, 0};\n  return\
-    \ _split(i, k);\n }\n template <class S> int build(size_t l, size_t r, const S\
-    \ &bg) noexcept {\n  if (r - l == 1) {\n   if constexpr (std::is_same_v<S, T>)\
-    \ return nl[nli]= bg, -nli++;\n   else return nl[nli]= *(bg + l), -nli++;\n  }\n\
-    \  size_t m= (l + r) / 2, i= nmi++;\n  return nm[i]= NodeM{build(l, m, bg), build(m,\
-    \ r, bg)}, update(i), i;\n }\n void dump(int i, typename std::vector<T>::iterator\
-    \ it) noexcept {\n  if (i < 0) *it= nl[-i];\n  else {\n   if constexpr (dual_v<M>\
-    \ || reversible) push(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1], it + size(nm[i].ch[0]));\n\
-    \  }\n }\n T fold(int i, size_t l, size_t r) noexcept {\n  if (i < 0) return nl[-i];\n\
-    \  if (l <= 0 && msize(i) <= r) return nm[i].sum;\n  if constexpr (dual_v<M> ||\
-    \ reversible) push(i);\n  auto [n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n\
-    \  if (r <= lsz) return fold(n0, l, r);\n  if (lsz <= l) return fold(n1, l - lsz,\
-    \ r - lsz);\n  return M::op(fold(n0, l, lsz), fold(n1, 0, r - lsz));\n }\n void\
+    \ _split(i, k);\n }\n template <class S> static inline int build(size_t l, size_t\
+    \ r, const S &bg) noexcept {\n  if (r - l == 1) {\n   if constexpr (std::is_same_v<S,\
+    \ T>) return nl[nli]= bg, -nli++;\n   else return nl[nli]= *(bg + l), -nli++;\n\
+    \  }\n  size_t m= (l + r) / 2, i= nmi++;\n  return nm[i]= NodeM{build(l, m, bg),\
+    \ build(m, r, bg)}, update(i), i;\n }\n static inline void dump(int i, typename\
+    \ std::vector<T>::iterator it) noexcept {\n  if (i < 0) *it= nl[-i];\n  else {\n\
+    \   if constexpr (dual_v<M> || reversible) push(i);\n   dump(nm[i].ch[0], it),\
+    \ dump(nm[i].ch[1], it + size(nm[i].ch[0]));\n  }\n }\n static inline T fold(int\
+    \ i, size_t l, size_t r) noexcept {\n  if (i < 0) return nl[-i];\n  if (l <= 0\
+    \ && msize(i) <= r) return nm[i].sum;\n  if constexpr (dual_v<M> || reversible)\
+    \ push(i);\n  auto [n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n  if (r <= lsz)\
+    \ return fold(n0, l, r);\n  if (lsz <= l) return fold(n1, l - lsz, r - lsz);\n\
+    \  return M::op(fold(n0, l, lsz), fold(n1, 0, r - lsz));\n }\n static inline void\
     \ apply(int &i, size_t l, size_t r, const E &x) noexcept {\n  if (i < 0) {\n \
     \  if constexpr (persistent) nl[nli]= nl[-i], i= -nli++;\n   M::mp(nl[-i], x,\
     \ 1);\n   return;\n  }\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
@@ -121,29 +122,30 @@ data:
     \ n1]= nm[i].ch;\n  size_t lsz= size(n0);\n  if (r <= lsz) apply(n0, l, r, x);\n\
     \  else if (lsz <= l) apply(n1, l - lsz, r - lsz, x);\n  else apply(n0, l, lsz,\
     \ x), apply(n1, 0, r - lsz, x);\n  if constexpr (semigroup_v<M>) update(i);\n\
-    \ }\n void set_val(int &i, size_t k, const T &x) noexcept {\n  if (i < 0) {\n\
-    \   if constexpr (persistent) nl[nli]= x, i= -nli++;\n   else nl[-i]= x;\n   return;\n\
-    \  }\n  if constexpr (dual_v<M> || reversible) push(i);\n  if constexpr (persistent)\
-    \ nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n  size_t lsz= size(l);\n\
-    \  lsz > k ? set_val(l, k, x) : set_val(r, k - lsz, x);\n  if constexpr (semigroup_v<M>)\
-    \ update(i);\n }\n void mul_val(int &i, size_t k, const T &x) noexcept {\n  if\
-    \ (i < 0) {\n   if constexpr (persistent) nl[nli]= M::op(nl[-i], x), i= -nli++;\n\
-    \   else nl[-i]= M::op(nl[-i], x);\n   return;\n  }\n  if constexpr (dual_v<M>\
-    \ || reversible) push(i);\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
-    \  auto &[l, r]= nm[i].ch;\n  size_t lsz= size(l);\n  lsz > k ? mul_val(l, k,\
-    \ x) : mul_val(r, k - lsz, x);\n  if constexpr (semigroup_v<M>) update(i);\n }\n\
-    \ T get_val(int i, size_t k) noexcept {\n  if (i < 0) return nl[-i];\n  if constexpr\
-    \ (dual_v<M> || reversible) push(i);\n  auto [l, r]= nm[i].ch;\n  size_t lsz=\
-    \ size(l);\n  return lsz > k ? get_val(l, k) : get_val(r, k - lsz);\n }\n T &at_val(int\
-    \ i, size_t k) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) return\
-    \ nl[nli++]= nl[-i];\n   else return nl[-i];\n  }\n  if constexpr (dual_v<M> ||\
-    \ reversible) push(i);\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
-    \  auto [l, r]= nm[i].ch;\n  size_t lsz= size(l);\n  return lsz > k ? at_val(l,\
-    \ k) : at_val(r, k - lsz);\n }\n static WBT id_to_wbt(int t) noexcept {\n  WBT\
-    \ ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree(): root(0)\
-    \ {}\n WeightBalancedTree(size_t n, T val= T()): root(n ? build(0, n, val) : 0)\
-    \ {}\n WeightBalancedTree(const T *bg, const T *ed): root(bg == ed ? 0 : build(0,\
-    \ ed - bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
+    \ }\n static inline void set_val(int &i, size_t k, const T &x) noexcept {\n  if\
+    \ (i < 0) {\n   if constexpr (persistent) nl[nli]= x, i= -nli++;\n   else nl[-i]=\
+    \ x;\n   return;\n  }\n  if constexpr (dual_v<M> || reversible) push(i);\n  if\
+    \ constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n\
+    \  size_t lsz= size(l);\n  lsz > k ? set_val(l, k, x) : set_val(r, k - lsz, x);\n\
+    \  if constexpr (semigroup_v<M>) update(i);\n }\n static inline void mul_val(int\
+    \ &i, size_t k, const T &x) noexcept {\n  if (i < 0) {\n   if constexpr (persistent)\
+    \ nl[nli]= M::op(nl[-i], x), i= -nli++;\n   else nl[-i]= M::op(nl[-i], x);\n \
+    \  return;\n  }\n  if constexpr (dual_v<M> || reversible) push(i);\n  if constexpr\
+    \ (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto &[l, r]= nm[i].ch;\n  size_t\
+    \ lsz= size(l);\n  lsz > k ? mul_val(l, k, x) : mul_val(r, k - lsz, x);\n  if\
+    \ constexpr (semigroup_v<M>) update(i);\n }\n static inline T get_val(int i, size_t\
+    \ k) noexcept {\n  if (i < 0) return nl[-i];\n  if constexpr (dual_v<M> || reversible)\
+    \ push(i);\n  auto [l, r]= nm[i].ch;\n  size_t lsz= size(l);\n  return lsz > k\
+    \ ? get_val(l, k) : get_val(r, k - lsz);\n }\n static inline T &at_val(int i,\
+    \ size_t k) noexcept {\n  if (i < 0) {\n   if constexpr (persistent) return nl[nli++]=\
+    \ nl[-i];\n   else return nl[-i];\n  }\n  if constexpr (dual_v<M> || reversible)\
+    \ push(i);\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n  auto [l,\
+    \ r]= nm[i].ch;\n  size_t lsz= size(l);\n  return lsz > k ? at_val(l, k) : at_val(r,\
+    \ k - lsz);\n }\n static inline WBT id_to_wbt(int t) noexcept {\n  WBT ret;\n\
+    \  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree(): root(0) {}\n\
+    \ WeightBalancedTree(size_t n, T val= T()): root(n ? build(0, n, val) : 0) {}\n\
+    \ WeightBalancedTree(const T *bg, const T *ed): root(bg == ed ? 0 : build(0, ed\
+    \ - bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
     \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
     \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
     \ std::array<WBT, 2> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
@@ -301,7 +303,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-24 17:18:35+09:00'
+  timestamp: '2024-03-24 23:28:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp

@@ -1572,16 +1572,16 @@ data:
     - icon: ':x:'
       path: test/yosupo/convolution_mod_2_64.test.cpp
       title: test/yosupo/convolution_mod_2_64.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
     - icon: ':x:'
       path: test/yosupo/directedmst.test.cpp
       title: test/yosupo/directedmst.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/discrete_logarithm_mod.test.cpp
       title: test/yosupo/discrete_logarithm_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/division_of_Poly.test.cpp
       title: test/yosupo/division_of_Poly.test.cpp
     - icon: ':x:'

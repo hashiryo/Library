@@ -252,7 +252,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/bipartitematching.test.cpp
     title: test/yosupo/bipartitematching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
   - icon: ':x:'

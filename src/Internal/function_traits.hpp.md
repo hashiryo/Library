@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc305_ex.test.cpp
     title: test/atcoder/abc305_ex.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':heavy_check_mark:'
