@@ -111,13 +111,13 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n#include <vector>\n#line 4 \"src/DataStructure/WeightBalancedTree.hpp\"\n#include\
-    \ <string>\n#include <tuple>\n#include <cstddef>\n#line 3 \"src/Internal/detection_idiom.hpp\"\
-    \n#define _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name:\
+    \ <string>\n#include <cstddef>\n#line 3 \"src/Internal/detection_idiom.hpp\"\n\
+    #define _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name:\
     \ std::false_type {}; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>:\
     \ std::true_type {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
     #define _DETECT_TYPE(name, type1, type2, ...) \\\n template <class T, class= void>\
     \ struct name { \\\n  using type= type2; \\\n }; \\\n template <class T> struct\
-    \ name<T, std::void_t<__VA_ARGS__>> { \\\n  using type= type1; \\\n }\n#line 9\
+    \ name<T, std::void_t<__VA_ARGS__>> { \\\n  using type= type1; \\\n }\n#line 8\
     \ \"src/DataStructure/WeightBalancedTree.hpp\"\nnamespace wbt_internal {\n#ifdef\
     \ __LOCAL\nstatic constexpr size_t __LEAF_SIZE= 1 << 15;\n#else\nstatic constexpr\
     \ size_t __LEAF_SIZE= 1 << 20;\n#endif\n}\ntemplate <class M, bool reversible=\
@@ -151,9 +151,9 @@ data:
     \ >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>)\
     \ {\n   M::mp(t->sum, x, t->sz & 0x3fffffff);\n   if constexpr (reversible &&\
     \ !commute_v<M>) M::mp(t->rsum, x, t->sz & 0x3fffffff);\n  }\n  t->sz|= 0x80000000;\n\
-    \ }\n static inline void toggle(int i) noexcept {\n  auto t= nm + i;\n  std::swap(t->ch[0],\
-    \ t->ch[1]);\n  if constexpr (semigroup_v<M> && !commute_v<M>) std::swap(t->sum,\
-    \ t->rsum);\n  t->sz^= 0x40000000;\n }\n static inline void _push(NodeM *t, int\
+    \ }\n static inline void toggle(int i) noexcept {\n  auto t= nm + i;\n  if constexpr\
+    \ (semigroup_v<M> && !commute_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0],\
+    \ t->ch[1]), t->sz^= 0x40000000;\n }\n static inline void _push(NodeM *t, int\
     \ &c) noexcept {\n  if (c > 0) {\n   if constexpr (persistent) nm[nmi]= nm[c],\
     \ c= nmi++;\n   if constexpr (dual_v<M>)\n    if (t->sz >> 31) propagate(c, t->laz);\n\
     \   if constexpr (reversible)\n    if (t->sz & 0x40000000) toggle(c);\n  } else\
@@ -222,25 +222,25 @@ data:
     \ ed - bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
     \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
     \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
-    \ std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
-    \ k);\n  return {id_to_wbt(l), id_to_wbt(r)};\n }\n std::tuple<WBT, WBT, WBT>\
-    \ split3(size_t a, size_t b) {\n  assert(root), assert(a <= b);\n  auto [tmp,\
-    \ r]= split(root, b);\n  auto [l, c]= split(tmp, a);\n  return {id_to_wbt(l),\
-    \ id_to_wbt(c), id_to_wbt(r)};\n }\n size_t size() const { return root ? size(root)\
-    \ : 0; }\n void insert(size_t k, T val) {\n  auto [l, r]= split(root, k);\n  nl[nli]=\
-    \ val, root= merge(merge(l, -nli++), r);\n }\n void push_back(T val) { nl[nli]=\
-    \ val, root= merge(root, -nli++); }\n void push_front(T val) { nl[nli]= val, root=\
-    \ merge(-nli++, root); }\n T erase(size_t k) {\n  assert(k < size());\n  auto\
-    \ [l, tmp]= split(root, k);\n  auto [t, r]= split(tmp, 1);\n  return root= merge(l,\
-    \ r), nl[-t];\n }\n T pop_back() {\n  auto [l, t]= split(root, size() - 1);\n\
-    \  return root= l, nl[-t];\n }\n T pop_front() {\n  auto [t, r]= split(root, 1);\n\
-    \  return root= r, nl[-t];\n }\n void set(size_t k, T val) { set_val(root, k,\
-    \ val); }\n void mul(size_t k, T val) {\n  static_assert(semigroup_v<M>, \"\\\"\
-    mul\\\" is not available\\n\");\n  mul_val(root, k, val);\n }\n T get(size_t k)\
-    \ { return get_val(root, k); }\n T &at(size_t k) {\n  static_assert(!semigroup_v<M>,\
-    \ \"\\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template\
-    \ <class L= M> std::enable_if_t<semigroup_v<L>, T> operator[](size_t k) { return\
-    \ get(k); }\n template <class L= M> std::enable_if_t<!semigroup_v<L>, T> &operator[](size_t\
+    \ std::array<WBT, 2> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
+    \ k);\n  return {id_to_wbt(l), id_to_wbt(r)};\n }\n std::array<WBT, 3> split3(size_t\
+    \ a, size_t b) {\n  assert(root), assert(a <= b);\n  auto [tmp, r]= split(root,\
+    \ b);\n  auto [l, c]= split(tmp, a);\n  return {id_to_wbt(l), id_to_wbt(c), id_to_wbt(r)};\n\
+    \ }\n size_t size() const { return root ? size(root) : 0; }\n void insert(size_t\
+    \ k, T val) {\n  auto [l, r]= split(root, k);\n  nl[nli]= val, root= merge(merge(l,\
+    \ -nli++), r);\n }\n void push_back(T val) { nl[nli]= val, root= merge(root, -nli++);\
+    \ }\n void push_front(T val) { nl[nli]= val, root= merge(-nli++, root); }\n T\
+    \ erase(size_t k) {\n  assert(k < size());\n  auto [l, tmp]= split(root, k);\n\
+    \  auto [t, r]= split(tmp, 1);\n  return root= merge(l, r), nl[-t];\n }\n T pop_back()\
+    \ {\n  auto [l, t]= split(root, size() - 1);\n  return root= l, nl[-t];\n }\n\
+    \ T pop_front() {\n  auto [t, r]= split(root, 1);\n  return root= r, nl[-t];\n\
+    \ }\n void set(size_t k, T val) { set_val(root, k, val); }\n void mul(size_t k,\
+    \ T val) {\n  static_assert(semigroup_v<M> && commute_v<M>, \"\\\"mul\\\" is not\
+    \ available\\n\");\n  mul_val(root, k, val);\n }\n T get(size_t k) { return get_val(root,\
+    \ k); }\n T &at(size_t k) {\n  static_assert(!semigroup_v<M>, \"\\\"at\\\" is\
+    \ not available\\n\");\n  return at_val(root, k);\n }\n template <class L= M>\
+    \ std::enable_if_t<semigroup_v<L>, T> operator[](size_t k) { return get(k); }\n\
+    \ template <class L= M> std::enable_if_t<!semigroup_v<L>, T> &operator[](size_t\
     \ k) { return at(k); }\n T fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
     \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b);\n }\n void\
     \ apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
@@ -251,20 +251,20 @@ data:
     \  if (c > 0) toggle(c);\n  root= merge(merge(l, c), r);\n }\n std::vector<T>\
     \ dump() {\n  if (!root) return std::vector<T>();\n  std::vector<T> ret(size());\n\
     \  return dump(root, ret.begin()), ret;\n }\n void clear() { root= 0; }\n static\
-    \ void reset() { nmi= 1, nli= 1; }\n static std::string which_available() {\n\
-    \  std::string ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"fold\\\"\
-    \ \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"\
-    apply\\\" \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\" \";\n  return\
-    \ ret;\n }\n static bool pool_empty() {\n  if constexpr (persistent && (dual_v<M>\
-    \ || reversible)) return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE >= L_SIZE;\n\
-    \  else return nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 9\
-    \ \"test/atcoder/abc256_f.WBT.test.cpp\"\nusing namespace std;\n\nusing Mint=\
-    \ ModInt<998244353>;\nstruct Mono {\n struct T {\n  Mint val, coef[2];\n  T()=\
-    \ default;\n  T(Mint id, Mint v): val(v), coef{(id + 1) * (id + 2) / 2, (id *\
-    \ 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n static void mp(T &x, const\
-    \ E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\
-    \ }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0], pre[1]+= suf[1],\
-    \ pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ void reset() { nmi= 1, nli= 1; }\n static std::string which_unavailable() {\n\
+    \  std::string ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"at\\\"\
+    \ \";\n  else ret+= \"\\\"fold\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
+    \ ret+= \"\\\"mul\\\" \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \"\
+    ;\n  if constexpr (!reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n\
+    \ static bool pool_empty() {\n  if constexpr (persistent && (dual_v<M> || reversible))\
+    \ return nmi + LEAF_SIZE >= M_SIZE || nli + LEAF_SIZE >= L_SIZE;\n  else return\
+    \ nmi + 1000 >= M_SIZE || nli + 1000 >= L_SIZE;\n }\n};\n#line 9 \"test/atcoder/abc256_f.WBT.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
+    \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
+    \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
+    \ static void mp(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1]\
+    \ * x.coef[1] + mapp[2]; }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0],\
+    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ using WBT= WeightBalancedTree<Mono>;\n int N, Q;\n cin >> N >> Q;\n Mint A[N],\
     \ D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for (int j= 0;\
     \ j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n WBT wbt(N);\n for\
@@ -298,7 +298,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-23 11:53:55+09:00'
+  timestamp: '2024-03-24 17:18:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.WBT.test.cpp
