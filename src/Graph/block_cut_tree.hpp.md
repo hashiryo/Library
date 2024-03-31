@@ -101,11 +101,11 @@ data:
   timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/biconnected_components.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/yukicoder/1326.test.cpp
+  - test/yosupo/biconnected_components.test.cpp
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/3022.test.cpp
-  - test/yukicoder/1326.test.cpp
 documentation_of: src/Graph/block_cut_tree.hpp
 layout: document
 title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3 (block-cut-tree (\u62E1\u5F35\

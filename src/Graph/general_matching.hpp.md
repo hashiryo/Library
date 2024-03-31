@@ -118,8 +118,8 @@ data:
   timestamp: '2024-02-19 18:05:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/bipartitematching.general_matching.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/yosupo/bipartitematching.general_matching.test.cpp
   - test/aoj/3198.general_matching.test.cpp
   - test/aoj/3032.test.cpp
 documentation_of: src/Graph/general_matching.hpp

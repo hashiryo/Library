@@ -121,18 +121,18 @@ data:
   timestamp: '2024-03-03 04:26:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/range_kth_smallest.WM.test.cpp
-  - test/yosupo/static_range_frequency.WM.test.cpp
-  - test/aoj/1549.WM.test.cpp
-  - test/aoj/2674.WM.test.cpp
-  - test/yukicoder/919.WM.test.cpp
-  - test/yukicoder/728.WM.test.cpp
-  - test/yukicoder/1371.WM.test.cpp
   - test/yukicoder/924.Seg2D.test.cpp
-  - test/atcoder/abc174_f.WM.test.cpp
+  - test/yukicoder/1371.WM.test.cpp
+  - test/yukicoder/728.WM.test.cpp
+  - test/yukicoder/919.WM.test.cpp
   - test/atcoder/abc337_g.test.cpp
+  - test/atcoder/abc174_f.WM.test.cpp
   - test/atcoder/abc202_e.test.cpp
   - test/atcoder/abc324_g.WM.test.cpp
+  - test/yosupo/static_range_frequency.WM.test.cpp
+  - test/yosupo/range_kth_smallest.WM.test.cpp
+  - test/aoj/2674.WM.test.cpp
+  - test/aoj/1549.WM.test.cpp
 documentation_of: src/DataStructure/WaveletMatrix.hpp
 layout: document
 title: "Wavelet\u884C\u5217"

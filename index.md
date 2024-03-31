@@ -37,6 +37,9 @@ data:
     - icon: ':warning:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
+    - icon: ':x:'
+      path: src/DataStructure/RandomizedBinarySearchTree.hpp
+      title: Splay-Tree
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/RangeSet.hpp
       title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
@@ -655,9 +658,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
+    - icon: ':x:'
+      path: test/aoj/1508.RBST.test.cpp
+      title: test/aoj/1508.RBST.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/1508.SplayTree.test.cpp
-      title: test/aoj/1508.SplayTree.test.cpp
+      path: test/aoj/1508.Splay.test.cpp
+      title: test/aoj/1508.Splay.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1508.WBT.test.cpp
       title: test/aoj/1508.WBT.test.cpp
@@ -1081,24 +1087,36 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
       title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
+    - icon: ':x:'
+      path: test/aoj/ITP2_2_D.RBST.test.cpp
+      title: test/aoj/ITP2_2_D.RBST.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.SplayTree.test.cpp
       title: test/aoj/ITP2_2_D.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.WBT.test.cpp
       title: test/aoj/ITP2_2_D.WBT.test.cpp
+    - icon: ':x:'
+      path: test/aoj/ITP2_4_A.RBST.test.cpp
+      title: test/aoj/ITP2_4_A.RBST.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.WBT.test.cpp
       title: test/aoj/ITP2_4_A.WBT.test.cpp
+    - icon: ':x:'
+      path: test/aoj/ITP2_4_B.RBST.test.cpp
+      title: test/aoj/ITP2_4_B.RBST.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.WBT.test.cpp
       title: test/aoj/ITP2_4_B.WBT.test.cpp
+    - icon: ':x:'
+      path: test/aoj/ITP2_4_C.RBST.test.cpp
+      title: test/aoj/ITP2_4_C.RBST.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
@@ -1350,12 +1368,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc256_f.RBST.test.cpp
+      title: test/atcoder/abc256_f.RBST.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/atcoder/abc256_f.SplayTree.test.cpp
-      title: test/atcoder/abc256_f.SplayTree.test.cpp
+      path: test/atcoder/abc256_f.Splay.test.cpp
+      title: test/atcoder/abc256_f.Splay.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
@@ -1461,6 +1482,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/arc153_b.RBST.test.cpp
+      title: test/atcoder/arc153_b.RBST.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc153_b.Splay.test.cpp
+      title: test/atcoder/arc153_b.Splay.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc153_b.WBT.test.cpp
+      title: test/atcoder/arc153_b.WBT.test.cpp
   - name: test/hackerrank
     pages:
     - icon: ':heavy_check_mark:'
@@ -1590,6 +1620,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
+      title: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
     - icon: ':x:'
       path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
       title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
@@ -1786,8 +1819,14 @@ data:
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     - icon: ':x:'
+      path: test/yosupo/range_affine_range_sum.RBST.test.cpp
+      title: test/yosupo/range_affine_range_sum.RBST.test.cpp
+    - icon: ':x:'
       path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
       title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/range_affine_range_sum.Splay.test.cpp
+      title: test/yosupo/range_affine_range_sum.Splay.test.cpp
     - icon: ':x:'
       path: test/yosupo/range_affine_range_sum.WBT.test.cpp
       title: test/yosupo/range_affine_range_sum.WBT.test.cpp
@@ -2222,6 +2261,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/362.test.cpp
       title: test/yukicoder/362.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/396.RBST.test.cpp
+      title: test/yukicoder/396.RBST.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/396.Splay.test.cpp
+      title: test/yukicoder/396.Splay.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/396.WBT.test.cpp
+      title: test/yukicoder/396.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/409.LARSCH.test.cpp
       title: test/yukicoder/409.LARSCH.test.cpp

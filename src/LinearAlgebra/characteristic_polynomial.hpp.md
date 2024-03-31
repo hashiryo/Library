@@ -227,11 +227,11 @@ data:
   timestamp: '2024-03-03 04:26:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
-  - test/yosupo/characteristic_polynomial.test.cpp
-  - test/yukicoder/1303.test.cpp
   - test/yukicoder/1907.test.cpp
+  - test/yukicoder/1303.test.cpp
   - test/atcoder/abc323_g.test.cpp
+  - test/yosupo/characteristic_polynomial.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"

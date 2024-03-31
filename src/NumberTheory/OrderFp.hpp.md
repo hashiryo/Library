@@ -185,9 +185,9 @@ data:
   timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/primitive_root.test.cpp
   - test/atcoder/abc335_g.test.cpp
   - test/unit_test/constexpr_orderfp.test.cpp
+  - test/yosupo/primitive_root.test.cpp
 documentation_of: src/NumberTheory/OrderFp.hpp
 layout: document
 title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"

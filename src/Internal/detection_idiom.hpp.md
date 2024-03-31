@@ -2,31 +2,88 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':x:'
+    path: src/DataStructure/RandomizedBinarySearchTree.hpp
+    title: Splay-Tree
+  - icon: ':question:'
+    path: src/DataStructure/SplayTree.hpp
+    title: Splay-Tree
   - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: Weight-Balanced-Tree
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/1508.RBST.test.cpp
+    title: test/aoj/1508.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1508.Splay.test.cpp
+    title: test/aoj/1508.Splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1508.WBT.test.cpp
     title: test/aoj/1508.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.WBT.test.cpp
     title: test/aoj/3024.WBT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/ITP2_2_D.RBST.test.cpp
+    title: test/aoj/ITP2_2_D.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_2_D.SplayTree.test.cpp
+    title: test/aoj/ITP2_2_D.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_2_D.WBT.test.cpp
     title: test/aoj/ITP2_2_D.WBT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/ITP2_4_A.RBST.test.cpp
+    title: test/aoj/ITP2_4_A.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_4_A.SplayTree.test.cpp
+    title: test/aoj/ITP2_4_A.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.WBT.test.cpp
     title: test/aoj/ITP2_4_A.WBT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/ITP2_4_B.RBST.test.cpp
+    title: test/aoj/ITP2_4_B.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_4_B.SplayTree.test.cpp
+    title: test/aoj/ITP2_4_B.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.WBT.test.cpp
     title: test/aoj/ITP2_4_B.WBT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/ITP2_4_C.RBST.test.cpp
+    title: test/aoj/ITP2_4_C.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_4_C.SplayTree.test.cpp
+    title: test/aoj/ITP2_4_C.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.WBT.test.cpp
     title: test/aoj/ITP2_4_C.WBT.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc256_f.RBST.test.cpp
+    title: test/atcoder/abc256_f.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc256_f.Splay.test.cpp
+    title: test/atcoder/abc256_f.Splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc153_b.RBST.test.cpp
+    title: test/atcoder/arc153_b.RBST.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/arc153_b.Splay.test.cpp
+    title: test/atcoder/arc153_b.Splay.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/arc153_b.WBT.test.cpp
+    title: test/atcoder/arc153_b.WBT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
+    title: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+    title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   - icon: ':x:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
@@ -34,8 +91,23 @@ data:
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
   - icon: ':x:'
+    path: test/yosupo/range_affine_range_sum.RBST.test.cpp
+    title: test/yosupo/range_affine_range_sum.RBST.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/range_affine_range_sum.Splay.test.cpp
+    title: test/yosupo/range_affine_range_sum.Splay.test.cpp
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/396.RBST.test.cpp
+    title: test/yukicoder/396.RBST.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/396.Splay.test.cpp
+    title: test/yukicoder/396.Splay.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/396.WBT.test.cpp
+    title: test/yukicoder/396.WBT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -60,19 +132,43 @@ data:
   path: src/Internal/detection_idiom.hpp
   requiredBy:
   - src/DataStructure/WeightBalancedTree.hpp
+  - src/DataStructure/SplayTree.hpp
+  - src/DataStructure/RandomizedBinarySearchTree.hpp
   timestamp: '2024-03-21 17:56:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
-  - test/yosupo/persistent_queue.WBT.test.cpp
-  - test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - test/aoj/3024.WBT.test.cpp
-  - test/aoj/ITP2_4_B.WBT.test.cpp
-  - test/aoj/ITP2_2_D.WBT.test.cpp
-  - test/aoj/ITP2_4_A.WBT.test.cpp
-  - test/aoj/ITP2_4_C.WBT.test.cpp
-  - test/aoj/1508.WBT.test.cpp
+  - test/yukicoder/396.WBT.test.cpp
+  - test/yukicoder/396.RBST.test.cpp
+  - test/yukicoder/396.Splay.test.cpp
+  - test/atcoder/abc256_f.Splay.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
+  - test/atcoder/abc256_f.RBST.test.cpp
+  - test/atcoder/arc153_b.RBST.test.cpp
+  - test/atcoder/arc153_b.WBT.test.cpp
+  - test/atcoder/arc153_b.Splay.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
+  - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/yosupo/persistent_queue.WBT.test.cpp
+  - test/yosupo/range_affine_range_sum.RBST.test.cpp
+  - test/yosupo/range_affine_range_sum.Splay.test.cpp
+  - test/aoj/ITP2_2_D.WBT.test.cpp
+  - test/aoj/1508.RBST.test.cpp
+  - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/ITP2_4_C.RBST.test.cpp
+  - test/aoj/1508.Splay.test.cpp
+  - test/aoj/ITP2_4_A.RBST.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/ITP2_2_D.RBST.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
+  - test/aoj/ITP2_4_A.WBT.test.cpp
+  - test/aoj/1508.WBT.test.cpp
+  - test/aoj/3024.WBT.test.cpp
+  - test/aoj/ITP2_4_B.RBST.test.cpp
+  - test/aoj/ITP2_4_B.WBT.test.cpp
+  - test/aoj/ITP2_4_C.WBT.test.cpp
 documentation_of: src/Internal/detection_idiom.hpp
 layout: document
 title: detection idiom

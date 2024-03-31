@@ -76,11 +76,11 @@ data:
   timestamp: '2024-02-22 16:45:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/0168.test.cpp
-  - test/yukicoder/1595.linear_rec.test.cpp
-  - test/yukicoder/1569.Nimber.test.cpp
-  - test/yukicoder/2122.test.cpp
   - test/yukicoder/658.linear_rec.test.cpp
+  - test/yukicoder/1569.Nimber.test.cpp
+  - test/yukicoder/1595.linear_rec.test.cpp
+  - test/yukicoder/2122.test.cpp
+  - test/aoj/0168.test.cpp
 documentation_of: src/Math/bostan_mori.hpp
 layout: document
 title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"

@@ -46,11 +46,11 @@ data:
   timestamp: '2023-11-25 18:44:26+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/enumerate_quotients.test.cpp
-  - test/yukicoder/1260.test.cpp
   - test/yukicoder/1573.enum_quo.test.cpp
+  - test/yukicoder/1260.test.cpp
   - test/atcoder/abc179_c.enum_quo.test.cpp
   - test/atcoder/abc172_d.enum_quo.test.cpp
+  - test/yosupo/enumerate_quotients.test.cpp
 documentation_of: src/NumberTheory/enumerate_quotients.hpp
 layout: document
 title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"

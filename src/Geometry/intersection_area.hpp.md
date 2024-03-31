@@ -348,8 +348,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/0356.test.cpp
-  - test/aoj/2495.test.cpp
   - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/2495.test.cpp
   - test/aoj/CGL_7_I.test.cpp
 documentation_of: src/Geometry/intersection_area.hpp
 layout: document
