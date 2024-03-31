@@ -19,8 +19,11 @@ data:
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2559.LCT_Dual.test.cpp
-    title: test/aoj/2559.LCT_Dual.test.cpp
+    path: test/aoj/2559.HLD.test.cpp
+    title: test/aoj/2559.HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2559.LCT.test.cpp
+    title: test/aoj/2559.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
@@ -106,7 +109,8 @@ data:
   - test/yosupo/bipartite_edge_coloring.test.cpp
   - test/yosupo/directedmst.test.cpp
   - test/aoj/3506.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/2559.LCT.test.cpp
+  - test/aoj/2559.HLD.test.cpp
   - test/aoj/GRL_2_A.kruskal.test.cpp
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/0342.test.cpp

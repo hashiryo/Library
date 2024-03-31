@@ -23,25 +23,25 @@ data:
   bundledCode: "#line 1 \"test/atcoder/arc153_b.RBST.test.cpp\"\n#define PROBLEM \"\
     https://atcoder.jp/contests/arc153/tasks/arc153_b\"\n\n// reverse \u306E verify\n\
     \n#include <iostream>\n#include <vector>\n#include <numeric>\n#line 3 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
-    \n#include <string>\n#include <array>\n#include <utility>\n#include <cstddef>\n\
-    #include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n\
-    #define _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name:\
-    \ std::false_type {}; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>:\
-    \ std::true_type {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
-    #define _DETECT_TYPE(name, type1, type2, ...) \\\n template <class T, class= void>\
-    \ struct name { \\\n  using type= type2; \\\n }; \\\n template <class T> struct\
-    \ name<T, std::void_t<__VA_ARGS__>> { \\\n  using type= type1; \\\n }\n#line 2\
-    \ \"src/Misc/rng.hpp\"\n#include <random>\n#include <cstdint>\nuint64_t rng()\
-    \ {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n return\
-    \ x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim;\
-    \ }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n#line\
-    \ 10 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\ntemplate <class M,\
-    \ bool reversible= false> class RandomizedBinarySearchTree {\n _DETECT_BOOL(semigroup,\
-    \ typename T::T, decltype(&T::op));\n _DETECT_BOOL(dual, typename T::T, typename\
-    \ T::E, decltype(&T::mp), decltype(&T::cp));\n _DETECT_BOOL(commute, typename\
-    \ T::commute);\n _DETECT_TYPE(nullptr_or_E, typename T::E, std::nullptr_t, typename\
-    \ T::E);\n _DETECT_TYPE(myself_or_T, typename T::T, T, typename T::T);\n using\
-    \ T= typename myself_or_T<M>::type;\n using E= typename nullptr_or_E<M>::type;\n\
+    \n#include <string>\n#include <array>\n#include <tuple>\n#include <utility>\n\
+    #include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\
+    \n#include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
+    \ class= void> struct name: std::false_type {}; \\\n template <class T> struct\
+    \ name<T, std::void_t<__VA_ARGS__>>: std::true_type {}; \\\n template <class T>\
+    \ static constexpr bool name##_v= name<T>::value\n#define _DETECT_TYPE(name, type1,\
+    \ type2, ...) \\\n template <class T, class= void> struct name { \\\n  using type=\
+    \ type2; \\\n }; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>\
+    \ { \\\n  using type= type1; \\\n }\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n\
+    #include <cstdint>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL\
+    \ * std::random_device{}();\n return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t\
+    \ lim) { return rng() % lim; }\nint64_t rng(int64_t l, int64_t r) { return l +\
+    \ rng() % (r - l); }\n#line 11 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
+    \ntemplate <class M, bool reversible= false> class RandomizedBinarySearchTree\
+    \ {\n _DETECT_BOOL(semigroup, typename T::T, decltype(&T::op));\n _DETECT_BOOL(dual,\
+    \ typename T::T, typename T::E, decltype(&T::mp), decltype(&T::cp));\n _DETECT_BOOL(commute,\
+    \ typename T::commute);\n _DETECT_TYPE(nullptr_or_E, typename T::E, std::nullptr_t,\
+    \ typename T::E);\n _DETECT_TYPE(myself_or_T, typename T::T, T, typename T::T);\n\
+    \ using T= typename myself_or_T<M>::type;\n using E= typename nullptr_or_E<M>::type;\n\
     \ using RBST= RandomizedBinarySearchTree;\n template <class D> struct NodeB {\n\
     \  T val;\n  D *l, *r;\n  size_t sz;\n };\n template <class D, bool du> struct\
     \ NodeD: NodeB<D> {};\n template <class D> struct NodeD<D, 1>: NodeB<D> {\n  E\
@@ -193,7 +193,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc153_b.RBST.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc153_b.RBST.test.cpp

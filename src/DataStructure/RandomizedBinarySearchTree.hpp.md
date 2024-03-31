@@ -45,9 +45,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\n#include\
-    \ <vector>\n#include <string>\n#include <array>\n#include <utility>\n#include\
-    \ <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n\
-    #include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
+    \ <vector>\n#include <string>\n#include <array>\n#include <tuple>\n#include <utility>\n\
+    #include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\
+    \n#include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
     \ class= void> struct name: std::false_type {}; \\\n template <class T> struct\
     \ name<T, std::void_t<__VA_ARGS__>>: std::true_type {}; \\\n template <class T>\
     \ static constexpr bool name##_v= name<T>::value\n#define _DETECT_TYPE(name, type1,\
@@ -57,7 +57,7 @@ data:
     #include <cstdint>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL\
     \ * std::random_device{}();\n return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t\
     \ lim) { return rng() % lim; }\nint64_t rng(int64_t l, int64_t r) { return l +\
-    \ rng() % (r - l); }\n#line 10 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
+    \ rng() % (r - l); }\n#line 11 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
     \ntemplate <class M, bool reversible= false> class RandomizedBinarySearchTree\
     \ {\n _DETECT_BOOL(semigroup, typename T::T, decltype(&T::op));\n _DETECT_BOOL(dual,\
     \ typename T::T, typename T::E, decltype(&T::mp), decltype(&T::cp));\n _DETECT_BOOL(commute,\
@@ -184,92 +184,93 @@ data:
     \  auto [tmp, r]= split(rt, b);\n  auto [l, c]= split(tmp, a);\n  toggle(c), rt=\
     \ merge(merge(l, c), r);\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <string>\n#include <array>\n#include\
-    \ <utility>\n#include <cstddef>\n#include <cassert>\n#include \"src/Internal/detection_idiom.hpp\"\
-    \n#include \"src/Misc/rng.hpp\"\ntemplate <class M, bool reversible= false> class\
-    \ RandomizedBinarySearchTree {\n _DETECT_BOOL(semigroup, typename T::T, decltype(&T::op));\n\
-    \ _DETECT_BOOL(dual, typename T::T, typename T::E, decltype(&T::mp), decltype(&T::cp));\n\
-    \ _DETECT_BOOL(commute, typename T::commute);\n _DETECT_TYPE(nullptr_or_E, typename\
-    \ T::E, std::nullptr_t, typename T::E);\n _DETECT_TYPE(myself_or_T, typename T::T,\
-    \ T, typename T::T);\n using T= typename myself_or_T<M>::type;\n using E= typename\
-    \ nullptr_or_E<M>::type;\n using RBST= RandomizedBinarySearchTree;\n template\
-    \ <class D> struct NodeB {\n  T val;\n  D *l, *r;\n  size_t sz;\n };\n template\
-    \ <class D, bool du> struct NodeD: NodeB<D> {};\n template <class D> struct NodeD<D,\
-    \ 1>: NodeB<D> {\n  E laz;\n };\n template <class D, bool sg, bool rev, bool com>\
-    \ struct NodeS: NodeD<D, dual_v<M>> {};\n template <class D, bool rev, bool com>\
-    \ struct NodeS<D, 1, rev, com>: NodeD<D, dual_v<M>> {\n  T sum;\n };\n template\
-    \ <class D> struct NodeS<D, 1, 1, 0>: NodeD<D, dual_v<M>> {\n  T sum, rsum;\n\
-    \ };\n struct Node: NodeS<Node, semigroup_v<M>, reversible, commute_v<M>> {\n\
-    \  size_t size() const {\n   if constexpr (dual_v<M> || reversible) return this->sz\
-    \ & 0x3fffffff;\n   else return this->sz;\n  }\n };\n using np= Node *;\n np rt;\n\
-    \ template <bool sz= 1> static inline void update(np t) {\n  if constexpr (sz)\
-    \ t->sz= 1;\n  if constexpr (semigroup_v<M>) {\n   t->sum= t->val;\n   if constexpr\
-    \ (reversible && !commute_v<M>) t->rsum= t->sum;\n  }\n  if (t->l) {\n   if constexpr\
-    \ (sz) t->sz+= t->l->size();\n   if constexpr (semigroup_v<M>) {\n    t->sum=\
-    \ M::op(t->l->sum, t->sum);\n    if constexpr (reversible && !commute_v<M>) t->rsum=\
-    \ M::op(t->rsum, t->l->rsum);\n   }\n  }\n  if (t->r) {\n   if constexpr (sz)\
-    \ t->sz+= t->r->size();\n   if constexpr (semigroup_v<M>) {\n    t->sum= M::op(t->sum,\
-    \ t->r->sum);\n    if constexpr (reversible && !commute_v<M>) t->rsum= M::op(t->r->rsum,\
-    \ t->rsum);\n   }\n  }\n }\n static inline void propagate(np t, const E &x) {\n\
-    \  if (!t) return;\n  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n\
-    \  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->size());\n   if constexpr\
-    \ (reversible && !commute_v<M>) M::mp(t->rsum, x, t->size());\n  }\n  M::mp(t->val,\
-    \ x, 1), t->sz|= 0x80000000;\n }\n static inline void toggle(np t) {\n  if (!t)\
-    \ return;\n  if constexpr (semigroup_v<M> && !commute_v<M>) std::swap(t->sum,\
-    \ t->rsum);\n  std::swap(t->l, t->r), t->sz^= 0x40000000;\n }\n static inline\
-    \ void push_prop(np t) {\n  if (t->sz >> 31) propagate(t->l, t->laz), propagate(t->r,\
-    \ t->laz), t->sz^= 0x80000000;\n }\n static inline void push_tog(np t) {\n  if\
-    \ (t->sz & 0x40000000) toggle(t->l), toggle(t->r), t->sz^= 0x40000000;\n }\n template\
-    \ <class S> static inline np build(size_t bg, size_t ed, const S &val) {\n  if\
-    \ (bg == ed) return nullptr;\n  size_t mid= bg + (ed - bg) / 2;\n  np t;\n  if\
-    \ constexpr (std::is_same_v<S, T>) t= new Node{val};\n  else t= new Node{val[mid]};\n\
-    \  return t->l= build(bg, mid, val), t->r= build(mid + 1, ed, val), update(t),\
-    \ t;\n }\n static inline void dump(typename std::vector<T>::iterator itr, np t)\
-    \ {\n  if (!t) return;\n  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr\
-    \ (reversible) push_tog(t);\n  size_t sz= t->l ? t->l->size() : 0;\n  *(itr +\
-    \ sz)= t->val, dump(itr, t->l), dump(itr + sz + 1, t->r);\n }\n static inline\
-    \ np merge(np l, np r) {\n  if (!l) return r;\n  if (!r) return l;\n  if (size_t\
-    \ lsz= l->size(), rsz= r->size(); rng(lsz + rsz) < lsz) {\n   if constexpr (dual_v<M>)\
-    \ push_prop(l);\n   if constexpr (reversible) push_tog(l);\n   return l->r= merge(l->r,\
-    \ r), update(l), l;\n  } else {\n   if constexpr (dual_v<M>) push_prop(r);\n \
-    \  if constexpr (reversible) push_tog(r);\n   return r->l= merge(l, r->l), update(r),\
-    \ r;\n  }\n }\n static inline std::pair<np, np> split(np t, size_t k) {\n  if\
-    \ (!t) return {nullptr, nullptr};\n  if constexpr (dual_v<M>) push_prop(t);\n\
-    \  if constexpr (reversible) push_tog(t);\n  if (size_t sz= t->l ? t->l->size()\
-    \ : 0; k <= sz) {\n   auto [l, r]= split(t->l, k);\n   t->l= r, update(t);\n \
-    \  return {l, t};\n  } else {\n   auto [l, r]= split(t->r, k - sz - 1);\n   t->r=\
-    \ l, update(t);\n   return {t, r};\n  }\n }\n static inline T erase(np &t, size_t\
-    \ k) {\n  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr (reversible)\
-    \ push_tog(t);\n  size_t sz= t->l ? t->l->size() : 0;\n  if (k == sz) {\n   T\
-    \ v= t->val;\n   return t= merge(t->l, t->r), v;\n  } else {\n   T v= k < sz ?\
-    \ erase(t->l, k) : erase(t->r, k - sz - 1);\n   return update(t), v;\n  }\n }\n\
-    \ static inline T fold(np t, size_t a, size_t b) {\n  if (!a && b == t->size())\
-    \ return t->sum;\n  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr (reversible)\
-    \ push_tog(t);\n  size_t l= t->l ? t->l->size() : 0, k= l + 1;\n  if (b < k) return\
-    \ fold(t->l, a, b);\n  if (a > l) return fold(t->r, a - k, b - k);\n  T ret= t->val;\n\
-    \  if (a < l) ret= M::op(fold(t->l, a, l), ret);\n  if (b > k) ret= M::op(ret,\
-    \ fold(t->r, 0, b - k));\n  return ret;\n }\n static inline void apply(np t, size_t\
-    \ a, size_t b, const E &x) {\n  if (!a && b == t->size()) return propagate(t,\
-    \ x);\n  if constexpr (reversible) push_tog(t);\n  push_prop(t);\n  size_t l=\
-    \ t->l ? t->l->size() : 0, k= l + 1;\n  if (b < k) apply(t->l, a, b, x);\n  else\
-    \ if (a > l) apply(t->r, a - k, b - k, x);\n  else {\n   M::mp(t->val, x, 1);\n\
-    \   if (a < l) apply(t->l, a, l, x);\n   if (b > k) apply(t->r, 0, b - k, x);\n\
-    \  }\n  if constexpr (semigroup_v<M>) update<0>(t);\n }\n static inline void set_val(np\
-    \ t, size_t k, const T &v) {\n  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr\
-    \ (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0;\n  if (k < l)\
-    \ set_val(t->l, k, v);\n  else if (k > l) set_val(t->r, k - l - 1, v);\n  else\
-    \ t->val= v;\n  if constexpr (semigroup_v<M>) update<0>(t);\n }\n static inline\
-    \ void mul_val(np t, size_t k, const T &v) {\n  if constexpr (dual_v<M>) push_prop(t);\n\
-    \  if constexpr (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0;\n\
-    \  if (k < l) mul_val(t->l, k, v);\n  else if (k > l) mul_val(t->r, k - l - 1,\
-    \ v);\n  else t->val= M::op(t->val, v);\n  update<0>(t);\n }\n static inline T\
-    \ get_val(np t, size_t k) {\n  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr\
-    \ (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0;\n  if (k < l)\
-    \ return get_val(t->l, k);\n  if (k > l) return get_val(t->r, k - l - 1);\n  return\
-    \ t->val;\n }\n static inline T &at_val(np t, size_t k) {\n  if constexpr (dual_v<M>)\
-    \ push_prop(t);\n  if constexpr (reversible) push_tog(t);\n  size_t l= t->l ?\
-    \ t->l->size() : 0;\n  if (k < l) return at_val(t->l, k);\n  if (k > l) return\
-    \ at_val(t->r, k - l - 1);\n  return t->val;\n }\n static inline RBST np_to_rbst(np\
-    \ t) {\n  RBST ret;\n  return ret.rt= t, ret;\n }\npublic:\n RandomizedBinarySearchTree():\
+    \ <tuple>\n#include <utility>\n#include <cstddef>\n#include <cassert>\n#include\
+    \ \"src/Internal/detection_idiom.hpp\"\n#include \"src/Misc/rng.hpp\"\ntemplate\
+    \ <class M, bool reversible= false> class RandomizedBinarySearchTree {\n _DETECT_BOOL(semigroup,\
+    \ typename T::T, decltype(&T::op));\n _DETECT_BOOL(dual, typename T::T, typename\
+    \ T::E, decltype(&T::mp), decltype(&T::cp));\n _DETECT_BOOL(commute, typename\
+    \ T::commute);\n _DETECT_TYPE(nullptr_or_E, typename T::E, std::nullptr_t, typename\
+    \ T::E);\n _DETECT_TYPE(myself_or_T, typename T::T, T, typename T::T);\n using\
+    \ T= typename myself_or_T<M>::type;\n using E= typename nullptr_or_E<M>::type;\n\
+    \ using RBST= RandomizedBinarySearchTree;\n template <class D> struct NodeB {\n\
+    \  T val;\n  D *l, *r;\n  size_t sz;\n };\n template <class D, bool du> struct\
+    \ NodeD: NodeB<D> {};\n template <class D> struct NodeD<D, 1>: NodeB<D> {\n  E\
+    \ laz;\n };\n template <class D, bool sg, bool rev, bool com> struct NodeS: NodeD<D,\
+    \ dual_v<M>> {};\n template <class D, bool rev, bool com> struct NodeS<D, 1, rev,\
+    \ com>: NodeD<D, dual_v<M>> {\n  T sum;\n };\n template <class D> struct NodeS<D,\
+    \ 1, 1, 0>: NodeD<D, dual_v<M>> {\n  T sum, rsum;\n };\n struct Node: NodeS<Node,\
+    \ semigroup_v<M>, reversible, commute_v<M>> {\n  size_t size() const {\n   if\
+    \ constexpr (dual_v<M> || reversible) return this->sz & 0x3fffffff;\n   else return\
+    \ this->sz;\n  }\n };\n using np= Node *;\n np rt;\n template <bool sz= 1> static\
+    \ inline void update(np t) {\n  if constexpr (sz) t->sz= 1;\n  if constexpr (semigroup_v<M>)\
+    \ {\n   t->sum= t->val;\n   if constexpr (reversible && !commute_v<M>) t->rsum=\
+    \ t->sum;\n  }\n  if (t->l) {\n   if constexpr (sz) t->sz+= t->l->size();\n  \
+    \ if constexpr (semigroup_v<M>) {\n    t->sum= M::op(t->l->sum, t->sum);\n   \
+    \ if constexpr (reversible && !commute_v<M>) t->rsum= M::op(t->rsum, t->l->rsum);\n\
+    \   }\n  }\n  if (t->r) {\n   if constexpr (sz) t->sz+= t->r->size();\n   if constexpr\
+    \ (semigroup_v<M>) {\n    t->sum= M::op(t->sum, t->r->sum);\n    if constexpr\
+    \ (reversible && !commute_v<M>) t->rsum= M::op(t->r->rsum, t->rsum);\n   }\n \
+    \ }\n }\n static inline void propagate(np t, const E &x) {\n  if (!t) return;\n\
+    \  if (t->sz >> 31) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>)\
+    \ {\n   M::mp(t->sum, x, t->size());\n   if constexpr (reversible && !commute_v<M>)\
+    \ M::mp(t->rsum, x, t->size());\n  }\n  M::mp(t->val, x, 1), t->sz|= 0x80000000;\n\
+    \ }\n static inline void toggle(np t) {\n  if (!t) return;\n  if constexpr (semigroup_v<M>\
+    \ && !commute_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->l, t->r), t->sz^=\
+    \ 0x40000000;\n }\n static inline void push_prop(np t) {\n  if (t->sz >> 31) propagate(t->l,\
+    \ t->laz), propagate(t->r, t->laz), t->sz^= 0x80000000;\n }\n static inline void\
+    \ push_tog(np t) {\n  if (t->sz & 0x40000000) toggle(t->l), toggle(t->r), t->sz^=\
+    \ 0x40000000;\n }\n template <class S> static inline np build(size_t bg, size_t\
+    \ ed, const S &val) {\n  if (bg == ed) return nullptr;\n  size_t mid= bg + (ed\
+    \ - bg) / 2;\n  np t;\n  if constexpr (std::is_same_v<S, T>) t= new Node{val};\n\
+    \  else t= new Node{val[mid]};\n  return t->l= build(bg, mid, val), t->r= build(mid\
+    \ + 1, ed, val), update(t), t;\n }\n static inline void dump(typename std::vector<T>::iterator\
+    \ itr, np t) {\n  if (!t) return;\n  if constexpr (dual_v<M>) push_prop(t);\n\
+    \  if constexpr (reversible) push_tog(t);\n  size_t sz= t->l ? t->l->size() :\
+    \ 0;\n  *(itr + sz)= t->val, dump(itr, t->l), dump(itr + sz + 1, t->r);\n }\n\
+    \ static inline np merge(np l, np r) {\n  if (!l) return r;\n  if (!r) return\
+    \ l;\n  if (size_t lsz= l->size(), rsz= r->size(); rng(lsz + rsz) < lsz) {\n \
+    \  if constexpr (dual_v<M>) push_prop(l);\n   if constexpr (reversible) push_tog(l);\n\
+    \   return l->r= merge(l->r, r), update(l), l;\n  } else {\n   if constexpr (dual_v<M>)\
+    \ push_prop(r);\n   if constexpr (reversible) push_tog(r);\n   return r->l= merge(l,\
+    \ r->l), update(r), r;\n  }\n }\n static inline std::pair<np, np> split(np t,\
+    \ size_t k) {\n  if (!t) return {nullptr, nullptr};\n  if constexpr (dual_v<M>)\
+    \ push_prop(t);\n  if constexpr (reversible) push_tog(t);\n  if (size_t sz= t->l\
+    \ ? t->l->size() : 0; k <= sz) {\n   auto [l, r]= split(t->l, k);\n   t->l= r,\
+    \ update(t);\n   return {l, t};\n  } else {\n   auto [l, r]= split(t->r, k - sz\
+    \ - 1);\n   t->r= l, update(t);\n   return {t, r};\n  }\n }\n static inline T\
+    \ erase(np &t, size_t k) {\n  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr\
+    \ (reversible) push_tog(t);\n  size_t sz= t->l ? t->l->size() : 0;\n  if (k ==\
+    \ sz) {\n   T v= t->val;\n   return t= merge(t->l, t->r), v;\n  } else {\n   T\
+    \ v= k < sz ? erase(t->l, k) : erase(t->r, k - sz - 1);\n   return update(t),\
+    \ v;\n  }\n }\n static inline T fold(np t, size_t a, size_t b) {\n  if (!a &&\
+    \ b == t->size()) return t->sum;\n  if constexpr (dual_v<M>) push_prop(t);\n \
+    \ if constexpr (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0,\
+    \ k= l + 1;\n  if (b < k) return fold(t->l, a, b);\n  if (a > l) return fold(t->r,\
+    \ a - k, b - k);\n  T ret= t->val;\n  if (a < l) ret= M::op(fold(t->l, a, l),\
+    \ ret);\n  if (b > k) ret= M::op(ret, fold(t->r, 0, b - k));\n  return ret;\n\
+    \ }\n static inline void apply(np t, size_t a, size_t b, const E &x) {\n  if (!a\
+    \ && b == t->size()) return propagate(t, x);\n  if constexpr (reversible) push_tog(t);\n\
+    \  push_prop(t);\n  size_t l= t->l ? t->l->size() : 0, k= l + 1;\n  if (b < k)\
+    \ apply(t->l, a, b, x);\n  else if (a > l) apply(t->r, a - k, b - k, x);\n  else\
+    \ {\n   M::mp(t->val, x, 1);\n   if (a < l) apply(t->l, a, l, x);\n   if (b >\
+    \ k) apply(t->r, 0, b - k, x);\n  }\n  if constexpr (semigroup_v<M>) update<0>(t);\n\
+    \ }\n static inline void set_val(np t, size_t k, const T &v) {\n  if constexpr\
+    \ (dual_v<M>) push_prop(t);\n  if constexpr (reversible) push_tog(t);\n  size_t\
+    \ l= t->l ? t->l->size() : 0;\n  if (k < l) set_val(t->l, k, v);\n  else if (k\
+    \ > l) set_val(t->r, k - l - 1, v);\n  else t->val= v;\n  if constexpr (semigroup_v<M>)\
+    \ update<0>(t);\n }\n static inline void mul_val(np t, size_t k, const T &v) {\n\
+    \  if constexpr (dual_v<M>) push_prop(t);\n  if constexpr (reversible) push_tog(t);\n\
+    \  size_t l= t->l ? t->l->size() : 0;\n  if (k < l) mul_val(t->l, k, v);\n  else\
+    \ if (k > l) mul_val(t->r, k - l - 1, v);\n  else t->val= M::op(t->val, v);\n\
+    \  update<0>(t);\n }\n static inline T get_val(np t, size_t k) {\n  if constexpr\
+    \ (dual_v<M>) push_prop(t);\n  if constexpr (reversible) push_tog(t);\n  size_t\
+    \ l= t->l ? t->l->size() : 0;\n  if (k < l) return get_val(t->l, k);\n  if (k\
+    \ > l) return get_val(t->r, k - l - 1);\n  return t->val;\n }\n static inline\
+    \ T &at_val(np t, size_t k) {\n  if constexpr (dual_v<M>) push_prop(t);\n  if\
+    \ constexpr (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0;\n\
+    \  if (k < l) return at_val(t->l, k);\n  if (k > l) return at_val(t->r, k - l\
+    \ - 1);\n  return t->val;\n }\n static inline RBST np_to_rbst(np t) {\n  RBST\
+    \ ret;\n  return ret.rt= t, ret;\n }\npublic:\n RandomizedBinarySearchTree():\
     \ rt(nullptr) {}\n RandomizedBinarySearchTree(size_t n, T val= T()): rt(n ? build(0,\
     \ n, val) : nullptr) {}\n RandomizedBinarySearchTree(const T *bg, const T *ed):\
     \ rt(bg == ed ? nullptr : build(0, ed - bg, bg)) {}\n RandomizedBinarySearchTree(const\
@@ -316,7 +317,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/RandomizedBinarySearchTree.hpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/396.RBST.test.cpp

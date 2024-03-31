@@ -13,6 +13,9 @@ data:
     path: test/yosupo/two_edge_connected_components.test.cpp
     title: test/yosupo/two_edge_connected_components.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/529.HLD.test.cpp
+    title: test/yukicoder/529.HLD.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   _isVerificationFailed: true
@@ -59,6 +62,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/529.HLD.test.cpp
   - test/yosupo/two_edge_connected_components.test.cpp
   - test/aoj/2893.test.cpp
   - test/aoj/GRL_3_B.test.cpp

@@ -2,20 +2,27 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/LinkCutTree.hpp
-    title: Link-Cut-Tree
-  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
+  - icon: ':question:'
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Graph/HeavyLightDecomposition.hpp
+    title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
+  - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
+      \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -142,109 +149,119 @@ data:
     \ bg, ed, {0, 1LL << HEIGHT}, ret.begin(), HEIGHT);\n  return ret;\n }\n static\
     \ std::string which_available() {\n  std::string ret= \"\";\n  if constexpr (monoid_v<M>)\
     \ ret+= \"\\\"fold\\\" \\\"find\\\"\";\n  else ret+= \"\\\"at\\\" \";\n  return\
-    \ ret;\n }\n};\n#line 6 \"src/DataStructure/LinkCutTree.hpp\"\n#include <cassert>\n\
-    #line 8 \"src/DataStructure/LinkCutTree.hpp\"\ntemplate <typename M= void> class\
-    \ LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n\
-    \ HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n template <class L> static constexpr\
-    \ bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n template <class\
-    \ L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>, has_mp<L>,\
-    \ has_cp<L>>;\n struct Node_B {\n  int ch[2]= {-1, -1}, par= -1;\n  bool rev_flg;\n\
-    \ };\n template <class D, bool sg, bool du> struct Node_D: Node_B {};\n template\
-    \ <class D> struct Node_D<D, 1, 0>: Node_B {\n  typename M::T val, sum, rsum;\n\
-    \ };\n template <class D> struct Node_D<D, 0, 1>: Node_B {\n  typename M::T val;\n\
-    \  typename M::E laz;\n  bool laz_flg;\n };\n template <class D> struct Node_D<D,\
-    \ 1, 1>: Node_B {\n  typename M::T val, sum, rsum;\n  typename M::E laz;\n  bool\
-    \ laz_flg;\n };\n using Node= Node_D<void, semigroup_v<M>, dual_v<M>>;\n using\
-    \ T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n inline int dir(int i)\
-    \ {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0] == i) return 0;\n  \
-    \ if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n }\n inline void\
-    \ rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]= ns[i].ch[!d])\
-    \ != -1) ns[ns[p].ch[d]].par= p;\n  ns[i].ch[!d]= p, ns[i].par= ns[p].par;\n \
-    \ if ((d= dir(p)) < 2) ns[ns[p].par].ch[d]= i;\n  ns[p].par= i;\n  if constexpr\
-    \ (semigroup_v<M>) update(p);\n }\n inline void splay(int i) {\n  push(i);\n \
-    \ int p= ns[i].par, pp;\n  for (int d= dir(i), c; d < 2; rot(i), d= dir(i), p=\
-    \ ns[i].par) {\n   if (c= dir(p), pp= ns[p].par; c < 2) push(pp), push(p), push(i),\
-    \ rot(d == c ? p : i);\n   else push(p), push(i);\n  }\n  if constexpr (semigroup_v<M>)\
-    \ update(i);\n }\n inline void update(int i) {\n  ns[i].rsum= ns[i].sum= ns[i].val;\n\
-    \  if (ns[i].ch[0] != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum, ns[i].sum), ns[i].rsum=\
-    \ M::op(ns[i].rsum, ns[ns[i].ch[0]].rsum);\n  if (ns[i].ch[1] != -1) ns[i].sum=\
-    \ M::op(ns[i].sum, ns[ns[i].ch[1]].sum), ns[i].rsum= M::op(ns[ns[i].ch[1]].rsum,\
-    \ ns[i].rsum);\n }\n inline void propagate(int i, const E &x) {\n  if (i == -1)\
-    \ return;\n  if (ns[i].laz_flg) M::cp(ns[i].laz, x);\n  else ns[i].laz= x;\n \
-    \ if constexpr (semigroup_v<M>) M::mp(ns[i].sum, x), M::mp(ns[i].rsum, x);\n \
-    \ M::mp(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int i) {\n\
-    \  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
-    \ (semigroup_v<M>) std::swap(ns[i].sum, ns[i].rsum);\n  ns[i].rev_flg= !ns[i].rev_flg;\n\
-    \ }\n inline void push(int i) {\n  if (ns[i].rev_flg) toggle(ns[i].ch[0]), toggle(ns[i].ch[1]),\
-    \ ns[i].rev_flg= false;\n  if constexpr (dual_v<M>)\n   if (ns[i].laz_flg) propagate(ns[i].ch[0],\
-    \ ns[i].laz), propagate(ns[i].ch[1], ns[i].laz), ns[i].laz_flg= false;\n }\n inline\
-    \ int expose(int i) {\n  int r= -1;\n  for (int p= i; p != -1; r= p, p= ns[p].par)\
-    \ {\n   splay(p), ns[p].ch[1]= r;\n   if constexpr (semigroup_v<M>) update(p);\n\
-    \  }\n  return splay(i), r;\n }\n std::vector<Node> ns;\npublic:\n LinkCutTree(size_t\
-    \ n): ns(n) {}\n LinkCutTree(size_t n, T val): ns(n) {\n  for (int i= n; i--;)\
-    \ ns[i].val= val;\n }\n void evert(int k) { expose(k), toggle(k), push(k); }\n\
-    \ void link(int c, int p) {\n  evert(c), expose(p), assert(ns[c].par == -1), ns[p].ch[1]=\
-    \ c, ns[c].par= p;\n  if constexpr (semigroup_v<M>) update(p);\n }\n void cut(int\
-    \ c, int p) {\n  evert(p), expose(c), assert(ns[c].ch[0] == p), ns[c].ch[0]= ns[p].par=\
-    \ -1;\n  if constexpr (semigroup_v<M>) update(c);\n }\n int root(int x) {\n  for\
-    \ (expose(x);; x= ns[x].ch[0])\n   if (push(x); ns[x].ch[0] == -1) return splay(x),\
-    \ x;\n }\n int parent(int x) {\n  if (expose(x), x= ns[x].ch[0]; x == -1) return\
-    \ -1;\n  for (;; x= ns[x].ch[1])\n   if (push(x); ns[x].ch[1] == -1) return splay(x),\
-    \ x;\n }\n int lca(int x, int y) { return x == y ? x : (expose(x), y= expose(y),\
-    \ ns[x].par == -1) ? -1 : y; }\n const T &operator[](int k) { return get(k); }\n\
-    \ const T &get(int k) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\"get\\\
-    \" is not available\\n\");\n  return expose(k), ns[k].val;\n }\n void set(int\
-    \ k, T v) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\"set\\\" is not\
-    \ available\\n\");\n  expose(k), ns[k].val= v;\n  if constexpr (semigroup_v<M>)\
-    \ update(k);\n }\n T fold(int a, int b) {  // [a,b] closed section\n  static_assert(semigroup_v<M>,\
-    \ \"\\\"fold\\\" is not available\\n\");\n  return a == b ? get(a) : (evert(a),\
-    \ expose(b), assert(ns[a].par != -1), ns[b].sum);\n }\n void apply(int a, int\
-    \ b, E v) {  // [a,b] closed section\n  static_assert(dual_v<M>, \"\\\"apply\\\
-    \" is not available\\n\");\n  evert(a), expose(b), assert(a == b || ns[a].par\
-    \ != -1), propagate(b, v), push(b);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M> || dual_v<M>) ret+=\
-    \ \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"\
-    fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n\
-    \ }\n};\n#line 9 \"test/atcoder/abc133_f.Patricia.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
-    \ cin >> N >> Q;\n LinkCutTree lct(N);\n vector<tuple<int, int, int>> adj[N];\n\
-    \ for (int i= 0; i < N - 1; i++) {\n  int a, b, c, d;\n  cin >> a >> b >> c >>\
-    \ d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b, c, d);\n  adj[b].emplace_back(a,\
-    \ c, d);\n }\n using PerArr= SegmentTree_Patricia<int, true, 17>;\n PerArr Arr1[N],\
-    \ Arr2[N];\n int sum[N];\n sum[0]= 0;\n auto dfs= [&adj, &Arr1, &Arr2, &sum](auto\
-    \ f, int v, int p) -> void {\n  for (auto [u, c, d]: adj[v])\n   if (u != p) {\n\
-    \    Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n\
-    \    sum[u]= sum[v] + d;\n    f(f, u, v);\n   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n\
-    \ for (int i= 0; i < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n\
-    \  int lca= lct.lca(--u, --v);\n  cout << sum[u] + sum[v] - 2 * sum[lca] + y *\
-    \ (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) +\
-    \ Arr2[v].get(x) - 2 * Arr2[lca].get(x)) << '\\n';\n }\n return 0;\n}\n"
+    \ ret;\n }\n};\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    #line 6 \"src/Internal/ListRange.hpp\"\n#define _LR(name, IT, CT) \\\n template\
+    \ <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT; \\\
+    \n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
+    \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
+    \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
+    \ iterator, T);\n_LR(ConstListRange, const_iterator, const T);\n#undef _LR\ntemplate\
+    \ <class T> struct CSRArray {\n std::vector<T> dat;\n std::vector<int> p;\n size_t\
+    \ size() const { return p.size() - 1; }\n ListRange<T> operator[](int i) { return\
+    \ {dat.begin() + p[i], dat.begin() + p[i + 1]}; }\n ConstListRange<T> operator[](int\
+    \ i) const { return {dat.cbegin() + p[i], dat.cbegin() + p[i + 1]}; }\n};\ntemplate\
+    \ <template <class> class F, class T> std::enable_if_t<std::disjunction_v<std::is_same<F<T>,\
+    \ ListRange<T>>, std::is_same<F<T>, ConstListRange<T>>, std::is_same<F<T>, CSRArray<T>>>,\
+    \ std::ostream &> operator<<(std::ostream &os, const F<T> &r) {\n os << '[';\n\
+    \ for (int _= 0, __= r.size(); _ < __; ++_) os << (_ ? \", \" : \"\") << r[_];\n\
+    \ return os << ']';\n}\n#line 3 \"src/Graph/Graph.hpp\"\nstruct Edge: std::pair<int,\
+    \ int> {\n using std::pair<int, int>::pair;\n Edge &operator--() { return --first,\
+    \ --second, *this; }\n int to(int v) const { return first ^ second ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.first >>\
+    \ e.second, is; }\n};\nstruct Graph: std::vector<Edge> {\n size_t n;\n Graph(size_t\
+    \ n= 0, size_t m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return\
+    \ n; }\n size_t edge_size() const { return size(); }\n size_t add_vertex() { return\
+    \ n++; }\n size_t add_edge(int s, int d) { return emplace_back(s, d), size() -\
+    \ 1; }\n size_t add_edge(Edge e) { return emplace_back(e), size() - 1; }\n#define\
+    \ _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n;\
+    \ ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) { \\\n  auto [u, v]= (*this)[i];\
+    \ \\\n  b; \\\n }\n#define _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !dir);\
+    \ \\\n if (!dir) { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[u]]= a, c[--p[v]]=\
+    \ b)) \\\n } else if (dir > 0) { \\\n  _ADJ_FOR(++p[u], c[--p[u]]= a) \\\n } else\
+    \ { \\\n  _ADJ_FOR(++p[v], c[--p[v]]= b) \\\n } \\\n return {c, p}\n CSRArray<int>\
+    \ adjacency_vertex(int dir) const { _ADJ(v, u); }\n CSRArray<int> adjacency_edge(int\
+    \ dir) const { _ADJ(i, i); }\n#undef _ADJ\n#undef _ADJ_FOR\n};\n#line 3 \"src/Graph/HeavyLightDecomposition.hpp\"\
+    \n#include <cassert>\n#line 5 \"src/Graph/HeavyLightDecomposition.hpp\"\nclass\
+    \ HeavyLightDecomposition {\n std::vector<int> P, PP, D, I, L, R;\npublic:\n HeavyLightDecomposition()=\
+    \ default;\n HeavyLightDecomposition(const Graph &g, int root= 0): HeavyLightDecomposition(g.adjacency_vertex(0),\
+    \ root) {}\n HeavyLightDecomposition(const CSRArray<int> &adj, int root= 0) {\n\
+    \  const int n= adj.size();\n  P.assign(n, -2), PP.resize(n), D.resize(n), I.resize(n),\
+    \ L.resize(n), R.resize(n);\n  auto f= [&, i= 0, v= 0, t= 0](int r) mutable {\n\
+    \   for (P[r]= -1, I[t++]= r; i < t; ++i)\n    for (int u: adj[v= I[i]])\n   \
+    \  if (P[v] != u) P[I[t++]= u]= v;\n  };\n  f(root);\n  for (int r= 0; r < n;\
+    \ ++r)\n   if (P[r] == -2) f(r);\n  std::vector<int> Z(n, 1), nx(n, -1);\n  for\
+    \ (int i= n, v; i--;) {\n   if (P[v= I[i]] == -1) continue;\n   if (Z[P[v]]+=\
+    \ Z[v]; nx[P[v]] == -1) nx[P[v]]= v;\n   if (Z[nx[P[v]]] < Z[v]) nx[P[v]]= v;\n\
+    \  }\n  for (int v= n; v--;) PP[v]= v;\n  for (int v: I)\n   if (nx[v] != -1)\
+    \ PP[nx[v]]= v;\n  for (int v: I)\n   if (P[v] != -1) PP[v]= PP[PP[v]], D[v]=\
+    \ D[P[v]] + 1;\n  for (int i= n; i--;) L[I[i]]= i;\n  for (int v: I) {\n   int\
+    \ ir= R[v]= L[v] + Z[v];\n   for (int u: adj[v])\n    if (u != P[v] && u != nx[v])\
+    \ L[u]= (ir-= Z[u]);\n   if (nx[v] != -1) L[nx[v]]= L[v] + 1;\n  }\n  for (int\
+    \ i= n; i--;) I[L[i]]= i;\n }\n int to_seq(int v) const { return L[v]; }\n int\
+    \ to_vertex(int i) const { return I[i]; }\n size_t size() const { return P.size();\
+    \ }\n int parent(int v) const { return P[v]; }\n int head(int v) const { return\
+    \ PP[v]; }\n int root(int v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v]\
+    \ == -1) return v;\n }\n bool connected(int u, int v) const { return root(u) ==\
+    \ root(v); }\n // u is in v\n bool in_subtree(int u, int v) const { return L[v]\
+    \ <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return R[v] - L[v];\
+    \ }\n int lca(int u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v])\
+    \ std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v,\
+    \ int k) const {\n  assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v=\
+    \ P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int\
+    \ u, int v, int k) const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if\
+    \ (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w=\
+    \ lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ?\
+    \ -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const\
+    \ { return D[v]; }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u,\
+    \ v)] * 2; }\n // half-open interval [l,r)\n std::pair<int, int> subtree(int v)\
+    \ const { return {L[v], R[v]}; }\n // sequence of closed intervals [l,r]\n std::vector<std::pair<int,\
+    \ int>> path(int u, int v, bool edge= 0) const {\n  std::vector<std::pair<int,\
+    \ int>> up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(L[PP[v]],\
+    \ L[v]), v= P[PP[v]];\n   else up.emplace_back(L[u], L[PP[u]]), u= P[PP[u]];\n\
+    \  }\n  if (L[u] < L[v]) down.emplace_back(L[u] + edge, L[v]);\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(L[u], L[v] + edge);\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 10 \"test/atcoder/abc133_f.Patricia.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Graph g(N, N - 1);\n vector<int> c(N - 1), d(N\
+    \ - 1);\n for (int i= 0; i < N - 1; ++i) cin >> g[i] >> c[i] >> d[i], --g[i];\n\
+    \ HeavyLightDecomposition hld(g, 0);\n using PerArr= SegmentTree_Patricia<int,\
+    \ true, 17>;\n vector<PerArr> Arr1(N), Arr2(N);\n vector<int> dep(N);\n auto adj=\
+    \ g.adjacency_edge(0);\n for (int i= 0; i < N; ++i) {\n  int v= hld.to_vertex(i),\
+    \ p= hld.parent(v);\n  for (int e: adj[v]) {\n   int u= g[e].to(v);\n   if (u\
+    \ == p) continue;\n   Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n   Arr1[u][c[e]]+=\
+    \ 1, Arr2[u][c[e]]+= d[e];\n   dep[u]= dep[v] + d[e];\n  }\n }\n for (int i= 0;\
+    \ i < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n  int lca= hld.lca(--u,\
+    \ --v);\n  cout << dep[u] + dep[v] - 2 * dep[lca] + y * (Arr1[u].get(x) + Arr1[v].get(x)\
+    \ - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\
+    \ << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n\n\
     // \u6C38\u7D9A\u914D\u5217(at) \u306E verify\n\n#include <iostream>\n#include\
     \ <vector>\n#include \"src/DataStructure/SegmentTree_Patricia.hpp\"\n#include\
-    \ \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace std;\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n LinkCutTree\
-    \ lct(N);\n vector<tuple<int, int, int>> adj[N];\n for (int i= 0; i < N - 1; i++)\
-    \ {\n  int a, b, c, d;\n  cin >> a >> b >> c >> d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b,\
-    \ c, d);\n  adj[b].emplace_back(a, c, d);\n }\n using PerArr= SegmentTree_Patricia<int,\
-    \ true, 17>;\n PerArr Arr1[N], Arr2[N];\n int sum[N];\n sum[0]= 0;\n auto dfs=\
-    \ [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n  for (auto [u,\
-    \ c, d]: adj[v])\n   if (u != p) {\n    Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n\
-    \    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n    sum[u]= sum[v] + d;\n    f(f, u, v);\n\
-    \   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n for (int i= 0; i < Q; i++) {\n\
-    \  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n  int lca= lct.lca(--u, --v);\n\
-    \  cout << sum[u] + sum[v] - 2 * sum[lca] + y * (Arr1[u].get(x) + Arr1[v].get(x)\
+    \ \"src/Graph/Graph.hpp\"\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Graph g(N, N - 1);\n vector<int> c(N - 1), d(N\
+    \ - 1);\n for (int i= 0; i < N - 1; ++i) cin >> g[i] >> c[i] >> d[i], --g[i];\n\
+    \ HeavyLightDecomposition hld(g, 0);\n using PerArr= SegmentTree_Patricia<int,\
+    \ true, 17>;\n vector<PerArr> Arr1(N), Arr2(N);\n vector<int> dep(N);\n auto adj=\
+    \ g.adjacency_edge(0);\n for (int i= 0; i < N; ++i) {\n  int v= hld.to_vertex(i),\
+    \ p= hld.parent(v);\n  for (int e: adj[v]) {\n   int u= g[e].to(v);\n   if (u\
+    \ == p) continue;\n   Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n   Arr1[u][c[e]]+=\
+    \ 1, Arr2[u][c[e]]+= d[e];\n   dep[u]= dep[v] + d[e];\n  }\n }\n for (int i= 0;\
+    \ i < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n  int lca= hld.lca(--u,\
+    \ --v);\n  cout << dep[u] + dep[v] - 2 * dep[lca] + y * (Arr1[u].get(x) + Arr1[v].get(x)\
     \ - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\
     \ << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SegmentTree_Patricia.hpp
   - src/Internal/HAS_CHECK.hpp
-  - src/DataStructure/LinkCutTree.hpp
+  - src/Graph/Graph.hpp
+  - src/Internal/ListRange.hpp
+  - src/Graph/HeavyLightDecomposition.hpp
   isVerificationFile: true
   path: test/atcoder/abc133_f.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-03-31 22:05:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.Patricia.test.cpp
 layout: document

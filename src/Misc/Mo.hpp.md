@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1270.test.cpp
     title: test/yukicoder/1270.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/Mo.hpp\"\n#include <vector>\n#include <algorithm>\n\
@@ -51,7 +51,7 @@ data:
   path: src/Misc/Mo.hpp
   requiredBy: []
   timestamp: '2023-02-09 16:12:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1270.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp

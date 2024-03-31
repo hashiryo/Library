@@ -6,16 +6,16 @@ data:
     title: Segment-Tree Beats!
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
     links:
     - https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
-  bundledCode: "#line 1 \"test/yosupo/range_chmin_chmax_add_range_sum.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
+  bundledCode: "#line 1 \"test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
     \n#include <iostream>\n#line 2 \"src/DataStructure/SegmentTree_Beats.hpp\"\n#include\
     \ <vector>\ntemplate <typename M> struct SegmentTree_Beats {\n using T= typename\
     \ M::T;\n using E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int\
@@ -44,12 +44,12 @@ data:
     \ std::vector<Lazy> laz;\n inline void eval(int k) {\n  if (!laz[k].flg) return;\n\
     \  propagate(k << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n  laz[k].flg=\
     \ false;\n }\n inline void propagate(int k, const E &x) {\n  if (bool success=\
-    \ M::mapping(dat[k], x); k < n) {\n   laz[k].flg ? (M::composition(laz[k].val,\
-    \ x), x) : laz[k].val= x;\n   if (laz[k].flg= true; !success) eval(k), update(k);\n\
-    \  }\n }\n inline void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k <<\
-    \ 1 | 1]); }\n};\n#line 4 \"test/yosupo/range_chmin_chmax_add_range_sum.test.cpp\"\
-    \nusing namespace std;\nstruct Mono {\n static constexpr long long INF= 1ll <<\
-    \ 62;\n struct T {\n  long long sum, h, l, h2, l2;\n  int sz, hc, lc;\n };\n struct\
+    \ M::mp(dat[k], x); k < n) {\n   laz[k].flg ? (M::cp(laz[k].val, x), x) : laz[k].val=\
+    \ x;\n   if (laz[k].flg= true; !success) eval(k), update(k);\n  }\n }\n inline\
+    \ void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k << 1 | 1]); }\n};\n\
+    #line 4 \"test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp\"\nusing\
+    \ namespace std;\nstruct Mono {\n static constexpr long long INF= 1ll << 62;\n\
+    \ struct T {\n  long long sum, h, l, h2, l2;\n  int sz, hc, lc;\n };\n struct\
     \ E {  // clamp(x,lb,ub)+ad\n  long long lb, ub, ad;\n  static E add(long long\
     \ x) { return {-INF, INF, x}; }\n  static E chmin(long long x) { return {-INF,\
     \ x, 0}; }\n  static E chmax(long long x) { return {x, INF, 0}; }\n };\n static\
@@ -61,28 +61,28 @@ data:
     \ T &vr) { return {vl.sum + vr.sum, max(vl.h, vr.h), min(vl.l, vr.l), max2(vl.h,\
     \ vl.h2, vr.h, vr.h2), min2(vl.l, vl.l2, vr.l, vr.l2), vl.sz + vr.sz, vl.hc *\
     \ (vl.h >= vr.h) + vr.hc * (vl.h <= vr.h), vl.lc * (vl.l <= vr.l) + vr.lc * (vl.l\
-    \ >= vr.l)}; }\n static bool mapping(T &v, const E &f) {\n  if (v.h <= f.lb) {\n\
-    \   v.sum= (v.h= v.l= f.lb + f.ad) * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2=\
-    \ INF;\n   return true;\n  }\n  if (v.l >= f.ub) {\n   v.sum= (v.h= v.l= f.ub\
-    \ + f.ad) * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2= INF;\n   return true;\n\
-    \  }\n  if (f.lb <= v.l && v.h <= f.ub) {\n   v.sum+= f.ad * v.sz, v.h+= f.ad,\
-    \ v.l+= f.ad;\n   v.h2+= f.ad, v.l2+= f.ad;\n   return true;\n  }\n  if (v.h2\
-    \ <= f.lb) {\n   v.l= v.h2= f.lb + f.ad, v.lc= v.sz - v.hc;\n   v.l2= v.h= min(f.ub,\
-    \ v.h) + f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n  }\n  if\
-    \ (v.l2 >= f.ub) {\n   v.h= v.l2= f.ub + f.ad, v.hc= v.sz - v.lc;\n   v.h2= v.l=\
-    \ max(f.lb, v.l) + f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n\
-    \  }\n  return false;\n }\n static void composition(E &pre, const E &suf) {\n\
-    \  if (auto tmpl= suf.lb - pre.ad; pre.ub <= tmpl) pre.ub= pre.lb= tmpl;\n  else\
-    \ if (auto tmpu= suf.ub - pre.ad; tmpu <= pre.lb) pre.ub= pre.lb= tmpu;\n  else\
-    \ pre.lb= max(pre.lb, tmpl), pre.ub= min(pre.ub, tmpu);\n  pre.ad+= suf.ad;\n\
-    \ }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N,\
-    \ Q;\n cin >> N >> Q;\n SegmentTree_Beats<Mono> seg(N);\n for (int i= 0; i < N;\
-    \ i++) {\n  long long a;\n  cin >> a;\n  seg.unsafe_set(i, {a, a, a, -Mono::INF,\
-    \ Mono::INF, 1, 1, 1});\n }\n seg.rebuild();\n while (Q--) {\n  int op, l, r;\n\
-    \  cin >> op >> l >> r;\n  if (op == 3) {\n   cout << seg.fold(l, r).sum << '\\\
-    n';\n  } else {\n   long long b;\n   cin >> b;\n   if (op == 0) seg.apply(l, r,\
-    \ Mono::E::chmin(b));\n   if (op == 1) seg.apply(l, r, Mono::E::chmax(b));\n \
-    \  if (op == 2) seg.apply(l, r, Mono::E::add(b));\n  }\n }\n return 0;\n}\n"
+    \ >= vr.l)}; }\n static bool mp(T &v, const E &f) {\n  if (v.h <= f.lb) {\n  \
+    \ v.sum= (v.h= v.l= f.lb + f.ad) * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2= INF;\n\
+    \   return true;\n  }\n  if (v.l >= f.ub) {\n   v.sum= (v.h= v.l= f.ub + f.ad)\
+    \ * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2= INF;\n   return true;\n  }\n  if\
+    \ (f.lb <= v.l && v.h <= f.ub) {\n   v.sum+= f.ad * v.sz, v.h+= f.ad, v.l+= f.ad;\n\
+    \   v.h2+= f.ad, v.l2+= f.ad;\n   return true;\n  }\n  if (v.h2 <= f.lb) {\n \
+    \  v.l= v.h2= f.lb + f.ad, v.lc= v.sz - v.hc;\n   v.l2= v.h= min(f.ub, v.h) +\
+    \ f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n  }\n  if (v.l2\
+    \ >= f.ub) {\n   v.h= v.l2= f.ub + f.ad, v.hc= v.sz - v.lc;\n   v.h2= v.l= max(f.lb,\
+    \ v.l) + f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n  }\n  return\
+    \ false;\n }\n static void cp(E &pre, const E &suf) {\n  if (auto tmpl= suf.lb\
+    \ - pre.ad; pre.ub <= tmpl) pre.ub= pre.lb= tmpl;\n  else if (auto tmpu= suf.ub\
+    \ - pre.ad; tmpu <= pre.lb) pre.ub= pre.lb= tmpu;\n  else pre.lb= max(pre.lb,\
+    \ tmpl), pre.ub= min(pre.ub, tmpu);\n  pre.ad+= suf.ad;\n }\n};\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
+    \ SegmentTree_Beats<Mono> seg(N);\n for (int i= 0; i < N; i++) {\n  long long\
+    \ a;\n  cin >> a;\n  seg.unsafe_set(i, {a, a, a, -Mono::INF, Mono::INF, 1, 1,\
+    \ 1});\n }\n seg.rebuild();\n while (Q--) {\n  int op, l, r;\n  cin >> op >> l\
+    \ >> r;\n  if (op == 3) {\n   cout << seg.fold(l, r).sum << '\\n';\n  } else {\n\
+    \   long long b;\n   cin >> b;\n   if (op == 0) seg.apply(l, r, Mono::E::chmin(b));\n\
+    \   if (op == 1) seg.apply(l, r, Mono::E::chmax(b));\n   if (op == 2) seg.apply(l,\
+    \ r, Mono::E::add(b));\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
     \n#include <iostream>\n#include \"src/DataStructure/SegmentTree_Beats.hpp\"\n\
     using namespace std;\nstruct Mono {\n static constexpr long long INF= 1ll << 62;\n\
@@ -98,40 +98,40 @@ data:
     \ T &vr) { return {vl.sum + vr.sum, max(vl.h, vr.h), min(vl.l, vr.l), max2(vl.h,\
     \ vl.h2, vr.h, vr.h2), min2(vl.l, vl.l2, vr.l, vr.l2), vl.sz + vr.sz, vl.hc *\
     \ (vl.h >= vr.h) + vr.hc * (vl.h <= vr.h), vl.lc * (vl.l <= vr.l) + vr.lc * (vl.l\
-    \ >= vr.l)}; }\n static bool mapping(T &v, const E &f) {\n  if (v.h <= f.lb) {\n\
-    \   v.sum= (v.h= v.l= f.lb + f.ad) * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2=\
-    \ INF;\n   return true;\n  }\n  if (v.l >= f.ub) {\n   v.sum= (v.h= v.l= f.ub\
-    \ + f.ad) * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2= INF;\n   return true;\n\
-    \  }\n  if (f.lb <= v.l && v.h <= f.ub) {\n   v.sum+= f.ad * v.sz, v.h+= f.ad,\
-    \ v.l+= f.ad;\n   v.h2+= f.ad, v.l2+= f.ad;\n   return true;\n  }\n  if (v.h2\
-    \ <= f.lb) {\n   v.l= v.h2= f.lb + f.ad, v.lc= v.sz - v.hc;\n   v.l2= v.h= min(f.ub,\
-    \ v.h) + f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n  }\n  if\
-    \ (v.l2 >= f.ub) {\n   v.h= v.l2= f.ub + f.ad, v.hc= v.sz - v.lc;\n   v.h2= v.l=\
-    \ max(f.lb, v.l) + f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n\
-    \  }\n  return false;\n }\n static void composition(E &pre, const E &suf) {\n\
-    \  if (auto tmpl= suf.lb - pre.ad; pre.ub <= tmpl) pre.ub= pre.lb= tmpl;\n  else\
-    \ if (auto tmpu= suf.ub - pre.ad; tmpu <= pre.lb) pre.ub= pre.lb= tmpu;\n  else\
-    \ pre.lb= max(pre.lb, tmpl), pre.ub= min(pre.ub, tmpu);\n  pre.ad+= suf.ad;\n\
-    \ }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N,\
-    \ Q;\n cin >> N >> Q;\n SegmentTree_Beats<Mono> seg(N);\n for (int i= 0; i < N;\
-    \ i++) {\n  long long a;\n  cin >> a;\n  seg.unsafe_set(i, {a, a, a, -Mono::INF,\
-    \ Mono::INF, 1, 1, 1});\n }\n seg.rebuild();\n while (Q--) {\n  int op, l, r;\n\
-    \  cin >> op >> l >> r;\n  if (op == 3) {\n   cout << seg.fold(l, r).sum << '\\\
-    n';\n  } else {\n   long long b;\n   cin >> b;\n   if (op == 0) seg.apply(l, r,\
-    \ Mono::E::chmin(b));\n   if (op == 1) seg.apply(l, r, Mono::E::chmax(b));\n \
-    \  if (op == 2) seg.apply(l, r, Mono::E::add(b));\n  }\n }\n return 0;\n}"
+    \ >= vr.l)}; }\n static bool mp(T &v, const E &f) {\n  if (v.h <= f.lb) {\n  \
+    \ v.sum= (v.h= v.l= f.lb + f.ad) * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2= INF;\n\
+    \   return true;\n  }\n  if (v.l >= f.ub) {\n   v.sum= (v.h= v.l= f.ub + f.ad)\
+    \ * (v.hc= v.lc= v.sz);\n   v.h2= -INF, v.l2= INF;\n   return true;\n  }\n  if\
+    \ (f.lb <= v.l && v.h <= f.ub) {\n   v.sum+= f.ad * v.sz, v.h+= f.ad, v.l+= f.ad;\n\
+    \   v.h2+= f.ad, v.l2+= f.ad;\n   return true;\n  }\n  if (v.h2 <= f.lb) {\n \
+    \  v.l= v.h2= f.lb + f.ad, v.lc= v.sz - v.hc;\n   v.l2= v.h= min(f.ub, v.h) +\
+    \ f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n  }\n  if (v.l2\
+    \ >= f.ub) {\n   v.h= v.l2= f.ub + f.ad, v.hc= v.sz - v.lc;\n   v.h2= v.l= max(f.lb,\
+    \ v.l) + f.ad;\n   v.sum= v.h * v.hc + v.l * v.lc;\n   return true;\n  }\n  return\
+    \ false;\n }\n static void cp(E &pre, const E &suf) {\n  if (auto tmpl= suf.lb\
+    \ - pre.ad; pre.ub <= tmpl) pre.ub= pre.lb= tmpl;\n  else if (auto tmpu= suf.ub\
+    \ - pre.ad; tmpu <= pre.lb) pre.ub= pre.lb= tmpu;\n  else pre.lb= max(pre.lb,\
+    \ tmpl), pre.ub= min(pre.ub, tmpu);\n  pre.ad+= suf.ad;\n }\n};\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
+    \ SegmentTree_Beats<Mono> seg(N);\n for (int i= 0; i < N; i++) {\n  long long\
+    \ a;\n  cin >> a;\n  seg.unsafe_set(i, {a, a, a, -Mono::INF, Mono::INF, 1, 1,\
+    \ 1});\n }\n seg.rebuild();\n while (Q--) {\n  int op, l, r;\n  cin >> op >> l\
+    \ >> r;\n  if (op == 3) {\n   cout << seg.fold(l, r).sum << '\\n';\n  } else {\n\
+    \   long long b;\n   cin >> b;\n   if (op == 0) seg.apply(l, r, Mono::E::chmin(b));\n\
+    \   if (op == 1) seg.apply(l, r, Mono::E::chmax(b));\n   if (op == 2) seg.apply(l,\
+    \ r, Mono::E::add(b));\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SegmentTree_Beats.hpp
   isVerificationFile: true
-  path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
+  path: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
   requiredBy: []
-  timestamp: '2023-01-25 13:39:36+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-03-31 22:05:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
+documentation_of: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-- /verify/test/yosupo/range_chmin_chmax_add_range_sum.test.cpp.html
-title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
+- /verify/test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
+- /verify/test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp.html
+title: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
 ---

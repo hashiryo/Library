@@ -239,7 +239,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc253_ex.test.cpp
     title: test/atcoder/abc253_ex.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_ex.Beats.test.cpp
     title: test/atcoder/abc256_ex.Beats.test.cpp
   - icon: ':heavy_check_mark:'
@@ -248,7 +248,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_f.RBST.test.cpp
     title: test/atcoder/abc256_f.RBST.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
   - icon: ':heavy_check_mark:'
@@ -561,6 +561,9 @@ data:
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':x:'
+    path: test/yosupo/vertex_set_path_composite.LCT.test.cpp
+    title: test/yosupo/vertex_set_path_composite.LCT.test.cpp
+  - icon: ':x:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
   - icon: ':x:'
@@ -722,6 +725,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.HLD.test.cpp
+    title: test/yukicoder/650.HLD.test.cpp
   - icon: ':x:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
@@ -937,6 +943,7 @@ data:
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/502.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/650.HLD.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/2264.test.cpp
@@ -995,6 +1002,7 @@ data:
   - test/unit_test/constexpr_is_prime.test.cpp
   - test/unit_test/constexpr_modint.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/vertex_set_path_composite.LCT.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp
   - test/yosupo/partition.MSET.test.cpp

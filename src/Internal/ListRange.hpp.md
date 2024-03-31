@@ -115,6 +115,12 @@ data:
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2450.HLD.test.cpp
+    title: test/aoj/2450.HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2559.HLD.test.cpp
+    title: test/aoj/2559.HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
   - icon: ':heavy_check_mark:'
@@ -156,6 +162,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc133_f.DynSeg.test.cpp
+    title: test/atcoder/abc133_f.DynSeg.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc133_f.Patricia.test.cpp
+    title: test/atcoder/abc133_f.Patricia.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc133_f.PerArr.test.cpp
+    title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
@@ -295,6 +310,12 @@ data:
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
   - icon: ':x:'
+    path: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+    title: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+    title: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':x:'
@@ -397,11 +418,17 @@ data:
     path: test/yukicoder/421.test.cpp
     title: test/yukicoder/421.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/529.HLD.test.cpp
+    title: test/yukicoder/529.HLD.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.HLD.test.cpp
+    title: test/yukicoder/650.HLD.test.cpp
   - icon: ':x:'
     path: test/yukicoder/658.period.test.cpp
     title: test/yukicoder/658.period.test.cpp
@@ -518,15 +545,18 @@ data:
   - test/yukicoder/1935.test.cpp
   - test/yukicoder/1295.test.cpp
   - test/yukicoder/421.test.cpp
+  - test/yukicoder/650.HLD.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
   - test/yukicoder/2360.test.cpp
+  - test/yukicoder/529.HLD.test.cpp
   - test/yukicoder/644.test.cpp
   - test/atcoder/abc337_g.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc133_f.PerArr.test.cpp
   - test/atcoder/abc202_e.test.cpp
   - test/atcoder/abc256_e.test.cpp
   - test/atcoder/abc310_g.test.cpp
@@ -542,6 +572,7 @@ data:
   - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc162_e.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
   - test/atcoder/abc167_d.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc177_e.gcd_conv.test.cpp
@@ -549,6 +580,7 @@ data:
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/atcoder/abc327_d.test.cpp
+  - test/atcoder/abc133_f.Patricia.test.cpp
   - test/yosupo/bipartite_edge_coloring.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
@@ -561,7 +593,9 @@ data:
   - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/bipartitematching.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
   - test/yosupo/scc.test.cpp
+  - test/yosupo/vertex_add_path_sum.HLD.test.cpp
   - test/yosupo/directedmst.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/general_matching.test.cpp
@@ -575,11 +609,13 @@ data:
   - test/aoj/2423.test.cpp
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/3022.test.cpp
+  - test/aoj/2559.HLD.test.cpp
   - test/aoj/3176.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/2893.test.cpp
   - test/aoj/1226.test.cpp
   - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/2450.HLD.test.cpp
   - test/aoj/3198.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/0273.test.cpp

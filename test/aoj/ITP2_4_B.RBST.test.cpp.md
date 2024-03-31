@@ -23,8 +23,8 @@ data:
   bundledCode: "#line 1 \"test/aoj/ITP2_4_B.RBST.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_B\"\
     \n\n// split, split3, operator+ \u306E verify\n\n#include <iostream>\n#line 2\
     \ \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\n#include <vector>\n#include\
-    \ <string>\n#include <array>\n#include <utility>\n#include <cstddef>\n#include\
-    \ <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n\
+    \ <string>\n#include <array>\n#include <tuple>\n#include <utility>\n#include <cstddef>\n\
+    #include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n\
     #define _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name:\
     \ std::false_type {}; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>:\
     \ std::true_type {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
@@ -35,7 +35,7 @@ data:
     \ {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n return\
     \ x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim;\
     \ }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n#line\
-    \ 10 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\ntemplate <class M,\
+    \ 11 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\ntemplate <class M,\
     \ bool reversible= false> class RandomizedBinarySearchTree {\n _DETECT_BOOL(semigroup,\
     \ typename T::T, decltype(&T::op));\n _DETECT_BOOL(dual, typename T::T, typename\
     \ T::E, decltype(&T::mp), decltype(&T::cp));\n _DETECT_BOOL(commute, typename\
@@ -185,7 +185,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_B.RBST.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_B.RBST.test.cpp

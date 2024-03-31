@@ -9,7 +9,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+    title: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+    title: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1270.test.cpp
     title: test/yukicoder/1270.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/738.BIT.test.cpp
     title: test/yukicoder/738.BIT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/BinaryIndexedTree.hpp\"\n#include <algorithm>\n\
@@ -57,12 +63,14 @@ data:
   path: src/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
   timestamp: '2023-01-21 16:53:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/1270.test.cpp
   - test/yosupo/point_add_range_sum.BIT.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+  - test/yosupo/vertex_add_path_sum.HLD.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp
 layout: document

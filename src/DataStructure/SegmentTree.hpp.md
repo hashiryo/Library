@@ -18,9 +18,15 @@ data:
   - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/529.HLD.test.cpp
+    title: test/yukicoder/529.HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.SegTree.test.cpp
     title: test/yukicoder/649.SegTree.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.HLD.test.cpp
+    title: test/yukicoder/650.HLD.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -89,6 +95,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/649.SegTree.test.cpp
+  - test/yukicoder/650.HLD.test.cpp
+  - test/yukicoder/529.HLD.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp

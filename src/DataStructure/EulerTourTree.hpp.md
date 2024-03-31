@@ -19,18 +19,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-    title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-    title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+    title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
+    title: test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/EulerTourTree.hpp\"\n#include <algorithm>\n\
@@ -234,11 +237,12 @@ data:
   requiredBy:
   - src/DataStructure/OnlineDynamicConnectivity.hpp
   timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/828.ETT.test.cpp
-  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp

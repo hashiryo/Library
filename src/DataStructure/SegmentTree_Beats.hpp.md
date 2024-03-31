@@ -7,24 +7,27 @@ data:
     path: test/aoj/0355.test.cpp
     title: test/aoj/0355.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2450.HLD.test.cpp
+    title: test/aoj/2450.HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
     title: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_ex.Beats.test.cpp
     title: test/atcoder/abc256_ex.Beats.test.cpp
   - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-    title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
+    title: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1270.test.cpp
     title: test/yukicoder/1270.test.cpp
   - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/880.Beats.test.cpp
     title: test/yukicoder/880.Beats.test.cpp
   _isVerificationFailed: true
@@ -59,10 +62,10 @@ data:
     \ Lazy {\n  E val;\n  bool flg;\n };\n std::vector<T> dat;\n std::vector<Lazy>\
     \ laz;\n inline void eval(int k) {\n  if (!laz[k].flg) return;\n  propagate(k\
     \ << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n  laz[k].flg= false;\n\
-    \ }\n inline void propagate(int k, const E &x) {\n  if (bool success= M::mapping(dat[k],\
-    \ x); k < n) {\n   laz[k].flg ? (M::composition(laz[k].val, x), x) : laz[k].val=\
-    \ x;\n   if (laz[k].flg= true; !success) eval(k), update(k);\n  }\n }\n inline\
-    \ void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k << 1 | 1]); }\n};\n"
+    \ }\n inline void propagate(int k, const E &x) {\n  if (bool success= M::mp(dat[k],\
+    \ x); k < n) {\n   laz[k].flg ? (M::cp(laz[k].val, x), x) : laz[k].val= x;\n \
+    \  if (laz[k].flg= true; !success) eval(k), update(k);\n  }\n }\n inline void\
+    \ update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k << 1 | 1]); }\n};\n"
   code: "#pragma once\n#include <vector>\ntemplate <typename M> struct SegmentTree_Beats\
     \ {\n using T= typename M::T;\n using E= typename M::E;\n SegmentTree_Beats()\
     \ {}\n SegmentTree_Beats(int n_): n(n_), height(n == 1 ? 0 : std::__lg(n - 1)\
@@ -90,25 +93,26 @@ data:
     \  bool flg;\n };\n std::vector<T> dat;\n std::vector<Lazy> laz;\n inline void\
     \ eval(int k) {\n  if (!laz[k].flg) return;\n  propagate(k << 1 | 0, laz[k].val),\
     \ propagate(k << 1 | 1, laz[k].val);\n  laz[k].flg= false;\n }\n inline void propagate(int\
-    \ k, const E &x) {\n  if (bool success= M::mapping(dat[k], x); k < n) {\n   laz[k].flg\
-    \ ? (M::composition(laz[k].val, x), x) : laz[k].val= x;\n   if (laz[k].flg= true;\
-    \ !success) eval(k), update(k);\n  }\n }\n inline void update(int k) { dat[k]=\
-    \ M::op(dat[k << 1 | 0], dat[k << 1 | 1]); }\n};\n"
+    \ k, const E &x) {\n  if (bool success= M::mp(dat[k], x); k < n) {\n   laz[k].flg\
+    \ ? (M::cp(laz[k].val, x), x) : laz[k].val= x;\n   if (laz[k].flg= true; !success)\
+    \ eval(k), update(k);\n  }\n }\n inline void update(int k) { dat[k]= M::op(dat[k\
+    \ << 1 | 0], dat[k << 1 | 1]); }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Beats.hpp
   requiredBy: []
-  timestamp: '2023-01-25 13:39:36+09:00'
+  timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/880.Beats.test.cpp
   - test/yukicoder/1270.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/atcoder/abc256_ex.Beats.test.cpp
+  - test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
   - test/aoj/0355.test.cpp
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
+  - test/aoj/2450.HLD.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Beats.hpp
 layout: document
 title: Segment-Tree Beats!

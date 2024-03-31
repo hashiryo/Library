@@ -4,34 +4,30 @@ data:
   - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
-  - icon: ':heavy_check_mark:'
-    path: src/DataStructure/OnlineDynamicConnectivity.hpp
-    title: Online-Dynamic-Connectivity
   - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2235
+    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
     links:
-    - https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2235
-  bundledCode: "#line 1 \"test/aoj/2235.onlinedicon.test.cpp\"\n#define PROBLEM \"\
-    https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2235\"\n#include\
-    \ <iostream>\n#line 2 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\n#include\
-    \ <vector>\n#include <unordered_set>\n#line 2 \"src/DataStructure/EulerTourTree.hpp\"\
-    \n#include <algorithm>\n#include <string>\n#include <unordered_map>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include\
-    \ <type_traits>\n#define MEMBER_MACRO(member, Dummy, name, type1, type2, last)\
-    \ \\\n template <class tClass> struct name##member { \\\n  template <class U,\
-    \ Dummy> static type1 check(U *); \\\n  static type2 check(...); \\\n  static\
-    \ tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member,\
-    \ Dummy, has_, std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
+  bundledCode: "#line 1 \"test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
+    \n#include <iostream>\n#line 2 \"src/DataStructure/EulerTourTree.hpp\"\n#include\
+    \ <algorithm>\n#include <string>\n#include <unordered_map>\n#include <cstddef>\n\
+    #include <cstdint>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
+    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
+    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
+    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
+    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
     #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
     \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
     \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
@@ -127,64 +123,42 @@ data:
     \ n_st);\n  while (v && (n[v].flag & 0b1000))\n   for (bool loop= true; loop;)\
     \ {\n    if (n[v].flag & 0b0100) {\n     if (f(n[v].flag >> 44)) return 1;\n \
     \    splay(v), loop= false;\n    } else v= n[v].ch[!(n[v].ch[0] && (n[n[v].ch[0]].flag\
-    \ & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 5 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
-    \ntemplate <typename M= void, std::size_t NODE_SIZE= 4'000'000> class OnlineDynamicConnectivity\
-    \ {\n using T= typename EulerTourTree<M, NODE_SIZE>::T;\n using E= typename EulerTourTree<M,\
-    \ NODE_SIZE>::E;\n int N;\n std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
-    \ adj;\n void replace(int x, int y, int level) {\n  for (int k= 0; k < level;\
-    \ k++) ett[k].cut(x, y);\n  for (int k= level, loop= true; k-- && loop;) {\n \
-    \  if (ett[k].tree_size(x) > ett[k].tree_size(y)) std::swap(x, y);\n   ett[k].hilevel_edges(x,\
-    \ [&](int s, int d) { ett[k + 1].link(s, d, true); });\n   ett[k].subedges(x,\
-    \ [&](int s) {\n    for (auto itr= adj[k][s].begin(); itr != adj[k][s].end();)\
-    \ {\n     auto d= *itr;\n     if (adj[k][s].size() == 1) ett[k].subedge_set(s,\
-    \ 0);\n     if (adj[k][d].size() == 1) ett[k].subedge_set(d, 0);\n     adj[k][d].erase(s),\
-    \ itr= adj[k][s].erase(itr);\n     if (ett[k].connected(s, d)) {\n      if (adj[k\
-    \ + 1][s].size() == 0) ett[k + 1].subedge_set(s, 1);\n      if (adj[k + 1][d].size()\
-    \ == 0) ett[k + 1].subedge_set(d, 1);\n      adj[k + 1][s].insert(d), adj[k +\
-    \ 1][d].insert(s);\n     } else {\n      for (int kk= k + 1; kk--;) ett[kk].link(s,\
-    \ d, kk == k);\n      return loop= false, true;\n     }\n    }\n    return false;\n\
-    \   });\n  }\n }\npublic:\n OnlineDynamicConnectivity(int N): N(N) { ett.emplace_back(N),\
-    \ adj.emplace_back(N); }\n void link(int x, int y) {\n  if (ett[0].connected(x,\
-    \ y)) {\n   if (adj[0][x].size() == 0) ett[0].subedge_set(x, 1);\n   if (adj[0][y].size()\
-    \ == 0) ett[0].subedge_set(y, 1);\n   adj[0][x].insert(y), adj[0][y].insert(x);\n\
-    \  } else ett[0].link(x, y, true);\n }\n void cut(int x, int y) {\n  for (int\
-    \ k= 0; k < ett.size(); k++)\n   if (adj[k][x].count(y)) {\n    adj[k][x].erase(y),\
-    \ adj[k][y].erase(x);\n    if (adj[k][x].size() == 0) ett[k].subedge_set(x, 0);\n\
-    \    if (adj[k][y].size() == 0) ett[k].subedge_set(y, 0);\n    return;\n   }\n\
-    \  for (int k= ett.size(); k--;)\n   if (ett[k].edge_exist(x, y)) {\n    if (k\
-    \ + 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n    replace(x,\
-    \ y, k + 1);\n   }\n }\n const T &operator[](int x) { return ett[0][x]; }\n const\
-    \ T &get(int x) { return ett[0].get(x); }\n void set(int x, T val) { ett[0].set(x,\
-    \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T fold(int x) {\
-    \ return ett[0].fold_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
-    \ v); }\n bool connected(int x, int y) { return ett[0].connected(x, y); }\n};\n\
-    #line 4 \"test/aoj/2235.onlinedicon.test.cpp\"\nusing namespace std;\nint main()\
-    \ {\n std::cin.tie(nullptr);\n std::ios::sync_with_stdio(false);\n int n, k;\n\
-    \ cin >> n >> k;\n OnlineDynamicConnectivity dicon(n);\n while (k--) {\n  int\
-    \ op, u, v;\n  cin >> op >> u >> v;\n  if (op == 1) dicon.link(u, v);\n  if (op\
-    \ == 2) dicon.cut(u, v);\n  if (op == 3) cout << (dicon.connected(u, v) ? \"YES\"\
-    \ : \"NO\") << '\\n';\n }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2235\"\
-    \n#include <iostream>\n#include \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
-    \nusing namespace std;\nint main() {\n std::cin.tie(nullptr);\n std::ios::sync_with_stdio(false);\n\
-    \ int n, k;\n cin >> n >> k;\n OnlineDynamicConnectivity dicon(n);\n while (k--)\
-    \ {\n  int op, u, v;\n  cin >> op >> u >> v;\n  if (op == 1) dicon.link(u, v);\n\
-    \  if (op == 2) dicon.cut(u, v);\n  if (op == 3) cout << (dicon.connected(u, v)\
-    \ ? \"YES\" : \"NO\") << '\\n';\n }\n}"
+    \ & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 4 \"test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp\"\
+    \nusing namespace std;\nstruct RsumQ {\n using T= long long;\n static T ti() {\
+    \ return 0; }\n static T op(T l, T r) { return l + r; }\n};\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n EulerTourTree<RsumQ>\
+    \ ett(N);\n for (int i= 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  ett.set(i,\
+    \ a);\n }\n for (int i= 0; i < N - 1; i++) {\n  int u, v;\n  cin >> u >> v;\n\
+    \  ett.link(v, u);\n }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0)\
+    \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   ett.cut(u, v);\n   ett.link(w,\
+    \ x);\n  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n\
+    \   ett.set(p, ett[p] + x);\n  } else {\n   int v, p;\n   cin >> v >> p;\n   cout\
+    \ << ett.fold_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
+    \n#include <iostream>\n#include \"src/DataStructure/EulerTourTree.hpp\"\nusing\
+    \ namespace std;\nstruct RsumQ {\n using T= long long;\n static T ti() { return\
+    \ 0; }\n static T op(T l, T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n EulerTourTree<RsumQ>\
+    \ ett(N);\n for (int i= 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  ett.set(i,\
+    \ a);\n }\n for (int i= 0; i < N - 1; i++) {\n  int u, v;\n  cin >> u >> v;\n\
+    \  ett.link(v, u);\n }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0)\
+    \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   ett.cut(u, v);\n   ett.link(w,\
+    \ x);\n  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n\
+    \   ett.set(p, ett[p] + x);\n  } else {\n   int v, p;\n   cin >> v >> p;\n   cout\
+    \ << ett.fold_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
   dependsOn:
-  - src/DataStructure/OnlineDynamicConnectivity.hpp
   - src/DataStructure/EulerTourTree.hpp
   - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
-  path: test/aoj/2235.onlinedicon.test.cpp
+  path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-03-31 22:05:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/2235.onlinedicon.test.cpp
+documentation_of: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/2235.onlinedicon.test.cpp
-- /verify/test/aoj/2235.onlinedicon.test.cpp.html
-title: test/aoj/2235.onlinedicon.test.cpp
+- /verify/test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
+- /verify/test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp.html
+title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
 ---

@@ -70,6 +70,9 @@ data:
     path: test/yukicoder/1907.test.cpp
     title: test/yukicoder/1907.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/650.HLD.test.cpp
+    title: test/yukicoder/650.HLD.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
   - icon: ':x:'
@@ -276,6 +279,7 @@ data:
   - test/yukicoder/1340.test.cpp
   - test/yukicoder/1303.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/650.HLD.test.cpp
   - test/yukicoder/1750.test.cpp
   - test/yukicoder/950.test.cpp
   - test/atcoder/abc236_g.test.cpp

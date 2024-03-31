@@ -32,11 +32,26 @@ data:
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2450.HLD.test.cpp
+    title: test/aoj/2450.HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2559.HLD.test.cpp
+    title: test/aoj/2559.HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc133_f.DynSeg.test.cpp
+    title: test/atcoder/abc133_f.DynSeg.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc133_f.Patricia.test.cpp
+    title: test/atcoder/abc133_f.Patricia.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc133_f.PerArr.test.cpp
+    title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
@@ -91,6 +106,12 @@ data:
   - icon: ':x:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+    title: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+    title: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
   - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
@@ -166,6 +187,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/529.HLD.test.cpp
+    title: test/yukicoder/529.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.HLD.test.cpp
+    title: test/yukicoder/650.HLD.test.cpp
   - icon: ':x:'
     path: test/yukicoder/658.period.test.cpp
     title: test/yukicoder/658.period.test.cpp
@@ -333,11 +360,14 @@ data:
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1935.test.cpp
   - test/yukicoder/1295.test.cpp
+  - test/yukicoder/650.HLD.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/2360.test.cpp
+  - test/yukicoder/529.HLD.test.cpp
   - test/atcoder/abc337_g.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc133_f.PerArr.test.cpp
   - test/atcoder/abc202_e.test.cpp
   - test/atcoder/abc310_g.test.cpp
   - test/atcoder/abc179_e.test.cpp
@@ -345,18 +375,24 @@ data:
   - test/atcoder/abc220_f.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
   - test/atcoder/abc167_d.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/atcoder/abc133_f.Patricia.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/lca.HLD.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+  - test/yosupo/vertex_add_path_sum.HLD.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/GRL_5_A.test.cpp
+  - test/aoj/2559.HLD.test.cpp
   - test/aoj/2667.HLD.test.cpp
+  - test/aoj/2450.HLD.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/1595.test.cpp
 documentation_of: src/Graph/HeavyLightDecomposition.hpp

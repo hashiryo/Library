@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: src/DataStructure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/BinaryIndexedTree.hpp
       title: Binary-Indexed-Tree
     - icon: ':heavy_check_mark:'
@@ -19,7 +19,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
     - icon: ':question:'
@@ -31,7 +31,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':warning:'
@@ -52,13 +52,13 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Patricia.hpp
       title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
     - icon: ':heavy_check_mark:'
@@ -359,7 +359,7 @@ data:
     - icon: ':question:'
       path: src/Misc/CartesianTree.hpp
       title: Cartesian-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Misc/Mo.hpp
       title: Mo's Algorithm
     - icon: ':question:'
@@ -758,6 +758,9 @@ data:
       path: test/aoj/2448.test.cpp
       title: test/aoj/2448.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/2450.HLD.test.cpp
+      title: test/aoj/2450.HLD.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2450.LCT.test.cpp
       title: test/aoj/2450.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -770,8 +773,11 @@ data:
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/2559.LCT_Dual.test.cpp
-      title: test/aoj/2559.LCT_Dual.test.cpp
+      path: test/aoj/2559.HLD.test.cpp
+      title: test/aoj/2559.HLD.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2559.LCT.test.cpp
+      title: test/aoj/2559.LCT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2587.test.cpp
       title: test/aoj/2587.test.cpp
@@ -1158,13 +1164,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc133_f.DynSeg.test.cpp
       title: test/atcoder/abc133_f.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc133_f.Patricia.test.cpp
       title: test/atcoder/abc133_f.Patricia.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1362,7 +1368,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_e.test.cpp
       title: test/atcoder/abc256_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_ex.Beats.test.cpp
       title: test/atcoder/abc256_ex.Beats.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1371,7 +1377,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc256_f.RBST.test.cpp
       title: test/atcoder/abc256_f.RBST.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1629,15 +1635,15 @@ data:
     - icon: ':x:'
       path: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
       title: test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-      title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+      title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+    - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-      title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
+      title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
     - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
@@ -1710,7 +1716,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/lca.HLD.test.cpp
       title: test/yosupo/lca.HLD.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
     - icon: ':x:'
@@ -1830,12 +1836,12 @@ data:
     - icon: ':x:'
       path: test/yosupo/range_affine_range_sum.WBT.test.cpp
       title: test/yosupo/range_affine_range_sum.WBT.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
+      title: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-      title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     - icon: ':x:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
@@ -1942,8 +1948,23 @@ data:
       path: test/yosupo/two_sat.test.cpp
       title: test/yosupo/two_sat.test.cpp
     - icon: ':x:'
+      path: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+      title: test/yosupo/vertex_add_path_sum.HLD.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/vertex_add_path_sum.LCT.test.cpp
+      title: test/yosupo/vertex_add_path_sum.LCT.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
+      title: test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+      title: test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
+    - icon: ':x:'
       path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
       title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/vertex_set_path_composite.LCT.test.cpp
+      title: test/yosupo/vertex_set_path_composite.LCT.test.cpp
     - icon: ':x:'
       path: test/yosupo/z_algorithm.RH.test.cpp
       title: test/yosupo/z_algorithm.RH.test.cpp
@@ -2021,7 +2042,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1269.test.cpp
       title: test/yukicoder/1269.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1270.test.cpp
       title: test/yukicoder/1270.test.cpp
     - icon: ':x:'
@@ -2298,6 +2319,9 @@ data:
       path: test/yukicoder/519.test.cpp
       title: test/yukicoder/519.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/529.HLD.test.cpp
+      title: test/yukicoder/529.HLD.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/529.LCT.test.cpp
       title: test/yukicoder/529.LCT.test.cpp
     - icon: ':x:'
@@ -2318,6 +2342,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/650.HLD.test.cpp
+      title: test/yukicoder/650.HLD.test.cpp
     - icon: ':x:'
       path: test/yukicoder/650.LCT.test.cpp
       title: test/yukicoder/650.LCT.test.cpp
@@ -2375,7 +2402,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/880.Beats.test.cpp
       title: test/yukicoder/880.Beats.test.cpp
     - icon: ':x:'

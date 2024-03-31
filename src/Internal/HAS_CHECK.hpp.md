@@ -2,22 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':question:'
-    path: src/DataStructure/LinkCutTree.hpp
-    title: Link-Cut-Tree
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   - icon: ':heavy_check_mark:'
@@ -43,12 +40,6 @@ data:
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2450.LCT.test.cpp
-    title: test/aoj/2450.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2559.LCT_Dual.test.cpp
-    title: test/aoj/2559.LCT_Dual.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,15 +60,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I.DynSeg.test.cpp
     title: test/aoj/DSL_2_I.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc133_f.PerArr.test.cpp
-    title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
@@ -96,21 +84,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-    title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-    title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-    title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - icon: ':x:'
-    path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-    title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/lca.LCT.test.cpp
-    title: test/yosupo/lca.LCT.test.cpp
+    path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+    title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
@@ -124,6 +103,9 @@ data:
     path: test/yosupo/set_xor_min.Patricia.test.cpp
     title: test/yosupo/set_xor_min.Patricia.test.cpp
   - icon: ':x:'
+    path: test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
+    title: test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'
@@ -135,21 +117,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/235.LCT.test.cpp
-    title: test/yukicoder/235.LCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/529.LCT.test.cpp
-    title: test/yukicoder/529.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.Patricia.test.cpp
     title: test/yukicoder/649.Patricia.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/650.LCT.test.cpp
-    title: test/yukicoder/650.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
@@ -193,16 +166,12 @@ data:
   - src/DataStructure/SegmentTree_Dynamic.hpp
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/SkewHeap.hpp
-  - src/DataStructure/LinkCutTree.hpp
   - src/DataStructure/OnlineDynamicConnectivity.hpp
   - src/DataStructure/EulerTourTree.hpp
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/1216.KDT.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
@@ -210,27 +179,23 @@ data:
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/828.ETT.test.cpp
   - test/yukicoder/649.Patricia.test.cpp
-  - test/atcoder/abc133_f.PerArr.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc309_f.KDT.test.cpp
   - test/atcoder/abc309_f.KDT.3D.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
   - test/atcoder/abc234_ex.KDT.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
-  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
   - test/yosupo/set_xor_min.Patricia.test.cpp
-  - test/yosupo/lca.LCT.test.cpp
-  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/3024.DynSeg.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/DSL_2_I.DynSeg.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
   - test/aoj/1068.KDT.test.cpp
@@ -238,7 +203,6 @@ data:
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/3024.Patricia.test.cpp
-  - test/aoj/2450.LCT.test.cpp
   - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
 documentation_of: src/Internal/HAS_CHECK.hpp

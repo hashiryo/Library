@@ -35,8 +35,8 @@ data:
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.RBST.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\n// apply,\
     \ fold \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
-    \n#include <vector>\n#include <string>\n#include <array>\n#include <utility>\n\
-    #include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\
+    \n#include <vector>\n#include <string>\n#include <array>\n#include <tuple>\n#include\
+    \ <utility>\n#include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\
     \n#include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
     \ class= void> struct name: std::false_type {}; \\\n template <class T> struct\
     \ name<T, std::void_t<__VA_ARGS__>>: std::true_type {}; \\\n template <class T>\
@@ -47,7 +47,7 @@ data:
     #include <cstdint>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL\
     \ * std::random_device{}();\n return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t\
     \ lim) { return rng() % lim; }\nint64_t rng(int64_t l, int64_t r) { return l +\
-    \ rng() % (r - l); }\n#line 10 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
+    \ rng() % (r - l); }\n#line 11 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
     \ntemplate <class M, bool reversible= false> class RandomizedBinarySearchTree\
     \ {\n _DETECT_BOOL(semigroup, typename T::T, decltype(&T::op));\n _DETECT_BOOL(dual,\
     \ typename T::T, typename T::E, decltype(&T::mp), decltype(&T::cp));\n _DETECT_BOOL(commute,\
@@ -284,7 +284,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.RBST.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.RBST.test.cpp

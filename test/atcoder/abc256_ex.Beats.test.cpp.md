@@ -18,9 +18,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_Ex
@@ -135,34 +135,34 @@ data:
     \ std::vector<Lazy> laz;\n inline void eval(int k) {\n  if (!laz[k].flg) return;\n\
     \  propagate(k << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n  laz[k].flg=\
     \ false;\n }\n inline void propagate(int k, const E &x) {\n  if (bool success=\
-    \ M::mapping(dat[k], x); k < n) {\n   laz[k].flg ? (M::composition(laz[k].val,\
-    \ x), x) : laz[k].val= x;\n   if (laz[k].flg= true; !success) eval(k), update(k);\n\
-    \  }\n }\n inline void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k <<\
-    \ 1 | 1]); }\n};\n#line 6 \"test/atcoder/abc256_ex.Beats.test.cpp\"\nusing namespace\
-    \ std;\nstruct Mono {\n struct T {\n  long long sum, max, sz;\n };\n static T\
-    \ ti() { return T(); }\n static T op(const T &vl, const T &vr) { return {vl.sum\
-    \ + vr.sum, max(vl.max, vr.max), vl.sz + vr.sz}; }\n struct E {\n  long long upd,\
-    \ div;\n };\n static bool mapping(T &v, const E &f) {\n  if (f.div == 0) return\
-    \ v.sum= (v.max= f.upd) * v.sz, true;\n  if (v.sum != v.max * v.sz) return false;\n\
-    \  return v.sum= (v.max/= f.div) * v.sz, true;\n }\n static void composition(E\
-    \ &pre, const E &suf) {\n  if (suf.div == 0) pre= suf;\n  else pre.upd/= suf.div,\
-    \ pre.div= min(pre.div * suf.div, 1ll << 30);\n }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n SegmentTree_Beats<Mono>\
-    \ seg(N);\n for (int i= 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  seg.unsafe_set(i,\
-    \ {a, a, 1});\n }\n seg.rebuild();\n while (Q--) {\n  int q, L, R;\n  cin >> q\
-    \ >> L >> R, L--;\n  if (q == 3) cout << seg.fold(L, R).sum << '\\n';\n  else\
-    \ {\n   long long x;\n   cin >> x;\n   if (q == 1) seg.apply(L, R, {0, x});\n\
-    \   if (q == 2) seg.apply(L, R, {x, 0});\n  }\n }\n return 0;\n}\n"
+    \ M::mp(dat[k], x); k < n) {\n   laz[k].flg ? (M::cp(laz[k].val, x), x) : laz[k].val=\
+    \ x;\n   if (laz[k].flg= true; !success) eval(k), update(k);\n  }\n }\n inline\
+    \ void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k << 1 | 1]); }\n};\n\
+    #line 6 \"test/atcoder/abc256_ex.Beats.test.cpp\"\nusing namespace std;\nstruct\
+    \ Mono {\n struct T {\n  long long sum, max, sz;\n };\n static T ti() { return\
+    \ T(); }\n static T op(const T &vl, const T &vr) { return {vl.sum + vr.sum, max(vl.max,\
+    \ vr.max), vl.sz + vr.sz}; }\n struct E {\n  long long upd, div;\n };\n static\
+    \ bool mp(T &v, const E &f) {\n  if (f.div == 0) return v.sum= (v.max= f.upd)\
+    \ * v.sz, true;\n  if (v.sum != v.max * v.sz) return false;\n  return v.sum= (v.max/=\
+    \ f.div) * v.sz, true;\n }\n static void cp(E &pre, const E &suf) {\n  if (suf.div\
+    \ == 0) pre= suf;\n  else pre.upd/= suf.div, pre.div= min(pre.div * suf.div, 1ll\
+    \ << 30);\n }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n SegmentTree_Beats<Mono> seg(N);\n for (int i= 0;\
+    \ i < N; i++) {\n  long long a;\n  cin >> a;\n  seg.unsafe_set(i, {a, a, 1});\n\
+    \ }\n seg.rebuild();\n while (Q--) {\n  int q, L, R;\n  cin >> q >> L >> R, L--;\n\
+    \  if (q == 3) cout << seg.fold(L, R).sum << '\\n';\n  else {\n   long long x;\n\
+    \   cin >> x;\n   if (q == 1) seg.apply(L, R, {0, x});\n   if (q == 2) seg.apply(L,\
+    \ R, {x, 0});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_Ex\"\n\
     // https://atcoder.jp/contests/abc256/tasks/abc256_h\n#include <iostream>\n#include\
     \ \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Beats.hpp\"\
     \nusing namespace std;\nstruct Mono {\n struct T {\n  long long sum, max, sz;\n\
     \ };\n static T ti() { return T(); }\n static T op(const T &vl, const T &vr) {\
     \ return {vl.sum + vr.sum, max(vl.max, vr.max), vl.sz + vr.sz}; }\n struct E {\n\
-    \  long long upd, div;\n };\n static bool mapping(T &v, const E &f) {\n  if (f.div\
+    \  long long upd, div;\n };\n static bool mp(T &v, const E &f) {\n  if (f.div\
     \ == 0) return v.sum= (v.max= f.upd) * v.sz, true;\n  if (v.sum != v.max * v.sz)\
     \ return false;\n  return v.sum= (v.max/= f.div) * v.sz, true;\n }\n static void\
-    \ composition(E &pre, const E &suf) {\n  if (suf.div == 0) pre= suf;\n  else pre.upd/=\
+    \ cp(E &pre, const E &suf) {\n  if (suf.div == 0) pre= suf;\n  else pre.upd/=\
     \ suf.div, pre.div= min(pre.div * suf.div, 1ll << 30);\n }\n};\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
     \ SegmentTree_Beats<Mono> seg(N);\n for (int i= 0; i < N; i++) {\n  long long\
@@ -179,8 +179,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_ex.Beats.test.cpp
   requiredBy: []
-  timestamp: '2024-02-03 19:27:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-03-31 22:05:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_ex.Beats.test.cpp
 layout: document

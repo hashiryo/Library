@@ -14,17 +14,17 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
+    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
     links:
-    - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
-  bundledCode: "#line 1 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
-    \n#include <iostream>\n#line 2 \"src/DataStructure/LinkCutTree.hpp\"\n#include\
-    \ <algorithm>\n#include <vector>\n#include <string>\n#include <cstddef>\n#include\
-    \ <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n\
-    #define _DETECT_BOOL(name, ...) \\\n template <class, class= void> struct name:\
-    \ std::false_type {}; \\\n template <class T> struct name<T, std::void_t<__VA_ARGS__>>:\
-    \ std::true_type {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
+    - https://judge.yosupo.jp/problem/vertex_add_path_sum
+  bundledCode: "#line 1 \"test/yosupo/vertex_add_path_sum.LCT.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n#include <iostream>\n\
+    #line 2 \"src/DataStructure/LinkCutTree.hpp\"\n#include <algorithm>\n#include\
+    \ <vector>\n#include <string>\n#include <cstddef>\n#include <cassert>\n#line 2\
+    \ \"src/Internal/detection_idiom.hpp\"\n#include <type_traits>\n#define _DETECT_BOOL(name,\
+    \ ...) \\\n template <class, class= void> struct name: std::false_type {}; \\\n\
+    \ template <class T> struct name<T, std::void_t<__VA_ARGS__>>: std::true_type\
+    \ {}; \\\n template <class T> static constexpr bool name##_v= name<T>::value\n\
     #define _DETECT_TYPE(name, type1, type2, ...) \\\n template <class T, class= void>\
     \ struct name { \\\n  using type= type2; \\\n }; \\\n template <class T> struct\
     \ name<T, std::void_t<__VA_ARGS__>> { \\\n  using type= type1; \\\n }\n#line 8\
@@ -98,42 +98,38 @@ data:
     \ constexpr (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\
     \" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\"\
     \ \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (std::is_void_v<M>)\
-    \ ret+= \"\\\"get\\\" \\\"set\\\" \";\n  return ret;\n }\n};\n#line 4 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
-    \nusing namespace std;\nstruct RsumQ {\n using T= long long;\n static T op(const\
-    \ T &l, const T &r) { return l + r; }\n using commute= void;\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n LinkCutTree<RsumQ>\
-    \ lct(N);\n for (int i= 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  lct.set(i,\
-    \ a);\n }\n for (int i= 0; i < N - 1; i++) {\n  int u, v;\n  cin >> u >> v;\n\
-    \  lct.link(v, u);\n }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0)\
-    \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   lct.cut(u, v);\n   lct.link(w,\
-    \ x);\n  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n\
-    \   lct.set(p, lct[p] + x);\n  } else {\n   int u, v;\n   cin >> u >> v;\n   cout\
-    \ << lct.fold(u, v) << '\\n';\n  }\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
-    \n#include <iostream>\n#include \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace\
-    \ std;\nstruct RsumQ {\n using T= long long;\n static T op(const T &l, const T\
-    \ &r) { return l + r; }\n using commute= void;\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n LinkCutTree<RsumQ> lct(N);\n\
-    \ for (int i= 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  lct.set(i, a);\n\
-    \ }\n for (int i= 0; i < N - 1; i++) {\n  int u, v;\n  cin >> u >> v;\n  lct.link(v,\
-    \ u);\n }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int u,\
-    \ v, w, x;\n   cin >> u >> v >> w >> x;\n   lct.cut(u, v);\n   lct.link(w, x);\n\
-    \  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n   lct.set(p,\
-    \ lct[p] + x);\n  } else {\n   int u, v;\n   cin >> u >> v;\n   cout << lct.fold(u,\
-    \ v) << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ ret+= \"\\\"get\\\" \\\"set\\\" \";\n  return ret;\n }\n};\n#line 4 \"test/yosupo/vertex_add_path_sum.LCT.test.cpp\"\
+    \nusing namespace std;\nstruct Mono {\n using T= long long;\n static T op(T l,\
+    \ T r) { return l + r; }\n using commute= void;\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n LinkCutTree<Mono> lct(N);\n\
+    \ for (int i= 0, a; i < N; ++i) cin >> a, lct.set(i, a);\n for (int i= 0, u, v;\
+    \ i < N - 1; ++i) cin >> u >> v, lct.link(u, v);\n while (Q--) {\n  bool op;\n\
+    \  cin >> op;\n  if (op) {\n   int u, v;\n   cin >> u >> v;\n   cout << lct.fold(u,\
+    \ v) << '\\n';\n  } else {\n   int p, x;\n   cin >> p >> x;\n   lct.mul(p, x);\n\
+    \  }\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
+    #include <iostream>\n#include \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace\
+    \ std;\nstruct Mono {\n using T= long long;\n static T op(T l, T r) { return l\
+    \ + r; }\n using commute= void;\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n LinkCutTree<Mono> lct(N);\n for (int i= 0, a; i\
+    \ < N; ++i) cin >> a, lct.set(i, a);\n for (int i= 0, u, v; i < N - 1; ++i) cin\
+    \ >> u >> v, lct.link(u, v);\n while (Q--) {\n  bool op;\n  cin >> op;\n  if (op)\
+    \ {\n   int u, v;\n   cin >> u >> v;\n   cout << lct.fold(u, v) << '\\n';\n  }\
+    \ else {\n   int p, x;\n   cin >> p >> x;\n   lct.mul(p, x);\n  }\n }\n return\
+    \ 0;\n}"
   dependsOn:
   - src/DataStructure/LinkCutTree.hpp
   - src/Internal/detection_idiom.hpp
   isVerificationFile: true
-  path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  path: test/yosupo/vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
   timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+documentation_of: test/yosupo/vertex_add_path_sum.LCT.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-- /verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html
-title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+- /verify/test/yosupo/vertex_add_path_sum.LCT.test.cpp
+- /verify/test/yosupo/vertex_add_path_sum.LCT.test.cpp.html
+title: test/yosupo/vertex_add_path_sum.LCT.test.cpp
 ---
