@@ -63,6 +63,9 @@ data:
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   - icon: ':warning:'
+    path: src/old/BiConnectedComponents.hpp
+    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':warning:'
     path: src/old/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
   - icon: ':warning:'
@@ -162,13 +165,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':heavy_check_mark:'
@@ -484,6 +487,7 @@ data:
   requiredBy:
   - src/old/FunctionalGraph.hpp
   - src/old/Tree.hpp
+  - src/old/BiConnectedComponents.hpp
   - src/old/CsrArray.hpp
   - src/old/BipartiteGraph.hpp
   - src/old/DulmageMendelsohn.hpp

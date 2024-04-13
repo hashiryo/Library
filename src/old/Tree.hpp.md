@@ -5,7 +5,10 @@ data:
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: src/old/BiConnectedComponents.hpp
+    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -178,7 +181,8 @@ data:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/old/Tree.hpp
-  requiredBy: []
+  requiredBy:
+  - src/old/BiConnectedComponents.hpp
   timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

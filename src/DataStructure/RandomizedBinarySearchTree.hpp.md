@@ -18,13 +18,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.RBST.test.cpp
     title: test/aoj/ITP2_4_A.RBST.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.RBST.test.cpp
     title: test/aoj/ITP2_4_B.RBST.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.RBST.test.cpp
     title: test/aoj/ITP2_4_C.RBST.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.RBST.test.cpp
     title: test/atcoder/abc256_f.RBST.test.cpp
   - icon: ':x:'
