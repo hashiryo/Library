@@ -27,19 +27,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc309_f.KDT.3D.test.cpp
     title: test/atcoder/abc309_f.KDT.3D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc309_f.KDT.test.cpp
     title: test/atcoder/abc309_f.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - icon: ':x:'
@@ -48,7 +48,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
   - icon: ':x:'
@@ -244,11 +244,11 @@ data:
     \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
     \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
     \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
-    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ r2), ret), ret;\n }\n T prod_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
     \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
-    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \ out_cuboid(r));\n }\n T prod_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
     \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
     \ r2));\n }\n void apply_cuboid(PK2... xs, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
@@ -410,11 +410,11 @@ data:
     \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
     \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
     \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
-    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ r2), ret), ret;\n }\n T prod_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
     \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
-    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \ out_cuboid(r));\n }\n T prod_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
     \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
     \ r2));\n }\n void apply_cuboid(PK2... xs, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
@@ -438,7 +438,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp

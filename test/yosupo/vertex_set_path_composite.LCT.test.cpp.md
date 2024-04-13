@@ -177,14 +177,14 @@ data:
     \ \"\\\"set\\\" is not available\\n\");\n  expose(k), n[k].val= v;\n  if constexpr\
     \ (semigroup_v<M>) update(k);\n }\n void mul(int k, const T &v) {\n  static_assert(semigroup_v<M>\
     \ && commute_v<M>, \"\\\"mul\\\" is not available\\n\");\n  expose(k), n[k].val=\
-    \ M::op(n[k].val, v), update(k);\n }\n // [a,b] closed section\n T fold(int a,\
-    \ int b) {\n  static_assert(semigroup_v<M>, \"\\\"fold\\\" is not available\\\
+    \ M::op(n[k].val, v), update(k);\n }\n // [a,b] closed section\n T prod(int a,\
+    \ int b) {\n  static_assert(semigroup_v<M>, \"\\\"prod\\\" is not available\\\
     n\");\n  return a == b ? get(a) : (evert(a), expose(b), assert(n[a].par != -1),\
     \ n[b].sum);\n }\n // [a,b] closed section\n void apply(int a, int b, const E\
     \ &v) {\n  static_assert(dual_v<M>, \"\\\"apply\\\" is not available\\n\");\n\
     \  evert(a), expose(b), assert(a == b || n[a].par != -1), propagate(b, v), push(b);\n\
     \ }\n static std::string which_unavailable() {\n  std::string ret= \"\";\n  if\
-    \ constexpr (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\
+    \ constexpr (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"prod\\\
     \" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\"\
     \ \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (std::is_void_v<M>)\
     \ ret+= \"\\\"get\\\" \\\"set\\\" \";\n  return ret;\n }\n};\n#line 7 \"test/yosupo/vertex_set_path_composite.LCT.test.cpp\"\
@@ -195,7 +195,7 @@ data:
     \ N; ++i) {\n  Mint a, b;\n  cin >> a >> b;\n  lct.set(i, {a, b});\n }\n for (int\
     \ i= 0, u, v; i < N - 1; ++i) cin >> u >> v, lct.link(u, v);\n\n while (Q--) {\n\
     \  bool op;\n  cin >> op;\n  if (op) {\n   int u, v;\n   Mint x;\n   cin >> u\
-    \ >> v >> x;\n   auto [a, b]= lct.fold(u, v);\n   cout << a * x + b << '\\n';\n\
+    \ >> v >> x;\n   auto [a, b]= lct.prod(u, v);\n   cout << a * x + b << '\\n';\n\
     \  } else {\n   int p;\n   Mint c, d;\n   cin >> p >> c >> d;\n   lct.set(p, {c,\
     \ d});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
@@ -208,7 +208,7 @@ data:
     \ a, b;\n  cin >> a >> b;\n  lct.set(i, {a, b});\n }\n for (int i= 0, u, v; i\
     \ < N - 1; ++i) cin >> u >> v, lct.link(u, v);\n\n while (Q--) {\n  bool op;\n\
     \  cin >> op;\n  if (op) {\n   int u, v;\n   Mint x;\n   cin >> u >> v >> x;\n\
-    \   auto [a, b]= lct.fold(u, v);\n   cout << a * x + b << '\\n';\n  } else {\n\
+    \   auto [a, b]= lct.prod(u, v);\n   cout << a * x + b << '\\n';\n  } else {\n\
     \   int p;\n   Mint c, d;\n   cin >> p >> c >> d;\n   lct.set(p, {c, d});\n  }\n\
     \ }\n return 0;\n}"
   dependsOn:
@@ -221,7 +221,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/vertex_set_path_composite.LCT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 22:05:48+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/vertex_set_path_composite.LCT.test.cpp

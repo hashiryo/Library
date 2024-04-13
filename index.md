@@ -28,7 +28,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
     - icon: ':question:'
@@ -37,7 +37,7 @@ data:
     - icon: ':warning:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/DataStructure/RandomizedBinarySearchTree.hpp
       title: Splay-Tree
     - icon: ':heavy_check_mark:'
@@ -658,7 +658,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1508.RBST.test.cpp
       title: test/aoj/1508.RBST.test.cpp
     - icon: ':heavy_check_mark:'
@@ -877,7 +877,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3024.Patricia.test.cpp
       title: test/aoj/3024.Patricia.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3024.WBT.test.cpp
       title: test/aoj/3024.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1093,7 +1093,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
       title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.RBST.test.cpp
       title: test/aoj/ITP2_2_D.RBST.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1102,7 +1102,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.WBT.test.cpp
       title: test/aoj/ITP2_2_D.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.RBST.test.cpp
       title: test/aoj/ITP2_4_A.RBST.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1114,19 +1114,19 @@ data:
     - icon: ':x:'
       path: test/aoj/ITP2_4_B.RBST.test.cpp
       title: test/aoj/ITP2_4_B.RBST.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_B.WBT.test.cpp
       title: test/aoj/ITP2_4_B.WBT.test.cpp
     - icon: ':x:'
       path: test/aoj/ITP2_4_C.RBST.test.cpp
       title: test/aoj/ITP2_4_C.RBST.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_C.WBT.test.cpp
       title: test/aoj/ITP2_4_C.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1314,7 +1314,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc228_f.Seg2D.test.cpp
       title: test/atcoder/abc228_f.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1326,7 +1326,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc234_ex.KDT.test.cpp
       title: test/atcoder/abc234_ex.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1371,7 +1371,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc256_ex.Beats.test.cpp
       title: test/atcoder/abc256_ex.Beats.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
     - icon: ':x:'
@@ -1380,10 +1380,10 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.Splay.test.cpp
       title: test/atcoder/abc256_f.Splay.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1413,13 +1413,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc305_ex.test.cpp
       title: test/atcoder/abc305_ex.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc309_f.KDT.3D.test.cpp
       title: test/atcoder/abc309_f.KDT.3D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc309_f.KDT.test.cpp
       title: test/atcoder/abc309_f.KDT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1491,10 +1491,10 @@ data:
     - icon: ':x:'
       path: test/atcoder/arc153_b.RBST.test.cpp
       title: test/atcoder/arc153_b.RBST.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc153_b.Splay.test.cpp
       title: test/atcoder/arc153_b.Splay.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc153_b.WBT.test.cpp
       title: test/atcoder/arc153_b.WBT.test.cpp
   - name: test/hackerrank
@@ -1508,7 +1508,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/hackerrank/cube-summation.KDT.test.cpp
       title: test/hackerrank/cube-summation.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1623,7 +1623,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/division_of_big_integers.test.cpp
       title: test/yosupo/division_of_big_integers.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':x:'
@@ -1791,10 +1791,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
       title: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
     - icon: ':x:'
@@ -1857,10 +1857,10 @@ data:
     - icon: ':x:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/set_xor_min.DynSeg.test.cpp
       title: test/yosupo/set_xor_min.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/set_xor_min.Patricia.test.cpp
       title: test/yosupo/set_xor_min.Patricia.test.cpp
     - icon: ':x:'
@@ -2126,10 +2126,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.MCF.test.cpp
       title: test/yukicoder/1615.MCF.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1625.KDT.test.cpp
       title: test/yukicoder/1625.KDT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1625.Seg2D.test.cpp
       title: test/yukicoder/1625.Seg2D.test.cpp
     - icon: ':x:'
@@ -2201,7 +2201,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/2012.test.cpp
       title: test/yukicoder/2012.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/2065.Seg2D.test.cpp
       title: test/yukicoder/2065.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2333,10 +2333,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.BIT.test.cpp
       title: test/yukicoder/649.BIT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/649.DynSeg.test.cpp
       title: test/yukicoder/649.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/649.Patricia.test.cpp
       title: test/yukicoder/649.Patricia.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2399,7 +2399,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
     - icon: ':x:'

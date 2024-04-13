@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RandomizedBinarySearchTree.hpp
     title: Splay-Tree
   - icon: ':question:'
@@ -34,7 +34,7 @@ data:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n\n// insert, erase, reverse, apply, fold \u306E verify\n\n#include <iostream>\n\
+    \n\n// insert, erase, reverse, apply, prod \u306E verify\n\n#include <iostream>\n\
     #include <array>\n#line 2 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
     \n#include <vector>\n#include <string>\n#line 5 \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
     \n#include <tuple>\n#include <utility>\n#include <cstddef>\n#include <cassert>\n\
@@ -106,12 +106,12 @@ data:
     \ (reversible) push_tog(t);\n  size_t sz= t->l ? t->l->size() : 0;\n  if (k ==\
     \ sz) {\n   T v= t->val;\n   return t= merge(t->l, t->r), v;\n  } else {\n   T\
     \ v= k < sz ? erase(t->l, k) : erase(t->r, k - sz - 1);\n   return update(t),\
-    \ v;\n  }\n }\n static inline T fold(np t, size_t a, size_t b) {\n  if (!a &&\
+    \ v;\n  }\n }\n static inline T prod(np t, size_t a, size_t b) {\n  if (!a &&\
     \ b == t->size()) return t->sum;\n  if constexpr (dual_v<M>) push_prop(t);\n \
     \ if constexpr (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0,\
-    \ k= l + 1;\n  if (b < k) return fold(t->l, a, b);\n  if (a > l) return fold(t->r,\
-    \ a - k, b - k);\n  T ret= t->val;\n  if (a < l) ret= M::op(fold(t->l, a, l),\
-    \ ret);\n  if (b > k) ret= M::op(ret, fold(t->r, 0, b - k));\n  return ret;\n\
+    \ k= l + 1;\n  if (b < k) return prod(t->l, a, b);\n  if (a > l) return prod(t->r,\
+    \ a - k, b - k);\n  T ret= t->val;\n  if (a < l) ret= M::op(prod(t->l, a, l),\
+    \ ret);\n  if (b > k) ret= M::op(ret, prod(t->r, 0, b - k));\n  return ret;\n\
     \ }\n static inline void apply(np t, size_t a, size_t b, const E &x) {\n  if (!a\
     \ && b == t->size()) return propagate(t, x);\n  if constexpr (reversible) push_tog(t);\n\
     \  push_prop(t);\n  size_t l= t->l ? t->l->size() : 0, k= l + 1;\n  if (b < k)\
@@ -143,42 +143,42 @@ data:
     \ nullptr; }\n std::vector<T> dump() {\n  if (!rt) return std::vector<T>();\n\
     \  std::vector<T> ret(size());\n  return dump(ret.begin(), rt), ret;\n }\n static\
     \ std::string which_unavailable() {\n  std::string ret= \"\";\n  if constexpr\
-    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\" \";\n \
+    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"prod\\\" \";\n \
     \ if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\" \";\n  if\
     \ constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (!reversible)\
     \ ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n RBST &operator+=(RBST r) {\
     \ return rt= merge(rt, r.rt), *this; }\n RBST operator+(RBST r) const { return\
     \ RBST(*this)+= r; }\n std::pair<RBST, RBST> split(size_t k) {\n  assert(k <=\
     \ size());\n  auto [l, r]= split(rt, k);\n  return {np_to_rbst(l), np_to_rbst(r)};\n\
-    \ }\n std::tuple<SplayTree, SplayTree, SplayTree> split3(size_t a, size_t b) {\n\
-    \  assert(a < b), assert(b <= size());\n  auto [tmp, r]= split(rt, b);\n  auto\
-    \ [l, c]= split(tmp, a);\n  return {np_to_rbst(l), np_to_rbst(c), np_to_rbst(r)};\n\
-    \ }\n void push_back(const T &v) {\n  np t= new Node{v};\n  update(t), rt= merge(rt,\
-    \ t);\n }\n void push_front(const T &v) {\n  np t= new Node{v};\n  update(t),\
-    \ rt= merge(t, rt);\n }\n void insert(size_t k, const T &v) {\n  auto [l, r]=\
-    \ split(rt, k);\n  rt= new Node{v}, update(rt), rt= merge(merge(l, rt), r);\n\
-    \ }\n T pop_back() {\n  auto [l, t]= split(rt, size() - 1);\n  return rt= l, t->val;\n\
-    \ }\n T pop_front() {\n  auto [t, r]= split(rt, 1);\n  return rt= r, t->val;\n\
-    \ }\n T erase(size_t k) { return assert(k < size()), erase(rt, k); }\n void set(size_t\
-    \ k, const T &val) { set_val(rt, k, val); }\n void mul(size_t k, const T &val)\
-    \ {\n  static_assert(semigroup_v<M> && commute_v<M>, \"\\\"mul\\\" is not available\\\
-    n\");\n  mul_val(rt, k, val);\n }\n T get(size_t k) { return get_val(rt, k); }\n\
-    \ T &at(size_t k) {\n  static_assert(!semigroup_v<M>, \"\\\"at\\\" is not available\\\
-    n\");\n  return at_val(rt, k);\n }\n template <class L= M> std::enable_if_t<semigroup_v<L>,\
-    \ T> operator[](size_t k) { return get(k); }\n template <class L= M> std::enable_if_t<!semigroup_v<L>,\
-    \ T> &operator[](size_t k) { return at(k); }\n T fold(size_t a, size_t b) {\n\
-    \  static_assert(semigroup_v<M>, \"\\\"fold\\\" is not available\\n\");\n  return\
-    \ fold(rt, a, b);\n }\n void apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>,\
-    \ \"\\\"apply\\\" is not available\\n\");\n  apply(rt, a, b, x);\n }\n void reverse()\
-    \ {\n  static_assert(reversible, \"\\\"reverse\\\" is not available\\n\");\n \
-    \ toggle(rt);\n }\n void reverse(size_t a, size_t b) {\n  static_assert(reversible,\
-    \ \"\\\"reverse\\\" is not available\\n\");\n  assert(a < b), assert(b <= size());\n\
-    \  auto [tmp, r]= split(rt, b);\n  auto [l, c]= split(tmp, a);\n  toggle(c), rt=\
-    \ merge(merge(l, c), r);\n }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class\
-    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
-    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
-    \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
-    \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ }\n std::tuple<RBST, RBST, RBST> split3(size_t a, size_t b) {\n  assert(a <\
+    \ b), assert(b <= size());\n  auto [tmp, r]= split(rt, b);\n  auto [l, c]= split(tmp,\
+    \ a);\n  return {np_to_rbst(l), np_to_rbst(c), np_to_rbst(r)};\n }\n void push_back(const\
+    \ T &v) {\n  np t= new Node{v};\n  update(t), rt= merge(rt, t);\n }\n void push_front(const\
+    \ T &v) {\n  np t= new Node{v};\n  update(t), rt= merge(t, rt);\n }\n void insert(size_t\
+    \ k, const T &v) {\n  auto [l, r]= split(rt, k);\n  rt= new Node{v}, update(rt),\
+    \ rt= merge(merge(l, rt), r);\n }\n T pop_back() {\n  auto [l, t]= split(rt, size()\
+    \ - 1);\n  return rt= l, t->val;\n }\n T pop_front() {\n  auto [t, r]= split(rt,\
+    \ 1);\n  return rt= r, t->val;\n }\n T erase(size_t k) { return assert(k < size()),\
+    \ erase(rt, k); }\n void set(size_t k, const T &val) { set_val(rt, k, val); }\n\
+    \ void mul(size_t k, const T &val) {\n  static_assert(semigroup_v<M> && commute_v<M>,\
+    \ \"\\\"mul\\\" is not available\\n\");\n  mul_val(rt, k, val);\n }\n T get(size_t\
+    \ k) { return get_val(rt, k); }\n T &at(size_t k) {\n  static_assert(!semigroup_v<M>,\
+    \ \"\\\"at\\\" is not available\\n\");\n  return at_val(rt, k);\n }\n template\
+    \ <class L= M> std::enable_if_t<semigroup_v<L>, T> operator[](size_t k) { return\
+    \ get(k); }\n template <class L= M> std::enable_if_t<!semigroup_v<L>, T> &operator[](size_t\
+    \ k) { return at(k); }\n T prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"prod\\\" is not available\\n\");\n  return prod(rt, a, b);\n }\n void\
+    \ apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
+    \ is not available\\n\");\n  apply(rt, a, b, x);\n }\n void reverse() {\n  static_assert(reversible,\
+    \ \"\\\"reverse\\\" is not available\\n\");\n  toggle(rt);\n }\n void reverse(size_t\
+    \ a, size_t b) {\n  static_assert(reversible, \"\\\"reverse\\\" is not available\\\
+    n\");\n  assert(a < b), assert(b <= size());\n  auto [tmp, r]= split(rt, b);\n\
+    \  auto [l, c]= split(tmp, a);\n  toggle(c), rt= merge(merge(l, c), r);\n }\n\
+    };\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int\
+    \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
+    \ y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b),\
+    \ z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod\
+    \ : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
     \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
     #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
@@ -264,10 +264,10 @@ data:
     \ if (op == 1) {\n   int i;\n   cin >> i;\n   rbst.erase(i);\n  } else if (op\
     \ == 2) {\n   int l, r;\n   cin >> l >> r;\n   rbst.reverse(l, r);\n  } else if\
     \ (op == 3) {\n   int l, r, b, c;\n   cin >> l >> r >> b >> c;\n   rbst.apply(l,\
-    \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << rbst.fold(l,\
+    \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << rbst.prod(l,\
     \ r) << '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n\n// insert, erase, reverse, apply, fold \u306E verify\n\n#include <iostream>\n\
+    \n\n// insert, erase, reverse, apply, prod \u306E verify\n\n#include <iostream>\n\
     #include <array>\n#include \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
     struct RaffineRsumQ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T\
@@ -281,7 +281,7 @@ data:
     \ else if (op == 1) {\n   int i;\n   cin >> i;\n   rbst.erase(i);\n  } else if\
     \ (op == 2) {\n   int l, r;\n   cin >> l >> r;\n   rbst.reverse(l, r);\n  } else\
     \ if (op == 3) {\n   int l, r, b, c;\n   cin >> l >> r >> b >> c;\n   rbst.apply(l,\
-    \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << rbst.fold(l,\
+    \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << rbst.prod(l,\
     \ r) << '\\n';\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/RandomizedBinarySearchTree.hpp
@@ -294,7 +294,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 22:05:48+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp

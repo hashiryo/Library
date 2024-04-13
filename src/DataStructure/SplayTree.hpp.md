@@ -15,16 +15,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.SplayTree.test.cpp
     title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/ITP2_4_B.SplayTree.test.cpp
     title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.Splay.test.cpp
     title: test/atcoder/abc256_f.Splay.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc153_b.Splay.test.cpp
     title: test/atcoder/arc153_b.Splay.test.cpp
   - icon: ':x:'
@@ -113,7 +113,7 @@ data:
     \ nullptr; }\n std::vector<T> dump() {\n  if (!rt) return std::vector<T>();\n\
     \  std::vector<T> ret(size());\n  return dump(ret.begin(), rt), ret;\n }\n static\
     \ std::string which_unavailable() {\n  std::string ret= \"\";\n  if constexpr\
-    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\" \";\n \
+    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"prod\\\" \";\n \
     \ if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\" \";\n  if\
     \ constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (!reversible)\
     \ ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n template <class L= M> const\
@@ -125,8 +125,8 @@ data:
     \ T &val) {\n  splay(rt, k), rt->val= val;\n  if constexpr (semigroup_v<M>) update<0>(rt);\n\
     \ }\n void mul(size_t k, const T &val) {\n  static_assert(semigroup_v<M> && commute_v<M>,\
     \ \"\\\"mul\\\" is not available\");\n  splay(rt, k), rt->val= M::op(rt->val,\
-    \ val), update<0>(rt);\n }\n const T &fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
-    \ \"\\\"fold\\\" is not available\");\n  return between(a, b)->sum;\n }\n void\
+    \ val), update<0>(rt);\n }\n const T &prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"prod\\\" is not available\");\n  return between(a, b)->sum;\n }\n void\
     \ apply(size_t a, size_t b, const E &x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\
     \" is not available\");\n  np t= between(a, b);\n  propagate(t, x);\n  if constexpr\
     \ (semigroup_v<M>)\n   if (np p= t->par; p)\n    if (update<0>(p); p->par) update<0>(p->par);\n\
@@ -220,7 +220,7 @@ data:
     \ nullptr; }\n std::vector<T> dump() {\n  if (!rt) return std::vector<T>();\n\
     \  std::vector<T> ret(size());\n  return dump(ret.begin(), rt), ret;\n }\n static\
     \ std::string which_unavailable() {\n  std::string ret= \"\";\n  if constexpr\
-    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\" \";\n \
+    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"prod\\\" \";\n \
     \ if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\" \";\n  if\
     \ constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (!reversible)\
     \ ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n template <class L= M> const\
@@ -232,8 +232,8 @@ data:
     \ T &val) {\n  splay(rt, k), rt->val= val;\n  if constexpr (semigroup_v<M>) update<0>(rt);\n\
     \ }\n void mul(size_t k, const T &val) {\n  static_assert(semigroup_v<M> && commute_v<M>,\
     \ \"\\\"mul\\\" is not available\");\n  splay(rt, k), rt->val= M::op(rt->val,\
-    \ val), update<0>(rt);\n }\n const T &fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
-    \ \"\\\"fold\\\" is not available\");\n  return between(a, b)->sum;\n }\n void\
+    \ val), update<0>(rt);\n }\n const T &prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"prod\\\" is not available\");\n  return between(a, b)->sum;\n }\n void\
     \ apply(size_t a, size_t b, const E &x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\
     \" is not available\");\n  np t= between(a, b);\n  propagate(t, x);\n  if constexpr\
     \ (semigroup_v<M>)\n   if (np p= t->par; p)\n    if (update<0>(p); p->par) update<0>(p->par);\n\
@@ -267,7 +267,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/396.Splay.test.cpp

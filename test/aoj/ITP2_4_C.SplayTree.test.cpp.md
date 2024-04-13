@@ -9,9 +9,9 @@ data:
     title: detection idiom
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C
@@ -92,7 +92,7 @@ data:
     \ {\n  if (!rt) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
     \ dump(ret.begin(), rt), ret;\n }\n static std::string which_unavailable() {\n\
     \  std::string ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"at\\\"\
-    \ \";\n  else ret+= \"\\\"fold\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
+    \ \";\n  else ret+= \"\\\"prod\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
     \ ret+= \"\\\"mul\\\" \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \"\
     ;\n  if constexpr (!reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n\
     \ template <class L= M> const std::enable_if_t<semigroup_v<L>, T> &operator[](size_t\
@@ -104,7 +104,7 @@ data:
     \ (semigroup_v<M>) update<0>(rt);\n }\n void mul(size_t k, const T &val) {\n \
     \ static_assert(semigroup_v<M> && commute_v<M>, \"\\\"mul\\\" is not available\"\
     );\n  splay(rt, k), rt->val= M::op(rt->val, val), update<0>(rt);\n }\n const T\
-    \ &fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>, \"\\\"fold\\\"\
+    \ &prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>, \"\\\"prod\\\"\
     \ is not available\");\n  return between(a, b)->sum;\n }\n void apply(size_t a,\
     \ size_t b, const E &x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\" is not available\"\
     );\n  np t= between(a, b);\n  propagate(t, x);\n  if constexpr (semigroup_v<M>)\n\
@@ -156,8 +156,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_C.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-04-13 13:36:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_C.SplayTree.test.cpp
 layout: document

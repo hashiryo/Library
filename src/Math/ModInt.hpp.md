@@ -208,7 +208,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_ex.Beats.test.cpp
     title: test/atcoder/abc256_ex.Beats.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':x:'
@@ -217,10 +217,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.Splay.test.cpp
     title: test/atcoder/abc256_f.Splay.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':heavy_check_mark:'

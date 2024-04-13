@@ -31,7 +31,7 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.Splay.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\n// apply,\
-    \ fold \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\
+    \ prod \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\
     \n#include <vector>\n#include <string>\n#include <array>\n#include <tuple>\n#include\
     \ <utility>\n#include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\
     \n#include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
@@ -104,7 +104,7 @@ data:
     \ {\n  if (!rt) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
     \ dump(ret.begin(), rt), ret;\n }\n static std::string which_unavailable() {\n\
     \  std::string ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"at\\\"\
-    \ \";\n  else ret+= \"\\\"fold\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
+    \ \";\n  else ret+= \"\\\"prod\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
     \ ret+= \"\\\"mul\\\" \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \"\
     ;\n  if constexpr (!reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n\
     \ template <class L= M> const std::enable_if_t<semigroup_v<L>, T> &operator[](size_t\
@@ -116,7 +116,7 @@ data:
     \ (semigroup_v<M>) update<0>(rt);\n }\n void mul(size_t k, const T &val) {\n \
     \ static_assert(semigroup_v<M> && commute_v<M>, \"\\\"mul\\\" is not available\"\
     );\n  splay(rt, k), rt->val= M::op(rt->val, val), update<0>(rt);\n }\n const T\
-    \ &fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>, \"\\\"fold\\\"\
+    \ &prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>, \"\\\"prod\\\"\
     \ is not available\");\n  return between(a, b)->sum;\n }\n void apply(size_t a,\
     \ size_t b, const E &x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\" is not available\"\
     );\n  np t= between(a, b);\n  propagate(t, x);\n  if constexpr (semigroup_v<M>)\n\
@@ -231,10 +231,10 @@ data:
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >>\
     \ Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n SplayTree<RaffineQ_RsumQ>\
     \ st(v, v + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >>\
-    \ r;\n  if (op) {\n   cout << st.fold(l, r) << '\\n';\n  } else {\n   Mint b,\
+    \ r;\n  if (op) {\n   cout << st.prod(l, r) << '\\n';\n  } else {\n   Mint b,\
     \ c;\n   cin >> b >> c;\n   st.apply(l, r, {b, c});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n\n// apply, fold \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/SplayTree.hpp\"\
+    \n\n// apply, prod \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/SplayTree.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
     struct RaffineQ_RsumQ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static\
     \ T op(const T &l, const T &r) { return l + r; }\n static void mp(T &v, const\
@@ -243,7 +243,7 @@ data:
     \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >>\
     \ v[i];\n SplayTree<RaffineQ_RsumQ> st(v, v + N);\n while (Q--) {\n  bool op;\n\
-    \  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << st.fold(l, r) <<\
+    \  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << st.prod(l, r) <<\
     \ '\\n';\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n   st.apply(l, r, {b,\
     \ c});\n  }\n }\n return 0;\n}"
   dependsOn:
@@ -256,7 +256,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.Splay.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.Splay.test.cpp

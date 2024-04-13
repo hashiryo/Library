@@ -88,14 +88,14 @@ data:
     \ \"\\\"set\\\" is not available\\n\");\n  expose(k), n[k].val= v;\n  if constexpr\
     \ (semigroup_v<M>) update(k);\n }\n void mul(int k, const T &v) {\n  static_assert(semigroup_v<M>\
     \ && commute_v<M>, \"\\\"mul\\\" is not available\\n\");\n  expose(k), n[k].val=\
-    \ M::op(n[k].val, v), update(k);\n }\n // [a,b] closed section\n T fold(int a,\
-    \ int b) {\n  static_assert(semigroup_v<M>, \"\\\"fold\\\" is not available\\\
+    \ M::op(n[k].val, v), update(k);\n }\n // [a,b] closed section\n T prod(int a,\
+    \ int b) {\n  static_assert(semigroup_v<M>, \"\\\"prod\\\" is not available\\\
     n\");\n  return a == b ? get(a) : (evert(a), expose(b), assert(n[a].par != -1),\
     \ n[b].sum);\n }\n // [a,b] closed section\n void apply(int a, int b, const E\
     \ &v) {\n  static_assert(dual_v<M>, \"\\\"apply\\\" is not available\\n\");\n\
     \  evert(a), expose(b), assert(a == b || n[a].par != -1), propagate(b, v), push(b);\n\
     \ }\n static std::string which_unavailable() {\n  std::string ret= \"\";\n  if\
-    \ constexpr (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\
+    \ constexpr (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"prod\\\
     \" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\"\
     \ \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (std::is_void_v<M>)\
     \ ret+= \"\\\"get\\\" \\\"set\\\" \";\n  return ret;\n }\n};\n#line 4 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
@@ -108,7 +108,7 @@ data:
     \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   lct.cut(u, v);\n   lct.link(w,\
     \ x);\n  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n\
     \   lct.set(p, lct[p] + x);\n  } else {\n   int u, v;\n   cin >> u >> v;\n   cout\
-    \ << lct.fold(u, v) << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ << lct.prod(u, v) << '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
     \n#include <iostream>\n#include \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace\
     \ std;\nstruct RsumQ {\n using T= long long;\n static T op(const T &l, const T\
@@ -119,7 +119,7 @@ data:
     \ u);\n }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int u,\
     \ v, w, x;\n   cin >> u >> v >> w >> x;\n   lct.cut(u, v);\n   lct.link(w, x);\n\
     \  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n   lct.set(p,\
-    \ lct[p] + x);\n  } else {\n   int u, v;\n   cin >> u >> v;\n   cout << lct.fold(u,\
+    \ lct[p] + x);\n  } else {\n   int u, v;\n   cin >> u >> v;\n   cout << lct.prod(u,\
     \ v) << '\\n';\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/LinkCutTree.hpp
@@ -127,7 +127,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 22:05:48+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp

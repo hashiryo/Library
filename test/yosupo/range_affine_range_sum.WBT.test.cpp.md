@@ -31,7 +31,7 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\n// apply,\
-    \ fold \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \ prod \u306E verify\n\n#include <iostream>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n#include <vector>\n#include <array>\n#include <tuple>\n#include <string>\n#include\
     \ <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\n\
     #include <type_traits>\n#define _DETECT_BOOL(name, ...) \\\n template <class,\
@@ -107,11 +107,11 @@ data:
     \ i;\n }\n static inline void dump(int i, typename std::vector<T>::iterator it)\
     \ {\n  if (i < 0) *it= nl[-i];\n  else {\n   if constexpr (dual_v<M> || reversible)\
     \ push(i);\n   dump(nm[i].ch[0], it), dump(nm[i].ch[1], it + size(nm[i].ch[0]));\n\
-    \  }\n }\n static inline T fold(int i, size_t l, size_t r) {\n  if (i < 0) return\
+    \  }\n }\n static inline T prod(int i, size_t l, size_t r) {\n  if (i < 0) return\
     \ nl[-i];\n  if (l <= 0 && msize(i) <= r) return nm[i].sum;\n  if constexpr (dual_v<M>\
     \ || reversible) push(i);\n  auto [n0, n1]= nm[i].ch;\n  size_t lsz= size(n0);\n\
-    \  if (r <= lsz) return fold(n0, l, r);\n  if (lsz <= l) return fold(n1, l - lsz,\
-    \ r - lsz);\n  return M::op(fold(n0, l, lsz), fold(n1, 0, r - lsz));\n }\n static\
+    \  if (r <= lsz) return prod(n0, l, r);\n  if (lsz <= l) return prod(n1, l - lsz,\
+    \ r - lsz);\n  return M::op(prod(n0, l, lsz), prod(n1, 0, r - lsz));\n }\n static\
     \ inline void apply(int &i, size_t l, size_t r, const E &x) {\n  if (i < 0) {\n\
     \   if constexpr (persistent) nl[nli]= nl[-i], i= -nli++;\n   M::mp(nl[-i], x,\
     \ 1);\n   return;\n  }\n  if constexpr (persistent) nm[nmi]= nm[i], i= nmi++;\n\
@@ -164,8 +164,8 @@ data:
     \\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
     \ L= M> std::enable_if_t<semigroup_v<L>, T> operator[](size_t k) { return get(k);\
     \ }\n template <class L= M> std::enable_if_t<!semigroup_v<L>, T> &operator[](size_t\
-    \ k) { return at(k); }\n T fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
-    \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b);\n }\n void\
+    \ k) { return at(k); }\n T prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"prod\\\" is not available\\n\");\n  return prod(root, a, b);\n }\n void\
     \ apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
     \ is not available\\n\");\n  apply(root, a, b, x);\n }\n void reverse() {\n  static_assert(reversible,\
     \ \"\\\"reverse\\\" is not available\\n\");\n  if (root <= 0) return;\n  if constexpr\
@@ -178,7 +178,7 @@ data:
     \ ret(size());\n  return dump(root, ret.begin()), ret;\n }\n void clear() { root=\
     \ 0; }\n static void reset() { nmi= 1, nli= 1; }\n static std::string which_unavailable()\
     \ {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"at\\\
-    \" \";\n  else ret+= \"\\\"fold\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
+    \" \";\n  else ret+= \"\\\"prod\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
     \ ret+= \"\\\"mul\\\" \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \"\
     ;\n  if constexpr (!reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n\
     \ static bool pool_empty() {\n  if constexpr (persistent && (dual_v<M> || reversible))\
@@ -269,10 +269,10 @@ data:
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >>\
     \ Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n WeightBalancedTree<RaffineQ_RsumQ>\
     \ wbt(v, v + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >>\
-    \ r;\n  if (op) {\n   cout << wbt.fold(l, r) << '\\n';\n  } else {\n   Mint b,\
+    \ r;\n  if (op) {\n   cout << wbt.prod(l, r) << '\\n';\n  } else {\n   Mint b,\
     \ c;\n   cin >> b >> c;\n   wbt.apply(l, r, {b, c});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n\n// apply, fold \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n\n// apply, prod \u306E verify\n\n#include <iostream>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
     struct RaffineQ_RsumQ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static\
     \ T op(const T &l, const T &r) { return l + r; }\n static void mp(T &v, const\
@@ -281,7 +281,7 @@ data:
     \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >>\
     \ v[i];\n WeightBalancedTree<RaffineQ_RsumQ> wbt(v, v + N);\n while (Q--) {\n\
-    \  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << wbt.fold(l,\
+    \  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << wbt.prod(l,\
     \ r) << '\\n';\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n   wbt.apply(l,\
     \ r, {b, c});\n  }\n }\n return 0;\n}"
   dependsOn:
@@ -294,7 +294,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

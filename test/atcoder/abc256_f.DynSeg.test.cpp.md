@@ -22,9 +22,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
@@ -162,12 +162,12 @@ data:
     \  else if constexpr (persistent) t= new Node(*t);\n }\n static inline void push(np\
     \ &t, const id_t &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
     \ t->lazy_flg= false;\n  propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1],\
-    \ t->lazy, sz / 2);\n }\n T fold(np &t, const id_t &l, const id_t &r, std::array<id_t,\
+    \ t->lazy, sz / 2);\n }\n T prod(np &t, const id_t &l, const id_t &r, std::array<id_t,\
     \ 2> b, const id_t &bias) {\n  if (!t || r <= b[0] || b[1] <= l) return def_val();\n\
     \  if (l <= b[0] && b[1] <= r) return t->val;\n  if constexpr (dual_v<M>) push(t,\
     \ b[1] - b[0]);\n  id_t m= (b[0] + b[1]) >> 1;\n  bool flg= (bias >> (__builtin_ctzll(b[1]\
-    \ - b[0]) - 1)) & 1;\n  return M::op(fold(t->ch[flg], l, r, {b[0], m}, bias),\
-    \ fold(t->ch[!flg], l, r, {m, b[1]}, bias));\n }\n void apply(np &t, const id_t\
+    \ - b[0]) - 1)) & 1;\n  return M::op(prod(t->ch[flg], l, r, {b[0], m}, bias),\
+    \ prod(t->ch[!flg], l, r, {m, b[1]}, bias));\n }\n void apply(np &t, const id_t\
     \ &l, const id_t &r, std::array<id_t, 2> b, const E &x) {\n  if (r <= b[0] ||\
     \ b[1] <= l) return;\n  id_t m= (b[0] + b[1]) >> 1;\n  if (cp_node(t); l <= b[0]\
     \ && b[1] <= r) return propagate(t, x, b[1] - b[0]);\n  push(t, b[1] - b[0]);\n\
@@ -213,10 +213,10 @@ data:
     \ \"\\\"at\\\" is not available\\n\");\n  return at_val(root, k, HEIGHT);\n }\n\
     \ template <class L= M, std::enable_if_t<monoid_v<L>, std::nullptr_t> = nullptr>\
     \ T operator[](id_t k) { return get(k); }\n template <class L= M, std::enable_if_t<!monoid_v<L>,\
-    \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
-    \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid_v<M>, \"\\\"fold\\\" is not\
-    \ available\\n\");\n  return fold(root, a, b, {0, 1LL << HEIGHT}, bias);\n }\n\
-    \ // find i s.t.\n //  check(fold(a,i)) == False, check(fold(a,i+1)) == True\n\
+    \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T prod(id_t\
+    \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid_v<M>, \"\\\"prod\\\" is not\
+    \ available\\n\");\n  return prod(root, a, b, {0, 1LL << HEIGHT}, bias);\n }\n\
+    \ // find i s.t.\n //  check(prod(a,i)) == False, check(prod(a,i+1)) == True\n\
     \ // return -1 if not found\n template <class C> id_t find_first(id_t a, C check,\
     \ id_t bias= 0) {\n  std::array<T, 1> sum{def_val()};\n  std::array<np, 1> t{root};\n\
     \  return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template\
@@ -224,7 +224,7 @@ data:
     \ N> segs, id_t bias= 0) {\n  std::array<T, N> sums;\n  sums.fill(def_val());\n\
     \  std::array<np, N> ts;\n  for (std::size_t i= 0; i < N; i++) ts[i]= segs[i].root;\n\
     \  return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, ts, sums);\n }\n\
-    \ // find i s.t.\n //  check(fold(i+1,b)) == False, check(fold(i,b)) == True\n\
+    \ // find i s.t.\n //  check(prod(i+1,b)) == False, check(prod(i,b)) == True\n\
     \ // return -1 if not found\n template <class C> id_t find_last(id_t b, C check,\
     \ id_t bias= 0) {\n  std::array<T, 1> sum{def_val()};\n  std::array<np, 1> t{root};\n\
     \  return find<1>(b, {1LL << HEIGHT, 0}, ~bias, HEIGHT, check, t, sum);\n }\n\
@@ -236,7 +236,7 @@ data:
     \ is not available\\n\");\n  apply(root, a, b, {0, 1LL << HEIGHT}, x);\n }\n std::vector<T>\
     \ dump(id_t bg, id_t ed) {\n  std::vector<T> ret(ed - bg);\n  return dump(root,\
     \ bg, ed, {0, 1LL << HEIGHT}, ret.begin()), ret;\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (monoid_v<M>) ret+= \"\\\"fold\\\
+    \ {\n  std::string ret= \"\";\n  if constexpr (monoid_v<M>) ret+= \"\\\"prod\\\
     \" \\\"find\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>)\
     \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n};\n#line 7 \"test/atcoder/abc256_f.DynSeg.test.cpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
@@ -278,8 +278,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-04-13 13:36:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.DynSeg.test.cpp
 layout: document

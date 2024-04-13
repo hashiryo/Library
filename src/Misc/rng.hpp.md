@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RandomizedBinarySearchTree.hpp
     title: Splay-Tree
   - icon: ':heavy_check_mark:'
@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0355.test.cpp
     title: test/aoj/0355.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1508.RBST.test.cpp
     title: test/aoj/1508.RBST.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,10 +45,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.RH.test.cpp
     title: test/aoj/ALDS1_14_B.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_2_D.RBST.test.cpp
     title: test/aoj/ITP2_2_D.RBST.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.RBST.test.cpp
     title: test/aoj/ITP2_4_A.RBST.test.cpp
   - icon: ':x:'

@@ -16,12 +16,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2893.onlinedicon.test.cpp
     title: test/aoj/2893.onlinedicon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\n#include\
@@ -110,15 +110,15 @@ data:
     \ x, vertex_id y) { return same_root(x + n_st, y + n_st); }\n void subedge_set(vertex_id\
     \ x, bool val) {\n  splay(x+= n_st);\n  if (val) n[x].flag|= 0b0100;\n  else n[x].flag&=\
     \ -5ll;\n  update(x);\n }\n size_t tree_size(vertex_id x) { return splay(x+= n_st),\
-    \ ((n[x].flag >> 4) & 0xfffff); }\n T fold_tree(vertex_id x) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold\\\" is not available\\n\");\n  return splay(x+= n_st), n[x].sum;\n\
-    \ }\n T fold_subtree(vertex_id x, vertex_id par= -1) {\n  if (par == -1) return\
-    \ fold_tree(x);\n  cut(x, par);\n  T ret= fold_tree(x);\n  link(x, par);\n  return\
+    \ ((n[x].flag >> 4) & 0xfffff); }\n T prod_tree(vertex_id x) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod\\\" is not available\\n\");\n  return splay(x+= n_st), n[x].sum;\n\
+    \ }\n T prod_subtree(vertex_id x, vertex_id par= -1) {\n  if (par == -1) return\
+    \ prod_tree(x);\n  cut(x, par);\n  T ret= prod_tree(x);\n  link(x, par);\n  return\
     \ ret;\n }\n void apply_tree(vertex_id x, E v) {\n  static_assert(dual_v<M>, \"\
     \\\"apply\\\" is not available\\n\");\n  splay(x+= n_st), propagate(x, v), push(x);\n\
     \ }\n void apply_subtree(vertex_id x, vertex_id par, E v) { cut(x, par), apply_tree(x,\
     \ v), link(x, par); }\n static std::string which_available() {\n  std::string\
-    \ ret= \"\";\n  if constexpr (monoid_v<M>) ret+= \"\\\"fold\\\" \";\n  if constexpr\
+    \ ret= \"\";\n  if constexpr (monoid_v<M>) ret+= \"\\\"prod\\\" \";\n  if constexpr\
     \ (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n template <class Func>\
     \ void hilevel_edges(vertex_id v, Func f) {\n  splay(v+= n_st);\n  while (v &&\
     \ (n[v].flag & 0b0010))\n   while (1) {\n    if (n[v].flag & 0b0001) {\n     f((n[v].flag\
@@ -156,8 +156,8 @@ data:
     \ + 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n    replace(x,\
     \ y, k + 1);\n   }\n }\n const T &operator[](int x) { return ett[0][x]; }\n const\
     \ T &get(int x) { return ett[0].get(x); }\n void set(int x, T val) { ett[0].set(x,\
-    \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T fold(int x) {\
-    \ return ett[0].fold_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
+    \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T prod(int x) {\
+    \ return ett[0].prod_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
     \ v); }\n bool connected(int x, int y) { return ett[0].connected(x, y); }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <unordered_set>\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \ntemplate <typename M= void, std::size_t NODE_SIZE= 4'000'000> class OnlineDynamicConnectivity\
@@ -187,8 +187,8 @@ data:
     \ + 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n    replace(x,\
     \ y, k + 1);\n   }\n }\n const T &operator[](int x) { return ett[0][x]; }\n const\
     \ T &get(int x) { return ett[0].get(x); }\n void set(int x, T val) { ett[0].set(x,\
-    \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T fold(int x) {\
-    \ return ett[0].fold_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
+    \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T prod(int x) {\
+    \ return ett[0].prod_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
     \ v); }\n bool connected(int x, int y) { return ett[0].connected(x, y); }\n};\n"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
@@ -196,8 +196,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-04-13 13:36:28+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp

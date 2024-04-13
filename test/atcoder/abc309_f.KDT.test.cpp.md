@@ -18,9 +18,9 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc309/tasks/abc309_f
@@ -214,11 +214,11 @@ data:
     \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
     \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
     \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
-    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ r2), ret), ret;\n }\n T prod_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
     \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
-    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \ out_cuboid(r));\n }\n T prod_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
     \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
     \ r2));\n }\n void apply_cuboid(PK2... xs, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
@@ -243,7 +243,7 @@ data:
     \  sort(a, a + 3);\n  query.push_back({a[0], a[1], a[2]});\n  xy.push_back({a[1],\
     \ a[2]});\n }\n KDTree<int, 2, ROrQ> kdt(xy);\n sort(query.begin(), query.end(),\
     \ [](auto a, auto b) { return a[0] == b[0] ? a[1] > b[1] : a[0] < b[0]; });\n\
-    \ bool isok= false;\n for (auto [h, w, d]: query) {\n  isok= kdt.fold_cuboid(0,\
+    \ bool isok= false;\n for (auto [h, w, d]: query) {\n  isok= kdt.prod_cuboid(0,\
     \ w - 1, 0, d - 1);\n  if (isok) break;\n  kdt.set(w, d, 1);\n }\n cout << (isok\
     \ ? \"Yes\" : \"No\") << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc309/tasks/abc309_f\"\n\n\
@@ -257,7 +257,7 @@ data:
     \ a[2]});\n  xy.push_back({a[1], a[2]});\n }\n KDTree<int, 2, ROrQ> kdt(xy);\n\
     \ sort(query.begin(), query.end(), [](auto a, auto b) { return a[0] == b[0] ?\
     \ a[1] > b[1] : a[0] < b[0]; });\n bool isok= false;\n for (auto [h, w, d]: query)\
-    \ {\n  isok= kdt.fold_cuboid(0, w - 1, 0, d - 1);\n  if (isok) break;\n  kdt.set(w,\
+    \ {\n  isok= kdt.prod_cuboid(0, w - 1, 0, d - 1);\n  if (isok) break;\n  kdt.set(w,\
     \ d, 1);\n }\n cout << (isok ? \"Yes\" : \"No\") << '\\n';\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/KDTree.hpp
@@ -267,8 +267,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc309_f.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-04-13 13:36:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc309_f.KDT.test.cpp
 layout: document

@@ -18,9 +18,9 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -214,11 +214,11 @@ data:
     \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
     \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
     \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
-    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ r2), ret), ret;\n }\n T prod_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
     \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
-    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \ out_cuboid(r));\n }\n T prod_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
     \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
     \ r2));\n }\n void apply_cuboid(PK2... xs, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
@@ -245,7 +245,7 @@ data:
     \ d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1,\
     \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
     \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
-    \ query[i];\n   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
+    \ query[i];\n   cout << kdt.prod_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
     \ {\n   auto [_, x, y, w]= query[i];\n   kdt.mul(x, y, w);\n  }\n }\n return 0;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
@@ -260,7 +260,7 @@ data:
     \ d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1,\
     \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
     \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
-    \ query[i];\n   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
+    \ query[i];\n   cout << kdt.prod_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
     \ {\n   auto [_, x, y, w]= query[i];\n   kdt.mul(x, y, w);\n  }\n }\n return 0;\n\
     }"
   dependsOn:
@@ -271,8 +271,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-22 11:53:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-04-13 13:36:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
 layout: document

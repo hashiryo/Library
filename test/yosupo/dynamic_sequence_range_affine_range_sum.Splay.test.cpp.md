@@ -31,7 +31,7 @@ data:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n\n// insert, erase, reverse, apply, fold \u306E verify\n\n#include <iostream>\n\
+    \n\n// insert, erase, reverse, apply, prod \u306E verify\n\n#include <iostream>\n\
     #include <array>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n\
     #include <string>\n#line 5 \"src/DataStructure/SplayTree.hpp\"\n#include <tuple>\n\
     #include <utility>\n#include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/detection_idiom.hpp\"\
@@ -105,7 +105,7 @@ data:
     \ {\n  if (!rt) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
     \ dump(ret.begin(), rt), ret;\n }\n static std::string which_unavailable() {\n\
     \  std::string ret= \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"at\\\"\
-    \ \";\n  else ret+= \"\\\"fold\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
+    \ \";\n  else ret+= \"\\\"prod\\\" \";\n  if constexpr (!semigroup_v<M> || !commute_v<M>)\
     \ ret+= \"\\\"mul\\\" \";\n  if constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \"\
     ;\n  if constexpr (!reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n\
     \ template <class L= M> const std::enable_if_t<semigroup_v<L>, T> &operator[](size_t\
@@ -117,7 +117,7 @@ data:
     \ (semigroup_v<M>) update<0>(rt);\n }\n void mul(size_t k, const T &val) {\n \
     \ static_assert(semigroup_v<M> && commute_v<M>, \"\\\"mul\\\" is not available\"\
     );\n  splay(rt, k), rt->val= M::op(rt->val, val), update<0>(rt);\n }\n const T\
-    \ &fold(size_t a, size_t b) {\n  static_assert(semigroup_v<M>, \"\\\"fold\\\"\
+    \ &prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>, \"\\\"prod\\\"\
     \ is not available\");\n  return between(a, b)->sum;\n }\n void apply(size_t a,\
     \ size_t b, const E &x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\" is not available\"\
     );\n  np t= between(a, b);\n  propagate(t, x);\n  if constexpr (semigroup_v<M>)\n\
@@ -236,10 +236,10 @@ data:
     \   int i;\n   cin >> i;\n   st.erase(i);\n  } else if (op == 2) {\n   int l,\
     \ r;\n   cin >> l >> r;\n   st.reverse(l, r);\n  } else if (op == 3) {\n   int\
     \ l, r, b, c;\n   cin >> l >> r >> b >> c;\n   st.apply(l, r, {b, c});\n  } else\
-    \ {\n   int l, r;\n   cin >> l >> r;\n   cout << st.fold(l, r) << '\\n';\n  }\n\
+    \ {\n   int l, r;\n   cin >> l >> r;\n   cout << st.prod(l, r) << '\\n';\n  }\n\
     \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n\n// insert, erase, reverse, apply, fold \u306E verify\n\n#include <iostream>\n\
+    \n\n// insert, erase, reverse, apply, prod \u306E verify\n\n#include <iostream>\n\
     #include <array>\n#include \"src/DataStructure/SplayTree.hpp\"\n#include \"src/Math/ModInt.hpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineRsumQ\
     \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T vl, T vr) { return\
@@ -253,7 +253,7 @@ data:
     \   int i;\n   cin >> i;\n   st.erase(i);\n  } else if (op == 2) {\n   int l,\
     \ r;\n   cin >> l >> r;\n   st.reverse(l, r);\n  } else if (op == 3) {\n   int\
     \ l, r, b, c;\n   cin >> l >> r >> b >> c;\n   st.apply(l, r, {b, c});\n  } else\
-    \ {\n   int l, r;\n   cin >> l >> r;\n   cout << st.fold(l, r) << '\\n';\n  }\n\
+    \ {\n   int l, r;\n   cin >> l >> r;\n   cout << st.prod(l, r) << '\\n';\n  }\n\
     \ }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SplayTree.hpp
@@ -265,7 +265,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 14:30:47+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp

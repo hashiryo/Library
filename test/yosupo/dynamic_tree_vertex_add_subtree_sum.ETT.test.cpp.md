@@ -105,15 +105,15 @@ data:
     \ x, vertex_id y) { return same_root(x + n_st, y + n_st); }\n void subedge_set(vertex_id\
     \ x, bool val) {\n  splay(x+= n_st);\n  if (val) n[x].flag|= 0b0100;\n  else n[x].flag&=\
     \ -5ll;\n  update(x);\n }\n size_t tree_size(vertex_id x) { return splay(x+= n_st),\
-    \ ((n[x].flag >> 4) & 0xfffff); }\n T fold_tree(vertex_id x) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold\\\" is not available\\n\");\n  return splay(x+= n_st), n[x].sum;\n\
-    \ }\n T fold_subtree(vertex_id x, vertex_id par= -1) {\n  if (par == -1) return\
-    \ fold_tree(x);\n  cut(x, par);\n  T ret= fold_tree(x);\n  link(x, par);\n  return\
+    \ ((n[x].flag >> 4) & 0xfffff); }\n T prod_tree(vertex_id x) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod\\\" is not available\\n\");\n  return splay(x+= n_st), n[x].sum;\n\
+    \ }\n T prod_subtree(vertex_id x, vertex_id par= -1) {\n  if (par == -1) return\
+    \ prod_tree(x);\n  cut(x, par);\n  T ret= prod_tree(x);\n  link(x, par);\n  return\
     \ ret;\n }\n void apply_tree(vertex_id x, E v) {\n  static_assert(dual_v<M>, \"\
     \\\"apply\\\" is not available\\n\");\n  splay(x+= n_st), propagate(x, v), push(x);\n\
     \ }\n void apply_subtree(vertex_id x, vertex_id par, E v) { cut(x, par), apply_tree(x,\
     \ v), link(x, par); }\n static std::string which_available() {\n  std::string\
-    \ ret= \"\";\n  if constexpr (monoid_v<M>) ret+= \"\\\"fold\\\" \";\n  if constexpr\
+    \ ret= \"\";\n  if constexpr (monoid_v<M>) ret+= \"\\\"prod\\\" \";\n  if constexpr\
     \ (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n template <class Func>\
     \ void hilevel_edges(vertex_id v, Func f) {\n  splay(v+= n_st);\n  while (v &&\
     \ (n[v].flag & 0b0010))\n   while (1) {\n    if (n[v].flag & 0b0001) {\n     f((n[v].flag\
@@ -133,7 +133,7 @@ data:
     \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   ett.cut(u, v);\n   ett.link(w,\
     \ x);\n  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n\
     \   ett.set(p, ett[p] + x);\n  } else {\n   int v, p;\n   cin >> v >> p;\n   cout\
-    \ << ett.fold_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ << ett.prod_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
     \n#include <iostream>\n#include \"src/DataStructure/EulerTourTree.hpp\"\nusing\
     \ namespace std;\nstruct RsumQ {\n using T= long long;\n static T ti() { return\
@@ -145,14 +145,14 @@ data:
     \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   ett.cut(u, v);\n   ett.link(w,\
     \ x);\n  } else if (op == 1) {\n   int p;\n   long long x;\n   cin >> p >> x;\n\
     \   ett.set(p, ett[p] + x);\n  } else {\n   int v, p;\n   cin >> v >> p;\n   cout\
-    \ << ett.fold_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ << ett.prod_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
   - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 22:05:48+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RandomizedBinarySearchTree.hpp
     title: Splay-Tree
   - icon: ':question:'
@@ -92,12 +92,12 @@ data:
     \ (reversible) push_tog(t);\n  size_t sz= t->l ? t->l->size() : 0;\n  if (k ==\
     \ sz) {\n   T v= t->val;\n   return t= merge(t->l, t->r), v;\n  } else {\n   T\
     \ v= k < sz ? erase(t->l, k) : erase(t->r, k - sz - 1);\n   return update(t),\
-    \ v;\n  }\n }\n static inline T fold(np t, size_t a, size_t b) {\n  if (!a &&\
+    \ v;\n  }\n }\n static inline T prod(np t, size_t a, size_t b) {\n  if (!a &&\
     \ b == t->size()) return t->sum;\n  if constexpr (dual_v<M>) push_prop(t);\n \
     \ if constexpr (reversible) push_tog(t);\n  size_t l= t->l ? t->l->size() : 0,\
-    \ k= l + 1;\n  if (b < k) return fold(t->l, a, b);\n  if (a > l) return fold(t->r,\
-    \ a - k, b - k);\n  T ret= t->val;\n  if (a < l) ret= M::op(fold(t->l, a, l),\
-    \ ret);\n  if (b > k) ret= M::op(ret, fold(t->r, 0, b - k));\n  return ret;\n\
+    \ k= l + 1;\n  if (b < k) return prod(t->l, a, b);\n  if (a > l) return prod(t->r,\
+    \ a - k, b - k);\n  T ret= t->val;\n  if (a < l) ret= M::op(prod(t->l, a, l),\
+    \ ret);\n  if (b > k) ret= M::op(ret, prod(t->r, 0, b - k));\n  return ret;\n\
     \ }\n static inline void apply(np t, size_t a, size_t b, const E &x) {\n  if (!a\
     \ && b == t->size()) return propagate(t, x);\n  if constexpr (reversible) push_tog(t);\n\
     \  push_prop(t);\n  size_t l= t->l ? t->l->size() : 0, k= l + 1;\n  if (b < k)\
@@ -129,49 +129,48 @@ data:
     \ nullptr; }\n std::vector<T> dump() {\n  if (!rt) return std::vector<T>();\n\
     \  std::vector<T> ret(size());\n  return dump(ret.begin(), rt), ret;\n }\n static\
     \ std::string which_unavailable() {\n  std::string ret= \"\";\n  if constexpr\
-    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"fold\\\" \";\n \
+    \ (semigroup_v<M>) ret+= \"\\\"at\\\" \";\n  else ret+= \"\\\"prod\\\" \";\n \
     \ if constexpr (!semigroup_v<M> || !commute_v<M>) ret+= \"\\\"mul\\\" \";\n  if\
     \ constexpr (!dual_v<M>) ret+= \"\\\"apply\\\" \";\n  if constexpr (!reversible)\
     \ ret+= \"\\\"reverse\\\" \";\n  return ret;\n }\n RBST &operator+=(RBST r) {\
     \ return rt= merge(rt, r.rt), *this; }\n RBST operator+(RBST r) const { return\
     \ RBST(*this)+= r; }\n std::pair<RBST, RBST> split(size_t k) {\n  assert(k <=\
     \ size());\n  auto [l, r]= split(rt, k);\n  return {np_to_rbst(l), np_to_rbst(r)};\n\
-    \ }\n std::tuple<SplayTree, SplayTree, SplayTree> split3(size_t a, size_t b) {\n\
-    \  assert(a < b), assert(b <= size());\n  auto [tmp, r]= split(rt, b);\n  auto\
-    \ [l, c]= split(tmp, a);\n  return {np_to_rbst(l), np_to_rbst(c), np_to_rbst(r)};\n\
-    \ }\n void push_back(const T &v) {\n  np t= new Node{v};\n  update(t), rt= merge(rt,\
-    \ t);\n }\n void push_front(const T &v) {\n  np t= new Node{v};\n  update(t),\
-    \ rt= merge(t, rt);\n }\n void insert(size_t k, const T &v) {\n  auto [l, r]=\
-    \ split(rt, k);\n  rt= new Node{v}, update(rt), rt= merge(merge(l, rt), r);\n\
-    \ }\n T pop_back() {\n  auto [l, t]= split(rt, size() - 1);\n  return rt= l, t->val;\n\
-    \ }\n T pop_front() {\n  auto [t, r]= split(rt, 1);\n  return rt= r, t->val;\n\
-    \ }\n T erase(size_t k) { return assert(k < size()), erase(rt, k); }\n void set(size_t\
-    \ k, const T &val) { set_val(rt, k, val); }\n void mul(size_t k, const T &val)\
-    \ {\n  static_assert(semigroup_v<M> && commute_v<M>, \"\\\"mul\\\" is not available\\\
-    n\");\n  mul_val(rt, k, val);\n }\n T get(size_t k) { return get_val(rt, k); }\n\
-    \ T &at(size_t k) {\n  static_assert(!semigroup_v<M>, \"\\\"at\\\" is not available\\\
-    n\");\n  return at_val(rt, k);\n }\n template <class L= M> std::enable_if_t<semigroup_v<L>,\
-    \ T> operator[](size_t k) { return get(k); }\n template <class L= M> std::enable_if_t<!semigroup_v<L>,\
-    \ T> &operator[](size_t k) { return at(k); }\n T fold(size_t a, size_t b) {\n\
-    \  static_assert(semigroup_v<M>, \"\\\"fold\\\" is not available\\n\");\n  return\
-    \ fold(rt, a, b);\n }\n void apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>,\
-    \ \"\\\"apply\\\" is not available\\n\");\n  apply(rt, a, b, x);\n }\n void reverse()\
-    \ {\n  static_assert(reversible, \"\\\"reverse\\\" is not available\\n\");\n \
-    \ toggle(rt);\n }\n void reverse(size_t a, size_t b) {\n  static_assert(reversible,\
-    \ \"\\\"reverse\\\" is not available\\n\");\n  assert(a < b), assert(b <= size());\n\
-    \  auto [tmp, r]= split(rt, b);\n  auto [l, c]= split(tmp, a);\n  toggle(c), rt=\
-    \ merge(merge(l, c), r);\n }\n};\n#line 9 \"test/atcoder/arc153_b.RBST.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using RBST= RandomizedBinarySearchTree<int, true>;\n int H, W;\n cin >> H >>\
-    \ W;\n vector<string> A(H);\n for (int i= 0; i < H; ++i) cin >> A[i];\n RBST row,\
-    \ col;\n {\n  vector<int> v(H);\n  iota(v.begin(), v.end(), 0);\n  row= RBST(v);\n\
-    \ }\n {\n  vector<int> v(W);\n  iota(v.begin(), v.end(), 0);\n  col= RBST(v);\n\
-    \ }\n int Q;\n cin >> Q;\n while (Q--) {\n  int a, b;\n  cin >> a >> b;\n  {\n\
-    \   auto [l, r]= row.split(a);\n   l.reverse(), r.reverse();\n   row= l + r;\n\
-    \  }\n  {\n   auto [l, r]= col.split(b);\n   l.reverse(), r.reverse();\n   col=\
-    \ l + r;\n  }\n }\n auto row_= row.dump();\n auto col_= col.dump();\n for (int\
-    \ i= 0; i < H; ++i) {\n  for (int j= 0; j < W; ++j) {\n   cout << A[row_[i]][col_[j]];\n\
-    \  }\n  cout << '\\n';\n }\n return 0;\n}\n"
+    \ }\n std::tuple<RBST, RBST, RBST> split3(size_t a, size_t b) {\n  assert(a <\
+    \ b), assert(b <= size());\n  auto [tmp, r]= split(rt, b);\n  auto [l, c]= split(tmp,\
+    \ a);\n  return {np_to_rbst(l), np_to_rbst(c), np_to_rbst(r)};\n }\n void push_back(const\
+    \ T &v) {\n  np t= new Node{v};\n  update(t), rt= merge(rt, t);\n }\n void push_front(const\
+    \ T &v) {\n  np t= new Node{v};\n  update(t), rt= merge(t, rt);\n }\n void insert(size_t\
+    \ k, const T &v) {\n  auto [l, r]= split(rt, k);\n  rt= new Node{v}, update(rt),\
+    \ rt= merge(merge(l, rt), r);\n }\n T pop_back() {\n  auto [l, t]= split(rt, size()\
+    \ - 1);\n  return rt= l, t->val;\n }\n T pop_front() {\n  auto [t, r]= split(rt,\
+    \ 1);\n  return rt= r, t->val;\n }\n T erase(size_t k) { return assert(k < size()),\
+    \ erase(rt, k); }\n void set(size_t k, const T &val) { set_val(rt, k, val); }\n\
+    \ void mul(size_t k, const T &val) {\n  static_assert(semigroup_v<M> && commute_v<M>,\
+    \ \"\\\"mul\\\" is not available\\n\");\n  mul_val(rt, k, val);\n }\n T get(size_t\
+    \ k) { return get_val(rt, k); }\n T &at(size_t k) {\n  static_assert(!semigroup_v<M>,\
+    \ \"\\\"at\\\" is not available\\n\");\n  return at_val(rt, k);\n }\n template\
+    \ <class L= M> std::enable_if_t<semigroup_v<L>, T> operator[](size_t k) { return\
+    \ get(k); }\n template <class L= M> std::enable_if_t<!semigroup_v<L>, T> &operator[](size_t\
+    \ k) { return at(k); }\n T prod(size_t a, size_t b) {\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"prod\\\" is not available\\n\");\n  return prod(rt, a, b);\n }\n void\
+    \ apply(size_t a, size_t b, E x) {\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
+    \ is not available\\n\");\n  apply(rt, a, b, x);\n }\n void reverse() {\n  static_assert(reversible,\
+    \ \"\\\"reverse\\\" is not available\\n\");\n  toggle(rt);\n }\n void reverse(size_t\
+    \ a, size_t b) {\n  static_assert(reversible, \"\\\"reverse\\\" is not available\\\
+    n\");\n  assert(a < b), assert(b <= size());\n  auto [tmp, r]= split(rt, b);\n\
+    \  auto [l, c]= split(tmp, a);\n  toggle(c), rt= merge(merge(l, c), r);\n }\n\
+    };\n#line 9 \"test/atcoder/arc153_b.RBST.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using RBST= RandomizedBinarySearchTree<int,\
+    \ true>;\n int H, W;\n cin >> H >> W;\n vector<string> A(H);\n for (int i= 0;\
+    \ i < H; ++i) cin >> A[i];\n RBST row, col;\n {\n  vector<int> v(H);\n  iota(v.begin(),\
+    \ v.end(), 0);\n  row= RBST(v);\n }\n {\n  vector<int> v(W);\n  iota(v.begin(),\
+    \ v.end(), 0);\n  col= RBST(v);\n }\n int Q;\n cin >> Q;\n while (Q--) {\n  int\
+    \ a, b;\n  cin >> a >> b;\n  {\n   auto [l, r]= row.split(a);\n   l.reverse(),\
+    \ r.reverse();\n   row= l + r;\n  }\n  {\n   auto [l, r]= col.split(b);\n   l.reverse(),\
+    \ r.reverse();\n   col= l + r;\n  }\n }\n auto row_= row.dump();\n auto col_=\
+    \ col.dump();\n for (int i= 0; i < H; ++i) {\n  for (int j= 0; j < W; ++j) {\n\
+    \   cout << A[row_[i]][col_[j]];\n  }\n  cout << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc153/tasks/arc153_b\"\n\n\
     // reverse \u306E verify\n\n#include <iostream>\n#include <vector>\n#include <numeric>\n\
     #include \"src/DataStructure/RandomizedBinarySearchTree.hpp\"\nusing namespace\
@@ -193,7 +192,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc153_b.RBST.test.cpp
   requiredBy: []
-  timestamp: '2024-03-31 22:05:48+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc153_b.RBST.test.cpp

@@ -212,11 +212,11 @@ data:
     \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
     \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
     \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
-    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ r2), ret), ret;\n }\n T prod_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
     \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
-    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
-    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \ out_cuboid(r));\n }\n T prod_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"prod_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
     \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
     \ r2));\n }\n void apply_cuboid(PK2... xs, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
@@ -257,7 +257,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_C.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
+  timestamp: '2024-04-13 13:36:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_C.KDT.test.cpp

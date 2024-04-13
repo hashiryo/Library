@@ -10,9 +10,9 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_f
@@ -75,7 +75,7 @@ data:
     \    if (j != -1) tol[p + 1]= !(j & 1);\n   }\n  for (int i= 1, e= id[sz]; i <\
     \ e; ++i) tol[i + 1]+= tol[i];\n  for (int i= 0, e= sz * 2; i < e; ++i) {\n  \
     \ auto dat= val.begin() + id[i] * 2;\n   for (int j= id[i + 1] - id[i]; --j >\
-    \ 0;) dat[j]= M::op(dat[j * 2], dat[j * 2 + 1]);\n  }\n }\n inline T fold(int\
+    \ 0;) dat[j]= M::op(dat[j * 2], dat[j * 2 + 1]);\n  }\n }\n inline T prod(int\
     \ i, int a, int b) const {\n  int n= id[i + 1] - id[i];\n  T ret= M::ti();\n \
     \ auto dat= val.begin() + id[i] * 2;\n  for (a+= n, b+= n; a < b; a>>= 1, b>>=\
     \ 1) {\n   if (a & 1) ret= M::op(ret, dat[a++]);\n   if (b & 1) ret= M::op(dat[--b],\
@@ -105,10 +105,10 @@ data:
     \ U>>> SegmentTree_2D(const std::vector<std::pair<P, U>> &p): SegmentTree_2D(p.data(),\
     \ p.size()) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
     \ U>>> SegmentTree_2D(const std::map<P, U> &p): SegmentTree_2D(std::vector(p.begin(),\
-    \ p.end())) {}\n // [l,r) x [u,d)\n T fold(pos_t l, pos_t r, pos_t u, pos_t d)\
+    \ p.end())) {}\n // [l,r) x [u,d)\n T prod(pos_t l, pos_t r, pos_t u, pos_t d)\
     \ const {\n  T ret= M::ti();\n  int L= x2i(l), R= x2i(r);\n  auto dfs= [&](auto\
     \ &dfs, int i, int a, int b, int c, int d) -> void {\n   if (c == d || R <= a\
-    \ || b <= L) return;\n   if (L <= a && b <= R) return ret= M::op(ret, fold(i,\
+    \ || b <= L) return;\n   if (L <= a && b <= R) return ret= M::op(ret, prod(i,\
     \ c, d)), void();\n   int m= (a + b) / 2, ac= tol[id[i] + c] - tol[id[i]], bc=\
     \ c - ac, ad= tol[id[i] + d] - tol[id[i]], bd= d - ad;\n   dfs(dfs, i * 2, a,\
     \ m, ac, ad), dfs(dfs, i * 2 + 1, m, b, bc, bd);\n  };\n  return dfs(dfs, 1, 0,\
@@ -152,8 +152,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc228_f.Seg2D.test.cpp
   requiredBy: []
-  timestamp: '2023-11-05 23:34:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-04-13 13:36:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc228_f.Seg2D.test.cpp
 layout: document
