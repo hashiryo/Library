@@ -174,12 +174,12 @@ data:
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc213_f.SA.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/yosupo/number_of_substrings.SA.test.cpp
   - test/yosupo/suffixarray.test.cpp
   - test/yosupo/longest_common_substring.test.cpp
-  - test/yosupo/number_of_substrings.SA.test.cpp
+  - test/aoj/2644.test.cpp
   - test/aoj/ALDS1_14_D.SA.test.cpp
   - test/aoj/ALDS1_14_B.SA.test.cpp
-  - test/aoj/2644.test.cpp
   - test/aoj/3112.SA.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document

@@ -5,7 +5,13 @@ data:
   - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
+  - icon: ':question:'
+    path: src/Optimization/PiecewiseLinearConvex.hpp
+    title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0661.test.cpp
+    title: test/aoj/0661.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
     title: test/aoj/1023.KDT.test.cpp
@@ -15,12 +21,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2865.test.cpp
+    title: test/aoj/2865.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc127_f.test.cpp
+    title: test/atcoder/abc127_f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc217_h.conj.test.cpp
+    title: test/atcoder/abc217_h.conj.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc217_h.test.cpp
+    title: test/atcoder/abc217_h.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc250_g.conj.test.cpp
+    title: test/atcoder/abc250_g.conj.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc250_g.test.cpp
+    title: test/atcoder/abc250_g.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc275_ex.test.cpp
+    title: test/atcoder/abc275_ex.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc309_f.KDT.3D.test.cpp
     title: test/atcoder/abc309_f.KDT.3D.test.cpp
@@ -28,20 +55,44 @@ data:
     path: test/atcoder/abc309_f.KDT.test.cpp
     title: test/atcoder/abc309_f.KDT.test.cpp
   - icon: ':x:'
+    path: test/atcoder/arc123_d.conj.test.cpp
+    title: test/atcoder/arc123_d.conj.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc123_d.test.cpp
+    title: test/atcoder/arc123_d.test.cpp
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1077.conj.test.cpp
+    title: test/yukicoder/1077.conj.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1077.test.cpp
+    title: test/yukicoder/1077.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1467.conj.test.cpp
+    title: test/yukicoder/1467.conj.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1467.test.cpp
+    title: test/yukicoder/1467.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2114.conj.test.cpp
+    title: test/yukicoder/2114.conj.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2114.test.cpp
+    title: test/yukicoder/2114.test.cpp
   - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
@@ -119,22 +170,39 @@ data:
   path: src/Internal/long_traits.hpp
   requiredBy:
   - src/DataStructure/KDTree.hpp
+  - src/Optimization/PiecewiseLinearConvex.hpp
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/yukicoder/2114.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/1077.conj.test.cpp
+  - test/yukicoder/2114.conj.test.cpp
   - test/yukicoder/1216.KDT.test.cpp
+  - test/yukicoder/1467.conj.test.cpp
+  - test/yukicoder/1077.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/1467.test.cpp
+  - test/atcoder/abc127_f.test.cpp
+  - test/atcoder/abc217_h.conj.test.cpp
+  - test/atcoder/arc123_d.test.cpp
   - test/atcoder/abc309_f.KDT.test.cpp
   - test/atcoder/abc309_f.KDT.3D.test.cpp
+  - test/atcoder/abc250_g.test.cpp
+  - test/atcoder/abc250_g.conj.test.cpp
+  - test/atcoder/arc123_d.conj.test.cpp
+  - test/atcoder/abc217_h.test.cpp
+  - test/atcoder/abc275_ex.test.cpp
   - test/atcoder/abc234_ex.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/aoj/1068.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
+  - test/aoj/2865.test.cpp
+  - test/aoj/1068.KDT.test.cpp
   - test/aoj/2842.KDT.test.cpp
+  - test/aoj/0661.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
+  - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/Internal/long_traits.hpp
 layout: document
 title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\

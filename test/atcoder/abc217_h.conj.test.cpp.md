@@ -10,18 +10,19 @@ data:
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1077
+    PROBLEM: https://atcoder.jp/contests/abc217/tasks/abc217_h
     links:
-    - https://yukicoder.me/problems/no/1077
-  bundledCode: "#line 1 \"test/yukicoder/1077.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/1077\"\
-    \n#include <iostream>\n#line 2 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n\
-    #include <vector>\n#include <algorithm>\n#line 5 \"src/Optimization/PiecewiseLinearConvex.hpp\"\
-    \n#include <sstream>\n#include <string>\n#include <cassert>\n#line 2 \"src/Internal/long_traits.hpp\"\
+    - https://atcoder.jp/contests/abc217/tasks/abc217_h
+  bundledCode: "#line 1 \"test/atcoder/abc217_h.conj.test.cpp\"\n#define PROBLEM \"\
+    https://atcoder.jp/contests/abc217/tasks/abc217_h\"\n#include <iostream>\n#line\
+    \ 2 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#line 5 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include\
+    \ <sstream>\n#include <string>\n#include <cassert>\n#line 2 \"src/Internal/long_traits.hpp\"\
     \n#include <cstdint>\n// clang-format off\ntemplate<class T>struct make_long{using\
     \ type= T;};\ntemplate<>struct make_long<int8_t>{using type= int16_t;};\ntemplate<>struct\
     \ make_long<uint8_t>{using type= uint16_t;};\ntemplate<>struct make_long<int16_t>{using\
@@ -218,30 +219,34 @@ data:
     \ add_r(r.m[1]);\n  else if (r.m[0] == r.m[1]) splay(r.m[0]), add_l(r.m[0]->ch[0]),\
     \ add_r(r.m[0]->ch[1]), add_max(-r.o[0], r.o[1], r.m[0]->x);\n  else {\n   splay(r.m[0]);\n\
     \   np t= r.m[0]->ch[1];\n   add_r(t), r.m[0]->ch[1]= nullptr, add_l(r.m[0]),\
-    \ r.m[0]->ch[1]= t;\n  }\n  return *this;\n }\n};\n#line 4 \"test/yukicoder/1077.test.cpp\"\
+    \ r.m[0]->ch[1]= t;\n  }\n  return *this;\n }\n};\n#line 4 \"test/atcoder/abc217_h.conj.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N;\n cin >> N;\n PiecewiseLinearConvex<int> f;\n for (int i= 0; i < N; ++i)\
-    \ {\n  int Y;\n  cin >> Y;\n  f.chmin_cum();\n  f.add_abs(1, Y);\n }\n cout <<\
-    \ f.min() << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1077\"\n#include <iostream>\n\
-    #include \"src/Optimization/PiecewiseLinearConvex.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n\
-    \ PiecewiseLinearConvex<int> f;\n for (int i= 0; i < N; ++i) {\n  int Y;\n  cin\
-    \ >> Y;\n  f.chmin_cum();\n  f.add_abs(1, Y);\n }\n cout << f.min() << '\\n';\n\
-    \ return 0;\n}"
+    \ int N;\n cin >> N;\n PiecewiseLinearConvex<long long> f;\n long long pT= 0;\n\
+    \ for (int i= 0; i < N; ++i) {\n  long long i64, D, X;\n  cin >> i64 >> D >> X;\n\
+    \  long long dT= i64 - pT;\n  f.add_abs(dT, 0);\n  f.add_linear(-X);\n  if (D)\
+    \ f.chmin_slide_win(0, 1);\n  else f.chmin_slide_win(-1, 0);\n  f.add_linear(X);\n\
+    \  pT= i64;\n }\n cout << (long long)-f(0) << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc217/tasks/abc217_h\"\n#include\
+    \ <iostream>\n#include \"src/Optimization/PiecewiseLinearConvex.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin\
+    \ >> N;\n PiecewiseLinearConvex<long long> f;\n long long pT= 0;\n for (int i=\
+    \ 0; i < N; ++i) {\n  long long i64, D, X;\n  cin >> i64 >> D >> X;\n  long long\
+    \ dT= i64 - pT;\n  f.add_abs(dT, 0);\n  f.add_linear(-X);\n  if (D) f.chmin_slide_win(0,\
+    \ 1);\n  else f.chmin_slide_win(-1, 0);\n  f.add_linear(X);\n  pT= i64;\n }\n\
+    \ cout << (long long)-f(0) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Optimization/PiecewiseLinearConvex.hpp
   - src/Internal/long_traits.hpp
   isVerificationFile: true
-  path: test/yukicoder/1077.test.cpp
+  path: test/atcoder/abc217_h.conj.test.cpp
   requiredBy: []
   timestamp: '2024-07-27 18:15:25+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yukicoder/1077.test.cpp
+documentation_of: test/atcoder/abc217_h.conj.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/1077.test.cpp
-- /verify/test/yukicoder/1077.test.cpp.html
-title: test/yukicoder/1077.test.cpp
+- /verify/test/atcoder/abc217_h.conj.test.cpp
+- /verify/test/atcoder/abc217_h.conj.test.cpp.html
+title: test/atcoder/abc217_h.conj.test.cpp
 ---

@@ -205,11 +205,11 @@ data:
   timestamp: '2024-02-23 00:06:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1569.Nimber.test.cpp
-  - test/atcoder/abc150_f.RH.Nimber.test.cpp
-  - test/unit_test/nimber_log.test.cpp
   - test/unit_test/nimber_sqrt.test.cpp
   - test/unit_test/nimber_inv.test.cpp
+  - test/unit_test/nimber_log.test.cpp
+  - test/yukicoder/1569.Nimber.test.cpp
+  - test/atcoder/abc150_f.RH.Nimber.test.cpp
   - test/yosupo/nim_product_64.test.cpp
 documentation_of: src/Math/Nimber.hpp
 layout: document

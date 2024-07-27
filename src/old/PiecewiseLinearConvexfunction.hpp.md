@@ -2,54 +2,21 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0661.test.cpp
-    title: test/aoj/0661.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2865.test.cpp
-    title: test/aoj/2865.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc127_f.test.cpp
-    title: test/atcoder/abc127_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc217_h.test.cpp
-    title: test/atcoder/abc217_h.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc250_g.conj.test.cpp
-    title: test/atcoder/abc250_g.conj.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc250_g.test.cpp
-    title: test/atcoder/abc250_g.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc275_ex.test.cpp
-    title: test/atcoder/abc275_ex.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc123_d.test.cpp
-    title: test/atcoder/arc123_d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1077.test.cpp
-    title: test/yukicoder/1077.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1467.test.cpp
-    title: test/yukicoder/1467.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/2114.test.cpp
-    title: test/yukicoder/2114.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\n#include\
-    \ <vector>\n#include <algorithm>\n#include <array>\n#include <sstream>\n#include\
-    \ <string>\n#include <iostream>\n#include <cassert>\ntemplate <std::size_t NODE_SIZE=\
-    \ 1 << 22> class PiecewiseLinearConvexfunction {\n using i64= long long;\n using\
-    \ i128= __int128_t;\n using node_id= int;\n static constexpr i64 INF= 1ll << 41;\n\
-    \ template <class Int> static inline std::string str(Int x) {\n  if (x >= INF)\
-    \ return \"inf\";\n  if (x <= -INF) return \"-inf\";\n  std::stringstream ss;\n\
-    \  ss << x;\n  return ss.str();\n }\n struct Node {\n  node_id ch[2], par;\n \
-    \ int sz;\n  i64 dx, slope, laz, x;\n  i128 y;\n };\n friend std::ostream &operator<<(std::ostream\
+  bundledCode: "#line 2 \"src/old/PiecewiseLinearConvexfunction.hpp\"\n#include <vector>\n\
+    #include <algorithm>\n#include <array>\n#include <sstream>\n#include <string>\n\
+    #include <iostream>\n#include <cassert>\ntemplate <std::size_t NODE_SIZE= 1 <<\
+    \ 22> class PiecewiseLinearConvexfunction {\n using i64= long long;\n using i128=\
+    \ __int128_t;\n using node_id= int;\n static constexpr i64 INF= 1ll << 41;\n template\
+    \ <class Int> static inline std::string str(Int x) {\n  if (x >= INF) return \"\
+    inf\";\n  if (x <= -INF) return \"-inf\";\n  std::stringstream ss;\n  ss << x;\n\
+    \  return ss.str();\n }\n struct Node {\n  node_id ch[2], par;\n  int sz;\n  i64\
+    \ dx, slope, laz, x;\n  i128 y;\n };\n friend std::ostream &operator<<(std::ostream\
     \ &os, Node *t) {\n  if (!t) return os << \"nullptr\";\n  return os << \"{dx:\"\
     \ << str(t->dx) << \",slope:\" << str(t->slope) << \",x:\" << str(t->x) << \"\
     ,y:\" << str(t->y) << \",laz:\" << str(t->laz) << \"}\";\n }\n static inline Node\
@@ -278,23 +245,12 @@ data:
     };"
   dependsOn: []
   isVerificationFile: false
-  path: src/Optimization/PiecewiseLinearConvexfunction.hpp
+  path: src/old/PiecewiseLinearConvexfunction.hpp
   requiredBy: []
-  timestamp: '2023-10-30 17:57:49+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/yukicoder/1077.test.cpp
-  - test/yukicoder/1467.test.cpp
-  - test/yukicoder/2114.test.cpp
-  - test/atcoder/abc275_ex.test.cpp
-  - test/atcoder/abc127_f.test.cpp
-  - test/atcoder/abc217_h.test.cpp
-  - test/atcoder/abc250_g.test.cpp
-  - test/atcoder/abc250_g.conj.test.cpp
-  - test/atcoder/arc123_d.test.cpp
-  - test/aoj/0661.test.cpp
-  - test/aoj/2865.test.cpp
-documentation_of: src/Optimization/PiecewiseLinearConvexfunction.hpp
+  timestamp: '2024-07-27 18:15:25+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: src/old/PiecewiseLinearConvexfunction.hpp
 layout: document
 title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
 ---

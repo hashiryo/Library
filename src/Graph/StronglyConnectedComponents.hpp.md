@@ -116,11 +116,11 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1170.test.cpp
-  - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1813.test.cpp
+  - test/yukicoder/1293.scc.test.cpp
   - test/atcoder/abc256_e.test.cpp
-  - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp
+  - test/yosupo/two_sat.test.cpp
   - test/aoj/0366.test.cpp
 documentation_of: src/Graph/StronglyConnectedComponents.hpp
 layout: document

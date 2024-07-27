@@ -164,55 +164,55 @@ data:
   isVerificationFile: false
   path: src/Internal/detection_idiom.hpp
   requiredBy:
+  - src/DataStructure/RandomizedBinarySearchTree.hpp
+  - src/DataStructure/SplayTree.hpp
   - src/DataStructure/WeightBalancedTree.hpp
   - src/DataStructure/LinkCutTree.hpp
-  - src/DataStructure/SplayTree.hpp
-  - src/DataStructure/RandomizedBinarySearchTree.hpp
   timestamp: '2024-03-21 17:56:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/396.Splay.test.cpp
   - test/yukicoder/396.WBT.test.cpp
   - test/yukicoder/396.RBST.test.cpp
   - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
-  - test/yukicoder/396.Splay.test.cpp
-  - test/atcoder/abc256_f.Splay.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/abc256_f.RBST.test.cpp
-  - test/atcoder/arc153_b.RBST.test.cpp
   - test/atcoder/arc153_b.WBT.test.cpp
+  - test/atcoder/arc153_b.RBST.test.cpp
+  - test/atcoder/abc256_f.Splay.test.cpp
   - test/atcoder/arc153_b.Splay.test.cpp
-  - test/yosupo/vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
-  - test/yosupo/lca.LCT.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   - test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
-  - test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - test/yosupo/persistent_queue.WBT.test.cpp
-  - test/yosupo/range_affine_range_sum.RBST.test.cpp
   - test/yosupo/vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+  - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/yosupo/vertex_set_path_composite.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/lca.LCT.test.cpp
+  - test/yosupo/range_affine_range_sum.RBST.test.cpp
+  - test/yosupo/persistent_queue.WBT.test.cpp
   - test/yosupo/range_affine_range_sum.Splay.test.cpp
-  - test/aoj/ITP2_2_D.WBT.test.cpp
-  - test/aoj/1508.RBST.test.cpp
-  - test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - test/aoj/ITP2_4_C.RBST.test.cpp
-  - test/aoj/2559.LCT.test.cpp
-  - test/aoj/1508.Splay.test.cpp
-  - test/aoj/ITP2_4_A.RBST.test.cpp
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/ITP2_2_D.RBST.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - test/aoj/ITP2_4_A.WBT.test.cpp
-  - test/aoj/1508.WBT.test.cpp
-  - test/aoj/3024.WBT.test.cpp
-  - test/aoj/ITP2_4_B.RBST.test.cpp
-  - test/aoj/ITP2_4_B.WBT.test.cpp
-  - test/aoj/2450.LCT.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
   - test/aoj/ITP2_4_C.WBT.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
+  - test/aoj/ITP2_2_D.WBT.test.cpp
+  - test/aoj/ITP2_4_A.RBST.test.cpp
+  - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/3024.WBT.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/2559.LCT.test.cpp
+  - test/aoj/ITP2_4_A.WBT.test.cpp
+  - test/aoj/ITP2_2_D.RBST.test.cpp
+  - test/aoj/1508.RBST.test.cpp
+  - test/aoj/2450.LCT.test.cpp
+  - test/aoj/ITP2_4_B.WBT.test.cpp
+  - test/aoj/ITP2_4_B.RBST.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/1508.WBT.test.cpp
+  - test/aoj/1508.Splay.test.cpp
+  - test/aoj/ITP2_4_C.RBST.test.cpp
 documentation_of: src/Internal/detection_idiom.hpp
 layout: document
 title: detection idiom

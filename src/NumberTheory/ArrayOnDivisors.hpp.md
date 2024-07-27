@@ -249,10 +249,10 @@ data:
   timestamp: '2024-02-26 00:40:09+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/2578.test.cpp
-  - test/yukicoder/1728.test.cpp
   - test/yukicoder/125.multiple_mobius.test.cpp
   - test/yukicoder/125.phi.test.cpp
+  - test/yukicoder/1728.test.cpp
+  - test/yukicoder/2578.test.cpp
   - test/yukicoder/2264.test.cpp
   - test/atcoder/abc212_g.test.cpp
   - test/atcoder/abc248_g.test.cpp

@@ -227,8 +227,8 @@ data:
   timestamp: '2024-03-03 04:26:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1907.test.cpp
   - test/yukicoder/1303.test.cpp
+  - test/yukicoder/1907.test.cpp
   - test/atcoder/abc323_g.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/matrix_det_arbitrary_mod.test.cpp

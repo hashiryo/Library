@@ -474,12 +474,12 @@ data:
   verifiedWith:
   - test/atcoder/abc136_d.test.cpp
   - test/yosupo/division_of_big_integers.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_F.test.cpp
   - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/NTL_2_B.test.cpp
+  - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/NTL_2_F.test.cpp
+  - test/aoj/NTL_2_D.test.cpp
+  - test/aoj/NTL_2_C.test.cpp
 documentation_of: src/FFT/BigInt.hpp
 layout: document
 title: "\u591A\u500D\u9577\u6574\u6570"

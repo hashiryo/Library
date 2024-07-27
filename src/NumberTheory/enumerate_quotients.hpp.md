@@ -48,8 +48,8 @@ data:
   verifiedWith:
   - test/yukicoder/1573.enum_quo.test.cpp
   - test/yukicoder/1260.test.cpp
-  - test/atcoder/abc179_c.enum_quo.test.cpp
   - test/atcoder/abc172_d.enum_quo.test.cpp
+  - test/atcoder/abc179_c.enum_quo.test.cpp
   - test/yosupo/enumerate_quotients.test.cpp
 documentation_of: src/NumberTheory/enumerate_quotients.hpp
 layout: document

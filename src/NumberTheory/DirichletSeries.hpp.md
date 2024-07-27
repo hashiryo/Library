@@ -246,12 +246,12 @@ data:
   timestamp: '2024-02-08 01:24:29+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1573.Dirichlet.test.cpp
+  - test/yukicoder/1276.Dirichlet.test.cpp
   - test/atcoder/arc116_c.Dirichlet.test.cpp
-  - test/atcoder/abc172_d.Dirichlet.test.cpp
   - test/atcoder/abc239_ex.test.cpp
   - test/atcoder/abc179_c.Dirichlet.test.cpp
+  - test/atcoder/abc172_d.Dirichlet.test.cpp
   - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
 documentation_of: src/NumberTheory/DirichletSeries.hpp
 layout: document
