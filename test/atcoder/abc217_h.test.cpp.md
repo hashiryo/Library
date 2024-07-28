@@ -10,9 +10,9 @@ data:
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc217/tasks/abc217_h
@@ -127,12 +127,12 @@ data:
     \  for (auto &a: as) a+= rem;\n  return as;\n }\n // f(x) += c\n void add_const(D\
     \ c) { y+= c; }\n // f(x) += ax, /\n void add_linear(T a) { rem+= a; }\n //  f(x)\
     \ += max(a(x-x0),b(x-x0)), (a < b)\n void add_max(T a, T b, T x0) {\n  assert(a\
-    \ < b);\n  if (bf[0] && x0 <= bx[0]) y-= D(b) * bx[0], rem+= b;\n  else if (bf[1]\
-    \ && bx[1] <= x0) y-= D(a) * bx[1], rem+= a;\n  else if (!m[0] && !m[1]) {\n \
-    \  np t= new Node{{nullptr, nullptr}, nullptr, 0, x0, b - a, b - a, D(x0) * (b\
-    \ - a), 1};\n   if (a >= 0) {\n    m[1]= t;\n    y-= D(a) * x0, rem+= a;\n   }\
-    \ else if (b <= 0) {\n    m[0]= t;\n    y-= D(b) * x0, rem+= b;\n   } else m[0]=\
-    \ m[1]= t, o[0]= -a, o[1]= b;\n  } else if (!m[0]) {\n   splay(m[1]);\n   if (m[1]->x\
+    \ < b);\n  if (bf[0] && x0 <= bx[0]) y-= D(b) * x0, rem+= b;\n  else if (bf[1]\
+    \ && bx[1] <= x0) y-= D(a) * x0, rem+= a;\n  else if (!m[0] && !m[1]) {\n   np\
+    \ t= new Node{{nullptr, nullptr}, nullptr, 0, x0, b - a, b - a, D(x0) * (b - a),\
+    \ 1};\n   if (a >= 0) {\n    m[1]= t;\n    y-= D(a) * x0, rem+= a;\n   } else\
+    \ if (b <= 0) {\n    m[0]= t;\n    y-= D(b) * x0, rem+= b;\n   } else m[0]= m[1]=\
+    \ t, o[0]= -a, o[1]= b;\n  } else if (!m[0]) {\n   splay(m[1]);\n   if (m[1]->x\
     \ <= x0) add_node(m[1], x0, b - a);\n   else {\n    np t= new Node{{nullptr, m[1]},\
     \ nullptr, 0, x0, b - a};\n    m[1]->par= t;\n    update(m[1]= t);\n   }\n   y-=\
     \ D(a) * x0, rem+= a;\n  } else if (!m[1]) {\n   splay(m[0]);\n   if (x0 <= m[0]->x)\
@@ -159,51 +159,52 @@ data:
     \ -D(bx[1]) * rem, 1};\n    if (m[0]) splay(m[0]), m[0]->ch[1]= m[1], update(m[0]);\n\
     \    bf[1]= false;\n   } else {\n    bf[1]= false;\n    if (!m[1]) return;\n \
     \   if (!m[0]) {\n     m[1]= nullptr;\n     return;\n    }\n    splay(m[0]);\n\
-    \    if (m[0] == m[1]) m[0]->d= o[0];\n    m[0]->ch[1]= m[1]= nullptr, update(m[0]);\n\
+    \    if (m[0] == m[1]) m[0]->d= o[0];\n    m[0]->ch[1]= m[1]= nullptr;\n    update(m[0]);\n\
     \   }\n  } else {\n   if (rem < 0) {\n    assert(bf[1]);\n    y+= D(rem) * bx[1];\n\
     \    m[0]= nullptr, rem= 0, bf[0]= false;\n   } else if (rem > 0) {\n    if (!bf[0])\
     \ return;\n    m[0]= new Node{{nullptr, nullptr}, m[1], 0, bx[0], rem, rem, D(bx[0])\
     \ * rem, 1};\n    if (m[1]) splay(m[1]), m[1]->ch[0]= m[0], update(m[1]);\n  \
-    \  bf[0]= false;\n   } else {\n    bf[0]= false;\n    if (!m[0]) return;\n   \
-    \ if (!m[1]) {\n     m[0]= nullptr;\n     return;\n    }\n    splay(m[1]);\n \
-    \   if (m[0] == m[1]) m[1]->d= o[1];\n    m[1]->ch[0]= m[0]= nullptr;\n    update(m[1]);\n\
-    \   }\n  }\n }\n //  f(x) <- min_{lb<=y<=ub} f(x-y). (lb <= ub), \\_/ -> \\__/\n\
-    \ void chmin_slide_win(T lb, T ub) {\n  assert(lb <= ub);\n  if (bf[0] && bf[1]\
-    \ && bx[0] == bx[1]) {\n   y+= D(rem) * bx[0], rem= 0, bx[0]+= lb, bx[1]+= ub;\n\
-    \   return;\n  }\n  slope_eval();\n  if (rem < 0) {\n   if (bf[1]) {\n    y+=\
-    \ D(rem) * bx[1];\n    np t= new Node{{nullptr, nullptr}, m[0], 0, bx[1], -rem,\
-    \ -rem, -D(bx[1]) * rem, 1};\n    if (m[0]) splay(m[0]), m[0]->ch[1]= t, update(m[0]);\n\
-    \    rem= 0, bx[1]+= ub, splay(m[0]= t), prop(t, lb);\n   } else if (m[0]) splay(m[0]),\
-    \ prop(m[0], lb);\n   if (bf[0]) bx[0]+= lb;\n   y-= D(rem) * lb;\n  } else if\
-    \ (rem > 0) {\n   if (bf[0]) {\n    y+= D(rem) * bx[0];\n    np t= new Node{{nullptr,\
-    \ nullptr}, m[1], 0, bx[0], rem, rem, D(bx[1]) * rem, 1};\n    if (m[1]) splay(m[1]),\
-    \ m[1]->ch[0]= t, update(m[1]);\n    rem= 0, bx[0]+= lb, splay(m[1]= t), prop(t,\
-    \ ub);\n   } else if (m[1]) splay(m[1]), prop(m[1], ub);\n   if (bf[1]) bx[1]+=\
-    \ ub;\n   y-= D(rem) * ub;\n  } else {\n   if (m[0]) {\n    splay(m[0]);\n   \
-    \ if (m[0] == m[1]) {\n     np r= m[0]->ch[1];\n     m[0]->ch[1]= nullptr;\n \
-    \    np t= new Node{{nullptr, r}, m[0], 0, m[0]->x, o[1], 0, 0, 1};\n     if (r)\
-    \ r->par= t;\n     update(t), prop(t, ub), m[0]->d= o[0], prop(m[0], lb), push(m[0]),\
-    \ m[0]->ch[1]= m[1]= t, update(m[0]);\n    } else if (m[1]) {\n     np t= m[0]->ch[1];\n\
-    \     m[0]->ch[1]= nullptr, prop(m[0], lb), push(m[0]), prop(t, ub), m[0]->ch[1]=\
-    \ t;\n     update(m[0]);\n     splay(m[1]);\n    } else prop(m[0], lb);\n   }\
-    \ else if (m[1]) splay(m[1]), prop(m[1], ub);\n   if (bf[0]) bx[0]+= lb;\n   if\
-    \ (bf[1]) bx[1]+= ub;\n  }\n }\n // f(x) <- f(x-x0)\n void shift(T x0) {\n  if\
-    \ (y-= D(rem) * x0; m[0]) {\n   if (splay(m[0]), prop(m[0], x0); m[1]) splay(m[1]);\n\
-    \  } else if (m[1]) splay(m[1]), prop(m[1], x0);\n  if (bf[0]) bx[0]+= x0;\n \
-    \ if (bf[1]) bx[1]+= x0;\n }\n // right=true : f(x) +=  inf  (x < x_0), right=false:\
-    \ f(x) += inf  (x_0 < x)\n void add_inf(bool right= false, T x0= 0) {\n  if (right)\
-    \ {\n   if (bf[1] && bx[1] <= x0) return;\n   assert(!bf[0] || bx[0] <= x0);\n\
-    \   bf[1]= true, bx[1]= x0;\n   if (!m[0] && !m[1]) return;\n   slope_lr<0>();\n\
-    \   if (x0 <= m[1]->x) {\n    m[1]= nullptr;\n    return;\n   }\n   splay(m[1]);\n\
-    \   np t= m[1], s= t;\n   for (; t;) {\n    if (push(t); t->x < x0) s= t, t= t->ch[1];\n\
-    \    else t= t->ch[0];\n   }\n   splay(s), s->ch[1]= nullptr;\n   update(s);\n\
-    \  } else {\n   if (bf[0] && x0 <= bx[0]) return;\n   assert(!bf[1] || x0 <= bx[1]);\n\
-    \   bf[0]= true, bx[0]= x0;\n   if (!m[0] && !m[1]) return;\n   slope_lr<1>();\n\
-    \   if (m[0]->x <= x0) {\n    m[0]= nullptr;\n    return;\n   }\n   splay(m[0]);\n\
-    \   np t= m[0], s= t;\n   for (; t;) {\n    push(t);\n    if (x0 < t->x) s= t,\
-    \ t= t->ch[0];\n    else t= t->ch[1];\n   }\n   splay(s), s->ch[0]= nullptr;\n\
-    \   update(s);\n  }\n }\n D min() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
-    \   return y + D(rem) * bx[0];\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
+    \  bf[0]= false;\n   } else {\n    bf[!rev]= false;\n    if (!m[!rev]) return;\n\
+    \    if (!m[rev]) {\n     m[!rev]= nullptr;\n     return;\n    }\n    splay(m[rev]);\n\
+    \    if (m[0] == m[1]) m[rev]->d= o[rev];\n    m[rev]->ch[!rev]= m[!rev]= nullptr;\n\
+    \    update(m[rev]);\n   }\n  }\n }\n //  f(x) <- min_{lb<=y<=ub} f(x-y). (lb\
+    \ <= ub), \\_/ -> \\__/\n void chmin_slide_win(T lb, T ub) {\n  assert(lb <= ub);\n\
+    \  if (bf[0] && bf[1] && bx[0] == bx[1]) {\n   y+= D(rem) * bx[0], rem= 0, bx[0]+=\
+    \ lb, bx[1]+= ub;\n   return;\n  }\n  slope_eval();\n  if (rem < 0) {\n   if (bf[1])\
+    \ {\n    y+= D(rem) * bx[1];\n    np t= new Node{{nullptr, nullptr}, m[0], 0,\
+    \ bx[1], -rem, -rem, -D(bx[1]) * rem, 1};\n    if (m[0]) splay(m[0]), m[0]->ch[1]=\
+    \ t, update(m[0]);\n    rem= 0, bx[1]+= ub, splay(m[0]= t), prop(t, lb);\n   }\
+    \ else if (m[0]) splay(m[0]), prop(m[0], lb);\n   if (bf[0]) bx[0]+= lb;\n   y-=\
+    \ D(rem) * lb;\n  } else if (rem > 0) {\n   if (bf[0]) {\n    y+= D(rem) * bx[0];\n\
+    \    np t= new Node{{nullptr, nullptr}, m[1], 0, bx[0], rem, rem, D(bx[1]) * rem,\
+    \ 1};\n    if (m[1]) splay(m[1]), m[1]->ch[0]= t, update(m[1]);\n    rem= 0, bx[0]+=\
+    \ lb, splay(m[1]= t), prop(t, ub);\n   } else if (m[1]) splay(m[1]), prop(m[1],\
+    \ ub);\n   if (bf[1]) bx[1]+= ub;\n   y-= D(rem) * ub;\n  } else {\n   if (m[0])\
+    \ {\n    splay(m[0]);\n    if (m[0] == m[1]) {\n     np r= m[0]->ch[1];\n    \
+    \ m[0]->ch[1]= nullptr;\n     np t= new Node{{nullptr, r}, m[0], 0, m[0]->x, o[1],\
+    \ 0, 0, 1};\n     if (r) r->par= t;\n     update(t), prop(t, ub), m[0]->d= o[0],\
+    \ prop(m[0], lb), push(m[0]), m[0]->ch[1]= m[1]= t, update(m[0]);\n    } else\
+    \ if (m[1]) {\n     np t= m[0]->ch[1];\n     m[0]->ch[1]= nullptr, prop(m[0],\
+    \ lb), push(m[0]), prop(t, ub), m[0]->ch[1]= t;\n     update(m[0]);\n     splay(m[1]);\n\
+    \    } else prop(m[0], lb);\n   } else if (m[1]) splay(m[1]), prop(m[1], ub);\n\
+    \   if (bf[0]) bx[0]+= lb;\n   if (bf[1]) bx[1]+= ub;\n  }\n }\n // f(x) <- f(x-x0)\n\
+    \ void shift(T x0) {\n  if (y-= D(rem) * x0; m[0]) {\n   if (splay(m[0]), prop(m[0],\
+    \ x0); m[1]) splay(m[1]);\n  } else if (m[1]) splay(m[1]), prop(m[1], x0);\n \
+    \ if (bf[0]) bx[0]+= x0;\n  if (bf[1]) bx[1]+= x0;\n }\n // right=false : f(x)\
+    \ +=  inf  (x < x_0), right=true: f(x) += inf  (x_0 < x)\n void add_inf(bool right=\
+    \ false, T x0= 0) {\n  if (right) {\n   if (bf[1] && bx[1] <= x0) return;\n  \
+    \ assert(!bf[0] || bx[0] <= x0);\n   bf[1]= true, bx[1]= x0;\n   if (!m[0] &&\
+    \ !m[1]) return;\n   slope_lr<0>();\n   if (x0 <= m[1]->x) {\n    m[1]= nullptr;\n\
+    \    return;\n   }\n   splay(m[1]);\n   np t= m[1], s= t;\n   for (; t;) {\n \
+    \   if (push(t); t->x < x0) s= t, t= t->ch[1];\n    else t= t->ch[0];\n   }\n\
+    \   splay(s), s->ch[1]= nullptr;\n   update(s);\n  } else {\n   if (bf[0] && x0\
+    \ <= bx[0]) return;\n   assert(!bf[1] || x0 <= bx[1]);\n   bf[0]= true, bx[0]=\
+    \ x0;\n   if (!m[0] && !m[1]) return;\n   slope_lr<1>();\n   if (m[0]->x <= x0)\
+    \ {\n    m[0]= nullptr;\n    return;\n   }\n   splay(m[0]);\n   np t= m[0], s=\
+    \ t;\n   for (; t;) {\n    push(t);\n    if (x0 < t->x) s= t, t= t->ch[0];\n \
+    \   else t= t->ch[1];\n   }\n   splay(s), s->ch[0]= nullptr;\n   update(s);\n\
+    \  }\n }\n D min() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n \
+    \  return y + D(rem) * bx[0];\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
     \ y + D(rem) * bx[1];\n  }\n  return y;\n }\n std::pair<T, T> argmin() {\n  slope_eval();\n\
     \  if (rem > 0) {\n   assert(bf[0]);\n   return {bx[0], bx[0]};\n  }\n  if (rem\
     \ < 0) {\n   assert(bf[1]);\n   return {bx[1], bx[1]};\n  }\n  assert(m[0] ||\
@@ -239,8 +240,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc217_h.test.cpp
   requiredBy: []
-  timestamp: '2024-07-27 18:15:25+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-07-28 19:27:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc217_h.test.cpp
 layout: document

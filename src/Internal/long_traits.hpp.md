@@ -9,7 +9,10 @@ data:
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/0661.conj.test.cpp
+    title: test/aoj/0661.conj.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,7 +24,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2865.conj.test.cpp
+    title: test/aoj/2865.conj.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.conj.test.cpp
     title: test/atcoder/abc217_h.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
   - icon: ':x:'
@@ -197,6 +203,8 @@ data:
   - test/atcoder/abc234_ex.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
+  - test/aoj/2865.conj.test.cpp
+  - test/aoj/0661.conj.test.cpp
   - test/aoj/2865.test.cpp
   - test/aoj/1068.KDT.test.cpp
   - test/aoj/2842.KDT.test.cpp
