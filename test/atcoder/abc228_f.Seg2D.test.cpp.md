@@ -10,9 +10,9 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_f
@@ -127,7 +127,7 @@ data:
     \ v;\n for (int i= 0; i + h2 <= H; ++i)\n  for (int j= 0; j + w2 <= W; ++j) v.emplace_back(i,\
     \ j, sum(i, i + h2, j, j + w2));\n SegmentTree_2D<int, RMQ> seg(v);\n long long\
     \ ans= 0;\n for (int i= 0; i + h1 <= H; ++i)\n  for (int j= 0; j + w1 <= W; ++j)\
-    \ ans= max(ans, sum(i, i + h1, j, j + w1) - seg.fold(i, i + h1 - h2 + 1, j, j\
+    \ ans= max(ans, sum(i, i + h1, j, j + w1) - seg.prod(i, i + h1 - h2 + 1, j, j\
     \ + w1 - w2 + 1));\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc228/tasks/abc228_f\"\n\n\
     // kdt \u306F TLE\n\n#include <iostream>\n#include <vector>\n#include <array>\n\
@@ -144,7 +144,7 @@ data:
     \ <= H; ++i)\n  for (int j= 0; j + w2 <= W; ++j) v.emplace_back(i, j, sum(i, i\
     \ + h2, j, j + w2));\n SegmentTree_2D<int, RMQ> seg(v);\n long long ans= 0;\n\
     \ for (int i= 0; i + h1 <= H; ++i)\n  for (int j= 0; j + w1 <= W; ++j) ans= max(ans,\
-    \ sum(i, i + h1, j, j + w1) - seg.fold(i, i + h1 - h2 + 1, j, j + w1 - w2 + 1));\n\
+    \ sum(i, i + h1, j, j + w1) - seg.prod(i, i + h1 - h2 + 1, j, j + w1 - w2 + 1));\n\
     \ cout << ans << '\\n';\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree_2D.hpp
@@ -152,8 +152,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc228_f.Seg2D.test.cpp
   requiredBy: []
-  timestamp: '2024-04-13 13:36:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-07-29 13:54:10+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc228_f.Seg2D.test.cpp
 layout: document

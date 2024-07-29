@@ -42,10 +42,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
   - icon: ':x:'

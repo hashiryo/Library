@@ -1326,7 +1326,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_f.Seg2D.test.cpp
       title: test/atcoder/abc228_f.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1338,7 +1338,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc234_ex.KDT.test.cpp
       title: test/atcoder/abc234_ex.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1365,7 +1365,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc248_g.test.cpp
       title: test/atcoder/abc248_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
     - icon: ':x:'
