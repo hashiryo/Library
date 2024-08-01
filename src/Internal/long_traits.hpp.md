@@ -12,7 +12,7 @@ data:
   - icon: ':x:'
     path: test/aoj/0661.conj.test.cpp
     title: test/aoj/0661.conj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
   - icon: ':heavy_check_mark:'
