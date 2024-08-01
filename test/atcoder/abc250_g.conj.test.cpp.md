@@ -10,9 +10,9 @@ data:
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc250/tasks/abc250_g
@@ -52,41 +52,40 @@ data:
     \ D(t->x) * t->d;\n  if (np l= t->ch[0]; l) t->sz+= l->sz, t->a+= l->a, t->s+=\
     \ l->s;\n  if (np r= t->ch[1]; r) t->sz+= r->sz, t->a+= r->a, t->s+= r->s;\n }\n\
     \ static inline void prop(np t, T v) { t->z+= v, t->s+= D(v) * t->a, t->x+= v;\
-    \ }\n static inline void push(np t) {\n  if (t->z) {\n   if (np l= t->ch[0]; l)\
-    \ prop(l, t->z);\n   if (np r= t->ch[1]; r) prop(r, t->z);\n   t->z= 0;\n  }\n\
-    \ }\n static inline void rot(np t) {\n  np p= t->par;\n  if (bool d= p->ch[1]\
-    \ == t; (p->ch[d]= std::exchange(t->ch[!d], p))) p->ch[d]->par= p;\n  if ((t->par=\
-    \ std::exchange(p->par, t))) t->par->ch[t->par->ch[1] == p]= t;\n  update(p);\n\
-    \ }\n static inline void splay(np t) {\n  for (np p= t->par; p; rot(t), p= t->par)\n\
-    \   if (p->par) rot(p->par->ch[p->ch[1] == t] == p ? p : t);\n }\n static inline\
-    \ void splay_p(np t) {\n  if (np p= t->par; p) do {\n    if (p->par) push(p->par),\
-    \ push(p), push(t), rot(p->par->ch[p->ch[1] == t] == p ? p : t);\n    else push(p),\
-    \ push(t);\n    rot(t), p= t->par;\n   } while (p);\n  else push(t);\n }\n static\
-    \ inline T sl(np t) { return t ? t->a : 0; }\n static inline D sum(np t) { return\
-    \ t ? t->s : 0; }\n template <bool r> static inline bool lt(T a, T b) {\n  if\
-    \ constexpr (r) return b < a;\n  else return a < b;\n }\n template <bool r> static\
-    \ inline D calc_y(np t, T x, T ol, T ou) {\n  for (np n;; t= n) {\n   push(t);\n\
-    \   if (lt<r>(t->x, x)) n= t->ch[!r];\n   else {\n    ol+= sl(t->ch[!r]), ou+=\
-    \ sum(t->ch[!r]);\n    if (t->x == x) break;\n    ol+= t->d, ou+= D(t->x) * t->d,\
-    \ n= t->ch[r];\n   }\n   if (!n) break;\n  }\n  splay(t);\n  if constexpr (r)\
-    \ return D(x) * ol - ou;\n  else return ou - D(x) * ol;\n }\n np mn;\n bool bf[2];\n\
-    \ T o[2], rem, bx[2];\n D y;\n D calc_y(T x) {\n  if (!mn) return 0;\n  if (mn->x\
-    \ == x) return 0;\n  splay_p(mn);\n  if (x < mn->x) return mn->ch[0] ? calc_y<0>(mn->ch[0],\
-    \ x, o[0], D(mn->x) * o[0]) : D(mn->x - x) * o[0];\n  else return mn->ch[1] ?\
-    \ calc_y<1>(mn->ch[1], x, o[1], D(mn->x) * o[1]) : D(x - mn->x) * o[1];\n }\n\
-    \ template <bool r> void slope_lr() {\n  np t= mn;\n  if (!t) return;\n  splay_p(t);\n\
-    \  T ol= o[r];\n  if constexpr (r) y-= sum(t->ch[r]) + D(t->x) * ol, rem+= ol\
-    \ + sl(t->ch[r]);\n  else y+= sum(t->ch[r]) + D(t->x) * ol, rem-= ol + sl(t->ch[r]);\n\
-    \  for (; t->ch[r];) push(t), t= t->ch[r];\n  mn= t, o[r]= 0, o[!r]= t->d;\n }\n\
-    \ void slope_eval() {\n  if (rem == 0 || !mn) return;\n  bool neg= rem < 0;\n\
-    \  T p= neg ? -rem : rem, ol= 0;\n  D ou= 0;\n  np t= mn;\n  if (ol= o[neg]; p\
-    \ <= ol) {\n   o[neg]-= p, o[!neg]+= p, y+= D(t->x) * rem, rem= 0;\n   return;\n\
-    \  }\n  splay_p(t);\n  ou+= D(t->x) * ol;\n  t= t->ch[neg];\n  if (ol + sl(t)\
-    \ < p) return neg ? slope_lr<1>() : slope_lr<0>();\n  for (;;) {\n   push(t);\n\
-    \   T s= ol + sl(t->ch[!neg]), l= s + t->d;\n   if (p < s) t= t->ch[!neg];\n \
-    \  else if (l < p) ol= l, ou+= sum(t->ch[!neg]) + D(t->x) * t->d, t= t->ch[neg];\n\
-    \   else {\n    y+= D(t->x) * rem, rem= 0;\n    if (neg) y+= D(t->x) * s - (ou\
-    \ + sum(t->ch[!neg]));\n    else y-= D(t->x) * s - (ou + sum(t->ch[!neg]));\n\
+    \ }\n static inline void push(np t) {\n  if (t->z != 0) {\n   if (t->ch[0]) prop(t->ch[0],\
+    \ t->z);\n   if (t->ch[1]) prop(t->ch[1], t->z);\n   t->z= 0;\n  }\n }\n static\
+    \ inline void rot(np t) {\n  np p= t->par;\n  if (bool d= p->ch[1] == t; (p->ch[d]=\
+    \ std::exchange(t->ch[!d], p))) p->ch[d]->par= p;\n  if ((t->par= std::exchange(p->par,\
+    \ t))) t->par->ch[t->par->ch[1] == p]= t;\n  update(p);\n }\n static inline void\
+    \ splay(np t) {\n  for (np p= t->par; p; rot(t), p= t->par)\n   if (p->par) rot(p->par->ch[p->ch[1]\
+    \ == t] == p ? p : t);\n }\n static inline void splay_p(np t) {\n  if (np p= t->par;\
+    \ p) do {\n    if (p->par) push(p->par), push(p), push(t), rot(p->par->ch[p->ch[1]\
+    \ == t] == p ? p : t);\n    else push(p), push(t);\n    rot(t), p= t->par;\n \
+    \  } while (p);\n  else push(t);\n }\n static inline T sl(np t) { return t ? t->a\
+    \ : 0; }\n static inline D sum(np t) { return t ? t->s : 0; }\n template <bool\
+    \ r> static inline bool lt(T a, T b) {\n  if constexpr (r) return b < a;\n  else\
+    \ return a < b;\n }\n template <bool r> static inline D calc_y(np t, T x, T ol,\
+    \ T ou) {\n  for (np n;; t= n) {\n   push(t);\n   if (lt<r>(t->x, x)) n= t->ch[!r];\n\
+    \   else {\n    ol+= sl(t->ch[!r]), ou+= sum(t->ch[!r]);\n    if (t->x == x) break;\n\
+    \    ol+= t->d, ou+= D(t->x) * t->d, n= t->ch[r];\n   }\n   if (!n) break;\n \
+    \ }\n  splay(t);\n  if constexpr (r) return D(x) * ol - ou;\n  else return ou\
+    \ - D(x) * ol;\n }\n np mn;\n bool bf[2];\n T o[2], rem, bx[2];\n D y;\n D calc_y(T\
+    \ x) {\n  if (!mn) return 0;\n  if (mn->x == x) return 0;\n  splay_p(mn);\n  if\
+    \ (x < mn->x) return mn->ch[0] ? calc_y<0>(mn->ch[0], x, o[0], D(mn->x) * o[0])\
+    \ : D(mn->x - x) * o[0];\n  else return mn->ch[1] ? calc_y<1>(mn->ch[1], x, o[1],\
+    \ D(mn->x) * o[1]) : D(x - mn->x) * o[1];\n }\n template <bool r> void slope_lr()\
+    \ {\n  np t= mn;\n  if (!t) return;\n  splay_p(t);\n  T ol= o[r];\n  if constexpr\
+    \ (r) y-= sum(t->ch[r]) + D(t->x) * ol, rem+= ol + sl(t->ch[r]);\n  else y+= sum(t->ch[r])\
+    \ + D(t->x) * ol, rem-= ol + sl(t->ch[r]);\n  for (; t->ch[r];) push(t), t= t->ch[r];\n\
+    \  mn= t, o[r]= 0, o[!r]= t->d;\n }\n void slope_eval() {\n  if (rem == 0 || !mn)\
+    \ return;\n  bool neg= rem < 0;\n  T p= neg ? -rem : rem, ol= 0;\n  D ou= 0;\n\
+    \  np t= mn;\n  if (ol= o[neg]; p <= ol) {\n   o[neg]-= p, o[!neg]+= p, y+= D(t->x)\
+    \ * rem, rem= 0;\n   return;\n  }\n  splay_p(t);\n  ou+= D(t->x) * ol;\n  t= t->ch[neg];\n\
+    \  if (ol + sl(t) < p) return neg ? slope_lr<1>() : slope_lr<0>();\n  for (;;)\
+    \ {\n   push(t);\n   T s= ol + sl(t->ch[!neg]), l= s + t->d;\n   if (p < s) t=\
+    \ t->ch[!neg];\n   else if (l < p) ol= l, ou+= sum(t->ch[!neg]) + D(t->x) * t->d,\
+    \ t= t->ch[neg];\n   else {\n    y+= D(t->x) * rem, rem= 0;\n    if (neg) y+=\
+    \ D(t->x) * s - (ou + sum(t->ch[!neg]));\n    else y-= D(t->x) * s - (ou + sum(t->ch[!neg]));\n\
     \    mn= t, o[neg]= l - p, o[!neg]= p - s;\n    break;\n   }\n  }\n }\n template\
     \ <bool r> void add_inf(T x0) {\n  if (bf[r] && !lt<r>(bx[r], x0)) return;\n \
     \ assert(!bf[!r] || !lt<r>(bx[!r], x0));\n  bf[r]= true, bx[r]= x0;\n  if (!mn)\
@@ -113,8 +112,8 @@ data:
     \ += max(a(x-x0),b(x-x0)), (a < b)\n void add_max(T a, T b, T x0) {\n  assert(a\
     \ < b);\n  if (bf[0] && x0 <= bx[0]) y-= D(b) * x0, rem+= b;\n  else if (bf[1]\
     \ && bx[1] <= x0) y-= D(a) * x0, rem+= a;\n  else if (mn) {\n   np t= mn;\n  \
-    \ for (splay_p(t);;) {\n    if (t->x == x0) {\n     t->d+= b - a;\n     break;\n\
-    \    }\n    push(t);\n    np &n= t->ch[t->x < x0];\n    if (!n) {\n     n= new\
+    \ for (splay_p(t);;) {\n    push(t);\n    if (t->x == x0) {\n     t->d+= b - a;\n\
+    \     break;\n    }\n    np &n= t->ch[t->x < x0];\n    if (!n) {\n     n= new\
     \ Node{{nullptr, nullptr}, t, 0, x0, b - a, b - a, D(x0) * (b - a), 1}, t= n;\n\
     \     break;\n    }\n    t= n;\n   }\n   if (splay(t); x0 < mn->x) y-= D(b) *\
     \ x0, rem+= b;\n   else if (y-= D(a) * x0, rem+= a; x0 == mn->x) o[1]+= b - a;\n\
@@ -179,8 +178,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc250_g.conj.test.cpp
   requiredBy: []
-  timestamp: '2024-08-01 17:25:27+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-08-01 22:24:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc250_g.conj.test.cpp
 layout: document
