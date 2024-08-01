@@ -9,7 +9,7 @@ data:
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.conj.test.cpp
     title: test/aoj/0661.conj.test.cpp
   - icon: ':heavy_check_mark:'
@@ -39,13 +39,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.conj.test.cpp
     title: test/atcoder/abc217_h.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
   - icon: ':x:'
