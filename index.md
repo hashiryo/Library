@@ -586,7 +586,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0655.test.cpp
       title: test/aoj/0655.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/0661.conj.test.cpp
       title: test/aoj/0661.conj.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1296,7 +1296,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc217_h.conj.test.cpp
       title: test/atcoder/abc217_h.conj.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc217_h.test.cpp
       title: test/atcoder/abc217_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1365,7 +1365,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc248_g.test.cpp
       title: test/atcoder/abc248_g.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
     - icon: ':x:'
