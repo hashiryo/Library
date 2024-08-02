@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2865.conj.test.cpp
     title: test/aoj/2865.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,7 +45,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
   - icon: ':x:'
