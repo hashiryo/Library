@@ -10,16 +10,16 @@ data:
   - icon: ':x:'
     path: test/aoj/0661.conj.test.cpp
     title: test/aoj/0661.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.conj.test.cpp
     title: test/aoj/2865.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc127_f.test.cpp
     title: test/atcoder/abc127_f.test.cpp
   - icon: ':x:'
@@ -63,7 +63,7 @@ data:
     title: test/yukicoder/2114.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include <vector>\n\
@@ -130,19 +130,19 @@ data:
     \ * s - (ou + sum(t->ch[!neg]));\n    else y-= D(t->x) * s - (ou + sum(t->ch[!neg]));\n\
     \    break;\n   }\n  }\n  splay(mn= t), y+= D(t->x) * rem, rem= 0;\n }\n template\
     \ <bool r> void add_inf(T x0) {\n  if (bf[r] && !lt<r>(bx[r], x0)) return;\n \
-    \ assert(!bf[!r] || !lt<r>(bx[!r], x0));\n  bf[r]= true, bx[r]= x0;\n  if (!mn)\
-    \ return;\n  slope_lr<!r>();\n  if (!lt<r>(x0, mn->x)) {\n   mn= nullptr;\n  \
-    \ return;\n  }\n  np t= mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x))\
-    \ s= t, t= t->ch[r];\n   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n\
-    \ }\n void add_r(np t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d,\
-    \ t->x), add_r(t->ch[1]);\n }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]),\
-    \ add_max(-t->d, 0, t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex():\
-    \ mn(nullptr), bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream\
-    \ ss;\n  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn <<\
-    \ \"\\n bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] <<\
-    \ \", bx[1]:\" << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1]\
-    \ << \"\\n\"; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs()\
-    \ {\n  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
+    \ if (assert(!bf[!r] || !lt<r>(bx[!r], x0)), bf[r]= true, bx[r]= x0; !mn) return;\n\
+    \  if (slope_lr<!r>(); !lt<r>(x0, mn->x)) return mn= nullptr, void();\n  np t=\
+    \ mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x)) s= t, t= t->ch[r];\n\
+    \   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n }\n void add_r(np\
+    \ t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d, t->x), add_r(t->ch[1]);\n\
+    \ }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]), add_max(-t->d, 0,\
+    \ t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex(): mn(nullptr),\
+    \ bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream ss;\n\
+    \  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn << \"\\n\
+    \ bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] << \", bx[1]:\"\
+    \ << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1] << \"\\n\"\
+    ; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs() {\n\
+    \  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
     \ xs);\n  if (bf[1]) xs.push_back(bx[1]);\n  return xs;\n }\n std::vector<std::pair<T,\
     \ D>> dump_xys() {\n  auto xs= dump_xs();\n  std::vector<std::pair<T, D>> xys(xs.size());\n\
     \  for (int i= xs.size(); i--;) xys[i]= {xs[i], operator()(xs[i])};\n  return\
@@ -185,23 +185,23 @@ data:
     \ mn->x+= lb; r) r->par= t;\n    }\n   }\n  } else {\n   bool r= rem > 0;\n  \
     \ T b[2]= {lb, ub};\n   if (bf[!r]) {\n    T p= r ? rem : -rem;\n    np t= new\
     \ Node{{nullptr, nullptr}, nullptr, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if\
-    \ (y+= D(rem) * bx[!r], rem= 0, mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]=\
-    \ 0; mn) t->ch[r]= mn, mn->par= t;\n   } else if (y-= D(rem) * b[r]; mn) mn->z+=\
-    \ b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x)\
-    \ { return assert(!bf[0] || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x)\
-    \ + D(rem) * x + y; }\n D min() { return slope_eval(), rem == 0 ? y : rem > 0\
-    \ ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\
-    \ }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
-    \   return {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
-    \ {bx[1], bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  np t= mn;\n\
-    \  if (!t) return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]=\
-    \ t->x;\n  else if (ret[r]= t->x, t= t->ch[!r]; t) {\n   for (; t->ch[r];) push(t),\
-    \ t= t->ch[r];\n   splay(t), ret[!r]= t->x, splay(mn);\n  } else assert(bf[!r]);\n\
-    \  return ret;\n }\n size_t size() { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex\
-    \ &operator+=(const PiecewiseLinearConvex &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0])\
-    \ add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true, r.bx[1]);\n  if (r.mn)\
-    \ add_l(r.mn->ch[0]), add_r(r.mn->ch[1]), add_max(-r.o[0], r.o[1], r.mn->x);\n\
-    \  return *this;\n }\n};\n"
+    \ (mn) splay(mn), t->ch[r]= mn, mn->par= t;\n    y+= D(rem) * bx[!r], rem= 0,\
+    \ mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]= 0;\n   } else if (y-= D(rem)\
+    \ * b[r]; mn) splay(mn), mn->z+= b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+=\
+    \ ub;\n }\n D operator()(T x) { return assert(!bf[0] || bx[0] <= x), assert(!bf[1]\
+    \ || x <= bx[1]), calc_y(x) + D(rem) * x + y; }\n D min() { return slope_eval(),\
+    \ rem == 0 ? y : rem > 0 ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]),\
+    \ y + D(rem) * bx[1]); }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if\
+    \ (rem > 0) {\n   assert(bf[0]);\n   return {bx[0], bx[0]};\n  }\n  if (rem <\
+    \ 0) {\n   assert(bf[1]);\n   return {bx[1], bx[1]};\n  }\n  std::array<T, 2>\
+    \ ret= {bx[0], bx[1]};\n  np t= mn;\n  if (!t) return ret;\n  bool r= o[0] ==\
+    \ 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]= t->x;\n  else if (ret[r]= t->x, t=\
+    \ t->ch[!r]; t) {\n   for (; t->ch[r];) push(t), t= t->ch[r];\n   splay(t), ret[!r]=\
+    \ t->x, splay(mn);\n  } else assert(bf[!r]);\n  return ret;\n }\n size_t size()\
+    \ { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex\
+    \ &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1])\
+    \ add_inf(true, r.bx[1]);\n  if (r.mn) add_l(r.mn->ch[0]), add_r(r.mn->ch[1]),\
+    \ add_max(-r.o[0], r.o[1], r.mn->x);\n  return *this;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <array>\n\
     #include <iostream>\n#include <sstream>\n#include <string>\n#include <cassert>\n\
     #include \"src/Internal/long_traits.hpp\"\ntemplate <class T> class PiecewiseLinearConvex\
@@ -256,19 +256,19 @@ data:
     \ * s - (ou + sum(t->ch[!neg]));\n    else y-= D(t->x) * s - (ou + sum(t->ch[!neg]));\n\
     \    break;\n   }\n  }\n  splay(mn= t), y+= D(t->x) * rem, rem= 0;\n }\n template\
     \ <bool r> void add_inf(T x0) {\n  if (bf[r] && !lt<r>(bx[r], x0)) return;\n \
-    \ assert(!bf[!r] || !lt<r>(bx[!r], x0));\n  bf[r]= true, bx[r]= x0;\n  if (!mn)\
-    \ return;\n  slope_lr<!r>();\n  if (!lt<r>(x0, mn->x)) {\n   mn= nullptr;\n  \
-    \ return;\n  }\n  np t= mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x))\
-    \ s= t, t= t->ch[r];\n   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n\
-    \ }\n void add_r(np t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d,\
-    \ t->x), add_r(t->ch[1]);\n }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]),\
-    \ add_max(-t->d, 0, t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex():\
-    \ mn(nullptr), bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream\
-    \ ss;\n  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn <<\
-    \ \"\\n bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] <<\
-    \ \", bx[1]:\" << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1]\
-    \ << \"\\n\"; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs()\
-    \ {\n  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
+    \ if (assert(!bf[!r] || !lt<r>(bx[!r], x0)), bf[r]= true, bx[r]= x0; !mn) return;\n\
+    \  if (slope_lr<!r>(); !lt<r>(x0, mn->x)) return mn= nullptr, void();\n  np t=\
+    \ mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x)) s= t, t= t->ch[r];\n\
+    \   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n }\n void add_r(np\
+    \ t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d, t->x), add_r(t->ch[1]);\n\
+    \ }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]), add_max(-t->d, 0,\
+    \ t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex(): mn(nullptr),\
+    \ bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream ss;\n\
+    \  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn << \"\\n\
+    \ bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] << \", bx[1]:\"\
+    \ << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1] << \"\\n\"\
+    ; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs() {\n\
+    \  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
     \ xs);\n  if (bf[1]) xs.push_back(bx[1]);\n  return xs;\n }\n std::vector<std::pair<T,\
     \ D>> dump_xys() {\n  auto xs= dump_xs();\n  std::vector<std::pair<T, D>> xys(xs.size());\n\
     \  for (int i= xs.size(); i--;) xys[i]= {xs[i], operator()(xs[i])};\n  return\
@@ -311,30 +311,30 @@ data:
     \ mn->x+= lb; r) r->par= t;\n    }\n   }\n  } else {\n   bool r= rem > 0;\n  \
     \ T b[2]= {lb, ub};\n   if (bf[!r]) {\n    T p= r ? rem : -rem;\n    np t= new\
     \ Node{{nullptr, nullptr}, nullptr, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if\
-    \ (y+= D(rem) * bx[!r], rem= 0, mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]=\
-    \ 0; mn) t->ch[r]= mn, mn->par= t;\n   } else if (y-= D(rem) * b[r]; mn) mn->z+=\
-    \ b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x)\
-    \ { return assert(!bf[0] || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x)\
-    \ + D(rem) * x + y; }\n D min() { return slope_eval(), rem == 0 ? y : rem > 0\
-    \ ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\
-    \ }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
-    \   return {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
-    \ {bx[1], bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  np t= mn;\n\
-    \  if (!t) return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]=\
-    \ t->x;\n  else if (ret[r]= t->x, t= t->ch[!r]; t) {\n   for (; t->ch[r];) push(t),\
-    \ t= t->ch[r];\n   splay(t), ret[!r]= t->x, splay(mn);\n  } else assert(bf[!r]);\n\
-    \  return ret;\n }\n size_t size() { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex\
-    \ &operator+=(const PiecewiseLinearConvex &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0])\
-    \ add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true, r.bx[1]);\n  if (r.mn)\
-    \ add_l(r.mn->ch[0]), add_r(r.mn->ch[1]), add_max(-r.o[0], r.o[1], r.mn->x);\n\
-    \  return *this;\n }\n};"
+    \ (mn) splay(mn), t->ch[r]= mn, mn->par= t;\n    y+= D(rem) * bx[!r], rem= 0,\
+    \ mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]= 0;\n   } else if (y-= D(rem)\
+    \ * b[r]; mn) splay(mn), mn->z+= b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+=\
+    \ ub;\n }\n D operator()(T x) { return assert(!bf[0] || bx[0] <= x), assert(!bf[1]\
+    \ || x <= bx[1]), calc_y(x) + D(rem) * x + y; }\n D min() { return slope_eval(),\
+    \ rem == 0 ? y : rem > 0 ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]),\
+    \ y + D(rem) * bx[1]); }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if\
+    \ (rem > 0) {\n   assert(bf[0]);\n   return {bx[0], bx[0]};\n  }\n  if (rem <\
+    \ 0) {\n   assert(bf[1]);\n   return {bx[1], bx[1]};\n  }\n  std::array<T, 2>\
+    \ ret= {bx[0], bx[1]};\n  np t= mn;\n  if (!t) return ret;\n  bool r= o[0] ==\
+    \ 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]= t->x;\n  else if (ret[r]= t->x, t=\
+    \ t->ch[!r]; t) {\n   for (; t->ch[r];) push(t), t= t->ch[r];\n   splay(t), ret[!r]=\
+    \ t->x, splay(mn);\n  } else assert(bf[!r]);\n  return ret;\n }\n size_t size()\
+    \ { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex\
+    \ &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1])\
+    \ add_inf(true, r.bx[1]);\n  if (r.mn) add_l(r.mn->ch[0]), add_r(r.mn->ch[1]),\
+    \ add_max(-r.o[0], r.o[1], r.mn->x);\n  return *this;\n }\n};"
   dependsOn:
   - src/Internal/long_traits.hpp
   isVerificationFile: false
   path: src/Optimization/PiecewiseLinearConvex.hpp
   requiredBy: []
-  timestamp: '2024-08-02 10:52:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-08-02 14:23:30+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/2114.test.cpp
   - test/yukicoder/1077.conj.test.cpp

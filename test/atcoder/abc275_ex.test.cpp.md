@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
@@ -102,19 +102,19 @@ data:
     \ * s - (ou + sum(t->ch[!neg]));\n    else y-= D(t->x) * s - (ou + sum(t->ch[!neg]));\n\
     \    break;\n   }\n  }\n  splay(mn= t), y+= D(t->x) * rem, rem= 0;\n }\n template\
     \ <bool r> void add_inf(T x0) {\n  if (bf[r] && !lt<r>(bx[r], x0)) return;\n \
-    \ assert(!bf[!r] || !lt<r>(bx[!r], x0));\n  bf[r]= true, bx[r]= x0;\n  if (!mn)\
-    \ return;\n  slope_lr<!r>();\n  if (!lt<r>(x0, mn->x)) {\n   mn= nullptr;\n  \
-    \ return;\n  }\n  np t= mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x))\
-    \ s= t, t= t->ch[r];\n   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n\
-    \ }\n void add_r(np t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d,\
-    \ t->x), add_r(t->ch[1]);\n }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]),\
-    \ add_max(-t->d, 0, t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex():\
-    \ mn(nullptr), bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream\
-    \ ss;\n  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn <<\
-    \ \"\\n bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] <<\
-    \ \", bx[1]:\" << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1]\
-    \ << \"\\n\"; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs()\
-    \ {\n  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
+    \ if (assert(!bf[!r] || !lt<r>(bx[!r], x0)), bf[r]= true, bx[r]= x0; !mn) return;\n\
+    \  if (slope_lr<!r>(); !lt<r>(x0, mn->x)) return mn= nullptr, void();\n  np t=\
+    \ mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x)) s= t, t= t->ch[r];\n\
+    \   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n }\n void add_r(np\
+    \ t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d, t->x), add_r(t->ch[1]);\n\
+    \ }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]), add_max(-t->d, 0,\
+    \ t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex(): mn(nullptr),\
+    \ bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream ss;\n\
+    \  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn << \"\\n\
+    \ bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] << \", bx[1]:\"\
+    \ << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1] << \"\\n\"\
+    ; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs() {\n\
+    \  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
     \ xs);\n  if (bf[1]) xs.push_back(bx[1]);\n  return xs;\n }\n std::vector<std::pair<T,\
     \ D>> dump_xys() {\n  auto xs= dump_xs();\n  std::vector<std::pair<T, D>> xys(xs.size());\n\
     \  for (int i= xs.size(); i--;) xys[i]= {xs[i], operator()(xs[i])};\n  return\
@@ -157,31 +157,31 @@ data:
     \ mn->x+= lb; r) r->par= t;\n    }\n   }\n  } else {\n   bool r= rem > 0;\n  \
     \ T b[2]= {lb, ub};\n   if (bf[!r]) {\n    T p= r ? rem : -rem;\n    np t= new\
     \ Node{{nullptr, nullptr}, nullptr, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if\
-    \ (y+= D(rem) * bx[!r], rem= 0, mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]=\
-    \ 0; mn) t->ch[r]= mn, mn->par= t;\n   } else if (y-= D(rem) * b[r]; mn) mn->z+=\
-    \ b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x)\
-    \ { return assert(!bf[0] || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x)\
-    \ + D(rem) * x + y; }\n D min() { return slope_eval(), rem == 0 ? y : rem > 0\
-    \ ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\
-    \ }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
-    \   return {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
-    \ {bx[1], bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  np t= mn;\n\
-    \  if (!t) return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]=\
-    \ t->x;\n  else if (ret[r]= t->x, t= t->ch[!r]; t) {\n   for (; t->ch[r];) push(t),\
-    \ t= t->ch[r];\n   splay(t), ret[!r]= t->x, splay(mn);\n  } else assert(bf[!r]);\n\
-    \  return ret;\n }\n size_t size() { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex\
-    \ &operator+=(const PiecewiseLinearConvex &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0])\
-    \ add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true, r.bx[1]);\n  if (r.mn)\
-    \ add_l(r.mn->ch[0]), add_r(r.mn->ch[1]), add_max(-r.o[0], r.o[1], r.mn->x);\n\
-    \  return *this;\n }\n};\n#line 7 \"test/atcoder/abc275_ex.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin\
-    \ >> N;\n vector<int> A(N), B(N);\n for (int i= 0; i < N; ++i) cin >> A[i];\n\
-    \ for (int i= 0; i < N; ++i) cin >> B[i];\n CartesianTree ct(B, false);\n int\
-    \ root= ct.root();\n vector<PiecewiseLinearConvex<int>> dp(N);\n auto dfs= [&](auto\
-    \ self, int v) -> void {\n  for (int u: ct.children(v))\n   if (u != -1) {\n \
-    \   self(self, u);\n    dp[v]+= dp[u];\n   }\n  dp[v].add_linear(B[v]);\n  dp[v].add_inf(false,\
-    \ A[v]);\n  dp[v].chmin_cum(true);\n  dp[v].add_linear(-B[v]);\n };\n dfs(dfs,\
-    \ root);\n cout << dp[root](0) << '\\n';\n return 0;\n}\n"
+    \ (mn) splay(mn), t->ch[r]= mn, mn->par= t;\n    y+= D(rem) * bx[!r], rem= 0,\
+    \ mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]= 0;\n   } else if (y-= D(rem)\
+    \ * b[r]; mn) splay(mn), mn->z+= b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+=\
+    \ ub;\n }\n D operator()(T x) { return assert(!bf[0] || bx[0] <= x), assert(!bf[1]\
+    \ || x <= bx[1]), calc_y(x) + D(rem) * x + y; }\n D min() { return slope_eval(),\
+    \ rem == 0 ? y : rem > 0 ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]),\
+    \ y + D(rem) * bx[1]); }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if\
+    \ (rem > 0) {\n   assert(bf[0]);\n   return {bx[0], bx[0]};\n  }\n  if (rem <\
+    \ 0) {\n   assert(bf[1]);\n   return {bx[1], bx[1]};\n  }\n  std::array<T, 2>\
+    \ ret= {bx[0], bx[1]};\n  np t= mn;\n  if (!t) return ret;\n  bool r= o[0] ==\
+    \ 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]= t->x;\n  else if (ret[r]= t->x, t=\
+    \ t->ch[!r]; t) {\n   for (; t->ch[r];) push(t), t= t->ch[r];\n   splay(t), ret[!r]=\
+    \ t->x, splay(mn);\n  } else assert(bf[!r]);\n  return ret;\n }\n size_t size()\
+    \ { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex\
+    \ &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1])\
+    \ add_inf(true, r.bx[1]);\n  if (r.mn) add_l(r.mn->ch[0]), add_r(r.mn->ch[1]),\
+    \ add_max(-r.o[0], r.o[1], r.mn->x);\n  return *this;\n }\n};\n#line 7 \"test/atcoder/abc275_ex.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n vector<int> A(N), B(N);\n for (int i= 0; i < N; ++i) cin\
+    \ >> A[i];\n for (int i= 0; i < N; ++i) cin >> B[i];\n CartesianTree ct(B, false);\n\
+    \ int root= ct.root();\n vector<PiecewiseLinearConvex<int>> dp(N);\n auto dfs=\
+    \ [&](auto self, int v) -> void {\n  for (int u: ct.children(v))\n   if (u !=\
+    \ -1) {\n    self(self, u);\n    dp[v]+= dp[u];\n   }\n  dp[v].add_linear(B[v]);\n\
+    \  dp[v].add_inf(false, A[v]);\n  dp[v].chmin_cum(true);\n  dp[v].add_linear(-B[v]);\n\
+    \ };\n dfs(dfs, root);\n cout << dp[root](0) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc275/tasks/abc275_Ex\"\n\
     // https://atcoder.jp/contests/abc275/tasks/abc275_h\n#include <iostream>\n#include\
     \ <vector>\n#include \"src/Misc/CartesianTree.hpp\"\n#include \"src/Optimization/PiecewiseLinearConvex.hpp\"\
@@ -200,7 +200,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc275_ex.test.cpp
   requiredBy: []
-  timestamp: '2024-08-02 10:52:22+09:00'
+  timestamp: '2024-08-02 14:23:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc275_ex.test.cpp

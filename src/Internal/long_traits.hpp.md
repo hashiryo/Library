@@ -5,14 +5,14 @@ data:
   - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/aoj/0661.conj.test.cpp
     title: test/aoj/0661.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,16 +24,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.conj.test.cpp
     title: test/aoj/2865.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc127_f.test.cpp
     title: test/atcoder/abc127_f.test.cpp
   - icon: ':x:'

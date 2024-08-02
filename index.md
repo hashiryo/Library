@@ -430,7 +430,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/NetworkSimplex.hpp
       title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Optimization/PiecewiseLinearConvex.hpp
       title: src/Optimization/PiecewiseLinearConvex.hpp
     - icon: ':heavy_check_mark:'
@@ -589,7 +589,7 @@ data:
     - icon: ':x:'
       path: test/aoj/0661.conj.test.cpp
       title: test/aoj/0661.conj.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0661.test.cpp
       title: test/aoj/0661.test.cpp
     - icon: ':heavy_check_mark:'
@@ -856,10 +856,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2863.test.cpp
       title: test/aoj/2863.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2865.conj.test.cpp
       title: test/aoj/2865.conj.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2865.test.cpp
       title: test/aoj/2865.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1167,7 +1167,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc121_d.test.cpp
       title: test/atcoder/abc121_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc127_f.test.cpp
       title: test/atcoder/abc127_f.test.cpp
     - icon: ':heavy_check_mark:'
