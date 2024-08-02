@@ -5,14 +5,14 @@ data:
     path: src/Internal/long_traits.hpp
     title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc127/tasks/abc127_f
@@ -60,110 +60,106 @@ data:
     \ == t] == p ? p : t);\n }\n static inline T sl(np t) { return t ? t->a : 0; }\n\
     \ static inline D sum(np t) { return t ? t->s : 0; }\n template <bool r> static\
     \ inline bool lt(T a, T b) {\n  if constexpr (r) return b < a;\n  else return\
-    \ a < b;\n }\n template <bool r> static inline D calc_y(np t, T x, T ol, T ou)\
-    \ {\n  for (np n;; t= n) {\n   if (push(t); lt<r>(t->x, x)) n= t->ch[!r];\n  \
-    \ else {\n    ol+= sl(t->ch[!r]), ou+= sum(t->ch[!r]);\n    if (t->x == x) break;\n\
-    \    ol+= t->d, ou+= D(t->x) * t->d, n= t->ch[r];\n   }\n   if (!n) break;\n \
-    \ }\n  splay(t);\n  if constexpr (r) return D(x) * ol - ou;\n  else return ou\
-    \ - D(x) * ol;\n }\n np mn;\n bool bf[2];\n T o[2], rem, bx[2];\n D y;\n D calc_y(T\
-    \ x) {\n  if (!mn) return 0;\n  if (mn->x == x) return 0;\n  splay(mn);\n  if\
-    \ (x < mn->x) return mn->ch[0] ? calc_y<0>(mn->ch[0], x, o[0], D(mn->x) * o[0])\
-    \ : D(mn->x - x) * o[0];\n  else return mn->ch[1] ? calc_y<1>(mn->ch[1], x, o[1],\
-    \ D(mn->x) * o[1]) : D(x - mn->x) * o[1];\n }\n template <bool r> void slope_lr()\
-    \ {\n  np t= mn;\n  if (!t) return;\n  splay(t);\n  T ol= o[r];\n  if constexpr\
+    \ a < b;\n }\n template <bool r> inline D calc_y(np t, T x, T ol, T ou) {\n  if\
+    \ (t) {\n   for (np n;; t= n) {\n    if (push(t); lt<r>(t->x, x)) n= t->ch[!r];\n\
+    \    else {\n     ol+= sl(t->ch[!r]), ou+= sum(t->ch[!r]);\n     if (t->x == x)\
+    \ break;\n     ol+= t->d, ou+= D(t->x) * t->d, n= t->ch[r];\n    }\n    if (!n)\
+    \ break;\n   }\n   splay(t), splay(mn);\n  }\n  if constexpr (r) return D(x) *\
+    \ ol - ou;\n  else return ou - D(x) * ol;\n }\n np mn;\n bool bf[2];\n T o[2],\
+    \ rem, bx[2];\n D y;\n D calc_y(T x) {\n  if (!mn) return 0;\n  if (mn->x == x)\
+    \ return 0;\n  return x < mn->x ? calc_y<0>(mn->ch[0], x, o[0], D(mn->x) * o[0])\
+    \ : calc_y<1>(mn->ch[1], x, o[1], D(mn->x) * o[1]);\n }\n template <bool r> void\
+    \ slope_lr() {\n  np t= mn;\n  if (!t) return;\n  T ol= o[r];\n  if constexpr\
     \ (r) y-= sum(t->ch[r]) + D(t->x) * ol, rem+= ol + sl(t->ch[r]);\n  else y+= sum(t->ch[r])\
     \ + D(t->x) * ol, rem-= ol + sl(t->ch[r]);\n  for (; push(t), t->ch[r];) t= t->ch[r];\n\
     \  splay(mn= t), o[r]= 0, o[!r]= t->d;\n }\n void slope_eval() {\n  if (rem ==\
     \ 0 || !mn) return;\n  bool neg= rem < 0;\n  T p= neg ? -rem : rem, ol= 0;\n \
     \ D ou= 0;\n  np t= mn;\n  if (ol= o[neg]; p <= ol) {\n   o[neg]-= p, o[!neg]+=\
-    \ p, y+= D(t->x) * rem, rem= 0;\n   return;\n  }\n  splay(t);\n  ou+= D(t->x)\
-    \ * ol;\n  t= t->ch[neg];\n  if (ol + sl(t) < p) return neg ? slope_lr<1>() :\
-    \ slope_lr<0>();\n  for (;;) {\n   push(t);\n   T s= ol + sl(t->ch[!neg]), l=\
-    \ s + t->d;\n   if (p < s) t= t->ch[!neg];\n   else if (l < p) ol= l, ou+= sum(t->ch[!neg])\
-    \ + D(t->x) * t->d, t= t->ch[neg];\n   else {\n    y+= D(t->x) * rem, rem= 0;\n\
-    \    if (neg) y+= D(t->x) * s - (ou + sum(t->ch[!neg]));\n    else y-= D(t->x)\
-    \ * s - (ou + sum(t->ch[!neg]));\n    mn= t, o[neg]= l - p, o[!neg]= p - s;\n\
-    \    break;\n   }\n  }\n }\n template <bool r> void add_inf(T x0) {\n  if (bf[r]\
-    \ && !lt<r>(bx[r], x0)) return;\n  assert(!bf[!r] || !lt<r>(bx[!r], x0));\n  bf[r]=\
-    \ true, bx[r]= x0;\n  if (!mn) return;\n  slope_lr<!r>();\n  if (!lt<r>(x0, mn->x))\
-    \ {\n   mn= nullptr;\n   return;\n  }\n  splay(mn);\n  np t= mn, s= t;\n  for\
-    \ (; t;)\n   if (push(t); lt<r>(x0, t->x)) s= t, t= t->ch[r];\n   else t= t->ch[!r];\n\
-    \  splay(s), s->ch[r]= nullptr;\n }\n void add_r(np t) {\n  if (t) push(t), add_r(t->ch[0]),\
-    \ add_max(0, t->d, t->x), add_r(t->ch[1]);\n }\n void add_l(np t) {\n  if (t)\
-    \ push(t), add_l(t->ch[0]), add_max(-t->d, 0, t->x), add_l(t->ch[1]);\n }\npublic:\n\
-    \ PiecewiseLinearConvex(): mn(nullptr), bf{0, 0}, rem(0), y(0) {}\n std::string\
-    \ info() {\n  std::stringstream ss;\n  ss << \"\\n rem:\" << rem << \", y:\" <<\
-    \ y << \", mn:\" << mn << \"\\n bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] <<\
-    \ \", bx[0]:\" << bx[0] << \", bx[1]:\" << bx[1] << \"\\n \" << \"o[0]:\" << o[0]\
-    \ << \", o[1]:\" << o[1] << \"\\n\";\n  if (mn) splay(mn), info(mn, 0, ss);\n\
-    \  return ss.str();\n }\n std::vector<T> dump_xs() {\n  std::vector<T> xs;\n \
-    \ if (bf[0]) xs.push_back(bx[0]);\n  if (mn) splay(mn), dump_xs(mn, xs);\n  if\
-    \ (bf[1]) xs.push_back(bx[1]);\n  return xs;\n }\n std::vector<std::pair<T, D>>\
-    \ dump_xys() {\n  auto xs= dump_xs();\n  std::vector<std::pair<T, D>> xys(xs.size());\n\
+    \ p, y+= D(t->x) * rem, rem= 0;\n   return;\n  }\n  if (ou+= D(t->x) * ol, t=\
+    \ t->ch[neg]; ol + sl(t) < p) return neg ? slope_lr<1>() : slope_lr<0>();\n  for\
+    \ (T s, l;;) {\n   if (push(t), s= ol + sl(t->ch[!neg]), l= s + t->d; p < s) t=\
+    \ t->ch[!neg];\n   else if (l < p) ol= l, ou+= sum(t->ch[!neg]) + D(t->x) * t->d,\
+    \ t= t->ch[neg];\n   else {\n    if (o[neg]= l - p, o[!neg]= p - s; neg) y+= D(t->x)\
+    \ * s - (ou + sum(t->ch[!neg]));\n    else y-= D(t->x) * s - (ou + sum(t->ch[!neg]));\n\
+    \    break;\n   }\n  }\n  splay(mn= t), y+= D(t->x) * rem, rem= 0;\n }\n template\
+    \ <bool r> void add_inf(T x0) {\n  if (bf[r] && !lt<r>(bx[r], x0)) return;\n \
+    \ assert(!bf[!r] || !lt<r>(bx[!r], x0));\n  bf[r]= true, bx[r]= x0;\n  if (!mn)\
+    \ return;\n  slope_lr<!r>();\n  if (!lt<r>(x0, mn->x)) {\n   mn= nullptr;\n  \
+    \ return;\n  }\n  np t= mn, s= t;\n  for (; t;)\n   if (push(t); lt<r>(x0, t->x))\
+    \ s= t, t= t->ch[r];\n   else t= t->ch[!r];\n  splay(s), s->ch[r]= nullptr, splay(mn);\n\
+    \ }\n void add_r(np t) {\n  if (t) push(t), add_r(t->ch[0]), add_max(0, t->d,\
+    \ t->x), add_r(t->ch[1]);\n }\n void add_l(np t) {\n  if (t) push(t), add_l(t->ch[0]),\
+    \ add_max(-t->d, 0, t->x), add_l(t->ch[1]);\n }\npublic:\n PiecewiseLinearConvex():\
+    \ mn(nullptr), bf{0, 0}, rem(0), y(0) {}\n std::string info() {\n  std::stringstream\
+    \ ss;\n  if (ss << \"\\n rem:\" << rem << \", y:\" << y << \", mn:\" << mn <<\
+    \ \"\\n bf[0]:\" << bf[0] << \", bf[1]:\" << bf[1] << \", bx[0]:\" << bx[0] <<\
+    \ \", bx[1]:\" << bx[1] << \"\\n \" << \"o[0]:\" << o[0] << \", o[1]:\" << o[1]\
+    \ << \"\\n\"; mn) info(mn, 0, ss);\n  return ss.str();\n }\n std::vector<T> dump_xs()\
+    \ {\n  std::vector<T> xs;\n  if (bf[0]) xs.push_back(bx[0]);\n  if (mn) dump_xs(mn,\
+    \ xs);\n  if (bf[1]) xs.push_back(bx[1]);\n  return xs;\n }\n std::vector<std::pair<T,\
+    \ D>> dump_xys() {\n  auto xs= dump_xs();\n  std::vector<std::pair<T, D>> xys(xs.size());\n\
     \  for (int i= xs.size(); i--;) xys[i]= {xs[i], operator()(xs[i])};\n  return\
-    \ xys;\n }\n std::vector<T> dump_slopes() {\n  std::vector<T> as;\n  if (mn) splay(mn),\
-    \ as.push_back(-o[0]), dump_slopes_l(mn->ch[0], o[0], as), std::reverse(as.begin(),\
-    \ as.end()), as.push_back(o[1]), dump_slopes_r(mn->ch[1], o[1], as);\n  else as.push_back(0);\n\
-    \  for (auto &a: as) a+= rem;\n  return as;\n }\n // f(x) += c\n void add_const(D\
-    \ c) { y+= c; }\n // f(x) += ax, /\n void add_linear(T a) { rem+= a; }\n //  f(x)\
-    \ += max(a(x-x0),b(x-x0)), (a < b)\n void add_max(T a, T b, T x0) {\n  assert(a\
-    \ < b);\n  if (bf[0] && x0 <= bx[0]) y-= D(b) * x0, rem+= b;\n  else if (bf[1]\
-    \ && bx[1] <= x0) y-= D(a) * x0, rem+= a;\n  else if (mn) {\n   np t= mn;\n  \
-    \ for (splay(t);;) {\n    if (push(t); t->x == x0) {\n     t->d+= b - a;\n   \
-    \  break;\n    }\n    np &n= t->ch[t->x < x0];\n    if (!n) {\n     n= new Node{{nullptr,\
-    \ nullptr}, t, 0, x0, b - a, b - a, D(x0) * (b - a), 1}, t= n;\n     break;\n\
-    \    }\n    t= n;\n   }\n   if (splay(t); x0 < mn->x) y-= D(b) * x0, rem+= b;\n\
-    \   else if (y-= D(a) * x0, rem+= a; x0 == mn->x) o[1]+= b - a;\n  } else mn=\
-    \ new Node{{nullptr, nullptr}, nullptr, 0, x0, b - a, b - a, D(x0) * (b - a),\
-    \ 1}, y-= D(a) * x0, rem+= a, o[0]= 0, o[1]= b - a;\n }\n // f(x) +=  max(0, a(x-x0))\n\
-    \ void add_ramp(T a, T x0) {\n  if (a != 0) a > 0 ? add_max(0, a, x0) : add_max(a,\
-    \ 0, x0);\n }\n // f(x) += a|x-x0|, \\/\n void add_abs(T a, T x0) {\n  if (assert(a\
-    \ >= 0); a != 0) add_max(-a, a, x0);\n }\n // right=false : f(x) +=  inf  (x <\
-    \ x_0), right=true: f(x) += inf  (x_0 < x)\n void add_inf(bool right= false, T\
-    \ x0= 0) { return right ? add_inf<1>(x0) : add_inf<0>(x0); }\n // f(x) <- f(x-x0)\n\
-    \ void shift(T x0) {\n  if (bx[0]+= x0, bx[1]+= x0, y-= D(rem) * x0; mn) splay(mn),\
-    \ mn->z+= x0, mn->x+= x0;\n }\n // rev=false: f(x) <- min_{y<=x} f(y), rev=true\
-    \ : f(x) <- min_{x<=y} f(y)\n void chmin_cum(bool rev= false) {\n  if (bf[0] &&\
-    \ bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n  else if (slope_eval();\
-    \ rem == 0) {\n   if (mn) splay(mn), mn->d= o[rev], o[!rev]= 0, mn->ch[!rev]=\
-    \ nullptr;\n  } else if ((rem > 0) ^ rev) {\n   assert(bf[rev]);\n   y+= D(rem)\
-    \ * bx[rev];\n   rem= 0, mn= nullptr;\n  } else if (bf[!rev]) {\n   T p= std::abs(rem);\n\
+    \ xys;\n }\n std::vector<T> dump_slopes() {\n  std::vector<T> as;\n  if (mn) as.push_back(-o[0]),\
+    \ dump_slopes_l(mn->ch[0], o[0], as), std::reverse(as.begin(), as.end()), as.push_back(o[1]),\
+    \ dump_slopes_r(mn->ch[1], o[1], as);\n  else as.push_back(0);\n  for (auto &a:\
+    \ as) a+= rem;\n  return as;\n }\n // f(x) += c\n void add_const(D c) { y+= c;\
+    \ }\n // f(x) += ax, /\n void add_linear(T a) { rem+= a; }\n //  f(x) += max(a(x-x0),b(x-x0)),\
+    \ (a < b)\n void add_max(T a, T b, T x0) {\n  assert(a < b);\n  if (bf[0] && x0\
+    \ <= bx[0]) y-= D(b) * x0, rem+= b;\n  else if (bf[1] && bx[1] <= x0) y-= D(a)\
+    \ * x0, rem+= a;\n  else if (mn) {\n   np t= mn;\n   for (;;) {\n    if (push(t);\
+    \ t->x == x0) {\n     t->d+= b - a;\n     break;\n    }\n    np &n= t->ch[t->x\
+    \ < x0];\n    if (!n) {\n     n= new Node{{nullptr, nullptr}, t, 0, x0, b - a,\
+    \ b - a, D(x0) * (b - a), 1}, t= n;\n     break;\n    }\n    t= n;\n   }\n   if\
+    \ (splay(t), splay(mn); x0 < mn->x) y-= D(b) * x0, rem+= b;\n   else if (y-= D(a)\
+    \ * x0, rem+= a; x0 == mn->x) o[1]+= b - a;\n  } else mn= new Node{{nullptr, nullptr},\
+    \ nullptr, 0, x0, b - a, b - a, D(x0) * (b - a), 1}, y-= D(a) * x0, rem+= a, o[0]=\
+    \ 0, o[1]= b - a;\n }\n // f(x) +=  max(0, a(x-x0))\n void add_ramp(T a, T x0)\
+    \ {\n  if (a != 0) a > 0 ? add_max(0, a, x0) : add_max(a, 0, x0);\n }\n // f(x)\
+    \ += a|x-x0|, \\/\n void add_abs(T a, T x0) {\n  if (assert(a >= 0); a != 0) add_max(-a,\
+    \ a, x0);\n }\n // right=false : f(x) +=  inf  (x < x_0), right=true: f(x) +=\
+    \ inf  (x_0 < x)\n void add_inf(bool right= false, T x0= 0) { return right ? add_inf<1>(x0)\
+    \ : add_inf<0>(x0); }\n // f(x) <- f(x-x0)\n void shift(T x0) {\n  if (bx[0]+=\
+    \ x0, bx[1]+= x0, y-= D(rem) * x0; mn) mn->z+= x0, mn->x+= x0;\n }\n // rev=false:\
+    \ f(x) <- min_{y<=x} f(y), rev=true : f(x) <- min_{x<=y} f(y)\n void chmin_cum(bool\
+    \ rev= false) {\n  if (bf[0] && bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem=\
+    \ 0;\n  else if (slope_eval(); rem == 0) {\n   if (mn) mn->d= o[rev], o[!rev]=\
+    \ 0, mn->ch[!rev]= nullptr;\n  } else if ((rem > 0) ^ rev) assert(bf[rev]), y+=\
+    \ D(rem) * bx[rev], rem= 0, mn= nullptr;\n  else if (bf[!rev]) {\n   T p= std::abs(rem);\n\
     \   np t= new Node{{nullptr, nullptr}, mn, 0, bx[!rev], p, p, D(bx[!rev]) * p,\
-    \ 1};\n   if (mn) splay(mn), mn->ch[!rev]= t;\n   mn= t, o[rev]= p, o[!rev]= 0;\n\
-    \  }\n  bf[!rev]= false;\n }\n //  f(x) <- min_{lb<=y<=ub} f(x-y). (lb <= ub),\
-    \ \\_/ -> \\__/\n void chmin_slide_win(T lb, T ub) {\n  assert(lb <= ub);\n  if\
-    \ (bf[0] && bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n  else if (slope_eval();\
-    \ rem == 0) {\n   if (mn) {\n    splay(mn);\n    if (o[0] == 0) {\n     if (np\
-    \ l= mn->ch[0]; l) prop(l, lb - ub);\n     mn->z+= ub, mn->x+= ub;\n    } else\
-    \ if (o[1] == 0) {\n     if (np r= mn->ch[1]; r) prop(r, ub - lb);\n     mn->z+=\
-    \ lb, mn->x+= lb;\n    } else {\n     np r= mn->ch[1], t= new Node{{nullptr, r},\
-    \ mn, 0, mn->x, o[1], 0, 0, 1};\n     if (r) r->par= t;\n     update(t), prop(mn->ch[1]=\
-    \ t, ub - lb), mn->d= o[0], o[1]= 0, mn->z+= lb, mn->x+= lb;\n    }\n   }\n  }\
-    \ else {\n   bool r= rem > 0;\n   T b[2]= {lb, ub};\n   if (bf[!r]) {\n    y+=\
-    \ D(rem) * bx[!r];\n    T p= r ? rem : -rem;\n    np t= new Node{{nullptr, nullptr},\
-    \ nullptr, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if (mn) splay(mn), t->ch[r]=\
-    \ mn, mn->par= t;\n    rem= 0, mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]=\
-    \ 0;\n   } else if (y-= D(rem) * b[r]; mn) splay(mn), mn->z+= b[r], mn->x+= b[r];\n\
-    \  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x) {\n  assert(!bf[0] ||\
-    \ bx[0] <= x), assert(!bf[1] || x <= bx[1]);\n  return calc_y(x) + D(rem) * x\
-    \ + y;\n }\n D min() {\n  if (slope_eval(); rem == 0) return y;\n  return rem\
-    \ > 0 ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\n\
+    \ 1};\n   if (mn) mn->ch[!rev]= t;\n   mn= t, o[rev]= p, o[!rev]= 0;\n  }\n  bf[!rev]=\
+    \ false;\n }\n //  f(x) <- min_{lb<=y<=ub} f(x-y). (lb <= ub), \\_/ -> \\__/\n\
+    \ void chmin_slide_win(T lb, T ub) {\n  assert(lb <= ub);\n  if (bf[0] && bf[1]\
+    \ && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n  else if (slope_eval(); rem\
+    \ == 0) {\n   if (mn) {\n    if (o[0] == 0) {\n     if (mn->z+= ub, mn->x+= ub;\
+    \ mn->ch[0]) prop(mn->ch[0], lb - ub);\n    } else if (o[1] == 0) {\n     if (mn->z+=\
+    \ lb, mn->x+= lb; mn->ch[1]) prop(mn->ch[1], ub - lb);\n    } else {\n     np\
+    \ r= mn->ch[1], t= new Node{{nullptr, r}, mn, 0, mn->x, o[1], 0, 0, 1};\n    \
+    \ if (update(t), prop(mn->ch[1]= t, ub - lb), mn->d= o[0], o[1]= 0, mn->z+= lb,\
+    \ mn->x+= lb; r) r->par= t;\n    }\n   }\n  } else {\n   bool r= rem > 0;\n  \
+    \ T b[2]= {lb, ub};\n   if (bf[!r]) {\n    T p= r ? rem : -rem;\n    np t= new\
+    \ Node{{nullptr, nullptr}, nullptr, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if\
+    \ (y+= D(rem) * bx[!r], rem= 0, mn= t, t->z+= b[r], t->x+= b[r], o[r]= p, o[!r]=\
+    \ 0; mn) t->ch[r]= mn, mn->par= t;\n   } else if (y-= D(rem) * b[r]; mn) mn->z+=\
+    \ b[r], mn->x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x)\
+    \ { return assert(!bf[0] || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x)\
+    \ + D(rem) * x + y; }\n D min() { return slope_eval(), rem == 0 ? y : rem > 0\
+    \ ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\
     \ }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
     \   return {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
     \ {bx[1], bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  np t= mn;\n\
-    \  if (!t) return ret;\n  splay(t);\n  bool r= o[0] == 0;\n  if (!r && o[1] !=\
-    \ 0) ret[0]= ret[1]= t->x;\n  else if (ret[r]= t->x, t= t->ch[!r]; t) {\n   for\
-    \ (; t->ch[r];) push(t), t= t->ch[r];\n   splay(t), ret[!r]= t->x;\n  } else assert(bf[!r]);\n\
-    \  return ret;\n }\n size_t size() { return mn ? splay(mn), mn->sz : 0; }\n PiecewiseLinearConvex\
-    \ &operator+=(const PiecewiseLinearConvex &r) {\n  y+= r.y, rem+= r.rem;\n  if\
-    \ (r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true, r.bx[1]);\n\
-    \  if (r.mn) splay(r.mn), add_l(r.mn->ch[0]), add_r(r.mn->ch[1]), add_max(-r.o[0],\
-    \ r.o[1], r.mn->x);\n  return *this;\n }\n};\n#line 4 \"test/atcoder/abc127_f.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int Q;\n cin >> Q;\n PiecewiseLinearConvex<int> f;\n while (Q--) {\n  int op;\n\
-    \  cin >> op;\n  if (op == 1) {\n   int a, b;\n   cin >> a >> b;\n   f.add_abs(1,\
-    \ a);\n   f.add_const(b);\n  } else {\n   auto [l, r]= f.argmin();\n   cout <<\
-    \ l << \" \" << f.min() << '\\n';\n  }\n }\n return 0;\n}\n"
+    \  if (!t) return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]=\
+    \ t->x;\n  else if (ret[r]= t->x, t= t->ch[!r]; t) {\n   for (; t->ch[r];) push(t),\
+    \ t= t->ch[r];\n   splay(t), ret[!r]= t->x, splay(mn);\n  } else assert(bf[!r]);\n\
+    \  return ret;\n }\n size_t size() { return mn ? mn->sz : 0; }\n PiecewiseLinearConvex\
+    \ &operator+=(const PiecewiseLinearConvex &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0])\
+    \ add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true, r.bx[1]);\n  if (r.mn)\
+    \ add_l(r.mn->ch[0]), add_r(r.mn->ch[1]), add_max(-r.o[0], r.o[1], r.mn->x);\n\
+    \  return *this;\n }\n};\n#line 4 \"test/atcoder/abc127_f.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin\
+    \ >> Q;\n PiecewiseLinearConvex<int> f;\n while (Q--) {\n  int op;\n  cin >> op;\n\
+    \  if (op == 1) {\n   int a, b;\n   cin >> a >> b;\n   f.add_abs(1, a);\n   f.add_const(b);\n\
+    \  } else {\n   auto [l, r]= f.argmin();\n   cout << l << \" \" << f.min() <<\
+    \ '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc127/tasks/abc127_f\"\n#include\
     \ <iostream>\n#include \"src/Optimization/PiecewiseLinearConvex.hpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin\
@@ -177,8 +173,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc127_f.test.cpp
   requiredBy: []
-  timestamp: '2024-08-02 10:04:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-08-02 10:52:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc127_f.test.cpp
 layout: document
