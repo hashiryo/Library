@@ -7,31 +7,31 @@ data:
       \u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0661.conj.test.cpp
     title: test/aoj/0661.conj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2865.conj.test.cpp
     title: test/aoj/2865.conj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc127_f.test.cpp
     title: test/atcoder/abc127_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc217_h.conj.test.cpp
     title: test/atcoder/abc217_h.conj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc250_g.test.cpp
     title: test/atcoder/abc250_g.test.cpp
   - icon: ':x:'
@@ -63,7 +63,7 @@ data:
     title: test/yukicoder/2114.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include <vector>\n\
@@ -337,14 +337,14 @@ data:
     \ n[mn].sz : 0; }\n PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex\
     \ &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1])\
     \ add_inf(true, r.bx[1]);\n  if (r.mn) add_l(n[r.mn].ch[0]), add_r(n[r.mn].ch[1]),\
-    \ add_max(-r.o[0], r.o[1], n[r.mn].x);\n  return *this;\n }\n};"
+    \ add_max(-r.o[0], r.o[1], n[r.mn].x);\n  return *this;\n }\n};\n"
   dependsOn:
   - src/Internal/long_traits.hpp
   isVerificationFile: false
   path: src/Optimization/PiecewiseLinearConvex.hpp
   requiredBy: []
-  timestamp: '2024-08-03 14:57:27+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2024-08-03 16:42:57+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1467.test.cpp
   - test/yukicoder/1467.conj.test.cpp

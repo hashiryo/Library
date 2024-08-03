@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
@@ -205,7 +205,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc275_ex.test.cpp
   requiredBy: []
-  timestamp: '2024-08-03 14:57:27+09:00'
+  timestamp: '2024-08-03 16:42:57+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc275_ex.test.cpp
