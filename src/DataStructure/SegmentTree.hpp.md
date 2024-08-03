@@ -95,13 +95,13 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/650.HLD.test.cpp
-  - test/yukicoder/529.HLD.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
-  - test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - test/yosupo/point_set_range_composite.SegTree.test.cpp
+  - test/yukicoder/529.HLD.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp
   - test/aoj/3086.LiCT.test.cpp
   - test/aoj/3086.LARSCH.test.cpp
+  - test/yosupo/point_set_range_composite.SegTree.test.cpp
+  - test/yosupo/vertex_set_path_composite.HLD.test.cpp
 documentation_of: src/DataStructure/SegmentTree.hpp
 layout: document
 title: Segment-Tree

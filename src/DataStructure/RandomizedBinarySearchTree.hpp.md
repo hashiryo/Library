@@ -321,15 +321,15 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/396.RBST.test.cpp
-  - test/atcoder/abc256_f.RBST.test.cpp
-  - test/atcoder/arc153_b.RBST.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
-  - test/yosupo/range_affine_range_sum.RBST.test.cpp
-  - test/aoj/ITP2_4_A.RBST.test.cpp
   - test/aoj/ITP2_2_D.RBST.test.cpp
   - test/aoj/1508.RBST.test.cpp
+  - test/aoj/ITP2_4_A.RBST.test.cpp
   - test/aoj/ITP2_4_B.RBST.test.cpp
   - test/aoj/ITP2_4_C.RBST.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
+  - test/yosupo/range_affine_range_sum.RBST.test.cpp
+  - test/atcoder/arc153_b.RBST.test.cpp
+  - test/atcoder/abc256_f.RBST.test.cpp
 documentation_of: src/DataStructure/RandomizedBinarySearchTree.hpp
 layout: document
 title: Splay-Tree

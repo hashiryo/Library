@@ -63,9 +63,9 @@ data:
   timestamp: '2024-03-31 22:05:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc256_f.SegDual.test.cpp
   - test/aoj/2559.HLD.test.cpp
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
+  - test/atcoder/abc256_f.SegDual.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dual.hpp
 layout: document
 title: "Segment-Tree(\u53CC\u5BFE)"

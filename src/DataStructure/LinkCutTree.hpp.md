@@ -203,15 +203,15 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
-  - test/yosupo/vertex_add_path_sum.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - test/yosupo/lca.LCT.test.cpp
-  - test/aoj/2559.LCT.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
   - test/aoj/2450.LCT.test.cpp
+  - test/aoj/2559.LCT.test.cpp
+  - test/yosupo/lca.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/vertex_set_path_composite.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree.hpp
 layout: document
 title: Link-Cut-Tree
