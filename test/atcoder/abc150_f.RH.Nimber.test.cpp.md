@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/RollingHash.hpp
     title: Rolling-Hash
   _extendedRequiredBy: []

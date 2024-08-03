@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/913.monotone_minima.test.cpp
     title: test/yukicoder/913.monotone_minima.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/952.monotone_minima.test.cpp
     title: test/yukicoder/952.monotone_minima.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/monotone_minima.hpp\"\n#include <vector>\n\
@@ -40,7 +40,7 @@ data:
   path: src/Optimization/monotone_minima.hpp
   requiredBy: []
   timestamp: '2023-08-17 22:34:53+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/952.monotone_minima.test.cpp
   - test/yukicoder/913.monotone_minima.test.cpp

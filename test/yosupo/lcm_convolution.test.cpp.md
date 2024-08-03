@@ -26,9 +26,9 @@ data:
       \u307F\u8FBC\u307F\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lcm_convolution
@@ -218,7 +218,7 @@ data:
   path: test/yosupo/lcm_convolution.test.cpp
   requiredBy: []
   timestamp: '2024-02-19 15:31:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/lcm_convolution.test.cpp
 layout: document

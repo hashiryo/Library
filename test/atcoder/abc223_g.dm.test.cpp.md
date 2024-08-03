@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
   - icon: ':question:'

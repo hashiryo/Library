@@ -87,10 +87,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/arc153_b.WBT.test.cpp
     title: test/atcoder/arc153_b.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.RBST.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
   - icon: ':x:'
@@ -108,13 +108,13 @@ data:
   - icon: ':x:'
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.RBST.test.cpp
     title: test/yosupo/range_affine_range_sum.RBST.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.Splay.test.cpp
     title: test/yosupo/range_affine_range_sum.Splay.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
   - icon: ':x:'

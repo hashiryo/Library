@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_mod_tetration.test.cpp
     title: test/unit_test/constexpr_mod_tetration.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include\
@@ -151,7 +151,7 @@ data:
   path: src/Math/mod_tetration.hpp
   requiredBy: []
   timestamp: '2024-02-06 20:21:12+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/yosupo/tetration_mod.test.cpp

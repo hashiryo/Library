@@ -6,21 +6,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1569.Nimber.test.cpp
     title: test/yukicoder/1569.Nimber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1595.linear_rec.test.cpp
     title: test/yukicoder/1595.linear_rec.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/658.linear_rec.test.cpp
     title: test/yukicoder/658.linear_rec.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/bostan_mori.hpp\"\n#include <vector>\n#include\
@@ -74,7 +74,7 @@ data:
   path: src/Math/bostan_mori.hpp
   requiredBy: []
   timestamp: '2024-02-22 16:45:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1595.linear_rec.test.cpp
   - test/yukicoder/1569.Nimber.test.cpp

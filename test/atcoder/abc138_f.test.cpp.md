@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Misc/Automaton.hpp
     title: "\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\u4E0A\u306EDP"
   _extendedRequiredBy: []

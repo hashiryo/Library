@@ -19,12 +19,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.general_matching.test.cpp
     title: test/yosupo/bipartitematching.general_matching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/general_matching.test.cpp
     title: test/yosupo/general_matching.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/general_matching.hpp\"\n#include <cassert>\n#line\
@@ -116,7 +116,7 @@ data:
   path: src/Graph/general_matching.hpp
   requiredBy: []
   timestamp: '2024-02-19 18:05:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/3198.general_matching.test.cpp
   - test/aoj/3032.test.cpp

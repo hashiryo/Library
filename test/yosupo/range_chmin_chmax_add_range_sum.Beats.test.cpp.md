@@ -6,9 +6,9 @@ data:
     title: Segment-Tree Beats!
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
@@ -126,7 +126,7 @@ data:
   path: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
   requiredBy: []
   timestamp: '2024-03-31 22:05:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_chmin_chmax_add_range_sum.Beats.test.cpp
 layout: document

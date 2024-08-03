@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/BinaryIndexedTree.hpp
     title: Binary-Indexed-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Misc/Mo.hpp
     title: Mo's Algorithm
   - icon: ':question:'
