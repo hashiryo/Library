@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
@@ -93,8 +93,8 @@ data:
     \ + D(mn->x) * o[r];\n  T q= o[r] + sl(mn->ch[r]);\n  splay(mn= t), o[r]= 0, o[!r]=\
     \ t->d, r ? (y-= p, rem+= q) : (y+= p, rem-= q);\n }\n void slope_eval() {\n \
     \ if (rem == 0 || !mn) return;\n  bool neg= rem < 0;\n  T p= neg ? -rem : rem,\
-    \ ol= 0;\n  D ou= 0;\n  np t= mn;\n  if (ol= o[neg]; p <= ol) {\n   o[neg]-= p,\
-    \ o[!neg]+= p, y+= D(t->x) * rem, rem= 0;\n   return;\n  }\n  if (ou+= D(t->x)\
+    \ ol= 0;\n  D ou= 0;\n  np t= mn;\n  if (push(t); ol= o[neg]; p <= ol) {\n   o[neg]-=\
+    \ p, o[!neg]+= p, y+= D(t->x) * rem, rem= 0;\n   return;\n  }\n  if (ou+= D(t->x)\
     \ * ol, t= t->ch[neg]; ol + sl(t) < p) return slope_lr(neg);\n  for (T s, l;;)\
     \ {\n   if (push(t), s= ol + sl(t->ch[!neg]), l= s + t->d; p < s) t= t->ch[!neg];\n\
     \   else if (l < p) ol= l, ou+= sum(t->ch[!neg]) + D(t->x) * t->d, t= t->ch[neg];\n\
@@ -200,7 +200,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc275_ex.test.cpp
   requiredBy: []
-  timestamp: '2024-08-02 21:51:13+09:00'
+  timestamp: '2024-08-03 12:29:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc275_ex.test.cpp
