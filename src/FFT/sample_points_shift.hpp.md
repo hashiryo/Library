@@ -321,9 +321,9 @@ data:
   timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/665.test.cpp
   - test/yukicoder/502.test.cpp
   - test/yukicoder/42.test.cpp
+  - test/yukicoder/665.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
 documentation_of: src/FFT/sample_points_shift.hpp

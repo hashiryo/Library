@@ -353,17 +353,17 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/396.WBT.test.cpp
-  - test/aoj/1508.WBT.test.cpp
-  - test/aoj/3024.WBT.test.cpp
-  - test/aoj/ITP2_4_B.WBT.test.cpp
-  - test/aoj/ITP2_4_A.WBT.test.cpp
+  - test/atcoder/abc256_f.WBT.test.cpp
+  - test/atcoder/arc153_b.WBT.test.cpp
+  - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/yosupo/persistent_queue.WBT.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
   - test/aoj/ITP2_4_C.WBT.test.cpp
   - test/aoj/ITP2_2_D.WBT.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.WBT.test.cpp
-  - test/yosupo/persistent_queue.WBT.test.cpp
-  - test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - test/atcoder/arc153_b.WBT.test.cpp
-  - test/atcoder/abc256_f.WBT.test.cpp
+  - test/aoj/3024.WBT.test.cpp
+  - test/aoj/ITP2_4_A.WBT.test.cpp
+  - test/aoj/ITP2_4_B.WBT.test.cpp
+  - test/aoj/1508.WBT.test.cpp
 documentation_of: src/DataStructure/WeightBalancedTree.hpp
 layout: document
 title: Weight-Balanced-Tree

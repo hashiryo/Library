@@ -290,13 +290,13 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/649.DynSeg.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
-  - test/aoj/3024.DynSeg.test.cpp
-  - test/aoj/DSL_2_I.DynSeg.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
-  - test/atcoder/abc256_f.DynSeg.test.cpp
-  - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
 title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"

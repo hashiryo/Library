@@ -98,8 +98,8 @@ data:
   timestamp: '2024-02-19 15:31:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1868.test.cpp
   - test/yukicoder/1170.test.cpp
+  - test/yukicoder/1868.test.cpp
   - test/aoj/3506.test.cpp
 documentation_of: src/Graph/RangeToRangeGraph.hpp
 layout: document

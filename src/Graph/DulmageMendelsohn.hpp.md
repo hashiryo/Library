@@ -180,10 +180,10 @@ data:
   timestamp: '2024-02-22 13:37:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
-  - test/aoj/3168.bm.test.cpp
+  - test/yukicoder/1744.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
+  - test/aoj/3168.bm.test.cpp
 documentation_of: src/Graph/DulmageMendelsohn.hpp
 layout: document
 title: "Dulmage-Mendelsohn \u5206\u89E3"

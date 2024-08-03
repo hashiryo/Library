@@ -64,10 +64,10 @@ data:
   timestamp: '2024-02-07 23:03:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/counting_primes.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/NumberTheory/CumSumQuotient.hpp
 layout: document
 title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"

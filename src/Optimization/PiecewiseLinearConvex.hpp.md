@@ -7,28 +7,28 @@ data:
       \u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.conj.test.cpp
     title: test/aoj/0661.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.conj.test.cpp
     title: test/aoj/2865.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc127_f.test.cpp
     title: test/atcoder/abc127_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.conj.test.cpp
     title: test/atcoder/abc217_h.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
   - icon: ':x:'
@@ -63,7 +63,7 @@ data:
     title: test/yukicoder/2114.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include <vector>\n\
@@ -344,26 +344,26 @@ data:
   path: src/Optimization/PiecewiseLinearConvex.hpp
   requiredBy: []
   timestamp: '2024-08-03 18:26:54+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1467.test.cpp
-  - test/yukicoder/1467.conj.test.cpp
-  - test/yukicoder/2114.conj.test.cpp
   - test/yukicoder/2114.test.cpp
-  - test/yukicoder/1077.test.cpp
   - test/yukicoder/1077.conj.test.cpp
-  - test/aoj/2865.conj.test.cpp
-  - test/aoj/0661.test.cpp
-  - test/aoj/2865.test.cpp
-  - test/aoj/0661.conj.test.cpp
-  - test/atcoder/abc275_ex.test.cpp
-  - test/atcoder/abc250_g.conj.test.cpp
-  - test/atcoder/arc123_d.conj.test.cpp
+  - test/yukicoder/2114.conj.test.cpp
+  - test/yukicoder/1467.conj.test.cpp
+  - test/yukicoder/1077.test.cpp
+  - test/yukicoder/1467.test.cpp
   - test/atcoder/abc127_f.test.cpp
   - test/atcoder/abc217_h.conj.test.cpp
-  - test/atcoder/abc217_h.test.cpp
-  - test/atcoder/abc250_g.test.cpp
   - test/atcoder/arc123_d.test.cpp
+  - test/atcoder/abc250_g.test.cpp
+  - test/atcoder/abc250_g.conj.test.cpp
+  - test/atcoder/arc123_d.conj.test.cpp
+  - test/atcoder/abc217_h.test.cpp
+  - test/atcoder/abc275_ex.test.cpp
+  - test/aoj/2865.conj.test.cpp
+  - test/aoj/0661.conj.test.cpp
+  - test/aoj/2865.test.cpp
+  - test/aoj/0661.test.cpp
 documentation_of: src/Optimization/PiecewiseLinearConvex.hpp
 layout: document
 redirect_from:

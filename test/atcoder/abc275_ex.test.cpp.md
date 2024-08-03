@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvex.hpp
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []

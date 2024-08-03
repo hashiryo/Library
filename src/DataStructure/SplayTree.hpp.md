@@ -271,15 +271,15 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/396.Splay.test.cpp
-  - test/aoj/1508.Splay.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
-  - test/yosupo/range_affine_range_sum.Splay.test.cpp
   - test/atcoder/abc256_f.Splay.test.cpp
   - test/atcoder/arc153_b.Splay.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.Splay.test.cpp
+  - test/yosupo/range_affine_range_sum.Splay.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
+  - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/1508.Splay.test.cpp
 documentation_of: src/DataStructure/SplayTree.hpp
 layout: document
 title: Splay-Tree

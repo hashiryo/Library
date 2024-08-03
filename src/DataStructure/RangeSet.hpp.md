@@ -118,15 +118,15 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/674.test.cpp
-  - test/aoj/1242.rational.test.cpp
-  - test/aoj/2880.test.cpp
-  - test/aoj/0655.test.cpp
-  - test/aoj/1242.longdouble.test.cpp
-  - test/atcoder/abc228_d.test.cpp
+  - test/atcoder/abc256_d.test.cpp
+  - test/atcoder/abc182_e.test.cpp
   - test/atcoder/abc214_e.test.cpp
   - test/atcoder/abc194_e.test.cpp
-  - test/atcoder/abc182_e.test.cpp
-  - test/atcoder/abc256_d.test.cpp
+  - test/atcoder/abc228_d.test.cpp
+  - test/aoj/0655.test.cpp
+  - test/aoj/1242.rational.test.cpp
+  - test/aoj/2880.test.cpp
+  - test/aoj/1242.longdouble.test.cpp
 documentation_of: src/DataStructure/RangeSet.hpp
 layout: document
 title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"

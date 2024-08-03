@@ -396,24 +396,24 @@ data:
   timestamp: '2024-02-23 11:54:34+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/2507.test.cpp
+  - test/yukicoder/1142.test.cpp
   - test/yukicoder/1901.test.cpp
   - test/yukicoder/1753.test.cpp
-  - test/yukicoder/1142.test.cpp
-  - test/yukicoder/2507.test.cpp
-  - test/aoj/2345.test.cpp
-  - test/yosupo/hafnian_of_matrix.test.cpp
+  - test/atcoder/abc321_g.test.cpp
+  - test/atcoder/abc199_d.test.cpp
+  - test/atcoder/abc236_ex.test.cpp
+  - test/atcoder/abc212_h.test.cpp
+  - test/atcoder/abc213_g.test.cpp
+  - test/atcoder/arc105_f.test.cpp
+  - test/atcoder/abc253_ex.test.cpp
+  - test/yosupo/bitwise_and_convolution.test.cpp
   - test/yosupo/subset_convolution.test.cpp
   - test/yosupo/bitwise_xor_convolution.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
   - test/yosupo/exp_of_set_power_series.test.cpp
-  - test/yosupo/bitwise_and_convolution.test.cpp
-  - test/atcoder/abc253_ex.test.cpp
-  - test/atcoder/abc236_ex.test.cpp
-  - test/atcoder/arc105_f.test.cpp
-  - test/atcoder/abc321_g.test.cpp
-  - test/atcoder/abc213_g.test.cpp
-  - test/atcoder/abc212_h.test.cpp
-  - test/atcoder/abc199_d.test.cpp
+  - test/yosupo/hafnian_of_matrix.test.cpp
+  - test/aoj/2345.test.cpp
 documentation_of: src/Math/set_power_series.hpp
 layout: document
 title: "\u96C6\u5408\u51AA\u7D1A\u6570"
