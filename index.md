@@ -1293,7 +1293,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc214_e.test.cpp
       title: test/atcoder/abc214_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc217_h.conj.test.cpp
       title: test/atcoder/abc217_h.conj.test.cpp
     - icon: ':heavy_check_mark:'
