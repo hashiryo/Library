@@ -1368,7 +1368,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.test.cpp
       title: test/atcoder/abc250_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1380,7 +1380,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_e.test.cpp
       title: test/atcoder/abc256_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_ex.Beats.test.cpp
       title: test/atcoder/abc256_ex.Beats.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1425,7 +1425,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc305_ex.test.cpp
       title: test/atcoder/abc305_ex.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.KDT.3D.test.cpp
       title: test/atcoder/abc309_f.KDT.3D.test.cpp
     - icon: ':x:'

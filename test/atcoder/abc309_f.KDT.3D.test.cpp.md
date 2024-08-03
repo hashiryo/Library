@@ -18,9 +18,9 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc309/tasks/abc309_f
@@ -264,7 +264,7 @@ data:
   path: test/atcoder/abc309_f.KDT.3D.test.cpp
   requiredBy: []
   timestamp: '2024-04-13 13:36:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc309_f.KDT.3D.test.cpp
 layout: document

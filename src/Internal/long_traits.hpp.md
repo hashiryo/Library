@@ -48,13 +48,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.test.cpp
     title: test/atcoder/abc250_g.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc275_ex.test.cpp
     title: test/atcoder/abc275_ex.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.KDT.3D.test.cpp
     title: test/atcoder/abc309_f.KDT.3D.test.cpp
   - icon: ':x:'
