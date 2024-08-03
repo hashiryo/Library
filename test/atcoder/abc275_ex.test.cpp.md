@@ -40,9 +40,9 @@ data:
     \ [l,r)\n std::array<int, 2> range(int i) const { return rg[i]; }\n};\n#line 3\
     \ \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include <algorithm>\n#line\
     \ 6 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n#include <sstream>\n#include\
-    \ <string>\n#include <cassert>\n#line 2 \"src/Internal/long_traits.hpp\"\n#include\
-    \ <cstdint>\n// clang-format off\ntemplate<class T>struct make_long{using type=\
-    \ T;};\ntemplate<>struct make_long<int8_t>{using type= int16_t;};\ntemplate<>struct\
+    \ <string>\n#include <cassert>\n#include <utility>\n#line 2 \"src/Internal/long_traits.hpp\"\
+    \n#include <cstdint>\n// clang-format off\ntemplate<class T>struct make_long{using\
+    \ type= T;};\ntemplate<>struct make_long<int8_t>{using type= int16_t;};\ntemplate<>struct\
     \ make_long<uint8_t>{using type= uint16_t;};\ntemplate<>struct make_long<int16_t>{using\
     \ type= int32_t;};\ntemplate<>struct make_long<uint16_t>{using type= uint32_t;};\n\
     template<>struct make_long<int32_t>{using type= int64_t;};\ntemplate<>struct make_long<uint32_t>{using\
@@ -50,7 +50,7 @@ data:
     template<>struct make_long<uint64_t>{using type= __uint128_t;};\ntemplate<>struct\
     \ make_long<float>{using type= double;};\ntemplate<>struct make_long<double>{using\
     \ type= long double;};\ntemplate<class T> using make_long_t= typename make_long<T>::type;\n\
-    // clang-format on\n#line 10 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n\
+    // clang-format on\n#line 11 \"src/Optimization/PiecewiseLinearConvex.hpp\"\n\
     namespace plc_internal {\n#ifdef __LOCAL\nstatic constexpr size_t __NODE_SIZE=\
     \ 1 << 15;\n#else\nstatic constexpr size_t __NODE_SIZE= 1 << 22;\n#endif\n}\n\
     template <class T, size_t NODE_SIZE= plc_internal::__NODE_SIZE> class PiecewiseLinearConvex\
@@ -205,7 +205,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc275_ex.test.cpp
   requiredBy: []
-  timestamp: '2024-08-03 16:42:57+09:00'
+  timestamp: '2024-08-03 18:26:54+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc275_ex.test.cpp
