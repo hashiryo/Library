@@ -88,9 +88,9 @@ data:
     \ t.d << \",a:\" << t.a << \",s:\" << t.s << \",sz:\" << t.sz << \",ch:(\" <<\
     \ t.ch[0] << \",\" << t.ch[1] << \"),par:\" << t.par << \"}\"; }\n };\n static\
     \ inline int ni= 1;\n static inline Node n[NODE_SIZE];\n static inline void info(int\
-    \ t, int d, std::stringstream &ss) {\n  if (!t) return;\n  info(n[t].ch[0], d\
-    \ + 1, ss);\n  for (int i= 0; i < d; ++i) ss << \"   \";\n  ss << \" \u25A0 \"\
-    \ << n[t] << '\\n', info(n[t].ch[1], d + 1, ss);\n }\n static inline void dump_xs(int\
+    \ t, int d, std::stringstream &ss) {\n  if (!t) return;\n  // push(t);\n  info(n[t].ch[0],\
+    \ d + 1, ss);\n  for (int i= 0; i < d; ++i) ss << \"   \";\n  ss << \" \u25A0\
+    \ \" << n[t] << '\\n', info(n[t].ch[1], d + 1, ss);\n }\n static inline void dump_xs(int\
     \ t, std::vector<T> &xs) {\n  if (t) push(t), dump_xs(n[t].ch[0], xs), xs.push_back(n[t].x),\
     \ dump_xs(n[t].ch[1], xs);\n }\n static inline void dump_slopes_l(int t, T ofs,\
     \ std::vector<T> &as) {\n  if (t) push(t), dump_slopes_l(n[t].ch[1], ofs, as),\
@@ -179,36 +179,36 @@ data:
     \ 0;\n  } else if ((rem > 0) ^ rev) assert(bf[rev]), y+= D(rem) * bx[rev], rem=\
     \ 0, mn= 0;\n  else if (bf[!rev]) {\n   T p= std::abs(rem);\n   int t= ni++;\n\
     \   n[t]= Node{{0, 0}, 0, 0, bx[!rev], p, p, D(bx[!rev]) * p, 1};\n   if (mn)\
-    \ update(mn), n[t].ch[rev]= mn, n[mn].par= t;\n   mn= t, o[rev]= p, o[!rev]= 0;\n\
-    \  }\n  bf[!rev]= false;\n }\n //  f(x) <- min_{lb<=y<=ub} f(x-y). (lb <= ub),\
-    \ \\_/ -> \\__/\n void chmin_slide_win(T lb, T ub) {\n  assert(lb <= ub);\n  if\
-    \ (bf[0] && bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n  else if (slope_eval();\
-    \ rem == 0) {\n   if (mn) {\n    if (o[0] == 0) {\n     if (n[mn].z+= ub, n[mn].x+=\
-    \ ub; n[mn].ch[0]) prop(n[mn].ch[0], lb - ub);\n    } else if (o[1] == 0) {\n\
-    \     if (n[mn].z+= lb, n[mn].x+= lb; n[mn].ch[1]) prop(n[mn].ch[1], ub - lb);\n\
-    \    } else {\n     int r= n[mn].ch[1], t= ni++;\n     n[t]= Node{{0, r}, mn,\
-    \ 0, n[mn].x, o[1], 0, 0, 1};\n     if (update(t), prop(n[mn].ch[1]= t, ub - lb),\
-    \ n[mn].d= o[0], o[1]= 0, n[mn].z+= lb, n[mn].x+= lb; r) n[r].par= t;\n    }\n\
-    \   }\n  } else {\n   bool r= rem > 0;\n   T b[2]= {lb, ub};\n   if (bf[!r]) {\n\
-    \    T p= r ? rem : -rem;\n    int t= ni++;\n    n[t]= Node{{0, 0}, 0, 0, bx[!r],\
-    \ p, p, D(bx[!r]) * p, 1};\n    if (mn) update(mn), n[t].ch[r]= mn, n[mn].par=\
-    \ t;\n    y+= D(rem) * bx[!r], rem= 0, mn= t, n[t].z+= b[r], n[t].x+= b[r], o[r]=\
-    \ p, o[!r]= 0;\n   } else if (y-= D(rem) * b[r]; mn) n[mn].z+= b[r], n[mn].x+=\
-    \ b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x) { return assert(!bf[0]\
-    \ || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x) + D(rem) * x + y; }\n\
-    \ D min() { return slope_eval(), rem == 0 ? y : rem > 0 ? (assert(bf[0]), y +\
-    \ D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]); }\n std::array<T, 2>\
-    \ argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n   return\
-    \ {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return {bx[1],\
-    \ bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  int t= mn;\n  if (!t)\
-    \ return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]= n[t].x;\n\
-    \  else if (ret[r]= n[t].x, t= n[t].ch[!r]; t) {\n   for (; n[t].ch[r];) push(t),\
-    \ t= n[t].ch[r];\n   splay(t), ret[!r]= n[t].x, splay(mn);\n  } else assert(bf[!r]);\n\
-    \  return ret;\n }\n size_t size() { return mn ? update(mn), n[mn].sz : 0; }\n\
-    \ PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex &r) {\n  if (y+=\
-    \ r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true,\
-    \ r.bx[1]);\n  if (r.mn) add_l(n[r.mn].ch[0]), add_r(n[r.mn].ch[1]), add_max(-r.o[0],\
-    \ r.o[1], n[r.mn].x);\n  return *this;\n }\n};\n"
+    \ update(mn), n[t].ch[rev]= mn, n[mn].par= t;\n   mn= t, o[rev]= p, o[!rev]= 0,\
+    \ y+= D(rem) * bx[!rev], rem= 0;\n  }\n  bf[!rev]= false;\n }\n //  f(x) <- min_{lb<=y<=ub}\
+    \ f(x-y). (lb <= ub), \\_/ -> \\__/\n void chmin_slide_win(T lb, T ub) {\n  assert(lb\
+    \ <= ub);\n  if (bf[0] && bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n\
+    \  else if (slope_eval(); rem == 0) {\n   if (mn) {\n    if (o[0] == 0) {\n  \
+    \   if (n[mn].z+= ub, n[mn].x+= ub; n[mn].ch[0]) prop(n[mn].ch[0], lb - ub);\n\
+    \    } else if (o[1] == 0) {\n     if (n[mn].z+= lb, n[mn].x+= lb; n[mn].ch[1])\
+    \ prop(n[mn].ch[1], ub - lb);\n    } else {\n     int r= n[mn].ch[1], t= ni++;\n\
+    \     n[t]= Node{{0, r}, mn, 0, n[mn].x, o[1], 0, 0, 1};\n     if (update(t),\
+    \ prop(n[mn].ch[1]= t, ub - lb), n[mn].d= o[0], o[1]= 0, n[mn].z+= lb, n[mn].x+=\
+    \ lb; r) n[r].par= t;\n    }\n   }\n  } else {\n   bool r= rem > 0;\n   T b[2]=\
+    \ {lb, ub};\n   if (bf[!r]) {\n    T p= r ? rem : -rem;\n    int t= ni++;\n  \
+    \  n[t]= Node{{0, 0}, 0, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if (mn) update(mn),\
+    \ n[t].ch[r]= mn, n[mn].par= t;\n    y+= D(rem) * bx[!r], rem= 0, mn= t, n[t].z+=\
+    \ b[r], n[t].x+= b[r], o[r]= p, o[!r]= 0;\n   } else if (y-= D(rem) * b[r]; mn)\
+    \ n[mn].z+= b[r], n[mn].x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T\
+    \ x) { return assert(!bf[0] || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x)\
+    \ + D(rem) * x + y; }\n D min() { return slope_eval(), rem == 0 ? y : rem > 0\
+    \ ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\
+    \ }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
+    \   return {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
+    \ {bx[1], bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  int t= mn;\n\
+    \  if (!t) return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]=\
+    \ n[t].x;\n  else if (ret[r]= n[t].x, t= n[t].ch[!r]; t) {\n   for (; n[t].ch[r];)\
+    \ push(t), t= n[t].ch[r];\n   splay(t), ret[!r]= n[t].x, splay(mn);\n  } else\
+    \ assert(bf[!r]);\n  return ret;\n }\n size_t size() { return mn ? update(mn),\
+    \ n[mn].sz : 0; }\n PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex\
+    \ &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1])\
+    \ add_inf(true, r.bx[1]);\n  if (r.mn) add_l(n[r.mn].ch[0]), add_r(n[r.mn].ch[1]),\
+    \ add_max(-r.o[0], r.o[1], n[r.mn].x);\n  return *this;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <array>\n\
     #include <iostream>\n#include <sstream>\n#include <string>\n#include <cassert>\n\
     #include \"src/Internal/long_traits.hpp\"\nnamespace plc_internal {\n#ifdef __LOCAL\n\
@@ -221,24 +221,25 @@ data:
     \ << t.sz << \",ch:(\" << t.ch[0] << \",\" << t.ch[1] << \"),par:\" << t.par <<\
     \ \"}\"; }\n };\n static inline int ni= 1;\n static inline Node n[NODE_SIZE];\n\
     \ static inline void info(int t, int d, std::stringstream &ss) {\n  if (!t) return;\n\
-    \  info(n[t].ch[0], d + 1, ss);\n  for (int i= 0; i < d; ++i) ss << \"   \";\n\
-    \  ss << \" \u25A0 \" << n[t] << '\\n', info(n[t].ch[1], d + 1, ss);\n }\n static\
-    \ inline void dump_xs(int t, std::vector<T> &xs) {\n  if (t) push(t), dump_xs(n[t].ch[0],\
-    \ xs), xs.push_back(n[t].x), dump_xs(n[t].ch[1], xs);\n }\n static inline void\
-    \ dump_slopes_l(int t, T ofs, std::vector<T> &as) {\n  if (t) push(t), dump_slopes_l(n[t].ch[1],\
-    \ ofs, as), ofs+= sl(n[t].ch[1]) + n[t].d, as.push_back(-ofs), dump_slopes_l(n[t].ch[0],\
-    \ ofs, as);\n }\n static inline void dump_slopes_r(int t, T ofs, std::vector<T>\
-    \ &as) {\n  if (t) push(t), dump_slopes_r(n[t].ch[0], ofs, as), ofs+= sl(n[t].ch[0])\
-    \ + n[t].d, as.push_back(ofs), dump_slopes_r(n[t].ch[1], ofs, as);\n }\n static\
-    \ inline void update(int t) {\n  n[t].sz= 1, n[t].a= n[t].d, n[t].s= D(n[t].x)\
-    \ * n[t].d;\n  if (int l= n[t].ch[0]; l) n[t].sz+= n[l].sz, n[t].a+= n[l].a, n[t].s+=\
-    \ n[l].s;\n  if (int r= n[t].ch[1]; r) n[t].sz+= n[r].sz, n[t].a+= n[r].a, n[t].s+=\
-    \ n[r].s;\n }\n static inline void prop(int t, T v) { n[t].z+= v, n[t].s+= D(v)\
-    \ * n[t].a, n[t].x+= v; }\n static inline void push(int t) {\n  if (n[t].z !=\
-    \ 0) {\n   if (n[t].ch[0]) prop(n[t].ch[0], n[t].z);\n   if (n[t].ch[1]) prop(n[t].ch[1],\
-    \ n[t].z);\n   n[t].z= 0;\n  }\n }\n static inline void rot(int t) {\n  int p=\
-    \ n[t].par;\n  if (bool d= n[p].ch[1] == t; (n[p].ch[d]= std::exchange(n[t].ch[!d],\
-    \ p))) n[n[p].ch[d]].par= p;\n  if ((n[t].par= std::exchange(n[p].par, t))) n[n[t].par].ch[n[n[t].par].ch[1]\
+    \  // push(t);\n  info(n[t].ch[0], d + 1, ss);\n  for (int i= 0; i < d; ++i) ss\
+    \ << \"   \";\n  ss << \" \u25A0 \" << n[t] << '\\n', info(n[t].ch[1], d + 1,\
+    \ ss);\n }\n static inline void dump_xs(int t, std::vector<T> &xs) {\n  if (t)\
+    \ push(t), dump_xs(n[t].ch[0], xs), xs.push_back(n[t].x), dump_xs(n[t].ch[1],\
+    \ xs);\n }\n static inline void dump_slopes_l(int t, T ofs, std::vector<T> &as)\
+    \ {\n  if (t) push(t), dump_slopes_l(n[t].ch[1], ofs, as), ofs+= sl(n[t].ch[1])\
+    \ + n[t].d, as.push_back(-ofs), dump_slopes_l(n[t].ch[0], ofs, as);\n }\n static\
+    \ inline void dump_slopes_r(int t, T ofs, std::vector<T> &as) {\n  if (t) push(t),\
+    \ dump_slopes_r(n[t].ch[0], ofs, as), ofs+= sl(n[t].ch[0]) + n[t].d, as.push_back(ofs),\
+    \ dump_slopes_r(n[t].ch[1], ofs, as);\n }\n static inline void update(int t) {\n\
+    \  n[t].sz= 1, n[t].a= n[t].d, n[t].s= D(n[t].x) * n[t].d;\n  if (int l= n[t].ch[0];\
+    \ l) n[t].sz+= n[l].sz, n[t].a+= n[l].a, n[t].s+= n[l].s;\n  if (int r= n[t].ch[1];\
+    \ r) n[t].sz+= n[r].sz, n[t].a+= n[r].a, n[t].s+= n[r].s;\n }\n static inline\
+    \ void prop(int t, T v) { n[t].z+= v, n[t].s+= D(v) * n[t].a, n[t].x+= v; }\n\
+    \ static inline void push(int t) {\n  if (n[t].z != 0) {\n   if (n[t].ch[0]) prop(n[t].ch[0],\
+    \ n[t].z);\n   if (n[t].ch[1]) prop(n[t].ch[1], n[t].z);\n   n[t].z= 0;\n  }\n\
+    \ }\n static inline void rot(int t) {\n  int p= n[t].par;\n  if (bool d= n[p].ch[1]\
+    \ == t; (n[p].ch[d]= std::exchange(n[t].ch[!d], p))) n[n[p].ch[d]].par= p;\n \
+    \ if ((n[t].par= std::exchange(n[p].par, t))) n[n[t].par].ch[n[n[t].par].ch[1]\
     \ == p]= t;\n  update(p);\n }\n static inline void splay(int t) {\n  for (int\
     \ p= n[t].par; p; rot(t), p= n[t].par)\n   if (n[p].par) rot(n[n[p].par].ch[n[p].ch[1]\
     \ == t] == p ? p : t);\n }\n static inline T sl(int t) { return t ? n[t].a : 0;\
@@ -311,42 +312,42 @@ data:
     \ 0;\n  } else if ((rem > 0) ^ rev) assert(bf[rev]), y+= D(rem) * bx[rev], rem=\
     \ 0, mn= 0;\n  else if (bf[!rev]) {\n   T p= std::abs(rem);\n   int t= ni++;\n\
     \   n[t]= Node{{0, 0}, 0, 0, bx[!rev], p, p, D(bx[!rev]) * p, 1};\n   if (mn)\
-    \ update(mn), n[t].ch[rev]= mn, n[mn].par= t;\n   mn= t, o[rev]= p, o[!rev]= 0;\n\
-    \  }\n  bf[!rev]= false;\n }\n //  f(x) <- min_{lb<=y<=ub} f(x-y). (lb <= ub),\
-    \ \\_/ -> \\__/\n void chmin_slide_win(T lb, T ub) {\n  assert(lb <= ub);\n  if\
-    \ (bf[0] && bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n  else if (slope_eval();\
-    \ rem == 0) {\n   if (mn) {\n    if (o[0] == 0) {\n     if (n[mn].z+= ub, n[mn].x+=\
-    \ ub; n[mn].ch[0]) prop(n[mn].ch[0], lb - ub);\n    } else if (o[1] == 0) {\n\
-    \     if (n[mn].z+= lb, n[mn].x+= lb; n[mn].ch[1]) prop(n[mn].ch[1], ub - lb);\n\
-    \    } else {\n     int r= n[mn].ch[1], t= ni++;\n     n[t]= Node{{0, r}, mn,\
-    \ 0, n[mn].x, o[1], 0, 0, 1};\n     if (update(t), prop(n[mn].ch[1]= t, ub - lb),\
-    \ n[mn].d= o[0], o[1]= 0, n[mn].z+= lb, n[mn].x+= lb; r) n[r].par= t;\n    }\n\
-    \   }\n  } else {\n   bool r= rem > 0;\n   T b[2]= {lb, ub};\n   if (bf[!r]) {\n\
-    \    T p= r ? rem : -rem;\n    int t= ni++;\n    n[t]= Node{{0, 0}, 0, 0, bx[!r],\
-    \ p, p, D(bx[!r]) * p, 1};\n    if (mn) update(mn), n[t].ch[r]= mn, n[mn].par=\
-    \ t;\n    y+= D(rem) * bx[!r], rem= 0, mn= t, n[t].z+= b[r], n[t].x+= b[r], o[r]=\
-    \ p, o[!r]= 0;\n   } else if (y-= D(rem) * b[r]; mn) n[mn].z+= b[r], n[mn].x+=\
-    \ b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T x) { return assert(!bf[0]\
-    \ || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x) + D(rem) * x + y; }\n\
-    \ D min() { return slope_eval(), rem == 0 ? y : rem > 0 ? (assert(bf[0]), y +\
-    \ D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]); }\n std::array<T, 2>\
-    \ argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n   return\
-    \ {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return {bx[1],\
-    \ bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  int t= mn;\n  if (!t)\
-    \ return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]= n[t].x;\n\
-    \  else if (ret[r]= n[t].x, t= n[t].ch[!r]; t) {\n   for (; n[t].ch[r];) push(t),\
-    \ t= n[t].ch[r];\n   splay(t), ret[!r]= n[t].x, splay(mn);\n  } else assert(bf[!r]);\n\
-    \  return ret;\n }\n size_t size() { return mn ? update(mn), n[mn].sz : 0; }\n\
-    \ PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex &r) {\n  if (y+=\
-    \ r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1]) add_inf(true,\
-    \ r.bx[1]);\n  if (r.mn) add_l(n[r.mn].ch[0]), add_r(n[r.mn].ch[1]), add_max(-r.o[0],\
-    \ r.o[1], n[r.mn].x);\n  return *this;\n }\n};"
+    \ update(mn), n[t].ch[rev]= mn, n[mn].par= t;\n   mn= t, o[rev]= p, o[!rev]= 0,\
+    \ y+= D(rem) * bx[!rev], rem= 0;\n  }\n  bf[!rev]= false;\n }\n //  f(x) <- min_{lb<=y<=ub}\
+    \ f(x-y). (lb <= ub), \\_/ -> \\__/\n void chmin_slide_win(T lb, T ub) {\n  assert(lb\
+    \ <= ub);\n  if (bf[0] && bf[1] && bx[0] == bx[1]) y+= D(rem) * bx[0], rem= 0;\n\
+    \  else if (slope_eval(); rem == 0) {\n   if (mn) {\n    if (o[0] == 0) {\n  \
+    \   if (n[mn].z+= ub, n[mn].x+= ub; n[mn].ch[0]) prop(n[mn].ch[0], lb - ub);\n\
+    \    } else if (o[1] == 0) {\n     if (n[mn].z+= lb, n[mn].x+= lb; n[mn].ch[1])\
+    \ prop(n[mn].ch[1], ub - lb);\n    } else {\n     int r= n[mn].ch[1], t= ni++;\n\
+    \     n[t]= Node{{0, r}, mn, 0, n[mn].x, o[1], 0, 0, 1};\n     if (update(t),\
+    \ prop(n[mn].ch[1]= t, ub - lb), n[mn].d= o[0], o[1]= 0, n[mn].z+= lb, n[mn].x+=\
+    \ lb; r) n[r].par= t;\n    }\n   }\n  } else {\n   bool r= rem > 0;\n   T b[2]=\
+    \ {lb, ub};\n   if (bf[!r]) {\n    T p= r ? rem : -rem;\n    int t= ni++;\n  \
+    \  n[t]= Node{{0, 0}, 0, 0, bx[!r], p, p, D(bx[!r]) * p, 1};\n    if (mn) update(mn),\
+    \ n[t].ch[r]= mn, n[mn].par= t;\n    y+= D(rem) * bx[!r], rem= 0, mn= t, n[t].z+=\
+    \ b[r], n[t].x+= b[r], o[r]= p, o[!r]= 0;\n   } else if (y-= D(rem) * b[r]; mn)\
+    \ n[mn].z+= b[r], n[mn].x+= b[r];\n  }\n  bx[0]+= lb, bx[1]+= ub;\n }\n D operator()(T\
+    \ x) { return assert(!bf[0] || bx[0] <= x), assert(!bf[1] || x <= bx[1]), calc_y(x)\
+    \ + D(rem) * x + y; }\n D min() { return slope_eval(), rem == 0 ? y : rem > 0\
+    \ ? (assert(bf[0]), y + D(rem) * bx[0]) : (assert(bf[1]), y + D(rem) * bx[1]);\
+    \ }\n std::array<T, 2> argmin() {\n  slope_eval();\n  if (rem > 0) {\n   assert(bf[0]);\n\
+    \   return {bx[0], bx[0]};\n  }\n  if (rem < 0) {\n   assert(bf[1]);\n   return\
+    \ {bx[1], bx[1]};\n  }\n  std::array<T, 2> ret= {bx[0], bx[1]};\n  int t= mn;\n\
+    \  if (!t) return ret;\n  bool r= o[0] == 0;\n  if (!r && o[1] != 0) ret[0]= ret[1]=\
+    \ n[t].x;\n  else if (ret[r]= n[t].x, t= n[t].ch[!r]; t) {\n   for (; n[t].ch[r];)\
+    \ push(t), t= n[t].ch[r];\n   splay(t), ret[!r]= n[t].x, splay(mn);\n  } else\
+    \ assert(bf[!r]);\n  return ret;\n }\n size_t size() { return mn ? update(mn),\
+    \ n[mn].sz : 0; }\n PiecewiseLinearConvex &operator+=(const PiecewiseLinearConvex\
+    \ &r) {\n  if (y+= r.y, rem+= r.rem; r.bf[0]) add_inf(false, r.bx[0]);\n  if (r.bf[1])\
+    \ add_inf(true, r.bx[1]);\n  if (r.mn) add_l(n[r.mn].ch[0]), add_r(n[r.mn].ch[1]),\
+    \ add_max(-r.o[0], r.o[1], n[r.mn].x);\n  return *this;\n }\n};"
   dependsOn:
   - src/Internal/long_traits.hpp
   isVerificationFile: false
   path: src/Optimization/PiecewiseLinearConvex.hpp
   requiredBy: []
-  timestamp: '2024-08-03 13:56:52+09:00'
+  timestamp: '2024-08-03 14:36:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/2114.test.cpp
