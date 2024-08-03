@@ -10,9 +10,9 @@ data:
     title: src/Optimization/PiecewiseLinearConvex.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc123/tasks/arc123_d
@@ -183,7 +183,7 @@ data:
   path: test/atcoder/arc123_d.conj.test.cpp
   requiredBy: []
   timestamp: '2024-08-03 18:26:54+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc123_d.conj.test.cpp
 layout: document

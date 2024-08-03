@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -12,15 +12,15 @@ data:
     path: src/Internal/long_traits.hpp
     title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc309/tasks/abc309_f
@@ -268,7 +268,7 @@ data:
   path: test/atcoder/abc309_f.KDT.test.cpp
   requiredBy: []
   timestamp: '2024-04-13 13:36:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc309_f.KDT.test.cpp
 layout: document

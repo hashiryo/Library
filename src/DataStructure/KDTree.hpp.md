@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -9,7 +9,7 @@ data:
     path: src/Internal/long_traits.hpp
     title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8 \u4ED6"
@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.KDT.3D.test.cpp
     title: test/atcoder/abc309_f.KDT.3D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.KDT.test.cpp
     title: test/atcoder/abc309_f.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -54,9 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <vector>\n#include\
@@ -439,21 +439,21 @@ data:
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
   timestamp: '2024-04-13 13:36:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1600.KDT.test.cpp
-  - test/yukicoder/1216.KDT.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
-  - test/atcoder/abc309_f.KDT.test.cpp
-  - test/atcoder/abc309_f.KDT.3D.test.cpp
-  - test/atcoder/abc234_ex.KDT.test.cpp
-  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - test/hackerrank/cube-summation.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/1068.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - test/atcoder/abc309_f.KDT.3D.test.cpp
+  - test/atcoder/abc234_ex.KDT.test.cpp
+  - test/atcoder/abc309_f.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document
 title: kD-Tree

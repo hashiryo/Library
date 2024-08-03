@@ -65,13 +65,13 @@ data:
   timestamp: '2023-01-21 16:53:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/649.BIT.test.cpp
+  - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/1270.test.cpp
-  - test/yosupo/point_add_range_sum.BIT.test.cpp
-  - test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
-  - test/yosupo/vertex_add_path_sum.HLD.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
+  - test/yosupo/point_add_range_sum.BIT.test.cpp
+  - test/yosupo/vertex_add_path_sum.HLD.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.HLD.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp
 layout: document
 title: Binary-Indexed-Tree

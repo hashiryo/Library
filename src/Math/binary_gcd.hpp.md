@@ -133,8 +133,8 @@ data:
   isVerificationFile: false
   path: src/Math/binary_gcd.hpp
   requiredBy:
-  - src/NumberTheory/OrderFp.hpp
   - src/NumberTheory/ArrayOnDivisors.hpp
+  - src/NumberTheory/OrderFp.hpp
   - src/NumberTheory/Factors.hpp
   - src/Math/Rational.hpp
   - src/Math/mod_kth_root.hpp
@@ -144,32 +144,32 @@ data:
   timestamp: '2023-10-30 16:02:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/unit_test/constexpr_binary_gcd.test.cpp
-  - test/unit_test/constexpr_mod_tetration.test.cpp
-  - test/unit_test/constexpr_orderfp.test.cpp
-  - test/unit_test/constexpr_factors.test.cpp
-  - test/unit_test/constexpr_rational.test.cpp
-  - test/yukicoder/125.multiple_mobius.test.cpp
-  - test/yukicoder/1501.test.cpp
-  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/1728.test.cpp
+  - test/yukicoder/1501.test.cpp
+  - test/yukicoder/125.multiple_mobius.test.cpp
   - test/yukicoder/2578.test.cpp
   - test/yukicoder/2264.test.cpp
-  - test/atcoder/abc212_g.test.cpp
-  - test/atcoder/abc248_g.test.cpp
-  - test/atcoder/abc228_e.test.cpp
-  - test/atcoder/abc335_g.test.cpp
-  - test/yosupo/primitive_root.test.cpp
-  - test/yosupo/tetration_mod.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
-  - test/yosupo/binomial_coefficient.test.cpp
-  - test/yosupo/factorize.test.cpp
+  - test/yukicoder/125.phi.test.cpp
+  - test/unit_test/constexpr_factors.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/unit_test/constexpr_orderfp.test.cpp
+  - test/unit_test/constexpr_binary_gcd.test.cpp
+  - test/unit_test/constexpr_rational.test.cpp
+  - test/aoj/2009.rational.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
   - test/aoj/1242.rational.test.cpp
+  - test/aoj/0350.test.cpp
   - test/aoj/2159.rational.test.cpp
   - test/aoj/2003.rational.test.cpp
-  - test/aoj/0350.test.cpp
-  - test/aoj/NTL_1_D.test.cpp
-  - test/aoj/2009.rational.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
+  - test/yosupo/factorize.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
+  - test/atcoder/abc335_g.test.cpp
+  - test/atcoder/abc248_g.test.cpp
+  - test/atcoder/abc228_e.test.cpp
+  - test/atcoder/abc212_g.test.cpp
 documentation_of: src/Math/binary_gcd.hpp
 layout: document
 title: Binary GCD

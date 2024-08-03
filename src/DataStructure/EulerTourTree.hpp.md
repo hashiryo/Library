@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -240,12 +240,12 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/828.ETT.test.cpp
-  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
-  - test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
-  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
+  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/yosupo/vertex_add_subtree_sum.ETT.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.ETT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.ETT.test.cpp
 documentation_of: src/DataStructure/EulerTourTree.hpp
 layout: document
 title: Euler-Tour-Tree

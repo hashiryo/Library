@@ -22,7 +22,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/KDTree.hpp
       title: kD-Tree
     - icon: ':question:'
@@ -46,7 +46,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_2D.hpp
       title: "Segment-Tree(2\u6B21\u5143)"
     - icon: ':question:'
@@ -238,7 +238,7 @@ data:
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   - name: src/Internal
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Internal/HAS_CHECK.hpp
       title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
         \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -263,7 +263,7 @@ data:
     - icon: ':question:'
       path: src/Internal/modint_traits.hpp
       title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Internal/tuple_traits.hpp
       title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
         \u30C8 \u4ED6"
@@ -1368,7 +1368,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.test.cpp
       title: test/atcoder/abc250_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1428,10 +1428,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.KDT.3D.test.cpp
       title: test/atcoder/abc309_f.KDT.3D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.KDT.test.cpp
       title: test/atcoder/abc309_f.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1488,7 +1488,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.Dirichlet.test.cpp
       title: test/atcoder/arc116_c.Dirichlet.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc123_d.conj.test.cpp
       title: test/atcoder/arc123_d.conj.test.cpp
     - icon: ':x:'
@@ -2108,7 +2108,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1418.test.cpp
       title: test/yukicoder/1418.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1467.conj.test.cpp
       title: test/yukicoder/1467.conj.test.cpp
     - icon: ':x:'

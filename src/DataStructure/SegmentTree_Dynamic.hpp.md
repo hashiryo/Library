@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -290,13 +290,13 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/649.DynSeg.test.cpp
-  - test/atcoder/abc133_f.DynSeg.test.cpp
-  - test/atcoder/abc256_f.DynSeg.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
-  - test/aoj/DSL_2_I.DynSeg.test.cpp
-  - test/aoj/3024.DynSeg.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
+  - test/atcoder/abc256_f.DynSeg.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
 title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"

@@ -132,9 +132,9 @@ data:
   timestamp: '2024-02-19 22:51:27+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/directedmst.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
   - test/aoj/2647.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/yosupo/directedmst.test.cpp
 documentation_of: src/Graph/minimum_spanning_aborescence.hpp
 layout: document
 title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
