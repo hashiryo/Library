@@ -1,0 +1,51 @@
+--- a/md/FFT/SubProductTree.md
++++ b/md/FFT/SubProductTree.md
+@@ -1,8 +1,41 @@
+ ---
+-title: 複数の値代入と多項式補間
++title: SubProductTree (多点評価・多項式補間)
+ documentation_of: ../../src/FFT/SubProductTree.hpp
+ ---
+-## 計算量
+-どちらも $O(N (\log N)^2)$
+-## 問題例
+-- [AtCoder Regular Contest 033 D - 見たことのない多項式](https://atcoder.jp/contests/arc033/tasks/arc033_4) (オーバーキル)
++
++## 概要
++
++$N$ 個の点 $x_0, x_1, \dots, x_{N-1}$ を用いて、多項式の多点評価 (multipoint evaluation) と、それらの点を通る多項式の補間 (polynomial interpolation) を高速に行う。
++
++## 使い方
++
++`SubProductTree<mod_t> tree(xs);` のように、点の x 座標のベクタ `xs` を渡してインスタンスを構築する。
++
++### 多点評価 (Multipoint Evaluation)
++
++多項式 $f(z) = \sum_{i=0}^{M-1} c_i z^i$ の係数ベクタ `c` を与えると、$f(x_0), f(x_1), \dots, f(x_{N-1})$ の値を格納したベクタを返す。
++
++```cpp
++std::vector<mod_t> c = { ... }; // 多項式の係数
++std::vector<mod_t> xs = { ... }; // 評価点の x 座標
++SubProductTree<mod_t> tree(xs);
++std::vector<mod_t> ys = tree.multi_eval(c); // ys[i] = f(xs[i])
++```
++
++### 多項式補間 (Polynomial Interpolation)
++
++$N$ 個の点 $(x_0, y_0), (x_1, y_1), \dots, (x_{N-1}, y_{N-1})$ をすべて通る唯一の $N-1$ 次以下の多項式 $f(z)$ の係数ベクタを返す。
++
++```cpp
++std::vector<mod_t> xs = { ... }; // 補間点の x 座標
++std::vector<mod_t> ys = { ... }; // 補間点の y 座標
++SubProductTree<mod_t> tree(xs);
++std::vector<mod_t> c = tree.interpolate(ys); // c は f(z) の係数
++```
++
++## 計算量
++- 構築: $O(N (\log N)^2)$
++- 多点評価: $O(N (\log N)^2)$
++- 多項式補間: $O(N (\log N)^2)$
++
++## 問題例
++- [Yosupo Judge - Multipoint Evaluation](https://judge.yosupo.jp/problem/multipoint_evaluation)
++- [Yosupo Judge - Polynomial Interpolation](https://judge.yosupo.jp/problem/polynomial_interpolation)
