@@ -3,60 +3,94 @@ title: グラフ
 documentation_of: ../../src/Graph/Graph.hpp
 ---
 
-## 使い方
+`Graph` は、辺のリストとしてグラフを表現するためのクラスです。`Edge` 構造体と `Graph` クラスから構成されます。
 
-**構築例**
-```c++
-int n,m;cin>>n>>m; // n: 頂点数, m: 辺数
-Graph g(n,m);
-for(int i=0;i<m;++i)cin>>g[i],--g[i];
-auto adj = g.adjecency_vertex(0); // 無向グラフ
-// auto adj = g.adjecency_vertex(1); // 有向グラフ
+## `Edge` 構造体
+
+`std::pair<int, int>` を継承し、辺 `(u, v)` を表します。`first` が始点、`second` が終点に対応します。
+
+### 使い方
+```cpp
+// 辺 (u, v) を表現
+Edge e = {u, v};
+
+// 1-indexed の入力を 0-indexed に変換
+cin >> e; // 10 5
+--e;      // e は {9, 4} となる
+
+// 頂点 u に接続するもう一方の端点 v を取得
+int v = e.to(u);
 ```
 
-**グラフ探索例**
-```c++
-for(int v=0;v<n;++v)
- for(int u: adj[v]){
-  /* do something */
- }
-```
+### メンバ関数・演算子
 
-## `Edge` クラス
-`pair<int,int>` を継承 \
-辺 $e=(s,d)$ を表すクラス．\
-`first` で始点，`second` で終点を表現する.
-
-|メンバ関数|概要|
+|シグネチャ|概要|
 |---|---|
-|`to(u)`|端点のうち頂点 $u$ でない方を返す.|
-|`operator--()`| 辺の端点をデクリメント. (1-index の入力をスムーズに 0-indexにするために用意).|
-
-|その他関数|概要|
-|---|---|
-|`operator<(Edge e1, Edge e2)`|辞書順比較．|
-|`operator>>(istream& is,Edge &e)`| `s d` のフォーマットの入力に対応.  |
-
+|`to(u)`|辺の端点のうち、頂点 `u` でない方の頂点を返す。`u` が辺の端点であることが前提。|
+|`operator--()`| 始点と終点の両方をデクリメントする。1-indexed の入力に対応する際に便利。|
+|`operator>>(istream&, Edge&)`| `u v` の形式で辺を標準入力から読み込む。|
 
 ## `Graph` クラス
 
-`vector<Edge>` を継承.\
-辺の配列の役割を担ったクラス.
+`std::vector<Edge>` を継承しており、グラフ全体を辺のリストとして管理します。
 
-|メンバ変数|概要|
-|---|---|
-|`n`|頂点数を意味する．|
+### 使い方
 
-|メンバ関数|概要|
-|---|---|
-|`Graph(n=0,m=0)`|コンストラクタ．頂点の数 $n$ と 辺の数 $m$ を渡す． <br> 辺はすべて $(0,0)$ で初期化．|
-|`vertex_size()`|頂点の数を返す．|
-|`edge_size()`|辺の数を返す．|
-|`add_vertex()`|内部で頂点を 1 つ増やし，その頂点番号を返す．|
-|`add_edge(Edge e)` <br> `add_edge(s,d)`| 辺 $e=(s,d)$ を追加し，その辺の番号を返す．|
-|`adjacency_vertex(dir)`|頂点 → 頂点の隣接リストを返す. <br> 引数が正なら有向グラフ.<br> 引数が $0$ なら無向グラフ．<br> 引数が負なら逆向きの有向グラフ. <br> 返り値は[`CSRArray<int>` クラス](../Internal/ListRange.hpp)． <br> 辺番号でソートされている．|
-|`adjacency_edge(dir)`|頂点 → 辺番号の隣接リストを返す. <br> 引数が正なら有向グラフ.<br> 引数が $0$ なら無向グラフ．<br> 引数が負なら逆向きの有向グラフ. <br>返り値は[`CSRArray<int>` クラス](../Internal/ListRange.hpp)． <br> 辺番号はソートされている．|
+#### 構築例
+```cpp
+int n, m; // n: 頂点数, m: 辺数
+cin >> n >> m;
 
+// 頂点数 n, 辺数 m のグラフを構築
+Graph g(n, m);
 
-## 参考
-[https://nachiavivias.github.io/cp-library/cpp/graph/graph.html](https://nachiavivias.github.io/cp-library/cpp/graph/graph.html)
+// 辺情報を読み込む
+// g は vector<Edge> を継承しているため、g[i] で辺にアクセスできる
+for (int i = 0; i < m; ++i) {
+  cin >> g[i];
+  --g[i]; // 1-indexed なら 0-indexed に変換
+}
+
+// 辺を追加することも可能
+g.add_edge(u, v); // 戻り値は追加された辺のインデックス
+```
+
+#### 隣接リストの取得と探索
+```cpp
+// 無向グラフとして隣接リスト（頂点）を取得
+auto adj_v = g.adjacency_vertex(0);
+// 有向グラフ（順方向）として隣接リスト（辺）を取得
+auto adj_e = g.adjacency_edge(1);
+
+// 頂点 v に隣接する頂点を走査
+for (int v = 0; v < n; ++v) {
+  for (int u : adj_v[v]) {
+    // v-u 間の処理
+  }
+}
+```
+
+### メンバ変数・メンバ関数
+
+|名前|概要|計算量|
+|---|---|---|
+|`n`|頂点数。| O(1) |
+|`Graph(n, m)`|頂点数 `n`、辺数 `m` で構築。`m` 本の辺が `(0,0)` で初期化される。| O(m) |
+|`vertex_size()`|頂点数を返す (`n` と同じ)。| O(1) |
+|`edge_size()`|辺数を返す (`size()` と同じ)。| O(1) |
+|`add_vertex()`|頂点を1つ追加し、その新しい頂点番号を返す。| O(1) |
+|`add_edge(s, d)` <br> `add_edge(Edge e)`| 辺 `(s, d)` を追加し、その辺のインデックスを返す。| O(1) (amortized) |
+|`adjacency_vertex(dir)`|**頂点**の隣接リストを返す。返り値は `CSRArray<int>`。 <br> このメソッドは呼び出されるたびにリストを再構築する。| O(N+M) |
+|`adjacency_edge(dir)`|**辺インデックス**の隣接リストを返す。返り値は `CSRArray<int>`。 <br> このメソッドは呼び出されるたびにリストを再構築する。| O(N+M) |
+
+### `adjacency_*` メソッドの `dir` パラメータ
+
+`adjacency_vertex` と `adjacency_edge` は、引数 `dir` によって生成する隣接リストの種類を制御します。
+
+-   `dir == 0`: **無向グラフ**として扱う。各辺 `(u, v)` は `u -> v` と `v -> u` の両方として扱われる。
+-   `dir > 0`: **有向グラフ（順方向）**として扱う。各辺 `(u, v)` は `u -> v` のみとして扱われる。
+-   `dir < 0`: **有向グラフ（逆方向）**として扱う。各辺 `(u, v)` は `v -> u` のみとして扱われる。
+
+### 注意事項
+- **計算量**: `adjacency_vertex` および `adjacency_edge` は、呼び出すたびに O(頂点数 + 辺数) の計算コストがかかります。ループ内で繰り返し呼び出すとパフォーマンスが低下する可能性があるため、一度だけ呼び出して結果を再利用することが推奨されます。
+- **継承**: `Graph` は `std::vector<Edge>` を継承しているため、`g[i]` による辺へのアクセス、`for(auto e : g)` といった範囲 for ループ、`g.begin()`, `g.end()` などのイテレータを利用できます。
