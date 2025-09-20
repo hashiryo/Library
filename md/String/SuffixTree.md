@@ -10,18 +10,20 @@ documentation_of: ../../src/String/SuffixTree.hpp
 
 |メンバ変数|概要|
 |---|---|
-|`graph`| 接尾辞木の[`Graph` クラス](../Graph/Graph.hpp) 表現. <br> 親から子の向きの辺のリスト．|
-|`tree`| 接尾辞木の[重軽分解](../Graph/HeavyLightDecomposition.hpp)|
+|`graph`| 接尾辞木の親子関係を表す[`Graph` クラス](../Graph/Graph.hpp) 表現. |
+|`tree`| 接尾辞木の構造に対する[重軽分解](../Graph/HeavyLightDecomposition.hpp). `substr(l, n)` などで利用される.|
+|`node`| 各頂点の情報を格納する配列. `(*this)[v]` でアクセスできる. |
+|`suf`| 接尾辞 $S_{i:}$ に対応する葉ノードの頂点番号を格納する配列. `suf[i]` でアクセスできる.|
 
 |メンバ関数|概要|計算量|
 |---|---|---|
 |`SuffixTree(sa, lcp)`|コンストラクタ. <br> 引数は [`SuffixArray` と `LCPArray`](src/String/SuffixArray.hpp) .|$O(n)$ |
-|`operator[](v)`| 接尾辞木上の頂点 `v` の情報を `std::tuple<int, int, int, int>` 型で返す。タプルの各要素は `{l, r, d, u}` であり、これは Suffix Array 上の区間 `[l, r)` と文字列の深さの区間 `[d, u)` を表す。|
-|`begin()`| 矩形情報配列の `begin()` を返す.||
-|`end()`| 矩形情報配列の `end()` を返す||
+|`operator[](v)`| 接尾辞木上の頂点 `v` の情報を `std::tuple<int, int, int, int>` 型で返す。タプルの各要素は `{l, r, d, u}` であり、それぞれ Suffix Array 上の区間 `[l, r)` と、根からの深さ (文字列長) の区間 `[d, u)` を表す。|
+|`begin()`| 頂点情報配列 `node` の `begin()` イテレータを返す.||
+|`end()`| 頂点情報配列 `node` の `end()` イテレータを返す.||
 |`size()`|接尾辞木の頂点数を返す.||
-|`substr(l)`|接尾辞 $S_{l:}$ を構成する頂点列（根から葉へのパス）のうちの最も子孫な頂点（葉）を返す.|$O(1)$|
-|`substr(l,n)`|部分文字列 $S_{l:l+n}$ を構成する頂点列（根からのパス）のうちの最も子孫な頂点を返す. |$O(\log n)$|
+|`substr(l)`|接尾辞 $S_{l:}$ に対応する葉ノードの頂点番号を返す.|$O(1)$|
+|`substr(l,n)`|部分文字列 $S_{l:l+n}$ を表すパスの末端の頂点番号を返す. |$O(\log n)$|
 
 ## Verify
 
