@@ -15,20 +15,29 @@ documentation_of: ../../src/NumberTheory/is_prime.hpp
 
 Miller-Rabin素数判定法に基づいています。
 `unsigned long long` 型の整数 `n` ($0 \le n < 2^{64}$) に対して、決定的に正しい結果を返します。
+`0` と `1` は素数ではないため、`false` を返します。
+
 `constexpr` なのでコンパイル時にも使用可能です。
 
 ## 使用例
 
 ```cpp
 #include <iostream>
+#include <limits>
 #include "NumberTheory/is_prime.hpp"
 
 int main() {
+    std::cout << is_prime(0) << std::endl; // 0
+    std::cout << is_prime(1) << std::endl; // 0
     std::cout << is_prime(2) << std::endl; // 1
     std::cout << is_prime(7) << std::endl; // 1
     std::cout << is_prime(10) << std::endl; // 0
     std::cout << is_prime(998244353) << std::endl; // 1
     
+    // unsigned long long の最大値に近い素数
+    unsigned long long large_prime = std::numeric_limits<unsigned long long>::max() - 58;
+    std::cout << is_prime(large_prime) << std::endl; // 1
+
     // constepxr
     constexpr bool p = is_prime(1000000007);
     static_assert(p);
@@ -36,4 +45,3 @@ int main() {
     return 0;
 }
 ```
-
