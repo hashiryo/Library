@@ -7,24 +7,25 @@ documentation_of: ../../src/FFT/fps_inv.hpp
 形式的冪級数 $A(x) = \sum_{i=0}^{N-1} a_i x^i$ の逆元 $B(x) = A(x)^{-1}$ を $\pmod{x^N}$ で求める。
 すなわち、$A(x)B(x) \equiv 1 \pmod{x^N}$ となる $B(x) = \sum_{i=0}^{N-1} b_i x^i$ を計算する。
 
-係数の型 `mod_t` は、体が想定されている（例: `ModInt`）。
+係数の型 `mod_t` は、NTT（数論変換）に適した素数を法とする剰余環（`ModInt` など）を想定しています。
 
 計算量: $O(N \log N)$
 
 ## 制約
-- $p$ は空でない (`p.size() > 0`)
-- $p$ の定数項 `p[0]` は逆元を持つ必要がある
+- `p` は空でない (`p.size() > 0`)
+- `p` の定数項 `p[0]` は $0$ ではない（逆元を持つ）
 
 ## 使用方法
 ```cpp
-#include <vector>
-#include "src/Math/ModInt.hpp" // ModIntなど
 #include "src/FFT/fps_inv.hpp"
 ```
 
 ### inv(p)
-- `p`: `vector<mod_t>` 型の形式的冪級数の係数ベクトル
+- `p`: `std::vector<mod_t>` 型の形式的冪級数の係数ベクトル
 - 戻り値: `p` の逆元の係数ベクトル (サイズは `p` と同じ)
+
+## Verify
+- [Yosupo Judge - Inv of Formal Power Series](https://judge.yosupo.jp/problem/inv_of_formal_power_series)
 
 ## 使用例
 
@@ -34,10 +35,9 @@ documentation_of: ../../src/FFT/fps_inv.hpp
 #include "src/Math/ModInt.hpp"
 #include "src/FFT/fps_inv.hpp"
 
-// https://judge.yosupo.jp/problem/inv_of_formal_power_series
 int main() {
-    std::cin.tie(0);
-    std::ios::sync_with_stdio(0);
+    std::cin.tie(nullptr);
+    std::ios::sync_with_stdio(false);
     int N;
     std::cin >> N;
     using Mint = ModInt<998244353>;
