@@ -21,35 +21,35 @@ documentation_of: ../../src/Misc/TwoSatisfiability.hpp
 
 ### `neg(int x)`
 
-リテラル `x` の否定リテラルを表す整数を返す。
-内部的には、リテラル `x` が `0, ..., n-1` のとき `x+n` を、`n, ..., 2n-1` のとき `x-n` を返す。
+リテラル `x` の否定リテラルを返す。
+例えば、変数 `i` のリテラル `i` に対して `neg(i)` を呼び出すと否定リテラルが、否定リテラル `neg(i)` に対して `neg()` を呼び出すと `i` が返る。
 
 ### `add_if(int u, int v)`
 
-節 $(u \implies v)$ を追加する。これは $(\neg u \lor v)$ と同値。
+リテラル `u`, `v` について、節 $(u \implies v)$ を追加する。これは $(\neg u \lor v)$ と同値。
 
 ### `add_or(int u, int v)`
 
-節 $(u \lor v)$ を追加する。
+リテラル `u`, `v` について、節 $(u \lor v)$ を追加する。
 
 ### `add_nand(int u, int v)`
 
-節 $\neg(u \land v)$ を追加する。これは $(\neg u \lor \neg v)$ と同値。
+リテラル `u`, `v` について、節 $\neg(u \land v)$ を追加する。これは $(\neg u \lor \neg v)$ と同値。
 
 ### `set_true(int u)`
 
-変数 `u` が真であることを要求する節 $(u)$ を追加する。
+変数 `u` が真であることを要求する節 $(u)$ を追加する。これは `add_or(u, u)` と同値。
 
 ### `set_false(int u)`
 
-変数 `u` が偽であることを要求する節 $(\neg u)$ を追加する。
+変数 `u` が偽であることを要求する節 $(\neg u)$ を追加する。これは `add_or(neg(u), neg(u))` と同値。
 
 ### `solve()`
 
 論理式を充足する割り当てが存在するかを判定する。
 
 - 存在する場合: `std::vector<bool>` を返す。返り値を `ret` とすると、`ret[i]` が変数 `i` の真偽値に対応する (`true` なら真、`false` なら偽)。
-- 存在しない場合: 空の `std::vector` を返す。
+- 存在しない場合: 空の `std::vector<bool>` を返す。
 
 ## 使用例
 
