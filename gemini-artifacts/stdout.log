@@ -1,0 +1,16 @@
+了解しました。競技プログラミングライブラリのドキュメント改善タスクを開始します。`md/LinearAlgebra/Vector.md`が選択されました。
+
+関連するソースファイルとテストファイルを調査し、ドキュメントの改善点を検討します。ファイルは `md/LinearAlgebra/Vector.md`、`src/LinearAlgebra/Vector.hpp`、`test/alone/vec.unit_test.cpp` です。内容を読み、ドキュメントを評価します。
+`md/LinearAlgebra/Vector.md`の改善点を特定しました。
+
+1.  **`Vector<bool>`の特殊化**: $\mathbb{F}_2$上のベクトルとして動作（加減算はXOR、ドット積はパリティ計算）する点を明記します。現在の説明では性能面にしか触れられていませんが、代数的性質の変更がより重要です。
+2.  **`operator<<`の欠落**: デバッグに有用な`operator<<`（出力ストリーム）がドキュメントに記載されていません。
+3.  **`Vector<bool>`の単項`-`**: $\mathbb{F}_2$では$-1 \equiv 1$のため、単項`-`が恒等操作である点を明記すべきです。
+4.  **`Vector<bool>`の`*=`**: `bool`との乗算が実質的にAND操作である点を明確にします。
+5.  **コード例の不足**: 使用例がないため、`Vector<int>`と`Vector<bool>`の基本的な使い方を示すコードを追加します。
+6.  **軽微なフォーマット修正**: 表の記述をより正確にし、一貫性を高めます。
+
+これらの計画に基づき、`md/LinearAlgebra/Vector.md`を修正します。Markdownファイルを更新しました。次は、要求された環境変数を設定します。
+
+*   `TARGET_FILE`: `md/LinearAlgebra/Vector.md`
+*   `IMPROVEMENT_SUMMARY`: `Vector.mdのドキュメントを改善し、Vector<bool>の特殊化に関する説明、演算子の詳細、コード例を追加`タスクはすべて完了しました。ランダムなMarkdownファイル（`md/LinearAlgebra/Vector.md`）を選択し、ソースとテストファイルを確認して、`Vector<bool>`の特殊化を明確化し、欠落していた演算子を追加し、コード例を提供することでドキュメントを改善しました。最後に、`TARGET_FILE`と`IMPROVEMENT_SUMMARY`環境変数を設定しました。これで依頼は完了です。
