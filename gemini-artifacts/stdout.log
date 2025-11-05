@@ -1,0 +1,31 @@
+はい、承知いたしました。競技プログラミングライブラリのドキュメント改善タスクを開始します。
+対象ファイルとして `md/DataStructure/OnlineDynamicConnectivity.md` が選択されました。
+関連ファイルを確認し、ドキュメントの改善提案を作成します。
+関連ファイルが見つかりました。
+- ソース: `src/DataStructure/OnlineDynamicConnectivity.hpp`
+- テスト:
+    - `test/sample_test/cf_contest1140_f.test.cpp`
+    - `test/aoj/2235.onlinedicon.test.cpp`
+    - `test/aoj/2893.onlinedicon.test.cpp`
+    - `test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp`
+
+これらのファイルの内容を読み込み、ドキュメントの現状を確認します。
+
+ファイル内容の分析が完了しました。ドキュメントにはいくつかの改善点があります。
+
+**改善方針:**
+
+1.  **正確性の向上**: `apply` 関数の説明が実態と異なっています。「作用 `f` を適用する」とありますが、実際には `E` 型の値を作用させるため、これを修正します。
+2.  **完全性の向上**:
+    *   `link` が多重辺に対応していること、`cut` が存在しない辺に対して何も行わないことを追記します。
+    *   `NODE_SIZE` の重要性について注意を喚起し、クエリ数に応じて大きめの値を設定する必要があることを追記します。
+3.  **可読性の向上**:
+    *   タイトルをファイル名と統一します。
+    *   コード例に `cut`, `connected` などの他の関数呼び出しを追加し、より実践的な内容にします。
+    *   新しく「注意点」セクションを設けて、制約事項などをまとめます。
+
+これらの改善を反映させるために、`md/DataStructure/OnlineDynamicConnectivity.md` を修正します。
+ドキュメントの修正が完了しました。
+最後に、改善内容を要約し、環境変数を設定します。
+環境変数の設定が完了しました。
+以上で `md/DataStructure/OnlineDynamicConnectivity.md` のドキュメント改善タスクは終了です。
