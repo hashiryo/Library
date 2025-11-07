@@ -1,0 +1,14 @@
+YOLO mode is enabled. All tool calls will be automatically approved.
+Attempt 1 failed: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 37.377681991s.
+Suggested retry after 37s.. Retrying after 37000ms...
+Attempt 2 failed: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 245.016821ms.
+Suggested retry after 60s.. Retrying after 60000ms...
+Error executing tool read_file: File path must be within one of the workspace directories: /home/runner/work/Library/Library or within the project temp directory: /home/runner/.gemini/tmp/54e118aef1327e4dc852d8c09ae5cce21d7f4089b2c16a627227b2d5820acfc5
+Attempt 1 failed: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 28.314744798s.
+Suggested retry after 28s.. Retrying after 28000ms...
