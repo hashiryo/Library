@@ -1,0 +1,9 @@
+了解しました。競技プログラミングライブラリのドキュメント改善タスクを開始します。
+`md/Math/binary_gcd.md`が選択されました。関連ファイルを確認し、改善点を検討します。
+`src/Math/binary_gcd.hpp` exists. I'll read `md/Math/binary_gcd.md` and `src/Math/binary_gcd.hpp`, then find and review test files that include `binary_gcd.hpp`.
+Okay, `md/Math/binary_gcd.md` reviewed. Now, `src/Math/binary_gcd.hpp`.
+`src/Math/binary_gcd.hpp` checked. Now, find files that include it.
+Found `test/alone/constexpr_binary_gcd.test.cpp`. Checking its contents.
+ドキュメントを評価し、`binary_gcd`の備考セクションに不正確な点を発見しました。`a`または`b`が0の場合、`binary_gcd(a, b)`は`a + b`を返しますが、これは`gcd(|a|, |b|)`と等価ではありません。この挙動を明確化するため、備考を「`a, b`が共に非ゼロの場合、結果は`gcd(|a|, |b|)`と等価」「いずれかがゼロの場合、結果は`a + b`となり、`std::gcd`の仕様とは異なる」と修正します。この内容で`md/Math/binary_gcd.md`を更新します。
+Doc fixed. Now, `GITHUB_ENV` update: `TARGET_FILE` is `md/Math/binary_gcd.md`, `IMPROVEMENT_SUMMARY` is "Corrected `binary_gcd` behavior description for zero arguments."
+Task complete. I selected `md/Math/binary_gcd.md`, reviewed related files, corrected an inaccuracy in the documentation regarding zero arguments, wrote the fix to the file, and set the necessary `GITHUB_ENV` variables. All requirements are met.
