@@ -1,0 +1,44 @@
+了解しました。競技プログラミングライブラリのドキュメント改善アシスタントとして、以下の手順でタスクを実行します。
+
+1.  ランダムにMarkdownファイルを1つ選択します。
+2.  選択されたファイルと、それに対応するヘッダファイル、テストファイルを確認します。
+3.  ドキュメントの改善点を分析し、必要であれば修正を行います。
+4.  最後に、改善内容を要約し、指定された形式で環境変数に出力します。
+
+それでは、最初のステップとして改善対象のファイルをランダムに選択します。
+ファイル `md/DataStructure/UnionFind_Potentialized.md` が選択されました。
+
+次に、このドキュメントに対応するソースコードとテストコードを調査し、ドキュメントの正確性、完全性、可読性、一貫性を検証します。
+
+関連ファイルを特定し、内容を読み込みます。
+ソースファイルが見つかりました。次に、このソースファイルを使用しているテストファイルを検索します。
+`#include` directive not found. The include path might be different. I'll search the `test/` directory for `UnionFind_Potentialized` to locate the relevant test file.
+Okay, I've found numerous test files containing `UnionFind_Potentialized`. I'll focus on those including `UnionFind_Potentialized.hpp`, not the `Undoable` version. `test/yosupo/unionfind_with_potential.test.cpp` looks promising. I'll now read that file, along with `md/DataStructure/UnionFind_Potentialized.md` and `src/DataStructure/UnionFind_Potentialized.hpp`.
+
+ファイルの分析結果と改善案をまとめます。
+
+### 分析結果
+
+1.  **正確性**: `unite` と `diff` の動作説明はソースコードと一致しており、正確です。
+2.  **完全性**:
+    *   `potential(u)` の説明が不十分です。実際には代表元からの相対ポテンシャルを返しますが、その旨が明記されていません。
+    *   `unite` が `false` を返す具体的な条件（既に連結でポテンシャルが矛盾する場合）が記載されていません。
+    *   コンストラクタ名に `UnionFind(n)` というタイポがあります。
+    *   `size(u)` の計算量が記載されていません。
+3.  **可読性**: 全体的に良好ですが、より具体的な説明を加えることで改善できます。
+4.  **一貫性**: 標準的なドキュメント構成に沿っています。
+
+### 改善計画
+
+以上の分析に基づき、以下の点を修正します。
+
+1.  **`potential(u)` の説明変更**: 代表元からの相対ポテンシャルであることを明記します。
+2.  **`unite(u,v,w)` の説明追記**: `false` を返す条件を具体的に記述します。
+3.  **タイポ修正**: コンストラクタ名を `UnionFind_Potentialized(n)` に修正します。
+4.  **計算量追記**: `size(u)` の計算量 $O(\alpha(n))$ を追記します。
+5.  **`diff(u,v)` の注意点追記**: `u,v` が異なる集合に属する場合の挙動は未定義であるため、使用前に `connected(u,v)` で連結判定をすることを推奨する旨を追記します。
+
+これらの改善を反映させたドキュメントを作成し、ファイルを更新します。
+Okay, I'll fix the documentation.
+Documentation updated. Now, outputting `TARGET_FILE` and `IMPROVEMENT_SUMMARY` to GITHUB_ENV.
+Okay, `md/DataStructure/UnionFind_Potentialized.md` is done. Awaiting further instructions.

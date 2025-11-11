@@ -16,13 +16,13 @@ documentation_of: ../../src/DataStructure/UnionFind_Potentialized.hpp
 
 |メンバ関数|概要|計算量|
 |---|---|---|
-|`UnionFind(n)`|コンストラクタ. 要素数 $n$ を渡す.||
-|`size(u)`|要素 $u$ の属する集合のサイズを返す.||
+|`UnionFind_Potentialized(n)`|コンストラクタ. 要素数 $n$ を渡す.||
+|`size(u)`|要素 $u$ の属する集合のサイズを返す.| $O(\alpha(n))$ |
 |`leader(u)`|要素 $u$ の属する集合の代表元を返す.|$O(\alpha(n))$|
 |`connected(u,v)`|要素 $u,v$ が同じ集合に属していれば `true` を返す．|$O(\alpha(n))$|
-|`unite(u,v,w)`|要素 $u,v$ それぞれが属する集合を併合し，ポテンシャルについては $p(u)=p(v)+w$ を満たすように変更する．<br> 矛盾していたら`false` を返す． |$O(\alpha(n))$|
-|`potential(u)`|要素 $u$ のポテンシャル $p(u)$ を返す． |$O(\alpha(n))$|
-|`diff(u,v)`| $-p(v)+p(u)$ を返す |$O(\alpha(n))$|
+|`unite(u,v,w)`|要素 $u,v$ それぞれが属する集合を併合し，ポテンシャルについては $p(u)=p(v)+w$ を満たすように変更する．<br> 既に $u,v$ が連結でポテンシャルの差に矛盾が生じる場合は `false` を返し，それ以外は `true` を返す． |$O(\alpha(n))$|
+|`potential(u)`|代表元 $r$ からの相対ポテンシャル $p(u)-p(r)$ を返す． |$O(\alpha(n))$|
+|`diff(u,v)`| ポテンシャルの差 $-p(v)+p(u)$ を返す．<br> $u,v$ が同じ集合に属している必要がある．|$O(\alpha(n))$|
 
 ## Verify
 
