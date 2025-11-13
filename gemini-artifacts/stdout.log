@@ -1,0 +1,9 @@
+了解しました。競技プログラミングライブラリのドキュメント改善タスクを開始します。
+ファイル `md/Geometry/Convex.md` が選択されました。これより、関連ファイルの確認とドキュメントの改善作業を開始します。
+`grep` failed, likely finding no includes for `Convex.hpp`. I'll now search for test files containing "Convex" in their name. Next, I'll read `md/Geometry/Convex.md` and `src/Geometry/Convex.hpp` to identify documentation improvements.
+No matching test files were found for `Convex.hpp`. I'll proceed by comparing `md/Geometry/Convex.md` and `src/Geometry/Convex.hpp` to identify documentation improvements, starting with reading both files.
+Okay, reading `src/Geometry/Convex.hpp`.
+`Convex.md` and `Convex.hpp` reviewed. I'll improve the documentation by: clarifying the `strict` parameter in the constructor to differentiate between strict and lenient convex hulls; detailing `diameter()`'s `long double` return and its incompatibility with `Rational` due to `sqrt`; noting `Convex`'s inheritance from `Polygon`; explaining the template parameter `K`; and adding a usage example. These changes will be applied to `md/Geometry/Convex.md`.
+Okay, I'll revise `md/Geometry/Convex.md` based on the proposal.
+Documentation updated. Setting environment variables: `TARGET_FILE` to `md/Geometry/Convex.md` and `IMPROVEMENT_SUMMARY` to "Improved `Convex.md` with inheritance, template parameters, detailed function descriptions, and examples." Now, I'll export these to GITHUB_ENV.
+I've completed all tasks. I selected and improved `md/Geometry/Convex.md` by comparing it to `src/Geometry/Convex.hpp`, despite finding no related test files. The document is now more accurate and readable. Finally, I set the required environment variables. My work is done.
