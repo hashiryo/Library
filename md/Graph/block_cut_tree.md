@@ -4,13 +4,14 @@ documentation_of: ../../src/Graph/block_cut_tree.hpp
 ---
 
 無向グラフを二点連結成分分解し、その構造を木で表現する Block-Cut Tree を構築する。
+自己ループや多重辺を含むグラフにも対応している。
 
 ![bct.svg](https://github.com/hashiryo/Library/blob/master/img/bct.drawio.svg?raw=true)
 <center>図：左が元グラフ、右が構築されたBlock-Cut Tree。丸が元頂点、四角が二点連結成分（ブロック）を表す頂点。</center>
 
-|関数名|概要|計算量|
-|---|---|---|
-|`block_cut_tree(CSRArray<int> adj)` <br> `block_cut_tree(Graph g)` |無向グラフ g を二点連結成分分解して構築した Block-Cut Tree を返す. <br> 引数は頂点 → 頂点の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) もしくは [`Graph`クラス](Graph.hpp) で無向グラフを渡す.　<br> 返り値は `Graph` クラス．|$O(V+E)$ |
+| 関数名                               | 概要                                                                                                                                                           | 計算量     |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `block_cut_tree(CSRArray<int> adj)` <br> `block_cut_tree(Graph g)` | 無向グラフ g を二点連結成分分解して構築した Block-Cut Tree を返す。<br>引数は [`CSRArray<int>`クラス](../Internal/ListRange.hpp) または [`Graph`クラス](Graph.hpp) で渡す。<br>返り値は `Graph` クラス。 | $O(V+E)$ |
 
 ### Block-Cut Tree の構造
 
@@ -23,7 +24,7 @@ documentation_of: ../../src/Graph/block_cut_tree.hpp
 - **ブロック頂点 (Block-Node)**: `N` から `N+C-1` の頂点が対応する。
   - 各頂点は、元グラフの各二点連結成分（ブロック）を表す。
   - ブロック頂点に隣接するのは、そのブロックに属する元頂点のみである。
-- **孤立点**: 元グラフの孤立点は、次数0の元頂点として表現される。
+- **孤立点**: 元グラフの孤立点は、その頂点のみを含むブロックと辺で結ばれる。したがって、Block-Cut Tree上では次数1の頂点となる。
 
 ### 使い方
 
