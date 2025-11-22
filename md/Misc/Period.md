@@ -1,37 +1,44 @@
 ---
-title: 周期性の利用 (Functionalグラフ)
+title: 周期性の検出 (Functional Graph)
 documentation_of: ../../src/Misc/Period.hpp
 ---
 
+## 概要
+
+関数 $f$ による状態遷移 $x_{i+1} = f(x_i)$ で定まる数列を考えます。状態の数が有限である場合、この数列は必ずどこかで周期に入ります（いわゆる「しっぽ付きのサイクル」構造）。
+
+`Period<T>` クラスは、このような状態遷移の構造（Functional Graph）を解析し、以下の機能を提供します。
+
+- ある状態から $k$ 回遷移した後の状態を高速に求める (`jump`)
+- ある状態から $k$ 回遷移するまでの軌道を求める (`path`)
+
+内部的には、Functional Graphをいくつかの木に分解し、Heavy-Light Decomposition を利用することで、各クエリを対数時間で処理します。
+
 ## `Period<T>` クラス
 
-初期状態が $x_0\in T$ な列 $(x_i)_i$ が次の漸化式で定まっているとする．
+### テンプレートパラメータ
 
-$
-\displaystyle x_{i+1} = f(x_i)
-$
+- `T`: 状態を表す型。`std::map` のキーとして使用できる必要があります。整数型の場合は内部で `std::unordered_map` を利用し高速化されます。
 
-$x_i$ として取りうる状態の数が有限であるときに周期性を利用して巨大な数 $k$ に対する $x_k$ を求める　
-
-などするクラス．
-
-初期状態が複数ある場合でも Functional グラフを重軽分解することで頑張る．
-
-状態 $x$ をいい感じに並び替えて，ラベリングする．
-
-状態の数を $n$ とする．
+### メンバ関数
 
 | メンバ関数 | 概要 | 計算量 |
 | --- | --- | --- |
-| `Period(f, init)` | コンストラクタ. <br> 関数 $f:T\to T$ と初期状態の集合 $X_0 \subset T $ を渡す． <br> 第二引数は `vector<T>`. |$O(An\log n)$ <br> ただし $f(x)$ の計算に $O(A)$ とかかるとした．<br> $\log$ は連想配列を用いたため．|
-| `Period(functional)` | コンストラクタ. <br> 全状態の集合が $V＝\lbrace 0,\dots,n-1\rbrace$ だとして，それぞれの状態の移り先を表す配列 ( $V\to V$ ) を渡す．<br> 引数は `vector<int>`. <br> `T == int` でないと呼べない．| $O(n)$|
-|`size()`|状態の数 $n$ を返す．||
-|`operator()(x)`| $x$ に対応するラベルを返す．<br> 戻り値は `int`. |
-| `jump(x,k)`          | $f^k(x)=\overbrace{f(\cdots f(f}^{k}(x)))$ を返す. <br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は `T`.| $O(\log n)$ |
-| `path(x,k)`          | $x,f(x),\dots,f^k(x)$ という軌道を表す 半開区間の列 を返す．<br> 第二引数は何らかの整数型 `Int`．( [`BigInt`クラス](../FFT/BigInt.hpp)も使える．) <br> 戻り値は4つのデータをラッピングした`tuple`．<br> 一つ目はサイクルに至るまでの軌道．<br> 二つ目はサイクル一周分を表す軌道．<br> 三つ目はサイクルの周回数 `Int`. <br> 四つ目はサイクルの余りの軌道．<br> 軌道は `vector<pair<int,int>>` で表現する半開区間の列 $\lbrack a_0, b_0 ),\dots,\lbrack a_m, b_m )$ であり, `operator()` のラベルに対応している． | $O(\log n)$ |
-| `path_upto_cycle(x)`          | 同じ値が出るまでの軌道を返す．<br> 軌道は `vector<pair<int,int>>` で表現する半開区間の列 $\lbrack a_0, b_0 ),\dots,\lbrack a_m, b_m )$ であり, `operator()` のラベルに対応している． | $O(\log n)$ |
+| `Period(f, init)` | コンストラクタ。<br>関数 `f: T -> T` と初期状態の集合 `init` (`vector<T>`) を渡す。 | $O(A \cdot n \log n)$ or $O(A \cdot n)$ ※1 |
+| `Period(functional)` | コンストラクタ。<br>状態が `0, ..., n-1` の整数で、`functional[i]` が状態 `i` の遷移先を表す配列 (`vector<int>`) を渡す。<br> `T` は `int` である必要がある。 | $O(n)$ |
+| `size()` | 状態の数 `n` を返す。 | $O(1)$ |
+| `operator()(x)` | 状態 `x` に対応する内部ラベル (`int`) を返す。 | $O(\log n)$ or $O(1)$ ※2 |
+| `jump(x, k)` | $k$ 回遷移した後の状態 $f^k(x)$ を返す。<br>`k` は `BigInt` など任意の整数型が使用可能。 | $O(\log n)$ |
+| `path(x, k)` | $x, f(x), \dots, f^k(x)$ の軌道を表す半開区間の列を返す。<br>戻り値は `tuple<Path, Path, Int, Path>` で、それぞれサイクル前の軌道、サイクル1周の軌道、サイクル周回数、サイクルの余りの軌道を表す。<br>`Path` は `vector<pair<int, int>>` 型。 | $O(\log n)$ |
+| `path_upto_cycle(x)` | 状態 `x` からサイクルに入り、サイクルを1周するまでの軌道を返す。 | $O(\log n)$ |
+
+※1: $n$ は状態数、$A$ は関数 `f` の計算量。`T` が整数型でない場合、内部で `std::map` を使うため $\log n$ が付く。整数型の場合は `std::unordered_map` を使い償却 $O(A \cdot n)$。
+※2: `T` が整数型でない場合は $O(\log n)$、整数型の場合は償却 $O(1)$。
+
+## 制約
+
+- `T` 型のオブジェクトは `std::map` のキーとして利用できること（比較演算子が定義されていること）。
 
 ## Verify
 
 - [AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)
-
