@@ -51,6 +51,12 @@ documentation_of: ../../src/Misc/TwoSatisfiability.hpp
 - 存在する場合: `std::vector<bool>` を返す。返り値を `ret` とすると、`ret[i]` が変数 `i` の真偽値に対応する (`true` なら真、`false` なら偽)。
 - 存在しない場合: 空の `std::vector` を返す。
 
+## よく使う論理式
+
+- **(u XOR v)**: 変数 `u` と `v` のうち、ちょうど一方が真であることを要求する。
+  - $(u \oplus v) \equiv (u \lor v) \land (\neg u \lor \neg v)$
+  - `add_or(u, v)` と `add_nand(u, v)` を両方呼び出すことで実現できる。
+
 ## 使用例
 
 例えば、論理式 $(x_0 \lor \neg x_1) \land (x_1 \lor x_2)$ を解く場合。
