@@ -49,7 +49,18 @@ int main() {
 ## `MaxFlow` のインターフェース
 
 ### テンプレートパラメータ
-- `FlowAlgo`: `Dinic<flow_t>` や `PushRelabel<flow_t>` のように、使用するアルゴリズムと流量の型 `flow_t` を指定する。
+
+- `FlowAlgo`: 使用するアルゴリズムと流量の型 `flow_t` を指定する。
+  - `Dinic<flow_t>`
+  - `PushRelabel<flow_t, global_freq, use_gap, freeze>`
+
+#### `PushRelabel` のテンプレートパラメータ詳細
+`PushRelabel` アルゴリズムを選択する場合、追加のパラメータを指定できる。
+
+- `flow_t`: 流量の型。
+- `unsigned global_freq = 4`: Global relabeling を行う頻度を制御する。`m * global_freq` 回（`m`は辺数）のpush/relabel操作ごとに実行される。`0` に設定すると無効になる。
+- `bool use_gap = true`: Gap heuristic を有効にするかどうかのフラグ。有効にすると、特定の高さの頂点が存在しなくなった場合に、それより高い頂点を無効とみなし、計算を効率化する。
+- `bool freeze = false`: `true` の場合、`maxflow` 計算後に追加のフローを始点 `s` に押し戻す処理をスキップする。これにより計算後の残余グラフが通常と異なる状態になるが、実行速度がわずかに向上する場合がある。
 
 ### コンストラクタ
 - `MaxFlow(size_t n = 0)`: 頂点数 `n` でグラフを初期化する。
@@ -80,17 +91,37 @@ int main() {
 
 ## `MaxFlowLowerBound` のインターフェース
 
-各辺に最小流量制約と最大流量制約がある場合の最大流を求める。
+各辺に最小流量（下限）制約と最大流量（容量）制約がある場合の最大流を求める。
+
+内部で問題を標準的な最大流問題に変換して解く。具体的には、各頂点の流量の収支を調整するために、元のグラフに新しい始点 `S` と終点 `T` を追加する。このため、コンストラクタで指定した頂点数 `n` に加え、`S` と `T` の2頂点が内部で自動的に追加される。ユーザーが使用する頂点番号は `0` から `n-1` のままである。
 
 ### 使い方
 `MaxFlow` と同様に、内部アルゴリズムと流量の型をテンプレートで指定する。
 
 ```cpp
-MaxFlowLowerBound<Dinic<long long>> graph(N);
-graph.add_edge(u, v, lower, upper); // 最小流量 lower, 最大流量 upper の辺を追加
-long long flow = graph.maxflow(s, t);
-if (flow == -1) {
-    // 最小流量制約を満たすフローが存在しない
+#include <iostream>
+#include "src/Optimization/MaxFlow.hpp"
+
+int main() {
+    int N = 4;
+    int s = 0, t = 3;
+    MaxFlowLowerBound<Dinic<long long>> graph(N);
+
+    // 最小流量制約 lower, 最大流量制約 upper を持つ辺を追加
+    graph.add_edge(0, 1, 1, 10);
+    graph.add_edge(0, 2, 2, 5);
+    graph.add_edge(1, 2, 0, 6);
+    graph.add_edge(1, 3, 5, 10);
+    graph.add_edge(2, 3, 1, 8);
+
+    long long flow = graph.maxflow(s, t);
+
+    if (flow == -1) {
+        std::cout << "実行可能なフローが存在しません" << std::endl;
+    } else {
+        std::cout << "最大流: " << flow << std::endl;
+    }
+    return 0;
 }
 ```
 
