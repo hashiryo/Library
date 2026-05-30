@@ -690,7 +690,6 @@ function generateHomePage(sidebar: string): void {
   <h1>Hashiryo's Library</h1>
   <p>競技プログラミング用C++ライブラリ</p>
   <div class="hero-actions">
-    <a href="${BASE_PATH}/DataStructure/BinaryIndexedTree.html" class="btn btn-primary">ライブラリ一覧</a>
     <a href="https://github.com/hashiryo/Library" class="btn">GitHub</a>
   </div>
 </div>`;
