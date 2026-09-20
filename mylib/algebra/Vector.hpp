@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <iostream>
 #include <valarray>
+#include <cassert>
 namespace _la_internal {
 using namespace std;
 template <class R> struct Vector {

@@ -1,6 +1,7 @@
 #pragma once
 #include <cassert>
 #include <vector>
+#include <algorithm>
 #include "mylib/algebra/Vector.hpp"
 namespace _la_internal {
 template <class R, class D> struct Mat {

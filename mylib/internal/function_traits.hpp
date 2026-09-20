@@ -1,5 +1,6 @@
 #pragma once
 #include <type_traits>
+#include <tuple>
 // clang-format off
 namespace function_template_internal{
 template<class C>struct is_function_object{

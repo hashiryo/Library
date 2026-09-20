@@ -2,6 +2,7 @@
 #include <numeric>
 #include <utility>
 #include <cassert>
+#include <iostream>
 class Nimber {
  using u64= unsigned long long;
  using u32= unsigned;

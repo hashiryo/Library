@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "mylib/internal/detection_idiom.hpp"
 template <class M> struct Algebra {
  using T= typename M::T;

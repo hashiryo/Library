@@ -6,6 +6,7 @@
 #include <cassert>
 #include <cmath>
 #include <cstdint>
+#include <iostream>
 class DyadicRational {
  static constexpr char FracLen= std::numeric_limits<uint64_t>::digits - 1;
  static constexpr uint64_t Denom= 1ULL << FracLen;

@@ -1,5 +1,7 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <vector>
+#include <functional>
+#include <algorithm>
 /**
  * @title Disjoint-Sparse-Table
  * @category データ構造
