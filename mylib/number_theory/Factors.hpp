@@ -30,7 +30,7 @@ class Factors: public ConstexprArray<pair<u64, uint16_t>, 16> {
  template <class Uint, class MP> static constexpr Uint rho(Uint n, Uint c) {
   const MP md(n);
   auto f= [&md, c](Uint x) { return md.plus(md.mul(x, x), c); };
-  const Uint m= 1LL << (__lg(n) / 5);
+  const Uint m= 1LL << ((63 - __builtin_clzll(n)) / 5);
   Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;
   for(Uint r= 1, i= 0; g == 1; r<<= 1) {
    for(x= y, i= r; i--;) y= f(y);

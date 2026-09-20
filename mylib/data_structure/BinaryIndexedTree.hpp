@@ -23,7 +23,7 @@ public:
  T operator[](int k) const { return sum(k + 1) - sum(k); }
  int find(T k) const {  // min { i : sum(i+1) > k } -> kth element(0-indexed)
   int i= 0;
-  for (int p= 1 << (std::__lg(dat.size() - 1) + 1), e= dat.size(); p; p>>= 1)
+  for (int p= 1 << (64 - __builtin_clzll(dat.size() - 1)), e= dat.size(); p; p>>= 1)
    if (i + p < e && dat[i + p] <= k) k-= dat[i+= p];
   return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
  }

@@ -18,7 +18,7 @@ public:
  DiscreteLogarithm(const F& mp, const G& op, const H& hash, int64_t lim= 1ll << 50): mp(mp), op(op), hash(hash), lim(lim) { static_assert(std::is_convertible_v<std::invoke_result_t<H, T>, int>); }
  int64_t operator()(const E& x, T s, const T& t, int64_t N= -1) const {
   if(N < 0) N= lim;
-  const int m= 1 << std::__lg(int(std::sqrt(N) + 1)), mask= m - 1;
+  const int m= 1 << (31 - __builtin_clz(int(std::sqrt(N) + 1))), mask= m - 1;
   std::vector<T> val(m), vs(m);
   std::vector<int> os(m + 1), so(m);
   T s1= t;
