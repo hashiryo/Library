@@ -30,6 +30,11 @@ const MD_DIR = path.join(ROOT, "md");
 const SITE_DIR = path.join(ROOT, "site");
 const OUT_DIR = path.join(SITE_DIR, "Library");
 const BASE_PATH = "/Library";
+// procon-judge のサイト。ヘッダごとの逆引き JSON (data/headers/<path>.json) を
+// 表示時に読む。ビルド時に焼き込まないのは順番の都合で、mylib を push すると
+// こちらのサイトが先に建ち、judge が測るのはそのあとになるため。焼き込むと
+// 定常状態で常に「参考」と出る。
+const JUDGE_SITE = "https://hashiryo.github.io/procon-judge";
 
 // ============================================================
 // markdown-it 初期化
@@ -328,6 +333,87 @@ function renderPage(title: string, content: string, sidebar: string): string {
       toggle.insertBefore(bundleBtn, toggle.firstChild);
     }
   </script>
+  <script>
+    // Submissions (procon-judge)。ヘッダごとの逆引き JSON を表示時に読む。
+    // 上のスクリプトとは分けておく。検索 UI が読めない回に巻き込まれないため。
+    const judge = document.querySelector('.judge-section');
+    if (judge) {
+      const JUDGE = '${JUDGE_SITE}';
+      const el = (tag, text, cls) => {
+        const node = document.createElement(tag);
+        if (text != null) node.textContent = text;
+        if (cls) node.className = cls;
+        return node;
+      };
+      const statusClass = (s) =>
+        s === 'AC' ? 'status-ac'
+        : s === 'WA' || s === 'RE' ? 'status-fail'
+        : s === 'TLE' || s === 'MLE' ? 'status-warn'
+        : 'status-gray';
+      const table = (data, rows, site) => {
+        const envs = data.environments || [];
+        const t = el('table', null, 'verify-matrix judge-table');
+        const head = el('tr');
+        head.append(el('th', 'Problem'), el('th', 'Submission'));
+        for (const env of envs) head.append(el('th', env));
+        const thead = el('thead');
+        thead.append(head);
+        t.append(thead);
+        const body = el('tbody');
+        for (const s of rows) {
+          const tr = el('tr');
+          const problem = el('td');
+          const pa = el('a', s.title || s.problem);
+          pa.href = site + s.problem_page;
+          problem.append(pa);
+          const submission = el('td');
+          const name = s.submission.startsWith('submissions/') ? s.submission.slice('submissions/'.length) : s.submission;
+          const sa = el('a', name);
+          sa.href = site + s.page;
+          submission.append(sa);
+          tr.append(problem, submission);
+          const byEnv = Object.fromEntries((s.envs || []).map((e) => [e.env, e]));
+          for (const env of envs) {
+            const e = byEnv[env];
+            if (!e || e.status == null) {
+              tr.append(el('td', '-', 'status-gray'));
+              continue;
+            }
+            const td = el('td', e.status, statusClass(e.status));
+            if (e.current === false) {
+              td.classList.add('judge-stale');
+              td.title = '測ってからヘッダが変わっています。次の計測で入れ替わります';
+              td.append(el('span', '参考', 'judge-chip'));
+            }
+            tr.append(td);
+          }
+          body.append(tr);
+        }
+        t.append(body);
+        const wrap = el('div', null, 'table-wrapper');
+        wrap.append(t);
+        return wrap;
+      };
+      fetch(JUDGE + '/data/headers/' + encodeURI(judge.dataset.judgeHeader) + '.json')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!data || !data.submissions || data.submissions.length === 0) return;
+          const site = data.site || JUDGE + '/';
+          const direct = data.submissions.filter((s) => s.direct);
+          const via = data.submissions.filter((s) => !s.direct);
+          const out = judge.querySelector('.judge-body');
+          if (direct.length) out.append(table(data, direct, site));
+          if (via.length) {
+            const details = el('details');
+            details.append(el('summary', 'Indirect (' + via.length + ')'));
+            details.append(table(data, via, site));
+            out.append(details);
+          }
+          judge.hidden = false;
+        })
+        .catch(() => {});
+    }
+  </script>
 </body>
 </html>`;
 }
@@ -541,6 +627,14 @@ function generateHppPage(
     body += "<h2>Verified with</h2>\n";
     body += renderVerifyMatrix(hppTestFiles, results);
   }
+
+  // Submissions (procon-judge)
+  // 中身は renderPage のスクリプトが表示時に judge から読んで埋める。JSON が
+  // 無い (どの提出も使っていない) ヘッダでは節ごと隠したままにする。
+  body += `<section class="judge-section" hidden data-judge-header="${escapeHtml(hppPath)}">\n`;
+  body += "<h2>Submissions</h2>\n";
+  body += `<p class="judge-note">procon-judge で計測した、このヘッダを使う提出。環境ごとの状態と、今のヘッダで測った記録かどうか。参考は測ってからヘッダが変わったもので、次の計測で入れ替わる。 <a href="${JUDGE_SITE}/">procon-judge</a></p>\n`;
+  body += '<div class="judge-body"></div>\n</section>\n';
 
   function renderDepItem(hppRelPath: string): string {
     const icon = hppStatusIcon(hppRelPath, results);
@@ -991,6 +1085,11 @@ summary { cursor: pointer; }
   .sidebar { display: none; }
   .content { padding: 1rem; }
 }
+
+/* procon-judge の提出の表 */
+.judge-note { color: var(--c-text-2); font-size: 0.85rem; margin: 0.25rem 0 0.5rem; }
+.judge-table .judge-stale { color: var(--c-text-2); }
+.judge-chip { margin-left: 0.4em; padding: 0 0.4em; border: 1px solid var(--c-divider); border-radius: 8px; font-size: 0.85em; color: var(--c-text-2); }
 `;
 
 main().catch(console.error);
