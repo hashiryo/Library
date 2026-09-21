@@ -38,7 +38,7 @@ public:
  template <class U, class F1, class F2, class F3> Rerooting(const Graph& g, const HeavyLightDecomposition& hld, const F1& put_edge, const F2& op, const U& ui, const F3& put_vertex): Rerooting(g, g.adjacency_edge(0), hld, put_edge, op, ui, put_vertex) {}
  template <class U, class F1, class F2, class F3> Rerooting(const Graph& g, const F1& put_edge, const F2& op, const U& ui, const F3& put_vertex): Rerooting(g, g.adjacency_edge(0), HeavyLightDecomposition(g), put_edge, op, ui, put_vertex) {}
  const T& operator[](int v) const { return dp[v]; }
- auto begin() const { return std::cbegin(dp); }
- auto end() const { return std::cend(dp); }
+ auto begin() const { return std::begin(dp); }
+ auto end() const { return std::end(dp); }
  const T& operator()(int root, int v) const { return root == v ? dp[v] : hld.in_subtree(root, v) ? dp2[hld.jump(v, root, 1)] : dp1[v]; }
 };
