@@ -371,6 +371,13 @@ function renderPage(title: string, content: string, sidebar: string): string {
           const sa = el('a', name);
           sa.href = site + s.page;
           submission.append(sa);
+          // 判定サイトのテストデータでない問題。AC の意味が違うので印を付ける。
+          if (s.official === false) {
+            const labels = { none: 'コンパイルのみ', local: '自作', manual: '手動取り込み' };
+            const chip = el('span', labels[s.testdata] || s.testdata, 'judge-chip');
+            chip.title = 'テストケースは判定サイトのものではありません';
+            submission.append(chip);
+          }
           tr.append(problem, submission);
           const byEnv = Object.fromEntries((s.envs || []).map((e) => [e.env, e]));
           for (const env of envs) {
