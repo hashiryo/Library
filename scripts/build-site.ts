@@ -405,6 +405,8 @@ function renderPage(title: string, content: string, sidebar: string): string {
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
           if (!data || !data.submissions || data.submissions.length === 0) return;
+          // JSON の契約の版。judge が形を変えて版を上げたら、知らない形を読まずに節を隠す。
+          if ((data.schema ?? 1) !== 1) return;
           const site = data.site || JUDGE + '/';
           const direct = data.submissions.filter((s) => s.direct);
           const via = data.submissions.filter((s) => !s.direct);
