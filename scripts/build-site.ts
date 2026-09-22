@@ -11,7 +11,6 @@ import { katex } from "@mdit/plugin-katex";
 import matter from "gray-matter";
 import { createHighlighter, type Highlighter } from "shiki";
 import katexLib from "katex";
-import { loadCompactResults, type CompactResults } from "./lib/results";
 import {
   buildDependencyGraph,
   type DependencyGraph,
@@ -24,7 +23,6 @@ import { bundleCpp } from "./lib/bundle";
 
 const ROOT = path.resolve(__dirname, "..");
 const SRC_DIR = path.join(ROOT, "mylib");
-const TEST_DIR = path.join(ROOT, "test");
 const MD_DIR = path.join(ROOT, "md");
 const SITE_DIR = path.join(ROOT, "site");
 const OUT_DIR = path.join(SITE_DIR, "Library");
@@ -66,10 +64,6 @@ async function initMarkdown() {
 
   return md;
 }
-
-// ============================================================
-// 依存グラフ・テストマップ (build-data.ts と同等)
-// ============================================================
 
 // ============================================================
 // HTML テンプレート
@@ -146,87 +140,6 @@ function rewriteLinks(html: string, mdDir: string): string {
  */
 function judgeDot(hppPath: string): string {
   return `<span data-pagefind-ignore class="dot dot-gray" data-judge-dot="${escapeHtml(hppPath)}" title="procon-judge の記録を読んでいます">●</span>`;
-}
-
-function statusLabel(status: string): string {
-  if (status === "IGNORE") return "-";
-  return status;
-}
-
-function statusClass(status: string): string {
-  if (status === "AC") return "status-ac";
-  if (status === "WA" || status === "RE") return "status-fail";
-  if (status === "TLE" || status === "MLE") return "status-warn";
-  if (status === "CE" || status === "IGNORE") return "status-gray";
-  return "";
-}
-
-function formatMemory(kb: number): string {
-  if (kb >= 1024) return (kb / 1024).toFixed(1) + " MB";
-  return kb + " KB";
-}
-
-function renderResultTable(result: any): string {
-  if (!result) return '<p class="no-results">結果データがありません</p>';
-
-  const envs = result.environments || {};
-  const envList = Object.keys(envs).sort();
-  if (envList.length === 0)
-    return '<p class="no-results">結果データがありません</p>';
-
-  let html = "";
-
-  // Problem link
-  if (result.problem) {
-    html += `<p>Problem: <a href="${escapeHtml(result.problem)}" target="_blank">${escapeHtml(result.problem)}</a>`;
-    if (result.time_limit_ms) html += ` (TL: ${result.time_limit_ms} ms)`;
-    html += "</p>\n";
-  }
-
-  // Summary table
-  html +=
-    '<div class="table-wrapper"><table class="result-table"><thead><tr><th>Environment</th><th>Status</th><th>Time (max)</th><th>Time (total)</th><th>Memory (max)</th></tr></thead><tbody>\n';
-  for (const env of envList) {
-    const e = envs[env];
-    const timeMax = e.summary?.time_max_ms ?? "-";
-    const timeTotal = e.summary?.time_total_ms ?? "-";
-    const memMax = e.summary?.memory_max_kb
-      ? formatMemory(e.summary.memory_max_kb)
-      : "-";
-    html += `<tr><td>${escapeHtml(env)}</td><td class="${statusClass(e.status)}">${statusLabel(e.status)}</td><td>${timeMax} ms</td><td>${timeTotal} ms</td><td>${memMax}</td></tr>\n`;
-  }
-  html += "</tbody></table></div>\n";
-
-  // Test case details
-  const firstEnv = envs[envList[0]];
-  if (firstEnv?.cases?.length) {
-    html += "<details><summary>テストケース詳細</summary>\n";
-    html +=
-      '<div class="table-wrapper"><table class="result-table"><thead><tr><th>Case</th>';
-    for (const env of envList)
-      html += `<th colspan="3">${escapeHtml(env)}</th>`;
-    html += "</tr><tr><th></th>";
-    for (const _ of envList)
-      html += "<th>Status</th><th>Time</th><th>Memory</th>";
-    html += "</tr></thead><tbody>\n";
-
-    for (const c of firstEnv.cases) {
-      html += `<tr><td>${escapeHtml(c.name)}</td>`;
-      for (const env of envList) {
-        const eCase = envs[env]?.cases?.find((x: any) => x.name === c.name);
-        if (eCase) {
-          const mem = eCase.memory_kb ? formatMemory(eCase.memory_kb) : "-";
-          html += `<td class="${statusClass(eCase.status)}">${statusLabel(eCase.status)}</td><td>${eCase.time_ms} ms</td><td>${mem}</td>`;
-        } else {
-          html += "<td>-</td><td>-</td><td>-</td>";
-        }
-      }
-      html += "</tr>\n";
-    }
-    html += "</tbody></table></div></details>\n";
-  }
-
-  return html;
 }
 
 // ============================================================
@@ -706,75 +619,6 @@ function generateHppPage(
 }
 
 // ============================================================
-// テストファイルページ生成
-// ============================================================
-
-function generateTestPage(
-  testFile: string,
-  sidebar: string,
-  results: CompactResults,
-): void {
-  const source = fs.readFileSync(path.join(ROOT, testFile), "utf-8");
-
-  const directIncludes: string[] = [];
-  for (const m of source.matchAll(/#include\s+"(mylib\/[^"]+\.hpp)"/g))
-    directIncludes.push(m[1]);
-
-  const testResult = results.tests[testFile] || null;
-  const problem: string | null = testResult?.problem || null;
-
-  const githubUrl = `https://github.com/hashiryo/Library/blob/master/${testFile}`;
-
-  let body = `<h1>${escapeHtml(testFile)}</h1>\n`;
-  body += "<ul>\n";
-  body += `<li><a href="${githubUrl}" target="_blank">View this file on GitHub</a></li>\n`;
-  if (problem)
-    body += `<li>Problem: <a href="${escapeHtml(problem)}" target="_blank">${escapeHtml(problem)}</a></li>\n`;
-  body += "</ul>\n";
-
-  // Depends on
-  if (directIncludes.length > 0) {
-    body += '<h2>Depends on</h2>\n<ul class="dep-list">\n';
-    for (const hpp of directIncludes) {
-      const icon = judgeDot(hpp);
-      const title =
-        readFrontmatter(
-          path.join(
-            MD_DIR,
-            hpp.replace(/^mylib\//, "").replace(/\.hpp$/, ".md"),
-          ),
-        ).title ||
-        hpp
-          .split("/")
-          .pop()
-          ?.replace(/\.hpp$/, "") ||
-        hpp;
-      const link = `${BASE_PATH}/${hpp.replace(/^mylib\//, "").replace(/\.hpp$/, ".html")}`;
-      body += `<li>${icon} <a href="${link}">${renderInlineKatex(escapeHtml(title))}</a><span class="dep-path">${escapeHtml(hpp)}</span></li>\n`;
-    }
-    body += "</ul>\n";
-  }
-
-  // Test results
-  body += "<h2>Test Results</h2>\n";
-  body += renderResultTable(testResult);
-
-  // Source code
-  body += "<h2>Code</h2>\n";
-  body += highlighter.codeToHtml(source, {
-    lang: "cpp",
-    themes: { light: "github-light", dark: "github-dark" },
-  });
-
-  // 出力
-  const outRelPath =
-    "test/" + testFile.replace(/^test\//, "").replace(/\.cpp$/, ".html");
-  const outPath = path.join(OUT_DIR, outRelPath);
-  fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, renderPage(testFile, body, sidebar));
-}
-
-// ============================================================
 // ホームページ生成
 // ============================================================
 
@@ -802,7 +646,6 @@ async function main() {
   // 初期化
   const md = await initMarkdown();
   const depGraph = buildDependencyGraph();
-  const results = loadCompactResults();
   const sidebar = generateSidebar();
 
   // 出力ディレクトリを準備
@@ -873,25 +716,6 @@ async function main() {
   }
   scanHpp(SRC_DIR);
   console.log(`Generated: ${hppCount} hpp documentation pages`);
-
-  // テストファイルページ (1ページずつ処理)
-  let testCount = 0;
-  function scanTest(dir: string) {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        scanTest(full);
-        continue;
-      }
-      if (!entry.name.endsWith(".test.cpp")) continue;
-
-      const testFile = path.relative(ROOT, full);
-      generateTestPage(testFile, sidebar, results);
-      testCount++;
-    }
-  }
-  scanTest(TEST_DIR);
-  console.log(`Generated: ${testCount} test pages`);
 
   console.timeEnd("Total build");
 }
@@ -1014,14 +838,6 @@ a:hover { text-decoration: underline; }
 
 .verify-matrix { font-size: 0.75rem; }
 .verify-matrix td, .verify-matrix th { white-space: nowrap; padding: 0.25rem 0.5rem; }
-.verify-matrix .test-name-cell { max-width: 280px; padding: 0; }
-.verify-matrix .test-name-scroll { overflow-x: auto; padding: 0.25rem 0.5rem; white-space: nowrap; scrollbar-width: none; }
-.verify-matrix .test-name-scroll::-webkit-scrollbar { display: none; }
-.result-table { font-size: 0.85rem; }
-.result-table td, .result-table th { white-space: nowrap; }
-.result-table td { font-variant-numeric: tabular-nums; }
-details .result-table { font-size: 0.75rem; }
-details .result-table td, details .result-table th { padding: 0.25rem 0.5rem; }
 
 .status-ac { color: var(--c-ac); }
 .status-fail { color: var(--c-fail); }
@@ -1034,7 +850,6 @@ details .result-table td, details .result-table th { padding: 0.25rem 0.5rem; }
 .dot-warn { color: var(--c-warn); }
 .dot-gray { color: var(--c-gray); }
 
-.no-results { color: var(--c-text-2); font-size: 0.9rem; }
 
 .hero { text-align: center; padding: 4rem 1rem; }
 .hero h1 { font-size: 2.5rem; border: none; }

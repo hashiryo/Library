@@ -84,7 +84,7 @@ $f, g$ に対応する `DirichletSeries` オブジェクトから $h$ に対応�
 
 ## 使用例
 
-- [Sum of Totient Function (yosupo)](../../test/yosupo/math/sum_of_totient_function.test.cpp)
+- [Sum of Totient Function (yosupo)](https://hashiryo.github.io/procon-judge/problems/yosupo-sum-of-totient-function.html)
   - $\sum_{i=1}^N \phi(i)$ を求めます。
 - [Sum of Divisors (yosupo)](../../test/yosupo/math/sum_of_powers_of_divisors.test.cpp)
   - $\sum_{i=1}^N \sigma(i)$ を求めます。

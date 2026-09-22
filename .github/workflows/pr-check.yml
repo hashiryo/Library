@@ -1,16 +1,16 @@
 name: pr-check
 
-# PR の軽い検査。変わったヘッダを閉包に持つ test を 1 環境で -fsyntax-only する。
+# PR の軽い検査。変わった mylib/ のヘッダを 1 環境で -fsyntax-only する。
 # テストデータもトークンも要らず、数分で終わる。CE は拾えるが WA は拾えない。
 # WA はマージ後に procon-judge が測って分かる (ヘッダページの Submissions)。
-# 正しさの証拠を procon-judge の記録に寄せたあとも、PR で壊れたことに気づく
-# 最低限の口として残す。設計は my-docs の「Library の verify を畳む設計」。
+# 正しさの証拠を procon-judge の記録に寄せ、Library の verify と test/ を畳んだ
+# (2026-09-22) あとに、PR で壊れたことに気づく最低限の口として残す。
+# 設計は my-docs の「Library の verify を畳む設計」。
 
 on:
   pull_request:
     paths:
       - "mylib/**"
-      - "test/**"
 
 permissions:
   contents: read
@@ -24,16 +24,16 @@ jobs:
           # base との差分を取るので履歴が要る。
           fetch-depth: 0
 
-      - name: 変わったヘッダを閉包に持つ test を集める
+      - name: 変わったヘッダを集める
         run: |
           python3 scripts/pr-syntax-targets.py \
             "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" > targets.txt
           echo "対象 $(wc -l < targets.txt) 件"
           cat targets.txt
 
-      # verify の x64-g++ と同じ g++-13 (ubuntu-24.04 の既定)、同じ -std=c++17。
-      # ヘッダ単体 (どの test も使わないもの) は -include で読む。直接渡すと
-      # 「#pragma once in main file」の警告が出るため。
+      # ubuntu-24.04 の既定の g++ (13) と -std=c++17。procon-judge はもっと新しい
+      # g++ / clang++ で測るので、ここは構文の粗い網でよい。
+      # ヘッダは -include で読む。直接渡すと「#pragma once in main file」の警告が出るため。
       - name: g++ -fsyntax-only
         run: |
           if [ ! -s targets.txt ]; then
@@ -41,11 +41,11 @@ jobs:
             exit 0
           fi
           check() {
-            local f="$1" args=("$f")
-            case "$f" in *.hpp) args=(-include "$f" -x c++ -) ;; esac
-            if ! g++ -std=c++17 -fsyntax-only -I. "${args[@]}" < /dev/null 2> "/tmp/$(echo "$f" | tr / _).err"; then
+            local f="$1" err
+            err="/tmp/$(echo "$f" | tr / _).err"
+            if ! g++ -std=c++17 -fsyntax-only -I. -include "$f" -x c++ - < /dev/null 2> "$err"; then
               echo "::error file=$f::コンパイルできません"
-              cat "/tmp/$(echo "$f" | tr / _).err"
+              cat "$err"
               return 1
             fi
             echo "ok  $f"
