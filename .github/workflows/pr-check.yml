@@ -32,7 +32,8 @@ jobs:
           cat targets.txt
 
       # verify の x64-g++ と同じ g++-13 (ubuntu-24.04 の既定)、同じ -std=c++17。
-      # ヘッダ単体 (どの test も使わないもの) は -x c++ で読む。
+      # ヘッダ単体 (どの test も使わないもの) は -include で読む。直接渡すと
+      # 「#pragma once in main file」の警告が出るため。
       - name: g++ -fsyntax-only
         run: |
           if [ ! -s targets.txt ]; then
@@ -40,9 +41,9 @@ jobs:
             exit 0
           fi
           check() {
-            local f="$1" extra=()
-            case "$f" in *.hpp) extra=(-x c++) ;; esac
-            if ! g++ -std=c++17 -fsyntax-only -I. "${extra[@]}" "$f" 2> "/tmp/$(echo "$f" | tr / _).err"; then
+            local f="$1" args=("$f")
+            case "$f" in *.hpp) args=(-include "$f" -x c++ -) ;; esac
+            if ! g++ -std=c++17 -fsyntax-only -I. "${args[@]}" < /dev/null 2> "/tmp/$(echo "$f" | tr / _).err"; then
               echo "::error file=$f::コンパイルできません"
               cat "/tmp/$(echo "$f" | tr / _).err"
               return 1
