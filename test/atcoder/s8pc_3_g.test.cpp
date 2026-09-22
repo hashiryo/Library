@@ -1,5 +1,5 @@
 // competitive-verifier: IGNORE
-// competitive-verifier: PROBLEM https://atcoder.jp/contests/s8pc_3/tasks/s8pc_3_g
+// competitive-verifier: PROBLEM https://atcoder.jp/contests/s8pc-3/tasks/s8pc_3_g
 // competitive-verifier: TLE 0.5
 // competitive-verifier: MLE 64
 // https://atcoder.jp/contests/s8pc-3/tasks/s8pc_3_g

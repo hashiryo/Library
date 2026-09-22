@@ -1,5 +1,5 @@
 // competitive-verifier: IGNORE
-// competitive-verifier: PROBLEM https://atcoder.jp/contests/codefestival2017final/tasks/cf17_final_e
+// competitive-verifier: PROBLEM https://atcoder.jp/contests/cf17-final/tasks/cf17_final_e
 // competitive-verifier: TLE 0.5
 // competitive-verifier: MLE 64
 // https://atcoder.jp/contests/cf17-final/tasks/cf17_final_e

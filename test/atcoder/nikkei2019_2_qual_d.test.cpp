@@ -1,5 +1,5 @@
 // competitive-verifier: IGNORE
-// competitive-verifier: PROBLEM https://atcoder.jp/contests/nikkeiqual_2019/tasks/nikkei2019_2_qual_d
+// competitive-verifier: PROBLEM https://atcoder.jp/contests/nikkei2019-2-qual/tasks/nikkei2019_2_qual_d
 // competitive-verifier: TLE 0.5
 // competitive-verifier: MLE 256
 // https://atcoder.jp/contests/nikkei2019-2-qual/tasks/nikkei2019_2_qual_d

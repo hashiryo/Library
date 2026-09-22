@@ -1,5 +1,5 @@
 // competitive-verifier: IGNORE
-// competitive-verifier: PROBLEM https://atcoder.jp/contests/arc070/tasks/arc070_e
+// competitive-verifier: PROBLEM https://atcoder.jp/contests/arc070/tasks/arc070_c
 // competitive-verifier: TLE 0.5
 // competitive-verifier: MLE 128
 // https://atcoder.jp/contests/arc070/tasks/arc070_c
