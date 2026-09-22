@@ -16,7 +16,6 @@ import {
   buildDependencyGraph,
   type DependencyGraph,
 } from "./lib/dependency-graph";
-import { hppStatusIcon } from "./lib/status";
 import { bundleCpp } from "./lib/bundle";
 
 // ============================================================
@@ -140,6 +139,15 @@ function rewriteLinks(html: string, mdDir: string): string {
   );
 }
 
+/**
+ * ヘッダの状態の印。中身は表示時に procon-judge の data/headers/index.json を読んで
+ * 色を付ける (renderPage のスクリプト)。ビルド時に焼き込まないのは、Library の
+ * サイトが先に建って judge がそのあと測る順番のため。焼くと定常状態で常に古く出る。
+ */
+function judgeDot(hppPath: string): string {
+  return `<span data-pagefind-ignore class="dot dot-gray" data-judge-dot="${escapeHtml(hppPath)}" title="procon-judge の記録を読んでいます">●</span>`;
+}
+
 function statusLabel(status: string): string {
   if (status === "IGNORE") return "-";
   return status;
@@ -156,53 +164,6 @@ function statusClass(status: string): string {
 function formatMemory(kb: number): string {
   if (kb >= 1024) return (kb / 1024).toFixed(1) + " MB";
   return kb + " KB";
-}
-
-function renderVerifyMatrix(files: string[], results: CompactResults): string {
-  if (files.length === 0) return "";
-
-  // 全環境名を収集
-  const envNames = new Set<string>();
-  for (const file of files) {
-    const test = results.tests[file];
-    if (test) for (const name of Object.keys(test.environments)) envNames.add(name);
-  }
-  const envList = [...envNames].sort();
-  if (envList.length === 0) return "";
-
-  const collapsed = files.length > 20;
-  let html = `<details${collapsed ? "" : " open"}><summary>Verification Results (${files.length} tests)</summary>\n`;
-  html +=
-    '<div class="table-wrapper"><table class="verify-matrix"><thead><tr><th>Test</th>';
-  for (const env of envList) html += `<th colspan="3">${escapeHtml(env)}</th>`;
-  html += "</tr><tr><th></th>";
-  for (const _ of envList)
-    html += "<th>Status</th><th>Time</th><th>Memory</th>";
-  html += "</tr></thead><tbody>\n";
-
-  for (const file of files) {
-    const test = results.tests[file];
-    const testName = file.replace(/^test\//, "").replace(/\.cpp$/, "");
-    const testLink = `${BASE_PATH}/test/${testName}.html`;
-    html += `<tr><td class="test-name-cell"><div class="test-name-scroll"><a href="${testLink}">${escapeHtml(file)}</a></div></td>`;
-    for (const env of envList) {
-      const e = test?.environments?.[env];
-      if (e) {
-        const time =
-          e.summary?.time_max_ms != null ? `${e.summary.time_max_ms} ms` : "";
-        const mem = e.summary?.memory_max_kb
-          ? formatMemory(e.summary.memory_max_kb)
-          : "";
-        html += `<td class="${statusClass(e.status)}">${statusLabel(e.status)}</td><td>${time}</td><td>${mem}</td>`;
-      } else {
-        html += "<td>-</td><td>-</td><td>-</td>";
-      }
-    }
-    html += "</tr>\n";
-  }
-
-  html += "</tbody></table></div></details>\n";
-  return html;
 }
 
 function renderResultTable(result: any): string {
@@ -334,11 +295,48 @@ function renderPage(title: string, content: string, sidebar: string): string {
     }
   </script>
   <script>
+    // procon-judge の記録を表示時に読む。上のスクリプトとは分けておく。検索 UI が
+    // 読めない回に巻き込まれないため。
+    const JUDGE = '${JUDGE_SITE}';
+
+    // ヘッダの状態の印。data/headers/index.json (ヘッダごとの要約) を 1 回読んで、
+    // 印ごとに色と説明を付ける。読めなければ灰色のまま。
+    const dots = document.querySelectorAll('[data-judge-dot]');
+    if (dots.length) {
+      fetch(JUDGE + '/data/headers/index.json')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!data || (data.schema ?? 1) !== 1 || !data.headers) return;
+          dots.forEach((dot) => {
+            const h = data.headers[dot.dataset.judgeDot];
+            if (!h) {
+              dot.title = 'このヘッダを使う提出は procon-judge に無い';
+              return;
+            }
+            let ac = 0, failing = 0, stale = 0;
+            for (const e of h.envs) { ac += e.ac; failing += e.failing; stale += e.stale; }
+            const verified = h.envs.filter((e) => e.verified).length;
+            let cls = 'dot-gray';
+            if (h.verified) cls = 'dot-ac';
+            else if (failing > 0 && ac === 0) cls = 'dot-fail';
+            else if (ac > 0 || failing > 0) cls = 'dot-warn';
+            dot.className = 'dot ' + cls;
+            let title;
+            if (h.verified) title = '全環境で現行の AC';
+            else if (ac === 0 && failing === 0) title = '今のコードでは未計測です';
+            else title = verified + ' / ' + h.envs.length + ' 環境で現行の AC';
+            if (failing) title += '、失敗 ' + failing;
+            if (stale) title += '、参考 ' + stale;
+            if (h.compile_only) title += ' (コンパイルのみ)';
+            dot.title = title;
+          });
+        })
+        .catch(() => {});
+    }
+
     // Submissions (procon-judge)。ヘッダごとの逆引き JSON を表示時に読む。
-    // 上のスクリプトとは分けておく。検索 UI が読めない回に巻き込まれないため。
     const judge = document.querySelector('.judge-section');
     if (judge) {
-      const JUDGE = '${JUDGE_SITE}';
       const el = (tag, text, cls) => {
         const node = document.createElement(tag);
         if (text != null) node.textContent = text;
@@ -446,9 +444,7 @@ function readFrontmatter(mdPath: string): { title?: string; order?: number } {
   };
 }
 
-function generateSidebar(
-  results: CompactResults,
-): string {
+function generateSidebar(): string {
   const categories = fs
     .readdirSync(SRC_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory());
@@ -476,7 +472,7 @@ function generateSidebar(
       const name = entry.name.replace(/\.hpp$/, "");
       const fm = readFrontmatter(path.join(mdPath, name + ".md"));
       const hppPath = `mylib/${hppPrefix}${entry.name}`;
-      const icon = hppStatusIcon(hppPath, results);
+      const icon = judgeDot(hppPath);
       items.push({
         text: fm.title || name,
         icon,
@@ -568,12 +564,11 @@ function generateHppPage(
   mdPath: string,
   sidebar: string,
   depGraph: DependencyGraph,
-  results: CompactResults,
 ): void {
   const raw = fs.readFileSync(mdPath, "utf-8");
   const { data: fm, content: mdContent } = matter(raw);
 
-  const icon = hppStatusIcon(hppPath, results);
+  const icon = judgeDot(hppPath);
   const title =
     fm.title ||
     hppPath
@@ -630,12 +625,8 @@ function generateHppPage(
     body += rewriteLinks(md.render(mdContent), mdRelDir);
   }
 
-  // Verified with
-  const hppTestFiles = results.hpp_map[hppPath] || [];
-  if (hppTestFiles.length > 0) {
-    body += "<h2>Verified with</h2>\n";
-    body += renderVerifyMatrix(hppTestFiles, results);
-  }
+  // 正しさの証拠は procon-judge の記録だけ。Library 自身の verify の表 (Verified with)
+  // は 2026-09-22 に消した (my-docs の「Library の verify を畳む設計」)。
 
   // Submissions (procon-judge)
   // 中身は renderPage のスクリプトが表示時に judge から読んで埋める。JSON が
@@ -646,7 +637,7 @@ function generateHppPage(
   body += '<div class="judge-body"></div>\n</section>\n';
 
   function renderDepItem(hppRelPath: string): string {
-    const icon = hppStatusIcon(hppRelPath, results);
+    const icon = judgeDot(hppRelPath);
     const title =
       readFrontmatter(
         path.join(
@@ -745,7 +736,7 @@ function generateTestPage(
   if (directIncludes.length > 0) {
     body += '<h2>Depends on</h2>\n<ul class="dep-list">\n';
     for (const hpp of directIncludes) {
-      const icon = hppStatusIcon(hpp, results);
+      const icon = judgeDot(hpp);
       const title =
         readFrontmatter(
           path.join(
@@ -812,7 +803,7 @@ async function main() {
   const md = await initMarkdown();
   const depGraph = buildDependencyGraph();
   const results = loadCompactResults();
-  const sidebar = generateSidebar(results);
+  const sidebar = generateSidebar();
 
   // 出力ディレクトリを準備
   if (fs.existsSync(SITE_DIR)) fs.rmSync(SITE_DIR, { recursive: true });
@@ -876,7 +867,6 @@ async function main() {
         mdPath || path.join(MD_DIR, mdRelPath),
         sidebar,
         depGraph,
-        results,
       );
       hppCount++;
     }
