@@ -1,6 +1,7 @@
 name: pr-check
 
-# PR の軽い検査。変わった mylib/ のヘッダを 1 環境で -fsyntax-only する。
+# PR の軽い検査。変わった mylib/ のヘッダを 1 環境 (procon-judge の x64-gcc と同じ
+# g++-15 と -std=gnu++23) で -fsyntax-only する。
 # テストデータもトークンも要らず、数分で終わる。CE は拾えるが WA は拾えない。
 # WA はマージ後に procon-judge が測って分かる (ヘッダページの Submissions)。
 # 正しさの証拠を procon-judge の記録に寄せ、Library の verify と test/ を畳んだ
@@ -31,8 +32,21 @@ jobs:
           echo "対象 $(wc -l < targets.txt) 件"
           cat targets.txt
 
-      # ubuntu-24.04 の既定の g++ (13) と -std=c++17。procon-judge はもっと新しい
-      # g++ / clang++ で測るので、ここは構文の粗い網でよい。
+      # コンパイラとフラグは procon-judge の x64-gcc に揃える (g++-15、-std=gnu++23、
+      # -march=x86-64-v3)。測る環境より古いコンパイラや規格で見ると、C++20 / 23 の機能を
+      # 使ったヘッダが procon-judge では通るのにここだけ落ちる。-march は __AVX2__ や
+      # __BMI2__ で分けた枝を、測るときと同じ側で見るため。ubuntu-24.04 の既定の g++ は
+      # 13 なので、procon-judge の judge.yml と同じ PPA から入れる。
+      - name: g++-15 を入れる
+        run: |
+          if [ ! -s targets.txt ]; then
+            exit 0
+          fi
+          sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+          sudo apt-get update
+          sudo apt-get install -y g++-15
+          g++-15 --version
+
       # ヘッダは -include で読む。直接渡すと「#pragma once in main file」の警告が出るため。
       - name: g++ -fsyntax-only
         run: |
@@ -43,7 +57,7 @@ jobs:
           check() {
             local f="$1" err
             err="/tmp/$(echo "$f" | tr / _).err"
-            if ! g++ -std=c++17 -fsyntax-only -I. -include "$f" -x c++ - < /dev/null 2> "$err"; then
+            if ! g++-15 -std=gnu++23 -march=x86-64-v3 -fsyntax-only -I. -include "$f" -x c++ - < /dev/null 2> "$err"; then
               echo "::error file=$f::コンパイルできません"
               cat "$err"
               return 1
