@@ -33,10 +33,12 @@ jobs:
           cat targets.txt
 
       # コンパイラとフラグは procon-judge の x64-gcc に揃える (g++-15、-std=gnu++23、
-      # -march=x86-64-v3)。測る環境より古いコンパイラや規格で見ると、C++20 / 23 の機能を
-      # 使ったヘッダが procon-judge では通るのにここだけ落ちる。-march は __AVX2__ や
-      # __BMI2__ で分けた枝を、測るときと同じ側で見るため。ubuntu-24.04 の既定の g++ は
-      # 13 なので、procon-judge の judge.yml と同じ PPA から入れる。
+      # -march なし)。測る環境より古いコンパイラや規格で見ると、C++20 / 23 の機能を
+      # 使ったヘッダが procon-judge では通るのにここだけ落ちる。-march を付けないのは、
+      # 使う命令をソースで宣言する方針に合わせるため (procon-judge も 2026-09-25 に外した)。
+      # ただしこの検査は構文だけを見るので、宣言の書き忘れは見つけられない。書き忘れの CE は
+      # インライン展開のときに出るので、見つけるのは procon-judge の記録。
+      # ubuntu-24.04 の既定の g++ は 13 なので、procon-judge の judge.yml と同じ PPA から入れる。
       - name: g++-15 を入れる
         run: |
           if [ ! -s targets.txt ]; then
@@ -57,7 +59,7 @@ jobs:
           check() {
             local f="$1" err
             err="/tmp/$(echo "$f" | tr / _).err"
-            if ! g++-15 -std=gnu++23 -march=x86-64-v3 -fsyntax-only -I. -include "$f" -x c++ - < /dev/null 2> "$err"; then
+            if ! g++-15 -std=gnu++23 -fsyntax-only -I. -include "$f" -x c++ - < /dev/null 2> "$err"; then
               echo "::error file=$f::コンパイルできません"
               cat "$err"
               return 1
