@@ -1,4 +1,19 @@
+#pragma once
 #ifdef __LOCAL
+// debug.hpp だけを include しても使えるように、使っている標準ヘッダをここで読む。
+#include <array>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <set>
+#include <string>
+#include <tuple>
+#include <type_traits>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
 // clang-format off
 #undef checkpoint
 #undef debug
