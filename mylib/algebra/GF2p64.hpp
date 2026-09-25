@@ -13,46 +13,43 @@ namespace gf2p64_internal {
 using u64= unsigned long long;
 using u32= unsigned;
 using u8= unsigned char;
-inline constexpr u64 apply(const u64 t[8][256], u64 a) { return t[0][u8(a)] ^ t[1][u8(a >> 8)] ^ t[2][u8(a >> 16)] ^ t[3][u8(a >> 24)] ^ t[4][u8(a >> 32)] ^ t[5][u8(a >> 40)] ^ t[6][u8(a >> 48)] ^ t[7][u8(a >> 56)]; }
-struct Frob {
+struct LinMap {
  u64 g[64], t[8][256];
+ constexpr LinMap(u64 b[64]): g{}, t{} {
+  for(int i= 0; i < 64; ++i) g[i]= b[i];
+  for(int p= 0; p < 8; ++p)
+   for(int j= 0; j < 8; ++j) {
+    const u64 v= g[8 * p + j];
+    const int half= 1 << j;
+    for(int b= 0; b < half; ++b) t[p][half + b]= t[p][b] ^ v;
+   }
+ }
+ inline constexpr u64 operator()(u64 a) const { return t[0][u8(a)] ^ t[1][u8(a >> 8)] ^ t[2][u8(a >> 16)] ^ t[3][u8(a >> 24)] ^ t[4][u8(a >> 32)] ^ t[5][u8(a >> 40)] ^ t[6][u8(a >> 48)] ^ t[7][u8(a >> 56)]; }
+ constexpr LinMap operator*(const LinMap& r) const {
+  u64 h[64]= {};
+  for(int i= 0; i < 64; ++i) h[i]= (*this)(r.g[i]);
+  return LinMap(h);
+ }
 };
-constexpr Frob expand(u64 b[64]) {
- Frob f{};
- for(int i= 0; i < 64; ++i) f.g[i]= b[i];
- for(int p= 0; p < 8; ++p)
-  for(int j= 0; j < 8; ++j) {
-   const u64 v= f.g[8 * p + j];
-   const int half= 1 << j;
-   for(int b= 0; b < half; ++b) f.t[p][half + b]= f.t[p][b] ^ v;
-  }
- return f;
-}
-constexpr Frob compose(const Frob& hi, const Frob& lo) {
- u64 g[64]= {1};
- for(int i= 0; i < 64; ++i) g[i]= apply(hi.t, lo.g[i]);
- return expand(g);
-}
-constexpr Frob make_frob1() {
+constexpr LinMap F1= []() {
  u64 g[64]= {1};
  for(int i= 1; i < 32; ++i) g[i]= u64(1) << (i * 2);
  for(int i= 32; i < 62; ++i) g[i]= u64(27) << ((i - 32) * 2);
  g[62]= 0xB00000000000001B, g[63]= 0xC00000000000005A;
- return expand(g);
-};
-constexpr Frob F1= make_frob1();
-constexpr Frob F2= compose(F1, F1);
-constexpr Frob F3= compose(F2, F1);
-constexpr Frob F4= compose(F2, F2);
-constexpr Frob F5= compose(F4, F1);
-constexpr Frob F6= compose(F4, F2);
-constexpr Frob F7= compose(F4, F3);
-constexpr Frob F8= compose(F4, F4);
-constexpr Frob F15= compose(F8, F7);
-constexpr Frob F16= compose(F8, F8);
-constexpr Frob F32= compose(F16, F16);
-constexpr Frob F48= compose(F32, F16);
-constexpr Frob F63= compose(F48, F15);
+ return LinMap(g);
+}();
+constexpr LinMap F2= F1 * F1;
+constexpr LinMap F3= F2 * F1;
+constexpr LinMap F4= F2 * F2;
+constexpr LinMap F5= F4 * F1;
+constexpr LinMap F6= F4 * F2;
+constexpr LinMap F7= F4 * F3;
+constexpr LinMap F8= F4 * F4;
+constexpr LinMap F15= F8 * F7;
+constexpr LinMap F16= F8 * F8;
+constexpr LinMap F32= F16 * F16;
+constexpr LinMap F48= F32 * F16;
+constexpr LinMap F63= F48 * F15;
 inline u64 mul(u64 a, u64 b) {
  static constexpr u8 RED[]= {0, 27, 45, 54, 90, 65, 119, 108};
  __m128i v= _mm_clmulepi64_si128(_mm_cvtsi64_si128(a), _mm_cvtsi64_si128(b), 0);
@@ -91,7 +88,7 @@ public:
  GF2p64 operator-(GF2p64 r) const { return GF2p64(x ^ r.x); }
  GF2p64 operator*(GF2p64 r) const { return GF2p64(mul(x, r.x)); }
  GF2p64 square() const { return GF2p64(sq(x)); }
- GF2p64 sqrt() const { return GF2p64(apply(F63.t, x)); }
+ GF2p64 sqrt() const { return GF2p64(F63(x)); }
  explicit operator u64() const { return x; }
  explicit operator bool() const { return x != 0; }
  friend std::ostream& operator<<(std::ostream& os, const GF2p64& r) { return os << r.x; }
