@@ -7,6 +7,7 @@
 #include <simde/x86/bmi.h>
 #endif
 #include <utility>
+#include <iostream>
 #include "include/debug.hpp"
 namespace gf2p64_internal {
 using u64= unsigned long long;
@@ -93,6 +94,8 @@ public:
  GF2p64 sqrt() const { return GF2p64(apply(F63.t, x)); }
  explicit operator u64() const { return x; }
  explicit operator bool() const { return x != 0; }
+ friend std::ostream& operator<<(std::ostream& os, const GF2p64& r) { return os << r.x; }
+ friend std::istream& operator>>(std::istream& is, GF2p64& r) { return is >> r.x; }
 };
 }
 using gf2p64_internal::GF2p64;
