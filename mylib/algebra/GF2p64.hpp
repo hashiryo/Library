@@ -6,7 +6,6 @@
 #include <simde/x86/clmul.h>
 #include <simde/x86/bmi.h>
 #endif
-#include <bit>
 #include <tuple>
 #include <utility>
 #include <iostream>
@@ -135,7 +134,7 @@ constexpr Ln16Inv LNINV16= []() {
  u16 id[65535]{};
  for(u32 k= 0, cur= 1; k < 65535; ++k, cur= u16(cur << 1) ^ (0x002d & -u16(cur >> 15))) id[k]= Tl[u8(cur)] ^ Th[cur >> 8];
  Ln16Inv r{};
- for(u32 k= 65535; k--;) r.t[id[k]]= (u32(id[k ? 65535 - k : 0]) << 16) | (u32(k) * 2699 % 65535);
+ for(u32 k= 65535; k--;) r.t[id[k]]= (u32(id[k ? 65535 - k : 0]) << 16) | (u32(k) * 49826 % 65535);
  return r;
 }();
 inline u64 iv(u64 a) {
@@ -156,7 +155,7 @@ struct Ln641 {
 constexpr Ln641 LN641= []() {
  Ln641 h{};
  LinMap t= make_mul_table(0x6bf808f7824282a2);
- for(u64 k= 0, cur= 1; k < 641; ++k, cur= t(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k;
+ for(u64 k= 0, cur= 1; k < 641; ++k, cur= t(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 % 641;
  return h;
 }();
 constexpr u16 PHI_B[16]= {49349, 60640, 60091, 52204, 8753, 26688, 50952, 24030, 14026, 41051, 57150, 31936, 39252, 22252, 63476, 55223};
@@ -182,7 +181,7 @@ constexpr ClassTable65537 CLS65537= []() {
    r.t[idx]= v;
   }
   cur= MUL_G17(cur);
-  v= v >= 2 ? v - 2 : v + 65535;
+  v= v >= 32768 ? v - 32768 : v + 32769;
  }
  return r;
 }();
@@ -273,7 +272,7 @@ inline u64 ln(u64 x) {
  __m256i t24_48= linmap2<F3, F4>(t3, t3);
  auto [t72, t51]= unpack(mul2(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
  auto [x_641, x_6700417]= unpack(mul2(mul2(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
- const __uint128_t acc= __uint128_t(0xeba1bf4d145e40b2) * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * BSGSTable6700417::solve(x_6700417) + std::rotl(0x1000100010001ull * u16(lnv), 14) + std::rotl(0xffff0000ffffull * log_65537(n, fn), 14);
+ const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * BSGSTable6700417::solve(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
