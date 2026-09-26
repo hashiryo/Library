@@ -8,21 +8,21 @@
 #endif
 #include <utility>
 #include <iostream>
+#include <cassert>
 #include "include/debug.hpp"
 namespace gf2p64_internal {
 using u64= unsigned long long;
 using u32= unsigned;
+using u16= unsigned short;
 using u8= unsigned char;
 struct LinMap {
  u64 g[64], t[8][256];
  constexpr LinMap(const u64 b[64]): g{}, t{} {
-  for(int i= 0; i < 64; ++i) g[i]= b[i];
-  for(int p= 0; p < 8; ++p)
-   for(int j= 0; j < 8; ++j) {
-    const u64 v= g[8 * p + j];
-    const int half= 1 << j;
-    for(int b= 0; b < half; ++b) t[p][half + b]= t[p][b] ^ v;
-   }
+  for(int i= 0; i < 64; ++i) {
+   g[i]= b[i];
+   u64* l= t[i >> 3];
+   for(u8 h= 1 << (i & 7), b= h; b--;) l[h | b]= l[b] ^ g[i];
+  }
  }
  inline constexpr u64 operator()(u64 a) const { return t[0][u8(a)] ^ t[1][u8(a >> 8)] ^ t[2][u8(a >> 16)] ^ t[3][u8(a >> 24)] ^ t[4][u8(a >> 32)] ^ t[5][u8(a >> 40)] ^ t[6][u8(a >> 48)] ^ t[7][u8(a >> 56)]; }
  constexpr LinMap operator*(const LinMap& r) const {
@@ -39,8 +39,8 @@ constexpr LinMap TO_NIM= LinMap(TO_NIM_BAS);
 constexpr LinMap FROM_NIM= LinMap(FROM_NIM_BAS);
 constexpr LinMap F1= []() {
  u64 g[64]= {1};
- for(int i= 1; i < 32; ++i) g[i]= u64(1) << (i * 2);
- for(int i= 32; i < 62; ++i) g[i]= u64(27) << ((i - 32) * 2);
+ for(int i= 32; --i;) g[i]= u64(1) << (i * 2);
+ for(int i= 62; i-- > 32;) g[i]= u64(27) << ((i - 32) * 2);
  g[62]= 0xB00000000000001B, g[63]= 0xC00000000000005A;
  return LinMap(g);
 }();
@@ -112,6 +112,39 @@ template <bool VPCLMUL= 1> inline u64 pw(u64 a, u64 e) {
  auto [A0, A1]= unpack(mul2<VPCLMUL>(linmap2<F8>(A2, A3), A01));
  return mul(F4(A1), A0);
 }
+struct Emb {
+ u64 t[2][256];
+ inline u64 operator()(u16 idx) const { return t[0][u8(idx)] ^ t[1][idx >> 8]; }
+};
+constexpr Emb emb= []() {
+ u64 BAS[]= {0x0000000000000001, 0x5FBFAEC6AEAC0002, 0xB06C601895640004, 0xB013B5277B7C0008, 0xB5EBB915248A0010, 0x109BB25B2C600020, 0xBF3BD95BD4190040, 0x0FC66342279B0080, 0xB6418F5E57C50100, 0xAA194BD4B83F0200, 0x1B5217B4DCC70400, 0xBB06FA73867A0800, 0x006FD55B23331000, 0x4AE8FB39198C2000, 0xFBD141B29B4F4000, 0x1D9CE1776BE78000};
+ Emb e{};
+ for(int i= 0; i < 16; ++i) {
+  u64* l= e.t[i >> 3];
+  for(u8 h= 1 << (i & 7), b= h; b--;) l[h | b]= l[b] ^ BAS[i];
+ }
+ return e;
+}();
+struct Ln16Inv {
+ u32 t[65536];
+};
+constexpr Ln16Inv LNINV16= []() {
+ u16 c_l[]= {1, 11778, 7028, 51115, 48663, 26081, 17458, 40223}, c_h[]= {30334, 42368, 14380, 2223, 49688, 11217, 44239, 63445};
+ u16 T_l[256]= {0}, T_h[256]= {0};
+ for(u8 i= 0; i < 8; ++i)
+  for(u8 h= 1 << i, b= h; b--;) T_l[h | b]= T_l[b] ^ c_l[i], T_h[h | b]= T_h[b] ^ c_h[i];
+ u16 id[65535]{};
+ for(u32 k= 0, cur= 1; k < 65535; ++k, cur= u16(cur << 1) ^ (0x002D & -u16(cur >> 15))) id[k]= T_l[u8(cur)] ^ T_h[cur >> 8];
+ Ln16Inv r{};
+ for(u32 k= 0; k < 65535; ++k) r.t[id[k]]= (u32(id[k ? 65535 - k : 0]) << 16) | (u32(k) * 2699 % 65535);
+ return r;
+}();
+inline u64 iv(u64 a) {
+ assert(a != 0);
+ u64 a32= F32(a), b= mul(a, a32);
+ auto [g, c]= unpack(mul2(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
+ return mul(emb(LNINV16.t[u16(c)] >> 16), g);
+}
 class GF2p64 {
  u64 x;
 public:
@@ -122,11 +155,14 @@ public:
  GF2p64& operator+=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator-=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator*=(GF2p64 r) { return x= mul(x, r.x), *this; }
+ GF2p64& operator/=(GF2p64 r) { return x= mul(x, iv(r.x)), *this; }
  GF2p64 operator+(GF2p64 r) const { return GF2p64(x ^ r.x); }
  GF2p64 operator-(GF2p64 r) const { return GF2p64(x ^ r.x); }
  GF2p64 operator*(GF2p64 r) const { return GF2p64(mul(x, r.x)); }
+ GF2p64 operator/(GF2p64 r) const { return GF2p64(mul(x, iv(r.x))); }
  GF2p64 square() const { return GF2p64(sq(x)); }
  GF2p64 sqrt() const { return GF2p64(F63(x)); }
+ GF2p64 inv() const { return GF2p64(iv(x)); }
  GF2p64 pow(u64 e) const {
 #ifdef __x86_64__
   if(__builtin_cpu_supports("vpclmulqdq")) return GF2p64(pw<1>(x, e));
