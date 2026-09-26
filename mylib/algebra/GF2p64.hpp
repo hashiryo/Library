@@ -56,6 +56,14 @@ constexpr LinMap F16= F8 * F8;
 constexpr LinMap F32= F16 * F16;
 constexpr LinMap F48= F32 * F16;
 constexpr LinMap F63= F48 * F15;
+template <LinMap LM0, LinMap LM1= LM0> inline __m256i linmap2(u64 a0, u64 a1) {
+ __m256i vA= _mm256_set_epi64x(LM1.t[1][u8(a1 >> 8)], LM1.t[0][u8(a1)], LM0.t[1][u8(a0 >> 8)], LM0.t[0][u8(a0)]);
+ __m256i vB= _mm256_set_epi64x(LM1.t[3][u8(a1 >> 24)], LM1.t[2][u8(a1 >> 16)], LM0.t[3][u8(a0 >> 24)], LM0.t[2][u8(a0 >> 16)]);
+ __m256i vC= _mm256_set_epi64x(LM1.t[5][u8(a1 >> 40)], LM1.t[4][u8(a1 >> 32)], LM0.t[5][u8(a0 >> 40)], LM0.t[4][u8(a0 >> 32)]);
+ __m256i vD= _mm256_set_epi64x(LM1.t[7][u8(a1 >> 56)], LM1.t[6][u8(a1 >> 48)], LM0.t[7][u8(a0 >> 56)], LM0.t[6][u8(a0 >> 48)]);
+ __m256i y= _mm256_xor_si256(_mm256_xor_si256(vA, vB), _mm256_xor_si256(vC, vD));
+ return _mm256_xor_si256(y, _mm256_srli_si256(y, 8));
+}
 inline u64 mul(u64 a, u64 b) {
  static constexpr u8 RED[]= {0, 27, 45, 54, 90, 65, 119, 108};
  __m128i v= _mm_clmulepi64_si128(_mm_cvtsi64_si128(a), _mm_cvtsi64_si128(b), 0);
@@ -81,6 +89,29 @@ template <bool VPCLMUL= 1, int IMM= 0> inline __m256i mul2(const __m256i& a_vec,
  return _mm256_xor_si256(_mm256_xor_si256(prod, _mm256_shuffle_epi8(RED256, _mm256_srli_epi64(h, 60))), _mm256_xor_si256(d, _mm256_slli_epi64(d, 3)));
 }
 inline std::pair<u64, u64> unpack(const __m256i& vec) { return std::make_pair(u64(_mm256_extract_epi64(vec, 0)), u64(_mm256_extract_epi64(vec, 2))); }
+template <bool VPCLMUL= 1> inline u64 pw(u64 a, u64 e) {
+ u64 T[16]= {1, a, sq(a)};
+ __m256i T12= _mm256_set_epi64x(0, T[2], 0, a);
+ __m256i T34= mul2<VPCLMUL>(T12, _mm256_set1_epi64x(T[2]));
+ std::tie(T[3], T[4])= unpack(T34);
+ __m256i T4= _mm256_set1_epi64x(T[4]);
+ __m256i T56= mul2<VPCLMUL>(T4, T12);
+ std::tie(T[5], T[6])= unpack(T56);
+ std::tie(T[7], T[8])= unpack(mul2<VPCLMUL>(T4, T34));
+ __m256i T8= _mm256_set1_epi64x(T[8]);
+ std::tie(T[9], T[10])= unpack(mul2<VPCLMUL>(T8, T12));
+ std::tie(T[11], T[12])= unpack(mul2<VPCLMUL>(T8, T34));
+ std::tie(T[13], T[14])= unpack(mul2<VPCLMUL>(T8, T56));
+ T[15]= mul(T[7], T[8]);
+ auto [A6, A7]= unpack(mul2<VPCLMUL>(linmap2<F32>(T[(e >> 56) & 0xF], T[(e >> 60) & 0xF]), _mm256_set_epi64x(0, T[(e >> 28) & 0xF], 0, T[(e >> 24) & 0xF])));
+ auto [A4, A5]= unpack(mul2<VPCLMUL>(linmap2<F32>(T[(e >> 48) & 0xF], T[(e >> 52) & 0xF]), _mm256_set_epi64x(0, T[(e >> 20) & 0xF], 0, T[(e >> 16) & 0xF])));
+ __m256i A23= mul2<VPCLMUL>(linmap2<F32>(T[(e >> 40) & 0xF], T[(e >> 44) & 0xF]), _mm256_set_epi64x(0, T[(e >> 12) & 0xF], 0, T[(e >> 8) & 0xF]));
+ __m256i A01= mul2<VPCLMUL>(linmap2<F32>(T[(e >> 32) & 0xF], T[(e >> 36) & 0xF]), _mm256_set_epi64x(0, T[(e >> 4) & 0xF], 0, T[e & 0xF]));
+ auto [A2, A3]= unpack(mul2<VPCLMUL>(linmap2<F16>(A6, A7), A23));
+ A01= mul2<VPCLMUL>(linmap2<F16>(A4, A5), A01);
+ auto [A0, A1]= unpack(mul2<VPCLMUL>(linmap2<F8>(A2, A3), A01));
+ return mul(F4(A1), A0);
+}
 class GF2p64 {
  u64 x;
 public:
@@ -96,6 +127,12 @@ public:
  GF2p64 operator*(GF2p64 r) const { return GF2p64(mul(x, r.x)); }
  GF2p64 square() const { return GF2p64(sq(x)); }
  GF2p64 sqrt() const { return GF2p64(F63(x)); }
+ GF2p64 pow(u64 e) const {
+#ifdef __x86_64__
+  if(__builtin_cpu_supports("vpclmulqdq")) return GF2p64(pw<1>(x, e));
+#endif
+  return GF2p64(pw<0>(x, e));
+ }
  u64 to_nimber() const { return TO_NIM(x); }
  explicit operator u64() const { return x; }
  explicit operator bool() const { return x != 0; }
