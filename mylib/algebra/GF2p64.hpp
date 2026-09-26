@@ -6,6 +6,8 @@
 #include <simde/x86/clmul.h>
 #include <simde/x86/bmi.h>
 #endif
+#include <bit>
+#include <tuple>
 #include <utility>
 #include <iostream>
 #include <cassert>
@@ -271,20 +273,9 @@ inline u64 ln(u64 x) {
  __m256i t24_48= linmap2<F3, F4>(t3, t3);
  auto [t72, t51]= unpack(mul2(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
  auto [x_641, x_6700417]= unpack(mul2(mul2(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
- const u16 r1= u16(lnv);
- const u32 r0= LN641(x_641);
- const u32 r2= log_65537(n, fn);
- const u32 r3= BSGSTable6700417::solve(x_6700417);
- const u16 cur_mod_641= r1 % 641;
- const u16 diff0= (r0 + 641 - cur_mod_641) % 641;
- const u16 u0= (diff0 * 243) % 641;
- const u32 cur_after0_mod_F17= (r1 + 65535 * u0) % 65537;
- const u32 diff2= (r2 + 65537 - cur_after0_mod_F17) % 65537;
- const u32 u2= (diff2 * 45242) % 65537;
- const u32 cur_after2_mod_BIG= (r1 + (65535 * u0) % 6700417 + (42007935ull * u2) % 6700417) % 6700417;
- const u32 diff3= (r3 + 6700417 - cur_after2_mod_BIG) % 6700417;
- const u32 u3= (u64(diff3) * 3883315) % 6700417;
- return u64(r1) + 65535 * u0 + 42007935ull * u2 + 0x280fffffd7f * u3;
+ const __uint128_t acc= __uint128_t(0xeba1bf4d145e40b2) * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * BSGSTable6700417::solve(x_6700417) + std::rotl(0x1000100010001ull * u16(lnv), 14) + std::rotl(0xffff0000ffffull * log_65537(n, fn), 14);
+ const u64 lo= u64(acc), t= lo + u64(acc >> 64);
+ return t + (t < lo);
 }
 class GF2p64 {
  u64 x;
