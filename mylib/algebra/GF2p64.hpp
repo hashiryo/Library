@@ -112,9 +112,9 @@ template <bool VPCLMUL= 1> inline u64 pw(u64 a, u64 e) {
  auto [b0, b1]= unpack(mul2<VPCLMUL>(linmap2<F8>(b2, b3), mul2<VPCLMUL>(linmap2<F16>(b4, b5), b01)));
  return mul(F4(b1), b0);
 }
-template <class U> struct HalfMap {
+template <class U> struct LinMap16 {
  U t[2][256];
- constexpr HalfMap(const U b[16]): t{} {
+ constexpr LinMap16(const U b[16]): t{} {
   for(int i= 0; i < 16; ++i) {
    U* l= t[i >> 3];
    for(u8 h= 1 << (i & 7), j= h; j--;) l[h | j]= l[j] ^ b[i];
@@ -123,7 +123,7 @@ template <class U> struct HalfMap {
  inline constexpr U operator()(const u16 x) const { return t[0][u8(x)] ^ t[1][x >> 8]; }
 };
 constexpr u64 EMB_B[]= {0x0000000000000001, 0x5fbfaec6aeac0002, 0xb06c601895640004, 0xb013b5277b7c0008, 0xb5ebb915248a0010, 0x109bb25b2c600020, 0xbf3bd95bd4190040, 0x0fc66342279b0080, 0xb6418f5e57c50100, 0xaa194bd4b83f0200, 0x1b5217b4dcc70400, 0xbb06fa73867a0800, 0x006fd55b23331000, 0x4ae8fb39198c2000, 0xfbd141b29b4f4000, 0x1d9ce1776be78000};
-constexpr HalfMap<u64> EMB= HalfMap<u64>(EMB_B);
+constexpr LinMap16<u64> EMB= LinMap16<u64>(EMB_B);
 struct Ln16Inv {
  u32 t[65536];
 };
@@ -137,10 +137,10 @@ constexpr Ln16Inv LNINV16= []() {
  for(u32 k= 65535; k--;) r.t[id[k]]= (u32(id[k ? 65535 - k : 0]) << 16) | (u32(k) * 49826 % 65535);
  return r;
 }();
-inline u64 iv(u64 a) {
+template <bool VPCLMUL= 1> inline u64 iv(u64 a) {
  assert(a);
  u64 a32= F32(a), b= mul(a, a32);
- auto [g, c]= unpack(mul2(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
+ auto [g, c]= unpack(mul2<VPCLMUL>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
  return mul(EMB(LNINV16.t[u16(c)] >> 16), g);
 }
 constexpr LinMap make_mul_table(u64 c) {
@@ -159,7 +159,7 @@ constexpr Ln641 LN641= []() {
  return h;
 }();
 constexpr u16 PHI_B[16]= {49349, 60640, 60091, 52204, 8753, 26688, 50952, 24030, 14026, 41051, 57150, 31936, 39252, 22252, 63476, 55223};
-constexpr HalfMap<u16> PHI= HalfMap<u16>(PHI_B);
+constexpr LinMap16<u16> PHI= LinMap16<u16>(PHI_B);
 struct ClassTable65537 {
  u32 t[65535];
  u32 K0;
@@ -278,6 +278,12 @@ inline u64 ln(u64 x) {
 }
 class GF2p64 {
  u64 x;
+ inline u64 iv_() const {
+#ifdef __x86_64__
+  if(__builtin_cpu_supports("vpclmulqdq")) return iv<1>(x);
+#endif
+  return iv<0>(x);
+ }
 public:
  GF2p64(): x(0) {}
  GF2p64(u64 y): x(y) {}
@@ -286,19 +292,19 @@ public:
  GF2p64& operator+=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator-=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator*=(GF2p64 r) { return x= mul(x, r.x), *this; }
- GF2p64& operator/=(GF2p64 r) { return x= mul(x, iv(r.x)), *this; }
- GF2p64 operator+(GF2p64 r) const { return GF2p64(x ^ r.x); }
- GF2p64 operator-(GF2p64 r) const { return GF2p64(x ^ r.x); }
- GF2p64 operator*(GF2p64 r) const { return GF2p64(mul(x, r.x)); }
- GF2p64 operator/(GF2p64 r) const { return GF2p64(mul(x, iv(r.x))); }
- GF2p64 square() const { return GF2p64(sq(x)); }
- GF2p64 sqrt() const { return GF2p64(F63(x)); }
- GF2p64 inv() const { return GF2p64(iv(x)); }
+ GF2p64& operator/=(GF2p64 r) { return x= mul(x, r.iv_()), *this; }
+ GF2p64 operator+(GF2p64 r) const { return x ^ r.x; }
+ GF2p64 operator-(GF2p64 r) const { return x ^ r.x; }
+ GF2p64 operator*(GF2p64 r) const { return mul(x, r.x); }
+ GF2p64 operator/(GF2p64 r) const { return mul(x, r.iv_()); }
+ GF2p64 square() const { return sq(x); }
+ GF2p64 sqrt() const { return F63(x); }
+ GF2p64 inv() const { return iv_(); }
  GF2p64 pow(u64 e) const {
 #ifdef __x86_64__
-  if(__builtin_cpu_supports("vpclmulqdq")) return GF2p64(pw<1>(x, e));
+  if(__builtin_cpu_supports("vpclmulqdq")) return pw<1>(x, e);
 #endif
-  return GF2p64(pw<0>(x, e));
+  return pw<0>(x, e);
  }
  u64 log() const { return ln(x); }
  u64 to_nimber() const { return TO_NIM(x); }
