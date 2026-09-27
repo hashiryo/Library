@@ -539,7 +539,7 @@ function generateHppPage(
   }
 
   // 正しさの証拠は procon-judge の記録だけ。Library 自身の verify の表 (Verified with)
-  // は 2026-09-22 に消した (my-docs の「Library の verify を畳む設計」)。
+  // は 2026-09-22 に消した (algo-notes の「Library の verify を畳む設計」)。
 
   // Submissions (procon-judge)
   // 中身は renderPage のスクリプトが表示時に judge から読んで埋める。JSON が

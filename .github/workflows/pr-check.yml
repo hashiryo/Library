@@ -6,7 +6,7 @@ name: pr-check
 # WA はマージ後に procon-judge が測って分かる (ヘッダページの Submissions)。
 # 正しさの証拠を procon-judge の記録に寄せ、Library の verify と test/ を畳んだ
 # (2026-09-22) あとに、PR で壊れたことに気づく最低限の口として残す。
-# 設計は my-docs の「Library の verify を畳む設計」。
+# 設計は algo-notes の「Library の verify を畳む設計」。
 
 on:
   pull_request:
