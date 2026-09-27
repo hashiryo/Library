@@ -240,9 +240,12 @@ template <bool V> inline u64 ln(u64 x) {
  auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
  const u32 lnv= LNINV16.t[u16(x_f16)];
  const u64 s= mul(EMB(u16(lnv >> 16)), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2), t48= F4(t3);
- auto [t72, t51]= unpack(mul2<V>(_mm256_set_epi64x(0, t48, 0, F3(t3)), _mm256_set_epi64x(0, t3, 0, t48)));
- auto [x_641, x_6700417]= unpack(mul2<V>(mul2<V>(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
- const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * LN6700417.solve<V>(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
+ auto [t5, t51]= unpack(mul2<V>(_mm256_set_epi64x(0, t48, 0, t2), _mm256_set1_epi64x(t3)));
+ auto [x_6700417, a]= unpack(mul2<V>(_mm256_set_epi64x(0, t51, 0, t5), _mm256_set1_epi64x(s)));
+ u32 r3= LN6700417.solve<V>(x_6700417);
+ auto [t72, b]= unpack(mul2<V>(_mm256_set_epi64x(0, F10(t51), 0, F3(t3)), _mm256_set_epi64x(0, a, 0, t48)));
+ u64 r0= LN641(mul(t72, b)), r2= log_65537(n, fn);
+ const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x945e40b26ba1bf4d) * r3 + 0x1000100010001ull * u16(lnv) + 0xffff0000ffff * r2;
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
