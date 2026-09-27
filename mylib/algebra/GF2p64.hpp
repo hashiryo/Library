@@ -56,14 +56,6 @@ constexpr LinMap F16= F8 * F8;
 constexpr LinMap F32= F16 * F16;
 constexpr LinMap F48= F32 * F16;
 constexpr LinMap F63= F48 * F15;
-template <LinMap LM0, LinMap LM1= LM0> inline __m256i linmap2(u64 a0, u64 a1) {
- __m256i vA= _mm256_set_epi64x(LM1.t[1][u8(a1 >> 8)], LM1.t[0][u8(a1)], LM0.t[1][u8(a0 >> 8)], LM0.t[0][u8(a0)]);
- __m256i vB= _mm256_set_epi64x(LM1.t[3][u8(a1 >> 24)], LM1.t[2][u8(a1 >> 16)], LM0.t[3][u8(a0 >> 24)], LM0.t[2][u8(a0 >> 16)]);
- __m256i vC= _mm256_set_epi64x(LM1.t[5][u8(a1 >> 40)], LM1.t[4][u8(a1 >> 32)], LM0.t[5][u8(a0 >> 40)], LM0.t[4][u8(a0 >> 32)]);
- __m256i vD= _mm256_set_epi64x(LM1.t[7][u8(a1 >> 56)], LM1.t[6][u8(a1 >> 48)], LM0.t[7][u8(a0 >> 56)], LM0.t[6][u8(a0 >> 48)]);
- __m256i y= _mm256_xor_si256(_mm256_xor_si256(vA, vB), _mm256_xor_si256(vC, vD));
- return _mm256_xor_si256(y, _mm256_srli_si256(y, 8));
-}
 inline u64 mul(u64 a, u64 b) {
  static constexpr u8 RED[]= {0, 27, 45, 54, 90, 65, 119, 108};
  __m128i v= _mm_clmulepi64_si128(_mm_cvtsi64_si128(a), _mm_cvtsi64_si128(b), 0);
@@ -89,26 +81,26 @@ template <bool V, int IMM= 0> inline __m256i mul2(const __m256i& a_vec, const __
  return _mm256_xor_si256(_mm256_xor_si256(prod, _mm256_shuffle_epi8(RED256, _mm256_srli_epi64(h, 60))), _mm256_xor_si256(d, _mm256_slli_epi64(d, 3)));
 }
 inline std::pair<u64, u64> unpack(const __m256i& vec) { return std::make_pair(u64(_mm256_extract_epi64(vec, 0)), u64(_mm256_extract_epi64(vec, 2))); }
-template <bool V> inline u64 pw(u64 a, u64 e) {
+template <bool VPCLMUL= 1> inline u64 pw(u64 a, u64 e) {
  u64 t[16]= {1, a, sq(a)};
  __m256i t12= _mm256_set_epi64x(0, t[2], 0, a);
- __m256i t34= mul2<V>(t12, _mm256_set1_epi64x(t[2]));
+ __m256i t34= mul2<VPCLMUL>(t12, _mm256_set1_epi64x(t[2]));
  std::tie(t[3], t[4])= unpack(t34);
  __m256i t4= _mm256_set1_epi64x(t[4]);
- __m256i t56= mul2<V>(t4, t12);
+ __m256i t56= mul2<VPCLMUL>(t4, t12);
  std::tie(t[5], t[6])= unpack(t56);
- std::tie(t[7], t[8])= unpack(mul2<V>(t4, t34));
+ std::tie(t[7], t[8])= unpack(mul2<VPCLMUL>(t4, t34));
  __m256i t8= _mm256_set1_epi64x(t[8]);
- std::tie(t[9], t[10])= unpack(mul2<V>(t8, t12));
- std::tie(t[11], t[12])= unpack(mul2<V>(t8, t34));
- std::tie(t[13], t[14])= unpack(mul2<V>(t8, t56));
+ std::tie(t[9], t[10])= unpack(mul2<VPCLMUL>(t8, t12));
+ std::tie(t[11], t[12])= unpack(mul2<VPCLMUL>(t8, t34));
+ std::tie(t[13], t[14])= unpack(mul2<VPCLMUL>(t8, t56));
  t[15]= mul(t[7], t[8]);
- auto [b6, b7]= unpack(mul2<V>(linmap2<F32>(t[(e >> 56) & 0xf], t[(e >> 60) & 0xf]), _mm256_set_epi64x(0, t[(e >> 28) & 0xf], 0, t[(e >> 24) & 0xf])));
- auto [b4, b5]= unpack(mul2<V>(linmap2<F32>(t[(e >> 48) & 0xf], t[(e >> 52) & 0xf]), _mm256_set_epi64x(0, t[(e >> 20) & 0xf], 0, t[(e >> 16) & 0xf])));
- __m256i b23= mul2<V>(linmap2<F32>(t[(e >> 40) & 0xf], t[(e >> 44) & 0xf]), _mm256_set_epi64x(0, t[(e >> 12) & 0xf], 0, t[(e >> 8) & 0xf]));
- __m256i b01= mul2<V>(linmap2<F32>(t[(e >> 32) & 0xf], t[(e >> 36) & 0xf]), _mm256_set_epi64x(0, t[(e >> 4) & 0xf], 0, t[e & 0xf]));
- auto [b2, b3]= unpack(mul2<V>(linmap2<F16>(b6, b7), b23));
- auto [b0, b1]= unpack(mul2<V>(linmap2<F8>(b2, b3), mul2<V>(linmap2<F16>(b4, b5), b01)));
+ auto [b6, b7]= unpack(mul2<VPCLMUL>(_mm256_set_epi64x(0, F32(t[(e >> 60) & 0xf]), 0, F32(t[(e >> 56) & 0xf])), _mm256_set_epi64x(0, t[(e >> 28) & 0xf], 0, t[(e >> 24) & 0xf])));
+ auto [b4, b5]= unpack(mul2<VPCLMUL>(_mm256_set_epi64x(0, F32(t[(e >> 52) & 0xf]), 0, F32(t[(e >> 48) & 0xf])), _mm256_set_epi64x(0, t[(e >> 20) & 0xf], 0, t[(e >> 16) & 0xf])));
+ __m256i b23= mul2<VPCLMUL>(_mm256_set_epi64x(0, F32(t[(e >> 44) & 0xf]), 0, F32(t[(e >> 40) & 0xf])), _mm256_set_epi64x(0, t[(e >> 12) & 0xf], 0, t[(e >> 8) & 0xf]));
+ __m256i b01= mul2<VPCLMUL>(_mm256_set_epi64x(0, F32(t[(e >> 36) & 0xf]), 0, F32(t[(e >> 32) & 0xf])), _mm256_set_epi64x(0, t[(e >> 4) & 0xf], 0, t[e & 0xf]));
+ auto [b2, b3]= unpack(mul2<VPCLMUL>(_mm256_set_epi64x(0, F16(b7), 0, F16(b6)), b23));
+ auto [b0, b1]= unpack(mul2<VPCLMUL>(_mm256_set_epi64x(0, F8(b3), 0, F8(b2)), mul2<VPCLMUL>(_mm256_set_epi64x(0, F16(b5), 0, F16(b4)), b01)));
  return mul(F4(b1), b0);
 }
 template <class U> struct LinMap16 {
@@ -248,9 +240,8 @@ template <bool V> inline u64 ln(u64 x) {
  const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
  auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
  const u32 lnv= LNINV16.t[u16(x_f16)];
- const u64 s= mul(EMB(u16(lnv >> 16)), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2);
- __m256i t24_48= linmap2<F3, F4>(t3, t3);
- auto [t72, t51]= unpack(mul2<V>(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
+ const u64 s= mul(EMB(u16(lnv >> 16)), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2), t48= F4(t3);
+ auto [t72, t51]= unpack(mul2<V>(_mm256_set_epi64x(0, t48, 0, F3(t3)), _mm256_set_epi64x(0, t3, 0, t48)));
  auto [x_641, x_6700417]= unpack(mul2<V>(mul2<V>(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
  const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * LN6700417.solve<V>(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
