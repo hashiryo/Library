@@ -196,27 +196,19 @@ inline u32 log_65537(u64 n, u64 fn) {
  return CLS65537.t[idx];
 }
 struct BSGSTable6700417 {
- static constexpr u32 mask= 524287;  // 19-bit, cap = 524288
- static constexpr u64 q= 6700417;
- static constexpr u32 m= 131072;
- static constexpr int max_i= 52;
- static constexpr u64 HI_MASK= ~u64(mask);  // = 0xfffffffffff80000
- static constexpr u64 inv_base_m= 0x1489880b9cf723de;
- static constexpr u64 inv2_base_m= 0x5be693c8c2c557e3;  // = inv_base_m^2
- static constexpr u64 inv3_base_m= 0x7a8a7626c26ddc4d;  // = inv_base_m^3
  // 空きは 0。値の側を j + 1 にして実在の entry が 0 にならないようにしてある
  // (こうすると 52 万要素の初期化ループが要らず、constexpr の step も浮く)。
  struct Tab {
-  u64 t[mask + 1];
+  u64 t[524288];
  };
  static constexpr Tab TAB= []() {
   const LinMap mg= make_mul_table(0x00f542601703f991);
   Tab r{};
   u64 cur= 1;
-  for(u32 j= 0; j < m; ++j) {
-   u32 h= u32(cur) & mask;
-   while(r.t[h]) h= (h + 1) & mask;
-   r.t[h]= (cur & HI_MASK) | (u64(j) + 1);
+  for(u32 j= 0; j < 131072; ++j) {
+   u32 h= u32(cur) & 524287;
+   while(r.t[h]) h= (h + 1) & 524287;
+   r.t[h]= (cur & 0xfffffffffff80000) | (u64(j) + 1);
    cur= mg(cur);
   }
   return r;
@@ -237,30 +229,30 @@ struct BSGSTable6700417 {
   std::tie(t_n[0], t_n[1])= unpack(An), std::tie(t_n[2], t_n[3])= unpack(Bn);
   std::tie(t_n2[0], t_n2[1])= unpack(An2), std::tie(t_n2[2], t_n2[3])= unpack(Bn2);
   for(int j= 0; j < 4; ++j) {
-   _mm_prefetch((const char*)&TAB.t[u32(t[j]) & mask], _MM_HINT_T0);
-   _mm_prefetch((const char*)&TAB.t[u32(t_n[j]) & mask], _MM_HINT_T0);
-   _mm_prefetch((const char*)&TAB.t[u32(t_n2[j]) & mask], _MM_HINT_T0);
+   _mm_prefetch((const char*)&TAB.t[u32(t[j]) & 524287], _MM_HINT_T0);
+   _mm_prefetch((const char*)&TAB.t[u32(t_n[j]) & 524287], _MM_HINT_T0);
+   _mm_prefetch((const char*)&TAB.t[u32(t_n2[j]) & 524287], _MM_HINT_T0);
   }
-  for(u8 i= 0; i <= max_i; i+= 4) {
+  for(u8 i= 0; i <= 52; i+= 4) {
    for(int j= 0; j < 4; ++j) {
-    if(i + j > max_i) break;
+    if(i + j > 52) break;
     u64 tt= t[j];
-    u32 h= u32(tt) & mask;
+    u32 h= u32(tt) & 524287;
     while(TAB.t[h]) {
      u64 e= TAB.t[h];
-     if(((e ^ tt) & HI_MASK) == 0) return u32((i + j) * m + u32(e & mask) - 1);
-     h= (h + 1) & mask;
+     if(((e ^ tt) & 0xfffffffffff80000) == 0) return u32((i + j) * 131072 + u32(e & 524287) - 1);
+     h= (h + 1) & 524287;
     }
    }
    A= An, B= Bn, An= An2, Bn= Bn2;
    for(int j= 0; j < 4; ++j) t[j]= t_n[j], t_n[j]= t_n2[j];
-   if(i + 12 <= max_i) {
+   if(i <= 40) {
     An2= mul2(An, V_S4), Bn2= mul2(Bn, V_S4);
     std::tie(t_n2[0], t_n2[1])= unpack(An2), std::tie(t_n2[2], t_n2[3])= unpack(Bn2);
-    for(int j= 0; j < 4; ++j) _mm_prefetch((const char*)&TAB.t[u32(t_n2[j]) & mask], _MM_HINT_T0);
+    for(int j= 0; j < 4; ++j) _mm_prefetch((const char*)&TAB.t[u32(t_n2[j]) & 524287], _MM_HINT_T0);
    }
   }
-  return q;
+  return 6700417;
  }
 };
 inline u64 ln(u64 x) {
