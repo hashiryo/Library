@@ -134,7 +134,7 @@ template <bool V> inline u64 iv(u64 a) {
  auto [g, c]= unpack(mul2<V>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
  return mul(EMB(LNINV16.t[u16(c)] >> 16), g);
 }
-constexpr LinMap make_mul_table(u64 c) {
+constexpr LinMap mul_linmap(u64 c) {
  u64 basis[64]= {c};
  for(int i= 1; i < 64; ++i) basis[i]= (basis[i - 1] << 1) ^ (0x1b & -(basis[i - 1] >> 63));
  return LinMap(basis);
@@ -145,7 +145,7 @@ struct Ln641 {
 };
 constexpr Ln641 LN641= []() {
  Ln641 h{};
- LinMap m= make_mul_table(0x6bf808f7824282a2);
+ LinMap m= mul_linmap(0x6bf808f7824282a2);
  for(u64 k= 0, cur= 1; k < 641; ++k, cur= m(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 % 641;
  return h;
 }();
@@ -159,7 +159,7 @@ constexpr ClassTable65537 CLS65537= []() {
  ClassTable65537 r{};
  u64 cur= 1;
  u32 v= 0;
- LinMap m= make_mul_table(0x1c1e79669b95a7ce);
+ LinMap m= mul_linmap(0x1c1e79669b95a7ce);
  for(u32 k= 0; k < 65537; ++k, cur= m(cur)) {
   const u64 fr= F16(cur);
   const u16 b1= cur ^ fr, b0= cur ^ PHI.t[0][u8(b1)] ^ PHI.t[1][b1 >> 8];
@@ -224,7 +224,7 @@ struct Ln6700417 {
  }
 };
 constexpr Ln6700417 LN6700417= []() {
- LinMap m= make_mul_table(0x00f542601703f991);
+ LinMap m= mul_linmap(0x00f542601703f991);
  Ln6700417 r{};
  u64 cur= 1;
  for(u32 j= 0; j < 131072; ++j, cur= m(cur)) {
