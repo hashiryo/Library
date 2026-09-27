@@ -173,7 +173,6 @@ constexpr ClassTable65537 CLS65537= []() {
  }
  return r;
 }();
-// n = x^(2^32+1), fn = F16(n) から log_{G_65537}(x^(2^32-1)) を返す
 inline u32 log_65537(u64 n, u64 fn) {
  const u16 b1= n ^ fn;
  if(!b1) return 0;
@@ -190,7 +189,7 @@ struct Ln6700417 {
   const __m256i V_S23= _mm256_set_epi64x(0, 0x7a8a7626c26ddc4d, 0, 0x5be693c8c2c557e3);
   const __m256i V_S4= _mm256_set1_epi64x(0xfdb44dcbca6522de);
   const __m256i tv= _mm256_set1_epi64x(target);
-  __m256i A= mul2<V>(tv, V_S01), B= mul2<V>(tv, V_S23);  // (t0, t1), (t2, t3)
+  __m256i A= mul2<V>(tv, V_S01), B= mul2<V>(tv, V_S23);
   __m256i An= mul2<V>(A, V_S4), Bn= mul2<V>(B, V_S4);
   __m256i An2= mul2<V>(An, V_S4), Bn2= mul2<V>(Bn, V_S4);
   u64 s[4], s_n[4], s_n2[4];
