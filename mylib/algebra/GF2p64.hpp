@@ -154,8 +154,8 @@ struct Ln641 {
 };
 constexpr Ln641 LN641= []() {
  Ln641 h{};
- LinMap t= make_mul_table(0x6bf808f7824282a2);
- for(u64 k= 0, cur= 1; k < 641; ++k, cur= t(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 % 641;
+ LinMap m= make_mul_table(0x6bf808f7824282a2);
+ for(u64 k= 0, cur= 1; k < 641; ++k, cur= m(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 % 641;
  return h;
 }();
 constexpr u16 PHI_B[16]= {49349, 60640, 60091, 52204, 8753, 26688, 50952, 24030, 14026, 41051, 57150, 31936, 39252, 22252, 63476, 55223};
@@ -168,19 +168,16 @@ constexpr ClassTable65537 CLS65537= []() {
  ClassTable65537 r{};
  u64 cur= 1;
  u32 v= 0;
- LinMap MUL_G17= make_mul_table(0x1c1e79669b95a7ce);
- for(u32 k= 0; k < 65537; ++k) {
+ LinMap m= make_mul_table(0x1c1e79669b95a7ce);
+ for(u32 k= 0; k < 65537; ++k, cur= m(cur)) {
   const u64 fr= F16(cur);
   const u16 b1= cur ^ fr, b0= cur ^ PHI.t[0][u8(b1)] ^ PHI.t[1][b1 >> 8];
-  if(b1 == 0) {
-  } else if(b0 == 0) {
-   r.K0= v;
-  } else {
+  if(b0 == 0) r.K0= v;
+  else if(b1) {
    u32 idx= u16(LNINV16.t[b0]) + 65535 - u16(LNINV16.t[b1]);
    if(idx >= 65535) idx-= 65535;
    r.t[idx]= v;
   }
-  cur= MUL_G17(cur);
   v= v >= 32768 ? v - 32768 : v + 32769;
  }
  return r;
@@ -195,21 +192,18 @@ inline u32 log_65537(u64 n, u64 fn) {
  if(idx >= 65535) idx-= 65535;
  return CLS65537.t[idx];
 }
-struct BSGSTable6700417 {
- // 空きは 0。値の側を j + 1 にして実在の entry が 0 にならないようにしてある
- // (こうすると 52 万要素の初期化ループが要らず、constexpr の step も浮く)。
+struct Ln6700417 {
  struct Tab {
   u64 t[524288];
  };
  static constexpr Tab TAB= []() {
-  const LinMap mg= make_mul_table(0x00f542601703f991);
+  LinMap m= make_mul_table(0x00f542601703f991);
   Tab r{};
   u64 cur= 1;
-  for(u32 j= 0; j < 131072; ++j) {
+  for(u32 j= 0; j < 131072; ++j, cur= m(cur)) {
    u32 h= u32(cur) & 524287;
    while(r.t[h]) h= (h + 1) & 524287;
    r.t[h]= (cur & 0xfffffffffff80000) | (u64(j) + 1);
-   cur= mg(cur);
   }
   return r;
  }();
@@ -264,7 +258,7 @@ inline u64 ln(u64 x) {
  __m256i t24_48= linmap2<F3, F4>(t3, t3);
  auto [t72, t51]= unpack(mul2(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
  auto [x_641, x_6700417]= unpack(mul2(mul2(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
- const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * BSGSTable6700417::solve(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
+ const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * Ln6700417::solve(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
