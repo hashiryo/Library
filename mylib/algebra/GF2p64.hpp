@@ -48,10 +48,9 @@ constexpr LinMap F1= []() {
 constexpr LinMap F2= F1 * F1;
 constexpr LinMap F3= F2 * F1;
 constexpr LinMap F4= F2 * F2;
-constexpr LinMap F5= F4 * F1;
 constexpr LinMap F7= F4 * F3;
 constexpr LinMap F8= F4 * F4;
-constexpr LinMap F10= F5 * F5;
+constexpr LinMap F10= F8 * F2;
 constexpr LinMap F15= F8 * F7;
 constexpr LinMap F16= F8 * F8;
 constexpr LinMap F32= F16 * F16;
@@ -80,36 +79,36 @@ inline u64 sq(u64 a) {
  u64 d= x[1];
  return (x[0] & 0x5555555555555555) ^ RED_SQ[a >> 62] ^ d ^ (d << 3);
 }
-template <bool VPCLMUL= 1, int IMM= 0> inline __m256i mul2(const __m256i& a_vec, const __m256i& b_vec) {
+template <bool V, int IMM= 0> inline __m256i mul2(const __m256i& a_vec, const __m256i& b_vec) {
  const __m256i RED256= _mm256_setr_epi8(0, 27, 45, 54, 90, 65, 119, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 45, 54, 90, 65, 119, 108, 0, 0, 0, 0, 0, 0, 0, 0);
  __m256i prod;
- if constexpr(VPCLMUL) prod= _mm256_clmulepi64_epi128(a_vec, b_vec, IMM);
+ if constexpr(V) prod= _mm256_clmulepi64_epi128(a_vec, b_vec, IMM);
  else prod= _mm256_setr_m128i(_mm_clmulepi64_si128(_mm256_castsi256_si128(a_vec), _mm256_castsi256_si128(b_vec), IMM), _mm_clmulepi64_si128(_mm256_extracti128_si256(a_vec, 1), _mm256_extracti128_si256(b_vec, 1), IMM));
  __m256i h= _mm256_srli_si256(prod, 8);
  __m256i d= _mm256_xor_si256(h, _mm256_slli_epi64(h, 1));
  return _mm256_xor_si256(_mm256_xor_si256(prod, _mm256_shuffle_epi8(RED256, _mm256_srli_epi64(h, 60))), _mm256_xor_si256(d, _mm256_slli_epi64(d, 3)));
 }
 inline std::pair<u64, u64> unpack(const __m256i& vec) { return std::make_pair(u64(_mm256_extract_epi64(vec, 0)), u64(_mm256_extract_epi64(vec, 2))); }
-template <bool VPCLMUL= 1> inline u64 pw(u64 a, u64 e) {
+template <bool V> inline u64 pw(u64 a, u64 e) {
  u64 t[16]= {1, a, sq(a)};
  __m256i t12= _mm256_set_epi64x(0, t[2], 0, a);
- __m256i t34= mul2<VPCLMUL>(t12, _mm256_set1_epi64x(t[2]));
+ __m256i t34= mul2<V>(t12, _mm256_set1_epi64x(t[2]));
  std::tie(t[3], t[4])= unpack(t34);
  __m256i t4= _mm256_set1_epi64x(t[4]);
- __m256i t56= mul2<VPCLMUL>(t4, t12);
+ __m256i t56= mul2<V>(t4, t12);
  std::tie(t[5], t[6])= unpack(t56);
- std::tie(t[7], t[8])= unpack(mul2<VPCLMUL>(t4, t34));
+ std::tie(t[7], t[8])= unpack(mul2<V>(t4, t34));
  __m256i t8= _mm256_set1_epi64x(t[8]);
- std::tie(t[9], t[10])= unpack(mul2<VPCLMUL>(t8, t12));
- std::tie(t[11], t[12])= unpack(mul2<VPCLMUL>(t8, t34));
- std::tie(t[13], t[14])= unpack(mul2<VPCLMUL>(t8, t56));
+ std::tie(t[9], t[10])= unpack(mul2<V>(t8, t12));
+ std::tie(t[11], t[12])= unpack(mul2<V>(t8, t34));
+ std::tie(t[13], t[14])= unpack(mul2<V>(t8, t56));
  t[15]= mul(t[7], t[8]);
- auto [b6, b7]= unpack(mul2<VPCLMUL>(linmap2<F32>(t[(e >> 56) & 0xf], t[(e >> 60) & 0xf]), _mm256_set_epi64x(0, t[(e >> 28) & 0xf], 0, t[(e >> 24) & 0xf])));
- auto [b4, b5]= unpack(mul2<VPCLMUL>(linmap2<F32>(t[(e >> 48) & 0xf], t[(e >> 52) & 0xf]), _mm256_set_epi64x(0, t[(e >> 20) & 0xf], 0, t[(e >> 16) & 0xf])));
- __m256i b23= mul2<VPCLMUL>(linmap2<F32>(t[(e >> 40) & 0xf], t[(e >> 44) & 0xf]), _mm256_set_epi64x(0, t[(e >> 12) & 0xf], 0, t[(e >> 8) & 0xf]));
- __m256i b01= mul2<VPCLMUL>(linmap2<F32>(t[(e >> 32) & 0xf], t[(e >> 36) & 0xf]), _mm256_set_epi64x(0, t[(e >> 4) & 0xf], 0, t[e & 0xf]));
- auto [b2, b3]= unpack(mul2<VPCLMUL>(linmap2<F16>(b6, b7), b23));
- auto [b0, b1]= unpack(mul2<VPCLMUL>(linmap2<F8>(b2, b3), mul2<VPCLMUL>(linmap2<F16>(b4, b5), b01)));
+ auto [b6, b7]= unpack(mul2<V>(linmap2<F32>(t[(e >> 56) & 0xf], t[(e >> 60) & 0xf]), _mm256_set_epi64x(0, t[(e >> 28) & 0xf], 0, t[(e >> 24) & 0xf])));
+ auto [b4, b5]= unpack(mul2<V>(linmap2<F32>(t[(e >> 48) & 0xf], t[(e >> 52) & 0xf]), _mm256_set_epi64x(0, t[(e >> 20) & 0xf], 0, t[(e >> 16) & 0xf])));
+ __m256i b23= mul2<V>(linmap2<F32>(t[(e >> 40) & 0xf], t[(e >> 44) & 0xf]), _mm256_set_epi64x(0, t[(e >> 12) & 0xf], 0, t[(e >> 8) & 0xf]));
+ __m256i b01= mul2<V>(linmap2<F32>(t[(e >> 32) & 0xf], t[(e >> 36) & 0xf]), _mm256_set_epi64x(0, t[(e >> 4) & 0xf], 0, t[e & 0xf]));
+ auto [b2, b3]= unpack(mul2<V>(linmap2<F16>(b6, b7), b23));
+ auto [b0, b1]= unpack(mul2<V>(linmap2<F8>(b2, b3), mul2<V>(linmap2<F16>(b4, b5), b01)));
  return mul(F4(b1), b0);
 }
 template <class U> struct LinMap16 {
@@ -137,10 +136,10 @@ constexpr Ln16Inv LNINV16= []() {
  for(u32 k= 65535; k--;) r.t[id[k]]= (u32(id[k ? 65535 - k : 0]) << 16) | (u32(k) * 49826 % 65535);
  return r;
 }();
-template <bool VPCLMUL= 1> inline u64 iv(u64 a) {
+template <bool V> inline u64 iv(u64 a) {
  assert(a);
  u64 a32= F32(a), b= mul(a, a32);
- auto [g, c]= unpack(mul2<VPCLMUL>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
+ auto [g, c]= unpack(mul2<V>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
  return mul(EMB(LNINV16.t[u16(c)] >> 16), g);
 }
 constexpr LinMap make_mul_table(u64 c) {
@@ -194,17 +193,14 @@ inline u32 log_65537(u64 n, u64 fn) {
 }
 struct Ln6700417 {
  u64 t[524288];
- // 定数のベクタは 1 度だけ作る (関数の中で組むと毎回即値の組み立てが走る)
- inline u32 solve(u64 target) const {
+ template <bool V> inline u32 solve(u64 target) const {
   const __m256i V_S01= _mm256_set_epi64x(0, 0x1489880b9cf723de, 0, 1);
   const __m256i V_S23= _mm256_set_epi64x(0, 0x7a8a7626c26ddc4d, 0, 0x5be693c8c2c557e3);
   const __m256i V_S4= _mm256_set1_epi64x(0xfdb44dcbca6522de);
-  // stream は (0,1) と (2,3) の 2 本のベクタで持つ。mul2 の出力 (q0, q2) が次の mul2 の
-  // operand の置き場所そのものなので、段を進めるのに詰め直しが要らない。
   const __m256i tv= _mm256_set1_epi64x(target);
-  __m256i A= mul2(tv, V_S01), B= mul2(tv, V_S23);  // (t0, t1), (t2, t3)
-  __m256i An= mul2(A, V_S4), Bn= mul2(B, V_S4);
-  __m256i An2= mul2(An, V_S4), Bn2= mul2(Bn, V_S4);
+  __m256i A= mul2<V>(tv, V_S01), B= mul2<V>(tv, V_S23);  // (t0, t1), (t2, t3)
+  __m256i An= mul2<V>(A, V_S4), Bn= mul2<V>(B, V_S4);
+  __m256i An2= mul2<V>(An, V_S4), Bn2= mul2<V>(Bn, V_S4);
   u64 s[4], s_n[4], s_n2[4];
   std::tie(s[0], s[1])= unpack(A), std::tie(s[2], s[3])= unpack(B);
   std::tie(s_n[0], s_n[1])= unpack(An), std::tie(s_n[2], s_n[3])= unpack(Bn);
@@ -228,7 +224,7 @@ struct Ln6700417 {
    A= An, B= Bn, An= An2, Bn= Bn2;
    for(int j= 0; j < 4; ++j) s[j]= s_n[j], s_n[j]= s_n2[j];
    if(i <= 40) {
-    An2= mul2(An, V_S4), Bn2= mul2(Bn, V_S4);
+    An2= mul2<V>(An, V_S4), Bn2= mul2<V>(Bn, V_S4);
     std::tie(s_n2[0], s_n2[1])= unpack(An2), std::tie(s_n2[2], s_n2[3])= unpack(Bn2);
     for(int j= 0; j < 4; ++j) _mm_prefetch((const char*)&t[u32(s_n2[j]) & 524287], _MM_HINT_T0);
    }
@@ -247,16 +243,16 @@ constexpr Ln6700417 LN6700417= []() {
  }
  return r;
 }();
-inline u64 ln(u64 x) {
+template <bool V> inline u64 ln(u64 x) {
  assert(x);
  const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
- auto [x_f16, w]= unpack(mul2(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
+ auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
  const u32 lnv= LNINV16.t[u16(x_f16)];
  const u64 s= mul(EMB(u16(lnv >> 16)), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2);
  __m256i t24_48= linmap2<F3, F4>(t3, t3);
- auto [t72, t51]= unpack(mul2(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
- auto [x_641, x_6700417]= unpack(mul2(mul2(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
- const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * LN6700417.solve(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
+ auto [t72, t51]= unpack(mul2<V>(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
+ auto [x_641, x_6700417]= unpack(mul2<V>(mul2<V>(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
+ const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * LN6700417.solve<V>(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
@@ -290,7 +286,12 @@ public:
 #endif
   return pw<0>(x, e);
  }
- u64 log() const { return ln(x); }
+ u64 log() const {
+#ifdef __x86_64__
+  if(__builtin_cpu_supports("vpclmulqdq")) return ln<1>(x);
+#endif
+  return ln<0>(x);
+ }
  u64 to_nimber() const { return TO_NIM(x); }
  explicit operator u64() const { return x; }
  explicit operator bool() const { return x != 0; }
