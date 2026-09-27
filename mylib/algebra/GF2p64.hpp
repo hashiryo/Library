@@ -193,62 +193,60 @@ inline u32 log_65537(u64 n, u64 fn) {
  return CLS65537.t[idx];
 }
 struct Ln6700417 {
- struct Tab {
-  u64 t[524288];
- };
- static constexpr Tab TAB= []() {
-  LinMap m= make_mul_table(0x00f542601703f991);
-  Tab r{};
-  u64 cur= 1;
-  for(u32 j= 0; j < 131072; ++j, cur= m(cur)) {
-   u32 h= u32(cur) & 524287;
-   while(r.t[h]) h= (h + 1) & 524287;
-   r.t[h]= (cur & 0xfffffffffff80000) | (u64(j) + 1);
-  }
-  return r;
- }();
+ u64 t[524288];
  // 定数のベクタは 1 度だけ作る (関数の中で組むと毎回即値の組み立てが走る)
- static inline const __m256i V_S01= _mm256_set_epi64x(0, 0x1489880b9cf723de, 0, 1);
- static inline const __m256i V_S23= _mm256_set_epi64x(0, 0x7a8a7626c26ddc4d, 0, 0x5be693c8c2c557e3);
- static inline const __m256i V_S4= _mm256_set1_epi64x(0xfdb44dcbca6522de);
- static inline u32 solve(u64 target) {
+ inline u32 solve(u64 target) const {
+  const __m256i V_S01= _mm256_set_epi64x(0, 0x1489880b9cf723de, 0, 1);
+  const __m256i V_S23= _mm256_set_epi64x(0, 0x7a8a7626c26ddc4d, 0, 0x5be693c8c2c557e3);
+  const __m256i V_S4= _mm256_set1_epi64x(0xfdb44dcbca6522de);
   // stream は (0,1) と (2,3) の 2 本のベクタで持つ。mul2 の出力 (q0, q2) が次の mul2 の
   // operand の置き場所そのものなので、段を進めるのに詰め直しが要らない。
   const __m256i tv= _mm256_set1_epi64x(target);
   __m256i A= mul2(tv, V_S01), B= mul2(tv, V_S23);  // (t0, t1), (t2, t3)
   __m256i An= mul2(A, V_S4), Bn= mul2(B, V_S4);
   __m256i An2= mul2(An, V_S4), Bn2= mul2(Bn, V_S4);
-  u64 t[4], t_n[4], t_n2[4];
-  std::tie(t[0], t[1])= unpack(A), std::tie(t[2], t[3])= unpack(B);
-  std::tie(t_n[0], t_n[1])= unpack(An), std::tie(t_n[2], t_n[3])= unpack(Bn);
-  std::tie(t_n2[0], t_n2[1])= unpack(An2), std::tie(t_n2[2], t_n2[3])= unpack(Bn2);
+  u64 s[4], s_n[4], s_n2[4];
+  std::tie(s[0], s[1])= unpack(A), std::tie(s[2], s[3])= unpack(B);
+  std::tie(s_n[0], s_n[1])= unpack(An), std::tie(s_n[2], s_n[3])= unpack(Bn);
+  std::tie(s_n2[0], s_n2[1])= unpack(An2), std::tie(s_n2[2], s_n2[3])= unpack(Bn2);
   for(int j= 0; j < 4; ++j) {
-   _mm_prefetch((const char*)&TAB.t[u32(t[j]) & 524287], _MM_HINT_T0);
-   _mm_prefetch((const char*)&TAB.t[u32(t_n[j]) & 524287], _MM_HINT_T0);
-   _mm_prefetch((const char*)&TAB.t[u32(t_n2[j]) & 524287], _MM_HINT_T0);
+   _mm_prefetch((const char*)&t[u32(s[j]) & 524287], _MM_HINT_T0);
+   _mm_prefetch((const char*)&t[u32(s_n[j]) & 524287], _MM_HINT_T0);
+   _mm_prefetch((const char*)&t[u32(s_n2[j]) & 524287], _MM_HINT_T0);
   }
   for(u8 i= 0; i <= 52; i+= 4) {
    for(int j= 0; j < 4; ++j) {
     if(i + j > 52) break;
-    u64 tt= t[j];
+    u64 tt= s[j];
     u32 h= u32(tt) & 524287;
-    while(TAB.t[h]) {
-     u64 e= TAB.t[h];
+    while(t[h]) {
+     u64 e= t[h];
      if(((e ^ tt) & 0xfffffffffff80000) == 0) return u32((i + j) * 131072 + u32(e & 524287) - 1);
      h= (h + 1) & 524287;
     }
    }
    A= An, B= Bn, An= An2, Bn= Bn2;
-   for(int j= 0; j < 4; ++j) t[j]= t_n[j], t_n[j]= t_n2[j];
+   for(int j= 0; j < 4; ++j) s[j]= s_n[j], s_n[j]= s_n2[j];
    if(i <= 40) {
     An2= mul2(An, V_S4), Bn2= mul2(Bn, V_S4);
-    std::tie(t_n2[0], t_n2[1])= unpack(An2), std::tie(t_n2[2], t_n2[3])= unpack(Bn2);
-    for(int j= 0; j < 4; ++j) _mm_prefetch((const char*)&TAB.t[u32(t_n2[j]) & 524287], _MM_HINT_T0);
+    std::tie(s_n2[0], s_n2[1])= unpack(An2), std::tie(s_n2[2], s_n2[3])= unpack(Bn2);
+    for(int j= 0; j < 4; ++j) _mm_prefetch((const char*)&t[u32(s_n2[j]) & 524287], _MM_HINT_T0);
    }
   }
   return 6700417;
  }
 };
+constexpr Ln6700417 LN6700417= []() {
+ LinMap m= make_mul_table(0x00f542601703f991);
+ Ln6700417 r{};
+ u64 cur= 1;
+ for(u32 j= 0; j < 131072; ++j, cur= m(cur)) {
+  u32 h= u32(cur) & 524287;
+  while(r.t[h]) h= (h + 1) & 524287;
+  r.t[h]= (cur & 0xfffffffffff80000) | (u64(j) + 1);
+ }
+ return r;
+}();
 inline u64 ln(u64 x) {
  assert(x);
  const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
@@ -258,7 +256,7 @@ inline u64 ln(u64 x) {
  __m256i t24_48= linmap2<F3, F4>(t3, t3);
  auto [t72, t51]= unpack(mul2(t24_48, _mm256_set_epi64x(0, t3, 0, _mm256_extract_epi64(t24_48, 2))));
  auto [x_641, x_6700417]= unpack(mul2(mul2(_mm256_set_epi64x(0, t2, 0, F10(t51)), _mm256_set_epi64x(0, t3, 0, mul(t72, t51))), _mm256_set1_epi64x(s)));
- const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * Ln6700417::solve(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
+ const __uint128_t acc= 0x663d80ff99c27full * LN641(x_641) + __uint128_t(0x945e40b26ba1bf4d) * LN6700417.solve(x_6700417) + 0x1000100010001ull * u16(lnv) + 0xffff0000ffffull * log_65537(n, fn);
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
