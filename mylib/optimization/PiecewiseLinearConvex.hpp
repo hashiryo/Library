@@ -57,10 +57,8 @@ template <class T, bool persistent= false, size_t NODE_SIZE= 1 << (20 + 2 * pers
   n[t].sz= 1 + n[l].sz + n[r].sz, n[t].a= n[t].d + n[l].a + n[r].a, n[t].s= D(n[t].x) * n[t].d + n[l].s + n[r].s;
  }
  template <bool b= 1> static inline void prop(int& t, T v) {
-  if constexpr(persistent && b) {
-   if(!t) return;
-   n[ni]= n[t], t= ni++;
-  }
+  if(!t) return;
+  if constexpr(persistent && b) n[ni]= n[t], t= ni++;
   n[t].z+= v, n[t].s+= D(v) * n[t].a, n[t].x+= v;
  }
  static inline void push(int t) {

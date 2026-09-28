@@ -98,7 +98,7 @@ template <class T> struct DirichletSeries {
   std::valarray<T> D= (ret.X-= x[1]), E(std::begin(D), K + 1), Y(std::begin(D) + K, L + 1), y= x, z(K + 1), Z(L + 1);
   auto A= [&](uint64_t n) { return n > K ? D[K + (double)N / n] : D[n]; };
   auto B= [&](uint64_t n) { return n > K ? Y[(double)N / n] : E[n]; };
-  for (tmp= pw[n - 2] * M, l= L; l; l--) ret.X[K + l]*= tmp;
+  for (tmp= n > 1 ? pw[n - 2] * M : T(), l= L; l; l--) ret.X[K + l]*= tmp;
   for (i= 2; i <= K; ++i) ret.x[i]*= tmp;
   for (ret.x[1]= pw[n - 1], l= L; l; l--) ret.X[K + l]+= ret.x[1];
   for (m= 1, b= M, l= std::min<uint64_t>(L, uint64_t((double)N / p) / 2); m + 1 < n;) {

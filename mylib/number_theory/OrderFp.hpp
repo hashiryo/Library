@@ -20,7 +20,7 @@ class OrderFp {
    Uint one= md.set(1);
    auto [q, e]= factors[l];
    for(u8 i= e; i--; ret*= q, x= pow(x, q, md))
-    if(x == one) break;
+    if(md.norm(x) == one) break;
    return ret;
   }
   u8 m= (l + r) / 2;

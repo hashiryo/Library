@@ -285,7 +285,8 @@ template <class T> vector<T> _egfT(const T* b, T* h, int M, int n) {
   for (int m= M, s, t; m > l; m>>= 1)
    for (a= h + (m - l), d= a + (m - l), s= l; s--;)
     for (a[t= s]+= d[s] * b[0]; t; --t&= s) a[s]+= d[s ^ t] * b[t];
- for (int i= 0; i <= n; ++i) c[i]= h[(1 << (n - i)) - 1];
+ for (int i= 0; i <= n; ++i)
+  if (int j= (1 << (n - i)) - 1; j < 2 * M) c[i]= h[j];
  return c;
 }
 // [X^{[n]}] f^k/k! for k=0,1,...,n , O(n^2 2^n)
