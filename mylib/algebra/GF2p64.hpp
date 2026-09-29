@@ -115,25 +115,37 @@ template <class U> struct LinMap16 {
 };
 constexpr u64 EMB_B[]= {0x0000000000000001, 0x5fbfaec6aeac0002, 0xb06c601895640004, 0xb013b5277b7c0008, 0xb5ebb915248a0010, 0x109bb25b2c600020, 0xbf3bd95bd4190040, 0x0fc66342279b0080, 0xb6418f5e57c50100, 0xaa194bd4b83f0200, 0x1b5217b4dcc70400, 0xbb06fa73867a0800, 0x006fd55b23331000, 0x4ae8fb39198c2000, 0xfbd141b29b4f4000, 0x1d9ce1776be78000};
 constexpr LinMap16<u64> EMB= LinMap16<u64>(EMB_B);
-struct Ln16Inv {
- u32 t[65536];
+constexpr u32 MG_B[16]= {11778, 26543, 52504, 2252, 62850, 2916, 10521, 61878, 56874, 42750, 3345, 46259, 4395, 25479, 2375, 31014}, MGI_B[16]= {31924, 38226, 20204, 7599, 29649, 43528, 31690, 42995, 5042, 974, 38821, 36722, 24051, 36426, 48847, 56272};
+struct Inv16 {
+ u16 t[65536];
 };
-constexpr Ln16Inv LNINV16= []() {
- u16 cl[]= {1, 11778, 7028, 51115, 48663, 26081, 17458, 40223}, ch[]= {30334, 42368, 14380, 2223, 49688, 11217, 44239, 63445}, Tl[256]= {0}, Th[256]= {0};
- for(u8 i= 0; i < 8; ++i)
-  for(u8 h= 1 << i, b= h; b--;) Tl[h | b]= Tl[b] ^ cl[i], Th[h | b]= Th[b] ^ ch[i];
- u16 id[65535]{};
- for(u32 k= 0, cur= 1; k < 65535; ++k, cur= u16(cur << 1) ^ (0x002d & -u16(cur >> 15))) id[k]= Tl[u8(cur)] ^ Th[cur >> 8];
- Ln16Inv r{};
- for(u32 k= 65535; k--;) r.t[id[k]]= (u32(id[k ? 65535 - k : 0]) << 16) | (u32(k) * 49826 % 65535);
+constexpr Inv16 INV16= []() {
+ u32 f[2][256]{}, b[2][256]{};
+ for(int i= 0; i < 16; ++i)
+  for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MG_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MGI_B[i];
+ Inv16 r{};
+ r.t[1]= 1;
+ for(u32 k= 32767, x= 1, y= 1; k--;) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= y, r.t[y]= x;
  return r;
 }();
 template <bool V> inline u64 iv(u64 a) {
  assert(a);
  u64 a32= F32(a), b= mul(a, a32);
  auto [g, c]= unpack(mul2<V>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
- return mul(EMB(LNINV16.t[u16(c)] >> 16), g);
+ return mul(EMB(INV16.t[u16(c)]), g);
 }
+constexpr u32 MH_B[16]= {42619, 34034, 37264, 59687, 13661, 58726, 9805, 26873, 8763, 63546, 2437, 49325, 17957, 37424, 41924, 9918}, MHI_B[16]= {65259, 13521, 41942, 64933, 45949, 48995, 32680, 14796, 1131, 41664, 58865, 25754, 5510, 38977, 46447, 39768};
+struct Ln16 {
+ u16 t[65536];
+};
+constexpr Ln16 LN16= []() {
+ u32 f[2][256]{}, b[2][256]{};
+ for(int i= 0; i < 16; ++i)
+  for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MH_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MHI_B[i];
+ Ln16 r{};
+ for(u32 l= 1, x= 1, y= 1; l < 32768; ++l) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= l, r.t[y]= 65535 - l;
+ return r;
+}();
 constexpr LinMap mul_linmap(u64 c) {
  u64 basis[64]= {c};
  for(int i= 1; i < 64; ++i) basis[i]= (basis[i - 1] << 1) ^ (0x1b & -(basis[i - 1] >> 63));
@@ -165,7 +177,7 @@ constexpr ClassTable65537 CLS65537= []() {
   const u16 b1= cur ^ fr, b0= cur ^ PHI.t[0][u8(b1)] ^ PHI.t[1][b1 >> 8];
   if(b0 == 0) r.K0= v;
   else if(b1) {
-   u32 idx= u16(LNINV16.t[b0]) + 65535 - u16(LNINV16.t[b1]);
+   u32 idx= LN16.t[b0] + 65535 - LN16.t[b1];
    if(idx >= 65535) idx-= 65535;
    r.t[idx]= v;
   }
@@ -178,7 +190,7 @@ inline u32 log_65537(u64 n, u64 fn) {
  if(!b1) return 0;
  const u16 b0= n ^ PHI(b1);
  if(!b0) return CLS65537.K0;
- u32 idx= u16(LNINV16.t[b0]) + 65535 - u16(LNINV16.t[b1]);
+ u32 idx= LN16.t[b0] + 65535 - LN16.t[b1];
  if(idx >= 65535) idx-= 65535;
  return CLS65537.t[idx];
 }
@@ -238,14 +250,14 @@ template <bool V> inline u64 ln(u64 x) {
  assert(x);
  const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
  auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
- const u32 lnv= LNINV16.t[u16(x_f16)];
- const u64 s= mul(EMB(u16(lnv >> 16)), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2), t48= F4(t3);
+ const u16 xf= u16(x_f16);
+ const u64 s= mul(EMB(INV16.t[xf]), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2), t48= F4(t3);
  auto [t5, t51]= unpack(mul2<V>(_mm256_set_epi64x(0, t48, 0, t2), _mm256_set1_epi64x(t3)));
  auto [x_6700417, a]= unpack(mul2<V>(_mm256_set_epi64x(0, t51, 0, t5), _mm256_set1_epi64x(s)));
  u32 r3= LN6700417.solve<V>(x_6700417);
  auto [t72, b]= unpack(mul2<V>(_mm256_set_epi64x(0, F10(t51), 0, F3(t3)), _mm256_set_epi64x(0, a, 0, t48)));
  u64 r0= LN641(mul(t72, b)), r2= log_65537(n, fn);
- const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x945e40b26ba1bf4d) * r3 + 0x1000100010001ull * u16(lnv) + 0xffff0000ffff * r2;
+ const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x945e40b26ba1bf4d) * r3 + 0x1000100010001ull * LN16.t[xf] + 0xffff0000ffff * r2;
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
