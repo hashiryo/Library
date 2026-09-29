@@ -163,28 +163,21 @@ constexpr Ln641 LN641= []() {
 }();
 constexpr u16 PHI_B[16]= {49349, 60640, 60091, 52204, 8753, 26688, 50952, 24030, 14026, 41051, 57150, 31936, 39252, 22252, 63476, 55223};
 constexpr LinMap16<u16> PHI= LinMap16<u16>(PHI_B);
+constexpr u32 MC_B[32]= {0xca137f44, 0x02f9ac22, 0x24119ddf, 0x677fa964, 0x1c3c90b8, 0x61acd330, 0x087e6d0e, 0x98f43405, 0x17ef3800, 0x46a70e74, 0xfdd52d61, 0x9767f2ed, 0xa06bb110, 0xf0ef2346, 0x88d7f773, 0x3bdf87f2, 0xb557b556, 0xaedbaed9, 0xb9ceb9ca, 0xce1bce13, 0x8c848c94, 0xb29cb2bc, 0x65706530, 0xacf1ac71, 0x2fef2eef, 0x48d34ad3, 0xd0b4d4b4, 0x658a6d8a, 0x117b017b, 0xd3a9f3a9, 0x7fa43fa4, 0xbc2d3c2d};
 struct ClassTable65537 {
  u32 t[65535];
- u32 K0;
+ u32 K0, s;
 };
-constexpr ClassTable65537 CLS65537= []() {
- ClassTable65537 r{};
- u64 cur= 1;
- u32 v= 0;
- LinMap m= mul_linmap(0x1c1e79669b95a7ce);
- for(u32 k= 0; k < 65537; ++k, cur= m(cur)) {
-  const u64 fr= F16(cur);
-  const u16 b1= cur ^ fr, b0= cur ^ PHI.t[0][u8(b1)] ^ PHI.t[1][b1 >> 8];
-  if(b0 == 0) r.K0= v;
-  else if(b1) {
-   u32 idx= LN16.t[b0] + 65535 - LN16.t[b1];
-   if(idx >= 65535) idx-= 65535;
-   r.t[idx]= v;
-  }
-  v= v >= 32768 ? v - 32768 : v + 32769;
- }
+constexpr ClassTable65537 cls65537(ClassTable65537 r, u32 k, u32 e) {
+ u32 m[4][256]{};
+ for(int i= 0; i < 32; ++i)
+  for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ MC_B[i];
+ u32 s= r.s, b0, b1, l1;
+ for(; k < e; ++k) s= m[0][s & 255] ^ m[1][s >> 8 & 255] ^ m[2][s >> 16 & 255] ^ m[3][s >> 24], b0= s & 65535, b1= s >> 16, l1= 65535 - LN16.t[b1], (b0 ? r.t[(LN16.t[b0] + l1) % 65535] : r.K0)= k, (b0 ^ b1 ? r.t[(LN16.t[b0 ^ b1] + l1) % 65535] : r.K0)= 65537 - k;
+ r.s= s;
  return r;
-}();
+}
+constexpr ClassTable65537 CLS65537_0= cls65537({{}, 0, 1}, 1, 16385), CLS65537= cls65537(CLS65537_0, 16385, 32769);
 inline u32 log_65537(u64 n, u64 fn) {
  const u16 b1= n ^ fn;
  if(!b1) return 0;
