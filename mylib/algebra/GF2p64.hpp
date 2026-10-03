@@ -8,6 +8,7 @@
 #endif
 #include <tuple>
 #include <utility>
+#include <type_traits>
 #include <iostream>
 #include <cassert>
 #include "include/debug.hpp"
@@ -56,6 +57,8 @@ constexpr LinMap F16= F8 * F8;
 constexpr LinMap F32= F16 * F16;
 constexpr LinMap F48= F32 * F16;
 constexpr LinMap F63= F48 * F15;
+constexpr LinMap F9= F8 * F1;
+constexpr LinMap F57= F48 * F9;
 inline u64 mul(u64 a, u64 b) {
  static constexpr u8 RED[]= {0, 27, 45, 54, 90, 65, 119, 108};
  __m128i v= _mm_clmulepi64_si128(_mm_cvtsi64_si128(a), _mm_cvtsi64_si128(b), 0);
@@ -146,6 +149,14 @@ constexpr Ln16 LN16= []() {
  for(u32 l= 1, x= 1, y= 1; l < 32768; ++l) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= l, r.t[y]= 65535 - l;
  return r;
 }();
+struct InvLn16 {
+ u32 t[65536];
+};
+constexpr InvLn16 IL16= []() {
+ InvLn16 r{};
+ for(u32 i= 0; i < 65536; ++i) r.t[i]= u32(INV16.t[i]) << 16 | LN16.t[i];
+ return r;
+}();
 constexpr LinMap mul_linmap(u64 c) {
  u64 basis[64]= {c};
  for(int i= 1; i < 64; ++i) basis[i]= (basis[i - 1] << 1) ^ (0x1b & -(basis[i - 1] >> 63));
@@ -158,14 +169,14 @@ struct Ln641 {
 constexpr Ln641 LN641= []() {
  Ln641 h{};
  LinMap m= mul_linmap(0x6bf808f7824282a2);
- for(u64 k= 0, cur= 1; k < 641; ++k, cur= m(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 % 641;
+ for(u64 k= 0, cur= 1; k < 641; ++k, cur= m(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 * 128 % 641;
  return h;
 }();
 constexpr u16 PHI_B[16]= {49349, 60640, 60091, 52204, 8753, 26688, 50952, 24030, 14026, 41051, 57150, 31936, 39252, 22252, 63476, 55223};
 constexpr LinMap16<u16> PHI= LinMap16<u16>(PHI_B);
 constexpr u32 MC_B[32]= {0xca137f44, 0x02f9ac22, 0x24119ddf, 0x677fa964, 0x1c3c90b8, 0x61acd330, 0x087e6d0e, 0x98f43405, 0x17ef3800, 0x46a70e74, 0xfdd52d61, 0x9767f2ed, 0xa06bb110, 0xf0ef2346, 0x88d7f773, 0x3bdf87f2, 0xb557b556, 0xaedbaed9, 0xb9ceb9ca, 0xce1bce13, 0x8c848c94, 0xb29cb2bc, 0x65706530, 0xacf1ac71, 0x2fef2eef, 0x48d34ad3, 0xd0b4d4b4, 0x658a6d8a, 0x117b017b, 0xd3a9f3a9, 0x7fa43fa4, 0xbc2d3c2d};
 struct ClassTable65537 {
- u32 t[65535];
+ u16 t[65535];
  u32 K0, s;
 };
 constexpr ClassTable65537 cls65537(ClassTable65537 r, u32 k, u32 e) {
@@ -173,7 +184,13 @@ constexpr ClassTable65537 cls65537(ClassTable65537 r, u32 k, u32 e) {
  for(int i= 0; i < 32; ++i)
   for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ MC_B[i];
  u32 s= r.s, b0, b1, l1;
- for(; k < e; ++k) s= m[0][s & 255] ^ m[1][s >> 8 & 255] ^ m[2][s >> 16 & 255] ^ m[3][s >> 24], b0= s & 65535, b1= s >> 16, l1= 65535 - LN16.t[b1], (b0 ? r.t[(LN16.t[b0] + l1) % 65535] : r.K0)= k, (b0 ^ b1 ? r.t[(LN16.t[b0 ^ b1] + l1) % 65535] : r.K0)= 65537 - k;
+ for(; k < e; ++k) {
+  s= m[0][s & 255] ^ m[1][s >> 8 & 255] ^ m[2][s >> 16 & 255] ^ m[3][s >> 24], b0= s & 65535, b1= s >> 16, l1= 65535 - LN16.t[b1];
+  if(b0) r.t[(LN16.t[b0] + l1) % 65535]= u16(k - 1);
+  else r.K0= k;
+  if(b0 ^ b1) r.t[(LN16.t[b0 ^ b1] + l1) % 65535]= u16(65536 - k);
+  else r.K0= 65537 - k;
+ }
  r.s= s;
  return r;
 }
@@ -183,74 +200,145 @@ inline u32 log_65537(u64 n, u64 fn) {
  if(!b1) return 0;
  const u16 b0= n ^ PHI(b1);
  if(!b0) return CLS65537.K0;
- u32 idx= LN16.t[b0] + 65535 - LN16.t[b1];
+ u32 idx= (IL16.t[b0] & 65535) + 65535 - (IL16.t[b1] & 65535);
  if(idx >= 65535) idx-= 65535;
- return CLS65537.t[idx];
+ return CLS65537.t[idx] + 1u;
 }
-struct Ln6700417 {
- u64 t[524288];
- template <bool V> inline u32 solve(u64 target) const {
-  const __m256i V_S01= _mm256_set_epi64x(0, 0x1489880b9cf723de, 0, 1);
-  const __m256i V_S23= _mm256_set_epi64x(0, 0x7a8a7626c26ddc4d, 0, 0x5be693c8c2c557e3);
-  const __m256i V_S4= _mm256_set1_epi64x(0xfdb44dcbca6522de);
-  const __m256i tv= _mm256_set1_epi64x(target);
-  __m256i A= mul2<V>(tv, V_S01), B= mul2<V>(tv, V_S23);
-  __m256i An= mul2<V>(A, V_S4), Bn= mul2<V>(B, V_S4);
-  __m256i An2= mul2<V>(An, V_S4), Bn2= mul2<V>(Bn, V_S4);
-  u64 s[4], s_n[4], s_n2[4];
-  std::tie(s[0], s[1])= unpack(A), std::tie(s[2], s[3])= unpack(B);
-  std::tie(s_n[0], s_n[1])= unpack(An), std::tie(s_n[2], s_n[3])= unpack(Bn);
-  std::tie(s_n2[0], s_n2[1])= unpack(An2), std::tie(s_n2[2], s_n2[3])= unpack(Bn2);
-  for(int j= 0; j < 4; ++j) {
-   _mm_prefetch((const char*)&t[u32(s[j]) & 524287], _MM_HINT_T0);
-   _mm_prefetch((const char*)&t[u32(s_n[j]) & 524287], _MM_HINT_T0);
-   _mm_prefetch((const char*)&t[u32(s_n2[j]) & 524287], _MM_HINT_T0);
-  }
-  for(u8 i= 0; i <= 52; i+= 4) {
-   for(int j= 0; j < 4; ++j) {
-    if(i + j > 52) break;
-    u64 tt= s[j];
-    u32 h= u32(tt) & 524287;
-    while(t[h]) {
-     u64 e= t[h];
-     if(((e ^ tt) & 0xfffffffffff80000) == 0) return u32((i + j) * 131072 + u32(e & 524287) - 1);
-     h= (h + 1) & 524287;
-    }
-   }
-   A= An, B= Bn, An= An2, Bn= Bn2;
-   for(int j= 0; j < 4; ++j) s[j]= s_n[j], s_n[j]= s_n2[j];
-   if(i <= 40) {
-    An2= mul2<V>(An, V_S4), Bn2= mul2<V>(Bn, V_S4);
-    std::tie(s_n2[0], s_n2[1])= unpack(An2), std::tie(s_n2[2], s_n2[3])= unpack(Bn2);
-    for(int j= 0; j < 4; ++j) _mm_prefetch((const char*)&t[u32(s_n2[j]) & 524287], _MM_HINT_T0);
-   }
-  }
-  return 6700417;
+constexpr u32 OR_L= 6700417, OR_N= 58900, OR_S= 4337141, OR_I= 13, OR_BB= 14, OR_SLOTS= 8u << OR_BB, OR_PAD= 64;
+constexpr u32 OR_C1= 0x40c1ee2e, OR_MG2_B[32]= {0x800e5536, 0xf206dc7f, 0xebe52465, 0x3db3b546, 0x7b06720d, 0xc4276035, 0x6532ca3c, 0x9bbfa71f, 0x3641a727, 0xf919cc6c, 0x5bcde957, 0xdc1e972a, 0xc64b8dfb, 0x11dc26a8, 0x37e7ab06, 0x597ccd7c, 0x0c0191c3, 0x16083352, 0x01f518c9, 0x2b2f7dd3, 0x982e7286, 0xc34076ee, 0x206f6920, 0x98d2c1d7, 0x9b52d4b3, 0x93cc096c, 0x98b2f2bf, 0x03b9fa4e, 0xccaf01d0, 0x5d3fe80e, 0xb91c8774, 0xfdefb3a2};
+constexpr u32 OR_MT1_B[32]= {0x72e12e3b, 0xe16f64aa, 0x5ec400dd, 0x5baaa4c1, 0xd8a77c7b, 0x475e9b5e, 0xc2705cee, 0xdc1b78ce, 0xf58842a1, 0xfa371ae4, 0x05e8731b, 0x77e28090, 0x02ce177a, 0xa927bdce, 0x0696177e, 0x661b6e7f, 0xcad3c1f4, 0xcf993c9d, 0x914d1c64, 0xbc31e925, 0x78f615ca, 0x4014dc84, 0x1b3f5a7f, 0x70b2d2b6, 0xed3323f5, 0x897807b1, 0x3cb6dcf0, 0xf6526d26, 0x4000fe3a, 0x1f4b257b, 0x8ac1c7d9, 0x65bfe9a2};
+constexpr u32 OR_LAM_B[64]= {0x00000000, 0x9793a0ad, 0x2f27415b, 0x2d35097e, 0x5e4e82b6, 0x43132bcc, 0x5a6a12fc, 0xd864f1ed, 0xbc9d056c, 0x861eeb46, 0x86265798, 0xbea091e6, 0xb4d425f8, 0x837f73c7, 0xb0c9e3db, 0x262565ac, 0x793a0ad9, 0xde69177e, 0x0c3dd68d, 0x9a2d0e52, 0x0c4caf31, 0xf3c09abe, 0x7d4123cd, 0x59261485, 0x69a84bf1, 0xc9c9bee2, 0x06fee78f, 0x34f6bd91, 0x6193c7b7, 0x18006846, 0x4c4acb58, 0xef7fe856, 0xf27415b2, 0x8db5b88a, 0xbcd22efd, 0xc11b2fe7, 0x187bad1a, 0x05982b31, 0x345a1ca5, 0x225c23c2, 0x18995e62, 0x0c48b0d6, 0xe781357d, 0xf5a83712, 0xfa82479a, 0x33217c80, 0xb24c290a, 0xc9295abc, 0xd35097e2, 0x26059b47, 0x93937dc5, 0x7ee7dd66, 0x0dfdcf1e, 0xc9a22bf2, 0x69ed7b22, 0x6779ca9a, 0xc3278f6e, 0xa69df839, 0x3000d08c, 0xcc04cc86, 0x989596b0, 0xe1a94462, 0xdeffd0ad, 0x202b58ec};
+constexpr u64 OR_H1= 0x9944cc327ae8fc24;
+constexpr u32 OR_P2INV[32]= {1, 3350209, 5025313, 5862865, 6281641, 6491029, 6595723, 6648070, 3324035, 5012226, 2506113, 4603265, 5651841, 6176129, 6438273, 6569345, 6634881, 6667649, 6684033, 6692225, 6696321, 6698369, 6699393, 6699905, 6700161, 6700289, 6700353, 6700385, 6700401, 6700409, 6700413, 6700415};
+template <int N> struct Lin32 {
+ u32 t[N][256];
+ constexpr Lin32(const u32 b[N * 8]): t{} {
+  for(int i= 0; i < N * 8; ++i)
+   for(u32 h= 1 << (i & 7), j= h; j--;) t[i >> 3][h | j]= t[i >> 3][j] ^ b[i];
+ }
+ constexpr u32 operator()(u64 x) const {
+  u32 r= 0;
+  for(int k= 0; k < N; ++k) r^= t[k][u8(x >> 8 * k)];
+  return r;
  }
 };
-constexpr Ln6700417 LN6700417= []() {
- LinMap m= mul_linmap(0x00f542601703f991);
- Ln6700417 r{};
- u64 cur= 1;
- for(u32 j= 0; j < 131072; ++j, cur= m(cur)) {
-  u32 h= u32(cur) & 524287;
-  while(r.t[h]) h= (h + 1) & 524287;
-  r.t[h]= (cur & 0xfffffffffff80000) | (u64(j) + 1);
+constexpr Lin32<4> OR_M1= Lin32<4>(OR_MT1_B);
+constexpr Lin32<8> OR_LAM= Lin32<8>(OR_LAM_B);
+#ifdef __x86_64__
+inline u64 orbit_canon_avx2(u32 w) {
+ const __m256i W= _mm256_set1_epi32(int(w));
+ const __m256i r0= _mm256_or_si256(_mm256_sllv_epi32(W, _mm256_setr_epi32(0, 1, 2, 3, 4, 5, 6, 7)), _mm256_srlv_epi32(W, _mm256_setr_epi32(32, 31, 30, 29, 28, 27, 26, 25)));
+ const __m256i r1= _mm256_or_si256(_mm256_slli_epi32(r0, 8), _mm256_srli_epi32(r0, 24));
+ const __m256i r2= _mm256_or_si256(_mm256_slli_epi32(r0, 16), _mm256_srli_epi32(r0, 16));
+ const __m256i r3= _mm256_or_si256(_mm256_slli_epi32(r0, 24), _mm256_srli_epi32(r0, 8));
+ __m256i m= _mm256_min_epu32(_mm256_min_epu32(r0, r1), _mm256_min_epu32(r2, r3));
+ m= _mm256_min_epu32(m, _mm256_permute2x128_si256(m, m, 1));
+ m= _mm256_min_epu32(m, _mm256_shuffle_epi32(m, 0x4e));
+ m= _mm256_min_epu32(m, _mm256_shuffle_epi32(m, 0xb1));
+ const u32 f= u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(r0, m)))) | u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(r1, m)))) << 8 | u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(r2, m)))) << 16 | u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(r3, m)))) << 24;
+ return u64(__builtin_ctz(f)) << 32 | u32(_mm256_cvtsi256_si32(m));
+}
+#endif
+constexpr u64 orbit_canon(u32 w) {
+#ifdef __x86_64__
+ if(!std::is_constant_evaluated()) return orbit_canon_avx2(w);
+#endif
+ const u32 nw= ~w;
+ u32 z= nw;
+ for(u32 t= 1, nz; t < 32 && (nz= z & (nw << t | nw >> (32 - t))); ++t) z= nz;
+ u32 j= (31 - __builtin_ctz(z)) & 31, best= j ? w << j | w >> (32 - j) : w, k= j;
+ for(z&= z - 1; z; z&= z - 1) {
+  j= (31 - __builtin_ctz(z)) & 31;
+  if(const u32 v= j ? w << j | w >> (32 - j) : w; v < best) best= v, k= j;
  }
+ return u64(k) << 32 | best;
+}
+struct alignas(64) OrbitTab {
+ u64 t[OR_SLOTS + OR_PAD];
+ u8 cnt[(OR_SLOTS + OR_PAD) / 8];
+ u32 p, c, n;
+};
+constexpr OrbitTab orbit_part(const OrbitTab& r0, u32 e) {
+ OrbitTab r= r0;
+ u32 m[4][256]{};
+ for(int i= 0; i < 32; ++i)
+  for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ OR_MG2_B[i];
+ u32 p= r.p, c= r.c, n= r.n;
+ for(; n <= e; ++n) {
+  const u64 ck= orbit_canon(c);
+  const u32 best= u32(ck), k= u32(ck >> 32);
+  u32 g= (best * 0x9e3779b1u) >> (32 - OR_BB);
+  while(r.cnt[g] == 8) ++g;
+  r.t[g * 8 + r.cnt[g]++]= u64(best) << 32 | u32((u64(2 * n - 1) << k) % OR_L);
+  const u32 x= m[0][c & 255] ^ m[1][c >> 8 & 255] ^ m[2][c >> 16 & 255] ^ m[3][c >> 24] ^ p;
+  p= c, c= x;
+ }
+ r.p= p, r.c= c, r.n= n;
+ return r;
+}
+constexpr OrbitTab OR_TAB_0= orbit_part(OrbitTab{{}, {}, OR_C1, OR_C1, 1}, 5890), OR_TAB_1= orbit_part(OR_TAB_0, 11780), OR_TAB_2= orbit_part(OR_TAB_1, 17670), OR_TAB_3= orbit_part(OR_TAB_2, 23560), OR_TAB_4= orbit_part(OR_TAB_3, 29450), OR_TAB_5= orbit_part(OR_TAB_4, 35340), OR_TAB_6= orbit_part(OR_TAB_5, 41230), OR_TAB_7= orbit_part(OR_TAB_6, 47120), OR_TAB_8= orbit_part(OR_TAB_7, 53010), OR_TAB= orbit_part(OR_TAB_8, OR_N);
+constexpr LinMap OR_MUL_G= mul_linmap(0x00f542601703f991), OR_MUL_G256= mul_linmap(0x5f915310c81c09e9), OR_MUL_G65536= mul_linmap(0x40cee54547d2d10a), OR_MUL_H= mul_linmap(OR_H1);
+struct OrbitPow {
+ u64 lo[256], mid[256], hi[(OR_L >> 16) + 1], hp[OR_I];
+};
+constexpr OrbitPow OR_POW= []() {
+ OrbitPow r{};
+ r.lo[0]= r.mid[0]= r.hi[0]= r.hp[0]= 1;
+ for(int i= 1; i < 256; ++i) r.lo[i]= OR_MUL_G(r.lo[i - 1]), r.mid[i]= OR_MUL_G256(r.mid[i - 1]);
+ for(u32 i= 1; i <= (OR_L >> 16); ++i) r.hi[i]= OR_MUL_G65536(r.hi[i - 1]);
+ for(u32 i= 1; i < OR_I; ++i) r.hp[i]= OR_MUL_H(r.hp[i - 1]);
  return r;
 }();
+constexpr Lin32<8> OR_LAMH= []() {
+ u32 b[64]{};
+ for(int i= 0; i < 64; ++i) b[i]= OR_LAM(OR_MUL_H(u64(1) << i));
+ return Lin32<8>(b);
+}();
+inline u32 orbit_home(u32 key) { return ((key * 0x9e3779b1u) >> (32 - OR_BB)) * 8; }
+inline u32 orbit_lookup(u32 key) {
+ const __m256i K= _mm256_set1_epi64x((long long)(u64(key) << 32));
+ for(u32 h= orbit_home(key);; h+= 8) {
+  const __m256i* q= (const __m256i*)&OR_TAB.t[h];
+  const u32 f= u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(_mm256_loadu_si256(q), K)))) | u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(_mm256_loadu_si256(q + 1), K)))) << 8;
+  if(f & 0xaaaa) return u32(OR_TAB.t[h + (__builtin_ctz(f & 0xaaaa) >> 1)]);
+  if(f & 0x5555) return 0;
+ }
+}
+inline u32 orbit_find(u64 y, u32 c, u64 ck, u32 i) {
+ constexpr u32 L= OR_L;
+ if(!c) return u32(u64(OR_S) * i % L);
+ const u32 e= orbit_lookup(u32(ck));
+ if(!e) return L;
+ const u32 e1= u32(u64(e) * OR_P2INV[ck >> 32] % L);
+ const u64 z= i ? mul(y, OR_POW.hp[i]) : y, g= mul(mul(OR_POW.lo[e1 & 255], OR_POW.mid[e1 >> 8 & 255]), OR_POW.hi[e1 >> 16]);
+ return u32((u64(OR_S) * i + (z == g ? e1 : L - e1)) % L);
+}
+inline void orbit_prefetch(u64 ck) { _mm_prefetch((const char*)&OR_TAB.t[orbit_home(u32(ck))], _MM_HINT_T0); }
+inline u32 log_6700417(u64 y) {
+ u32 c0= OR_LAM(y), c1= OR_LAMH(y);
+ for(u32 i= 0; i < OR_I; i+= 2) {
+  const u64 k0= c0 ? orbit_canon(c0) : 0, k1= c1 ? orbit_canon(c1) : 0;
+  orbit_prefetch(k0), orbit_prefetch(k1);
+  if(const u32 e= orbit_find(y, c0, k0, i); e != OR_L) return e;
+  if(i + 1 < OR_I)
+   if(const u32 e= orbit_find(y, c1, k1, i + 1); e != OR_L) return e;
+  const u32 c2= OR_M1(c1) ^ c0;
+  c1= OR_M1(c2) ^ c1, c0= c2;
+ }
+ return OR_L;
+}
 template <bool V> inline u64 ln(u64 x) {
  assert(x);
  const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
  auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
  const u16 xf= u16(x_f16);
- const u64 s= mul(EMB(INV16.t[xf]), w), s7= F7(s), t2= sq(s7), t3= mul(s7, t2), t48= F4(t3);
- auto [t5, t51]= unpack(mul2<V>(_mm256_set_epi64x(0, t48, 0, t2), _mm256_set1_epi64x(t3)));
- auto [x_6700417, a]= unpack(mul2<V>(_mm256_set_epi64x(0, t51, 0, t5), _mm256_set1_epi64x(s)));
- u32 r3= LN6700417.solve<V>(x_6700417);
- auto [t72, b]= unpack(mul2<V>(_mm256_set_epi64x(0, F10(t51), 0, F3(t3)), _mm256_set_epi64x(0, a, 0, t48)));
- u64 r0= LN641(mul(t72, b)), r2= log_65537(n, fn);
- const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x945e40b26ba1bf4d) * r3 + 0x1000100010001ull * LN16.t[xf] + 0xffff0000ffff * r2;
+ const u32 il= IL16.t[xf];
+ const u64 s= mul(EMB(u16(il >> 16)), w), w1= mul(s, F9(s)), e57= F57(w1);
+ auto [w2, y]= unpack(mul2<V>(_mm256_set_epi64x(0, e57, 0, sq(w1)), _mm256_set_epi64x(0, s, 0, w1)));
+ u32 r3= log_6700417(y);
+ const u64 w3= mul(s, sq(w2)), w4= mul(w3, F4(w3));
+ u64 r0= LN641(mul(e57, w4)), r2= log_65537(n, fn);
+ const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x2f205935d0dfa6ca) * r3 + 0x1000100010001ull * (il & 65535) + 0xffff0000ffff * r2;
  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
  return t + (t < lo);
 }
