@@ -51,14 +51,11 @@ constexpr LinMap F3= F2 * F1;
 constexpr LinMap F4= F2 * F2;
 constexpr LinMap F7= F4 * F3;
 constexpr LinMap F8= F4 * F4;
-constexpr LinMap F10= F8 * F2;
 constexpr LinMap F15= F8 * F7;
 constexpr LinMap F16= F8 * F8;
 constexpr LinMap F32= F16 * F16;
 constexpr LinMap F48= F32 * F16;
 constexpr LinMap F63= F48 * F15;
-constexpr LinMap F9= F8 * F1;
-constexpr LinMap F57= F48 * F9;
 inline u64 mul(u64 a, u64 b) {
  static constexpr u8 RED[]= {0, 27, 45, 54, 90, 65, 119, 108};
  __m128i v= _mm_clmulepi64_si128(_mm_cvtsi64_si128(a), _mm_cvtsi64_si128(b), 0);
@@ -122,88 +119,37 @@ constexpr u32 MG_B[16]= {11778, 26543, 52504, 2252, 62850, 2916, 10521, 61878, 5
 struct Inv16 {
  u16 t[65536];
 };
-constexpr Inv16 INV16= []() {
- u32 f[2][256]{}, b[2][256]{};
- for(int i= 0; i < 16; ++i)
-  for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MG_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MGI_B[i];
- Inv16 r{};
- r.t[1]= 1;
- for(u32 k= 32767, x= 1, y= 1; k--;) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= y, r.t[y]= x;
- return r;
-}();
-template <bool V> inline u64 iv(u64 a) {
- assert(a);
- u64 a32= F32(a), b= mul(a, a32);
- auto [g, c]= unpack(mul2<V>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
- return mul(EMB(INV16.t[u16(c)]), g);
-}
-constexpr u32 MH_B[16]= {42619, 34034, 37264, 59687, 13661, 58726, 9805, 26873, 8763, 63546, 2437, 49325, 17957, 37424, 41924, 9918}, MHI_B[16]= {65259, 13521, 41942, 64933, 45949, 48995, 32680, 14796, 1131, 41664, 58865, 25754, 5510, 38977, 46447, 39768};
-struct Ln16 {
- u16 t[65536];
+template <int D> struct Inv {
+ static constexpr Inv16 INV16= []() {
+  u32 f[2][256]{}, b[2][256]{};
+  for(int i= 0; i < 16; ++i)
+   for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MG_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MGI_B[i];
+  Inv16 r{};
+  r.t[1]= 1;
+  for(u32 k= 32767, x= 1, y= 1; k--;) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= y, r.t[y]= x;
+  return r;
+ }();
+ template <bool V> static inline u64 iv(u64 a) {
+  assert(a);
+  u64 a32= F32(a), b= mul(a, a32);
+  auto [g, c]= unpack(mul2<V>(_mm256_set_epi64x(0, b, 0, a32), _mm256_set1_epi64x(F16(b))));
+  return mul(EMB(INV16.t[u16(c)]), g);
+ }
 };
-constexpr Ln16 LN16= []() {
- u32 f[2][256]{}, b[2][256]{};
- for(int i= 0; i < 16; ++i)
-  for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MH_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MHI_B[i];
- Ln16 r{};
- for(u32 l= 1, x= 1, y= 1; l < 32768; ++l) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= l, r.t[y]= 65535 - l;
- return r;
-}();
+constexpr u32 MH_B[16]= {42619, 34034, 37264, 59687, 13661, 58726, 9805, 26873, 8763, 63546, 2437, 49325, 17957, 37424, 41924, 9918}, MHI_B[16]= {65259, 13521, 41942, 64933, 45949, 48995, 32680, 14796, 1131, 41664, 58865, 25754, 5510, 38977, 46447, 39768};
 struct InvLn16 {
  u32 t[65536];
 };
-constexpr InvLn16 IL16= []() {
- InvLn16 r{};
- for(u32 i= 0; i < 65536; ++i) r.t[i]= u32(INV16.t[i]) << 16 | LN16.t[i];
- return r;
-}();
-constexpr LinMap mul_linmap(u64 c) {
- u64 basis[64]= {c};
- for(int i= 1; i < 64; ++i) basis[i]= (basis[i - 1] << 1) ^ (0x1b & -(basis[i - 1] >> 63));
- return LinMap(basis);
-}
 struct Ln641 {
  u16 t[1 << 14];
  u16 operator()(u64 a) const { return t[u16((a * 0xffef5fb99f1bf6e7) >> 50)]; }
 };
-constexpr Ln641 LN641= []() {
- Ln641 h{};
- LinMap m= mul_linmap(0x6bf808f7824282a2);
- for(u64 k= 0, cur= 1; k < 641; ++k, cur= m(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 * 128 % 641;
- return h;
-}();
 constexpr u16 PHI_B[16]= {49349, 60640, 60091, 52204, 8753, 26688, 50952, 24030, 14026, 41051, 57150, 31936, 39252, 22252, 63476, 55223};
-constexpr LinMap16<u16> PHI= LinMap16<u16>(PHI_B);
 constexpr u32 MC_B[32]= {0xca137f44, 0x02f9ac22, 0x24119ddf, 0x677fa964, 0x1c3c90b8, 0x61acd330, 0x087e6d0e, 0x98f43405, 0x17ef3800, 0x46a70e74, 0xfdd52d61, 0x9767f2ed, 0xa06bb110, 0xf0ef2346, 0x88d7f773, 0x3bdf87f2, 0xb557b556, 0xaedbaed9, 0xb9ceb9ca, 0xce1bce13, 0x8c848c94, 0xb29cb2bc, 0x65706530, 0xacf1ac71, 0x2fef2eef, 0x48d34ad3, 0xd0b4d4b4, 0x658a6d8a, 0x117b017b, 0xd3a9f3a9, 0x7fa43fa4, 0xbc2d3c2d};
 struct ClassTable65537 {
  u16 t[65535];
  u32 K0, s;
 };
-constexpr ClassTable65537 cls65537(ClassTable65537 r, u32 k, u32 e) {
- u32 m[4][256]{};
- for(int i= 0; i < 32; ++i)
-  for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ MC_B[i];
- u32 s= r.s, b0, b1, l1;
- for(; k < e; ++k) {
-  s= m[0][s & 255] ^ m[1][s >> 8 & 255] ^ m[2][s >> 16 & 255] ^ m[3][s >> 24], b0= s & 65535, b1= s >> 16, l1= 65535 - LN16.t[b1];
-  if(b0) r.t[(LN16.t[b0] + l1) % 65535]= u16(k - 1);
-  else r.K0= k;
-  if(b0 ^ b1) r.t[(LN16.t[b0 ^ b1] + l1) % 65535]= u16(65536 - k);
-  else r.K0= 65537 - k;
- }
- r.s= s;
- return r;
-}
-constexpr ClassTable65537 CLS65537_0= cls65537({{}, 0, 1}, 1, 16385), CLS65537= cls65537(CLS65537_0, 16385, 32769);
-inline u32 log_65537(u64 n, u64 fn) {
- const u16 b1= n ^ fn;
- if(!b1) return 0;
- const u16 b0= n ^ PHI(b1);
- if(!b0) return CLS65537.K0;
- u32 idx= (IL16.t[b0] & 65535) + 65535 - (IL16.t[b1] & 65535);
- if(idx >= 65535) idx-= 65535;
- return CLS65537.t[idx] + 1u;
-}
 constexpr u32 OR_L= 6700417, OR_N= 58900, OR_S= 4337141, OR_I= 13, OR_BB= 14, OR_SLOTS= 8u << OR_BB, OR_PAD= 64;
 constexpr u32 OR_C1= 0x40c1ee2e, OR_MG2_B[32]= {0x800e5536, 0xf206dc7f, 0xebe52465, 0x3db3b546, 0x7b06720d, 0xc4276035, 0x6532ca3c, 0x9bbfa71f, 0x3641a727, 0xf919cc6c, 0x5bcde957, 0xdc1e972a, 0xc64b8dfb, 0x11dc26a8, 0x37e7ab06, 0x597ccd7c, 0x0c0191c3, 0x16083352, 0x01f518c9, 0x2b2f7dd3, 0x982e7286, 0xc34076ee, 0x206f6920, 0x98d2c1d7, 0x9b52d4b3, 0x93cc096c, 0x98b2f2bf, 0x03b9fa4e, 0xccaf01d0, 0x5d3fe80e, 0xb91c8774, 0xfdefb3a2};
 constexpr u32 OR_MT1_B[32]= {0x72e12e3b, 0xe16f64aa, 0x5ec400dd, 0x5baaa4c1, 0xd8a77c7b, 0x475e9b5e, 0xc2705cee, 0xdc1b78ce, 0xf58842a1, 0xfa371ae4, 0x05e8731b, 0x77e28090, 0x02ce177a, 0xa927bdce, 0x0696177e, 0x661b6e7f, 0xcad3c1f4, 0xcf993c9d, 0x914d1c64, 0xbc31e925, 0x78f615ca, 0x4014dc84, 0x1b3f5a7f, 0x70b2d2b6, 0xed3323f5, 0x897807b1, 0x3cb6dcf0, 0xf6526d26, 0x4000fe3a, 0x1f4b257b, 0x8ac1c7d9, 0x65bfe9a2};
@@ -222,8 +168,6 @@ template <int N> struct Lin32 {
   return r;
  }
 };
-constexpr Lin32<4> OR_M1= Lin32<4>(OR_MT1_B);
-constexpr Lin32<8> OR_LAM= Lin32<8>(OR_LAM_B);
 #ifdef __x86_64__
 inline u64 orbit_canon_avx2(u32 w) {
  const __m256i W= _mm256_set1_epi32(int(w));
@@ -258,97 +202,148 @@ struct alignas(64) OrbitTab {
  u8 cnt[(OR_SLOTS + OR_PAD) / 8];
  u32 p, c, n;
 };
-constexpr OrbitTab orbit_part(const OrbitTab& r0, u32 e) {
- OrbitTab r= r0;
- u32 m[4][256]{};
- for(int i= 0; i < 32; ++i)
-  for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ OR_MG2_B[i];
- u32 p= r.p, c= r.c, n= r.n;
- for(; n <= e; ++n) {
-  const u64 ck= orbit_canon(c);
-  const u32 best= u32(ck), k= u32(ck >> 32);
-  u32 g= (best * 0x9e3779b1u) >> (32 - OR_BB);
-  while(r.cnt[g] == 8) ++g;
-  r.t[g * 8 + r.cnt[g]++]= u64(best) << 32 | u32((u64(2 * n - 1) << k) % OR_L);
-  const u32 x= m[0][c & 255] ^ m[1][c >> 8 & 255] ^ m[2][c >> 16 & 255] ^ m[3][c >> 24] ^ p;
-  p= c, c= x;
- }
- r.p= p, r.c= c, r.n= n;
- return r;
-}
-constexpr OrbitTab OR_TAB_0= orbit_part(OrbitTab{{}, {}, OR_C1, OR_C1, 1}, 5890), OR_TAB_1= orbit_part(OR_TAB_0, 11780), OR_TAB_2= orbit_part(OR_TAB_1, 17670), OR_TAB_3= orbit_part(OR_TAB_2, 23560), OR_TAB_4= orbit_part(OR_TAB_3, 29450), OR_TAB_5= orbit_part(OR_TAB_4, 35340), OR_TAB_6= orbit_part(OR_TAB_5, 41230), OR_TAB_7= orbit_part(OR_TAB_6, 47120), OR_TAB_8= orbit_part(OR_TAB_7, 53010), OR_TAB= orbit_part(OR_TAB_8, OR_N);
-constexpr LinMap OR_MUL_G= mul_linmap(0x00f542601703f991), OR_MUL_G256= mul_linmap(0x5f915310c81c09e9), OR_MUL_G65536= mul_linmap(0x40cee54547d2d10a), OR_MUL_H= mul_linmap(OR_H1);
 struct OrbitPow {
  u64 lo[256], mid[256], hi[(OR_L >> 16) + 1], hp[OR_I];
 };
-constexpr OrbitPow OR_POW= []() {
- OrbitPow r{};
- r.lo[0]= r.mid[0]= r.hi[0]= r.hp[0]= 1;
- for(int i= 1; i < 256; ++i) r.lo[i]= OR_MUL_G(r.lo[i - 1]), r.mid[i]= OR_MUL_G256(r.mid[i - 1]);
- for(u32 i= 1; i <= (OR_L >> 16); ++i) r.hi[i]= OR_MUL_G65536(r.hi[i - 1]);
- for(u32 i= 1; i < OR_I; ++i) r.hp[i]= OR_MUL_H(r.hp[i - 1]);
- return r;
-}();
-constexpr Lin32<8> OR_LAMH= []() {
- u32 b[64]{};
- for(int i= 0; i < 64; ++i) b[i]= OR_LAM(OR_MUL_H(u64(1) << i));
- return Lin32<8>(b);
-}();
 inline u32 orbit_home(u32 key) { return ((key * 0x9e3779b1u) >> (32 - OR_BB)) * 8; }
-inline u32 orbit_lookup(u32 key) {
- const __m256i K= _mm256_set1_epi64x((long long)(u64(key) << 32));
- for(u32 h= orbit_home(key);; h+= 8) {
-  const __m256i* q= (const __m256i*)&OR_TAB.t[h];
-  const u32 f= u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(_mm256_loadu_si256(q), K)))) | u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(_mm256_loadu_si256(q + 1), K)))) << 8;
-  if(f & 0xaaaa) return u32(OR_TAB.t[h + (__builtin_ctz(f & 0xaaaa) >> 1)]);
-  if(f & 0x5555) return 0;
+template <int D> struct Log {
+ static constexpr LinMap mul_linmap(u64 c) {
+  u64 basis[64]= {c};
+  for(int i= 1; i < 64; ++i) basis[i]= (basis[i - 1] << 1) ^ (0x1b & -(basis[i - 1] >> 63));
+  return LinMap(basis);
  }
-}
-inline u32 orbit_find(u64 y, u32 c, u64 ck, u32 i) {
- constexpr u32 L= OR_L;
- if(!c) return u32(u64(OR_S) * i % L);
- const u32 e= orbit_lookup(u32(ck));
- if(!e) return L;
- const u32 e1= u32(u64(e) * OR_P2INV[ck >> 32] % L);
- const u64 z= i ? mul(y, OR_POW.hp[i]) : y, g= mul(mul(OR_POW.lo[e1 & 255], OR_POW.mid[e1 >> 8 & 255]), OR_POW.hi[e1 >> 16]);
- return u32((u64(OR_S) * i + (z == g ? e1 : L - e1)) % L);
-}
-inline void orbit_prefetch(u64 ck) { _mm_prefetch((const char*)&OR_TAB.t[orbit_home(u32(ck))], _MM_HINT_T0); }
-inline u32 log_6700417(u64 y) {
- u32 c0= OR_LAM(y), c1= OR_LAMH(y);
- for(u32 i= 0; i < OR_I; i+= 2) {
-  const u64 k0= c0 ? orbit_canon(c0) : 0, k1= c1 ? orbit_canon(c1) : 0;
-  orbit_prefetch(k0), orbit_prefetch(k1);
-  if(const u32 e= orbit_find(y, c0, k0, i); e != OR_L) return e;
-  if(i + 1 < OR_I)
-   if(const u32 e= orbit_find(y, c1, k1, i + 1); e != OR_L) return e;
-  const u32 c2= OR_M1(c1) ^ c0;
-  c1= OR_M1(c2) ^ c1, c0= c2;
+ static constexpr InvLn16 IL16= []() {
+  u32 f[2][256]{}, b[2][256]{};
+  for(int i= 0; i < 16; ++i)
+   for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MH_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MHI_B[i];
+  InvLn16 r{};
+  r.t[1]= 1 << 16;
+  for(u32 l= 1, x= 1, y= 1; l < 32768; ++l) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= y << 16 | l, r.t[y]= x << 16 | (65535 - l);
+  return r;
+ }();
+ static constexpr LinMap F9= []() { return F8 * F1; }(), F57= F48 * F9;
+ static constexpr Ln641 LN641= []() {
+  Ln641 h{};
+  LinMap m= mul_linmap(0x6bf808f7824282a2);
+  for(u64 k= 0, cur= 1; k < 641; ++k, cur= m(cur)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 * 128 % 641;
+  return h;
+ }();
+ static constexpr LinMap16<u16> PHI= []() { return LinMap16<u16>(PHI_B); }();
+ static constexpr ClassTable65537 cls65537(ClassTable65537 r, u32 k, u32 e) {
+  u32 m[4][256]{};
+  for(int i= 0; i < 32; ++i)
+   for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ MC_B[i];
+  u32 s= r.s, b0, b1, l1;
+  for(; k < e; ++k) {
+   s= m[0][s & 255] ^ m[1][s >> 8 & 255] ^ m[2][s >> 16 & 255] ^ m[3][s >> 24], b0= s & 65535, b1= s >> 16, l1= 65535 - (IL16.t[b1] & 65535);
+   if(b0) r.t[((IL16.t[b0] & 65535) + l1) % 65535]= u16(k - 1);
+   else r.K0= k;
+   if(b0 ^ b1) r.t[((IL16.t[b0 ^ b1] & 65535) + l1) % 65535]= u16(65536 - k);
+   else r.K0= 65537 - k;
+  }
+  r.s= s;
+  return r;
  }
- return OR_L;
-}
-template <bool V> inline u64 ln(u64 x) {
- assert(x);
- const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
- auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
- const u16 xf= u16(x_f16);
- const u32 il= IL16.t[xf];
- const u64 s= mul(EMB(u16(il >> 16)), w), w1= mul(s, F9(s)), e57= F57(w1);
- auto [w2, y]= unpack(mul2<V>(_mm256_set_epi64x(0, e57, 0, sq(w1)), _mm256_set_epi64x(0, s, 0, w1)));
- u32 r3= log_6700417(y);
- const u64 w3= mul(s, sq(w2)), w4= mul(w3, F4(w3));
- u64 r0= LN641(mul(e57, w4)), r2= log_65537(n, fn);
- const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x2f205935d0dfa6ca) * r3 + 0x1000100010001ull * (il & 65535) + 0xffff0000ffff * r2;
- const u64 lo= u64(acc), t= lo + u64(acc >> 64);
- return t + (t < lo);
-}
+ static constexpr ClassTable65537 CLS65537_0= cls65537({{}, 0, 1}, 1, 16385), CLS65537= cls65537(CLS65537_0, 16385, 32769);
+ static inline u32 log_65537(u64 n, u64 fn) {
+  const u16 b1= n ^ fn;
+  if(!b1) return 0;
+  const u16 b0= n ^ PHI(b1);
+  if(!b0) return CLS65537.K0;
+  u32 idx= (IL16.t[b0] & 65535) + 65535 - (IL16.t[b1] & 65535);
+  if(idx >= 65535) idx-= 65535;
+  return CLS65537.t[idx] + 1u;
+ }
+ static constexpr Lin32<4> OR_M1= []() { return Lin32<4>(OR_MT1_B); }();
+ static constexpr Lin32<8> OR_LAM= []() { return Lin32<8>(OR_LAM_B); }();
+ static constexpr OrbitTab orbit_part(const OrbitTab& r0, u32 e) {
+  OrbitTab r= r0;
+  u32 m[4][256]{};
+  for(int i= 0; i < 32; ++i)
+   for(u32 h= 1 << (i & 7), j= h; j--;) m[i >> 3][h | j]= m[i >> 3][j] ^ OR_MG2_B[i];
+  u32 p= r.p, c= r.c, n= r.n;
+  for(; n <= e; ++n) {
+   const u64 ck= orbit_canon(c);
+   const u32 best= u32(ck), k= u32(ck >> 32);
+   u32 g= (best * 0x9e3779b1u) >> (32 - OR_BB);
+   while(r.cnt[g] == 8) ++g;
+   r.t[g * 8 + r.cnt[g]++]= u64(best) << 32 | u32((u64(2 * n - 1) << k) % OR_L);
+   const u32 x= m[0][c & 255] ^ m[1][c >> 8 & 255] ^ m[2][c >> 16 & 255] ^ m[3][c >> 24] ^ p;
+   p= c, c= x;
+  }
+  r.p= p, r.c= c, r.n= n;
+  return r;
+ }
+ static constexpr OrbitTab OR_TAB_0= orbit_part(OrbitTab{{}, {}, OR_C1, OR_C1, 1}, 5890), OR_TAB_1= orbit_part(OR_TAB_0, 11780), OR_TAB_2= orbit_part(OR_TAB_1, 17670), OR_TAB_3= orbit_part(OR_TAB_2, 23560), OR_TAB_4= orbit_part(OR_TAB_3, 29450), OR_TAB_5= orbit_part(OR_TAB_4, 35340), OR_TAB_6= orbit_part(OR_TAB_5, 41230), OR_TAB_7= orbit_part(OR_TAB_6, 47120), OR_TAB_8= orbit_part(OR_TAB_7, 53010), OR_TAB= orbit_part(OR_TAB_8, OR_N);
+ static constexpr LinMap OR_MUL_G= mul_linmap(0x00f542601703f991), OR_MUL_G256= mul_linmap(0x5f915310c81c09e9), OR_MUL_G65536= mul_linmap(0x40cee54547d2d10a), OR_MUL_H= mul_linmap(OR_H1);
+ static constexpr OrbitPow OR_POW= []() {
+  OrbitPow r{};
+  r.lo[0]= r.mid[0]= r.hi[0]= r.hp[0]= 1;
+  for(int i= 1; i < 256; ++i) r.lo[i]= OR_MUL_G(r.lo[i - 1]), r.mid[i]= OR_MUL_G256(r.mid[i - 1]);
+  for(u32 i= 1; i <= (OR_L >> 16); ++i) r.hi[i]= OR_MUL_G65536(r.hi[i - 1]);
+  for(u32 i= 1; i < OR_I; ++i) r.hp[i]= OR_MUL_H(r.hp[i - 1]);
+  return r;
+ }();
+ static constexpr Lin32<8> OR_LAMH= []() {
+  u32 b[64]{};
+  for(int i= 0; i < 64; ++i) b[i]= OR_LAM(OR_MUL_H(u64(1) << i));
+  return Lin32<8>(b);
+ }();
+ static inline u32 orbit_lookup(u32 key) {
+  const __m256i K= _mm256_set1_epi64x((long long)(u64(key) << 32));
+  for(u32 h= orbit_home(key);; h+= 8) {
+   const __m256i* q= (const __m256i*)&OR_TAB.t[h];
+   const u32 f= u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(_mm256_loadu_si256(q), K)))) | u32(_mm256_movemask_ps(_mm256_castsi256_ps(_mm256_cmpeq_epi32(_mm256_loadu_si256(q + 1), K)))) << 8;
+   if(f & 0xaaaa) return u32(OR_TAB.t[h + (__builtin_ctz(f & 0xaaaa) >> 1)]);
+   if(f & 0x5555) return 0;
+  }
+ }
+ static inline u32 orbit_find(u64 y, u32 c, u64 ck, u32 i) {
+  constexpr u32 L= OR_L;
+  if(!c) return u32(u64(OR_S) * i % L);
+  const u32 e= orbit_lookup(u32(ck));
+  if(!e) return L;
+  const u32 e1= u32(u64(e) * OR_P2INV[ck >> 32] % L);
+  const u64 z= i ? mul(y, OR_POW.hp[i]) : y, g= mul(mul(OR_POW.lo[e1 & 255], OR_POW.mid[e1 >> 8 & 255]), OR_POW.hi[e1 >> 16]);
+  return u32((u64(OR_S) * i + (z == g ? e1 : L - e1)) % L);
+ }
+ static inline void orbit_prefetch(u64 ck) { _mm_prefetch((const char*)&OR_TAB.t[orbit_home(u32(ck))], _MM_HINT_T0); }
+ static inline u32 log_6700417(u64 y) {
+  u32 c0= OR_LAM(y), c1= OR_LAMH(y);
+  for(u32 i= 0; i < OR_I; i+= 2) {
+   const u64 k0= c0 ? orbit_canon(c0) : 0, k1= c1 ? orbit_canon(c1) : 0;
+   orbit_prefetch(k0), orbit_prefetch(k1);
+   if(const u32 e= orbit_find(y, c0, k0, i); e != OR_L) return e;
+   if(i + 1 < OR_I)
+    if(const u32 e= orbit_find(y, c1, k1, i + 1); e != OR_L) return e;
+   const u32 c2= OR_M1(c1) ^ c0;
+   c1= OR_M1(c2) ^ c1, c0= c2;
+  }
+  return OR_L;
+ }
+ template <bool V> static inline u64 ln(u64 x) {
+  assert(x);
+  const u64 x32= F32(x), n= mul(x, x32), fn= F16(n);
+  auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
+  const u16 xf= u16(x_f16);
+  const u32 il= IL16.t[xf];
+  const u64 s= mul(EMB(u16(il >> 16)), w), w1= mul(s, F9(s)), e57= F57(w1);
+  auto [w2, y]= unpack(mul2<V>(_mm256_set_epi64x(0, e57, 0, sq(w1)), _mm256_set_epi64x(0, s, 0, w1)));
+  u32 r3= log_6700417(y);
+  const u64 w3= mul(s, sq(w2)), w4= mul(w3, F4(w3));
+  u64 r0= LN641(mul(e57, w4)), r2= log_65537(n, fn);
+  const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x2f205935d0dfa6ca) * r3 + 0x1000100010001ull * (il & 65535) + 0xffff0000ffff * r2;
+  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
+  return t + (t < lo);
+ }
+};
 class GF2p64 {
  u64 x;
- inline u64 iv_() const {
+ template <int D> inline u64 iv_() const {
 #ifdef __x86_64__
-  if(__builtin_cpu_supports("vpclmulqdq")) return iv<1>(x);
+  if(__builtin_cpu_supports("vpclmulqdq")) return Inv<D>::template iv<1>(x);
 #endif
-  return iv<0>(x);
+  return Inv<D>::template iv<0>(x);
  }
 public:
  GF2p64(): x(0) {}
@@ -358,25 +353,25 @@ public:
  GF2p64& operator+=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator-=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator*=(GF2p64 r) { return x= mul(x, r.x), *this; }
- GF2p64& operator/=(GF2p64 r) { return x= mul(x, r.iv_()), *this; }
+ template <int D= 0> GF2p64& operator/=(GF2p64 r) { return x= mul(x, r.iv_<D>()), *this; }
  GF2p64 operator+(GF2p64 r) const { return x ^ r.x; }
  GF2p64 operator-(GF2p64 r) const { return x ^ r.x; }
  GF2p64 operator*(GF2p64 r) const { return mul(x, r.x); }
- GF2p64 operator/(GF2p64 r) const { return mul(x, r.iv_()); }
+ template <int D= 0> GF2p64 operator/(GF2p64 r) const { return mul(x, r.iv_<D>()); }
  GF2p64 square() const { return sq(x); }
  GF2p64 sqrt() const { return F63(x); }
- GF2p64 inv() const { return iv_(); }
+ template <int D= 0> GF2p64 inv() const { return iv_<D>(); }
  GF2p64 pow(u64 e) const {
 #ifdef __x86_64__
   if(__builtin_cpu_supports("vpclmulqdq")) return pw<1>(x, e);
 #endif
   return pw<0>(x, e);
  }
- u64 log() const {
+ template <int D= 0> u64 log() const {
 #ifdef __x86_64__
-  if(__builtin_cpu_supports("vpclmulqdq")) return ln<1>(x);
+  if(__builtin_cpu_supports("vpclmulqdq")) return Log<D>::template ln<1>(x);
 #endif
-  return ln<0>(x);
+  return Log<D>::template ln<0>(x);
  }
  u64 to_nimber() const { return TO_NIM(x); }
  explicit operator u64() const { return x; }
