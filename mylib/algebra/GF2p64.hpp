@@ -317,6 +317,13 @@ template <int D> struct Log {
   const u64 lo= u64(acc), t= lo + u64(acc >> 64);
   return t + (t < lo);
  }
+ static inline u64 ord(u64 a) {
+  assert(a);
+  const u64 n= mul(a, F32(a)), fn= F16(n), x3= mul(a, sq(a)), x15= mul(x3, F2(x3)), x51= mul(x3, F4(x3));
+  const u64 c= mul(mul(a, F7(a)), sq(F8(a))), d= mul(mul(sq(F16(x51)), sq(sq(F8(x15)))), mul(F7(x3), a));
+  const u32 l= IL16.t[u16(mul(n, fn))] & 65535;
+  return u64(l % 3 ? 3 : 1) * (l % 5 ? 5 : 1) * (l % 17 ? 17 : 1) * (l % 257 ? 257 : 1) * (fn != n ? 65537 : 1) * (F32(d) != d ? 641 : 1) * (F32(c) != c ? 6700417 : 1);
+ }
 };
 template <int D> struct LogBase {
  using L= Log<D>;
@@ -451,6 +458,7 @@ public:
 #endif
   return LogBase<D>::template ln<0>(base.x, x);
  }
+ template <int D= 0> u64 ord() const { return Log<D>::ord(x); }
  u64 to_nimber() const { return TO_NIM(x); }
  explicit operator u64() const { return x; }
  explicit operator bool() const { return x != 0; }
