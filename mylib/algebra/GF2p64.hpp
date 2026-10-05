@@ -76,6 +76,13 @@ inline u64 sq(u64 a) {
  u64 d= x[1];
  return (x[0] & 0x5555555555555555) ^ RED_SQ[a >> 62] ^ d ^ (d << 3);
 }
+inline __m256i sq2(const __m256i& v) {
+ const __m256i MASK_LO= _mm256_set1_epi8(0x0f), EVEN= _mm256_set1_epi64x(0x5555555555555555);
+ const __m256i SPR= _mm256_setr_epi8(0x00, 0x03, 0x0c, 0x0f, 0x30, 0x33, 0x3c, 0x3f, (char)0xc0, (char)0xc3, (char)0xcc, (char)0xcf, (char)0xf0, (char)0xf3, (char)0xfc, (char)0xff, 0x00, 0x03, 0x0c, 0x0f, 0x30, 0x33, 0x3c, 0x3f, (char)0xc0, (char)0xc3, (char)0xcc, (char)0xcf, (char)0xf0, (char)0xf3, (char)0xfc, (char)0xff);
+ const __m256i RED_SQ= _mm256_setr_epi8(0, 27, 90, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 90, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+ const __m256i x= _mm256_shuffle_epi8(SPR, _mm256_and_si256(_mm256_unpacklo_epi8(v, _mm256_srli_epi16(v, 4)), MASK_LO)), d= _mm256_srli_si256(x, 8);
+ return _mm256_xor_si256(_mm256_xor_si256(_mm256_and_si256(x, EVEN), _mm256_shuffle_epi8(RED_SQ, _mm256_srli_epi64(v, 62))), _mm256_xor_si256(d, _mm256_slli_epi64(d, 3)));
+}
 template <bool V> inline __m256i mul2(const __m256i& a_vec, const __m256i& b_vec) {
  const __m256i RED256= _mm256_setr_epi8(0, 27, 45, 54, 90, 65, 119, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 45, 54, 90, 65, 119, 108, 0, 0, 0, 0, 0, 0, 0, 0);
  __m256i prod;
@@ -215,14 +222,14 @@ template <int D> struct Log {
   return r;
  }
  static constexpr ClassTable65537 CLS65537_0= cls65537({{}, 0, 1}, 1, 16385), CLS65537= cls65537(CLS65537_0, 16385, 32769);
- static inline u32 log_65537(u64 n, u64 fn) {
+ static inline u32 log_65537(u64 n, u64 fn, const ClassTable65537& c= CLS65537) {
   const u16 b1= n ^ fn;
   if(!b1) return 0;
   const u16 b0= n ^ PHI(b1);
-  if(!b0) return CLS65537.K0;
+  if(!b0) return c.K0;
   u32 idx= (IL16.t[b0] & 65535) + 65535 - (IL16.t[b1] & 65535);
   if(idx >= 65535) idx-= 65535;
-  return CLS65537.t[idx] + 1u;
+  return c.t[idx] + 1u;
  }
  static constexpr Lin<u32, 4> OR_M1= []() { return Lin<u32, 4>(OR_MT1_B); }();
  static constexpr Lin<u32, 8> OR_LAM= []() { return Lin<u32, 8>(OR_LAM_B); }();
@@ -311,6 +318,97 @@ template <int D> struct Log {
   return t + (t < lo);
  }
 };
+template <int D> struct LogBase {
+ using L= Log<D>;
+ static constexpr u32 FP= 6700417, FN= 128, FB= FN * FN, FA= FP / FN;
+ template <u32 P, u32 C> static constexpr Arr<u16, P> inv_tab() {
+  Arr<u16, P> r{};
+  r.t[1]= C;
+  for(u32 i= 2; i < P; ++i) r.t[i]= u16(P - u64(P / i) * r.t[P % i] % P);
+  return r;
+ }
+ static constexpr Arr<u32, 255> T255= []() {
+  Arr<u32, 255> r{};
+  for(u32 x= 0; x < 255; ++x) {
+   u32 y= x;
+   for(int i= 1; i < 15; ++i) y= y * x % 255;
+   r.t[x]= 8224 * y % 65535 | u32(x % 3 == 0) << 16 | u32(x % 5 == 0) << 17 | u32(x % 17 == 0) << 18;
+  }
+  return r;
+ }();
+ static constexpr Arr<u16, 257> T257= []() {
+  Arr<u16, 257> r= inv_tab<257, 1>();
+  for(u32 x= 1; x < 257; ++x) r.t[x]= u16(8160 * r.t[x] % 65535);
+  return r;
+ }();
+ static constexpr Arr<u16, 641> INV641= []() { return inv_tab<641, 590>(); }();
+ static constexpr Arr<u16, 65537> inv65537(const Arr<u16, 65537>& r0, u32 lo, u32 hi) {
+  Arr<u16, 65537> r= r0;
+  for(u32 i= lo; i < hi; ++i) r.t[i]= u16((65537 - u64(65537 / i) * (r.t[65537 % i] + 1) % 65537) % 65537 - 1);
+  return r;
+ }
+ static constexpr Arr<u16, 65537> INV65537_0= inv65537({{0, 16383}}, 2, 32769), INV65537= inv65537(INV65537_0, 32769, 65537);
+ static constexpr ClassTable65537 ICLS65537= []() {
+  ClassTable65537 r{};
+  for(u32 i= 0; i < 65535; ++i) r.t[i]= INV65537.t[L::CLS65537.t[i] + 1];
+  r.K0= INV65537.t[L::CLS65537.K0] + 1u;
+  return r;
+ }();
+ static constexpr Arr<u32, FB> FR= []() {
+  Arr<u32, FB> r{};
+  for(u32 a= 0, b= 1, c= 1, d= FN;;) {
+   for(u32 i= a * FB / b + 1, e= c == d ? FB - 1 : c * FB / d; i <= e; ++i) r.t[i]= ((i + 1) * d >= c * FB ? c | d << 8 : a | b << 8) | (c | d << 8) << 16;
+   if(c == 1 && d == 1) break;
+   const u32 k= (FN + b) / d, e= k * c - a, f= k * d - b;
+   a= c, b= d, c= e, d= f;
+  }
+  r.t[0]= 1 << 8 | 1 << 24;
+  return r;
+ }();
+ static constexpr Arr<u32, FA + 1> FI= []() {
+  Arr<u32, FA + 1> r{};
+  r.t[1]= 3883315;
+  for(u32 i= 2; i <= FA; ++i) r.t[i]= u32(FP - u64(FP / i) * r.t[FP % i] % FP);
+  return r;
+ }();
+ static inline u32 inv_6700417(u32 x) {
+  const u32 f= FR.t[u64(x) * FB / FP], c1= f & 255, b1= f >> 8 & 255, c2= f >> 16 & 255, b2= f >> 24;
+  const long long a1= (long long)b1 * x - (long long)c1 * FP, a2= (long long)b2 * x - (long long)c2 * FP, m1= a1 < 0 ? -a1 : a1, m2= a2 < 0 ? -a2 : a2;
+  const bool s= m1 <= m2;
+  const u32 r= u32(u64(s ? b1 : b2) * FI.t[s ? m1 : m2] % FP);
+  return (s ? a1 : a2) < 0 && r ? FP - r : r;
+ }
+ template <bool V> static inline u64 ln(u64 a, u64 b) {
+  constexpr u64 M= ~0ull;
+  if(b == 1) return 0;
+  if(a == b) return 1;
+  if(a <= 1 || !b) return M;
+  const u64 a32= F32(a), b32= F32(b);
+  const __m256i x32= _mm256_set_epi64x(0, b32, 0, a32);
+  const auto [na, nb]= unpack(mul2<V>(_mm256_set_epi64x(0, b, 0, a), x32));
+  const u64 fna= F16(na), fnb= F16(nb);
+  const __m256i fn2= _mm256_set_epi64x(0, fnb, 0, fna);
+  const auto [ma, mb]= unpack(mul2<V>(_mm256_set_epi64x(0, nb, 0, na), fn2));
+  const u32 ila= L::IL16.t[u16(ma)], ilb= L::IL16.t[u16(mb)], la= ila & 65535, lb= ilb & 65535, a255= la % 255, b255= lb % 255, a257= la % 257, b257= lb % 257;
+  const auto [wa, wb]= unpack(mul2<V>(sq2(x32), fn2));
+  const __m256i s2= mul2<V>(_mm256_set_epi64x(0, EMB(u16(ilb >> 16)), 0, EMB(u16(ila >> 16))), _mm256_set_epi64x(0, wb, 0, wa));
+  const auto [sa, sb]= unpack(s2);
+  const __m256i w12= mul2<V>(s2, _mm256_set_epi64x(0, L::F9(sb), 0, L::F9(sa)));
+  const auto [w1a, w1b]= unpack(w12);
+  const __m256i e2= _mm256_set_epi64x(0, L::F57(w1b), 0, L::F57(w1a));
+  const auto [ya, yb]= unpack(mul2<V>(e2, s2));
+  const auto [w3a, w3b]= unpack(mul2<V>(s2, sq2(mul2<V>(sq2(w12), w12))));
+  const auto [w4a, w4b]= unpack(mul2<V>(_mm256_set_epi64x(0, w3b, 0, w3a), _mm256_set_epi64x(0, F4(w3b), 0, F4(w3a))));
+  const auto [za, zb]= unpack(mul2<V>(e2, _mm256_set_epi64x(0, w4b, 0, w4a)));
+  const u32 v0a= L::LN641(za), v0b= L::LN641(zb), i2a= L::log_65537(na, fna, ICLS65537), v2b= L::log_65537(nb, fnb);
+  const u32 ra= L::log_6700417(ya), rb= L::log_6700417(yb), t255= T255.t[a255];
+  if((t255 >> 16 & ~(T255.t[b255] >> 16)) || (!a257 && b257) || (!v0a && v0b) || (!i2a && v2b) || (!ra && rb)) return M;
+  const u64 v1= b255 * (t255 & 65535) + b257 * T257.t[a257], v0= v0b * INV641.t[v0a], v2= u64(v2b) * i2a, v3= u64(rb) * inv_6700417(ra);
+  const __uint128_t acc= __uint128_t(0x1000100010001) * v1 + __uint128_t(0x663d80ff99c27f) * v0 + __uint128_t(0xffff0000ffff) * v2 + __uint128_t(0x280fffffd7f) * v3;
+  const u64 lo= u64(acc), t= lo + u64(acc >> 64);
+  return (t + (t < lo)) % (u64(t255 >> 16 & 1 ? 1 : 3) * (t255 >> 17 & 1 ? 1 : 5) * (t255 >> 18 & 1 ? 1 : 17) * (a257 ? 257 : 1) * (v0a ? 641 : 1) * (i2a ? 65537 : 1) * (ra ? 6700417 : 1));
+ }
+};
 class GF2p64 {
  u64 x;
  template <int D> inline u64 iv_() const {
@@ -322,6 +420,7 @@ class GF2p64 {
 public:
  GF2p64(u64 y= 0): x(y) {}
  static GF2p64 from_nimber(u64 n) { return GF2p64(FROM_NIM(n)); }
+ static GF2p64 generator() { return GF2p64(2); }
  auto operator<=>(const GF2p64&) const= default;
  GF2p64& operator+=(GF2p64 r) { return x^= r.x, *this; }
  GF2p64& operator-=(GF2p64 r) { return x^= r.x, *this; }
@@ -345,6 +444,12 @@ public:
   if(__builtin_cpu_supports("vpclmulqdq")) return Log<D>::template ln<1>(x);
 #endif
   return Log<D>::template ln<0>(x);
+ }
+ template <int D= 0> u64 log(GF2p64 base) const {
+#ifdef __x86_64__
+  if(__builtin_cpu_supports("vpclmulqdq")) return LogBase<D>::template ln<1>(base.x, x);
+#endif
+  return LogBase<D>::template ln<0>(base.x, x);
  }
  u64 to_nimber() const { return TO_NIM(x); }
  explicit operator u64() const { return x; }
