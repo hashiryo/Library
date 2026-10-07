@@ -233,6 +233,10 @@ function renderPage(title: string, content: string, sidebar: string): string {
             if (h.verified) cls = 'dot-ac';
             else if (failing > 0 && ac === 0) cls = 'dot-fail';
             else if (ac > 0 || failing > 0) cls = 'dot-warn';
+            // 実行時の分岐を持つヘッダは、Codeforces と同じ命令の CPU でも代わりの経路を
+            // 確かめている (procon-judge の pj fallback)。通らない提出があれば緑にしない。
+            const fb = h.fallback;
+            if (fb && fb.failing > 0 && cls === 'dot-ac') cls = 'dot-warn';
             dot.className = 'dot ' + cls;
             let title;
             if (h.verified) title = '全環境で現行の AC';
@@ -241,6 +245,12 @@ function renderPage(title: string, content: string, sidebar: string): string {
             if (failing) title += '、失敗 ' + failing;
             if (stale) title += '、参考 ' + stale;
             if (h.compile_only) title += ' (コンパイルのみ)';
+            if (fb) {
+              title += fb.failing
+                ? '。Codeforces 相当の CPU で失敗 ' + fb.failing + ' (' + fb.checked + ' 本中)'
+                : '。Codeforces 相当の CPU でも AC (' + fb.ac + ' 本)';
+              if (fb.skipped) title += '、確かめられなかった ' + fb.skipped;
+            }
             dot.title = title;
           });
         })
@@ -287,6 +297,17 @@ function renderPage(title: string, content: string, sidebar: string): string {
             const labels = { none: 'コンパイルのみ', local: '自作', manual: '手動取り込み' };
             const chip = el('span', labels[s.testdata] || s.testdata, 'judge-chip');
             chip.title = 'テストケースは判定サイトのものではありません';
+            submission.append(chip);
+          }
+          // Codeforces と同じ命令の CPU (QEMU) で、このヘッダの実行時の分岐の代わりの経路を
+          // 走らせた結果 (procon-judge の pj fallback)。印を持つヘッダの、対象の提出にだけある。
+          if (s.fallback) {
+            const skipped = s.fallback === 'SKIP';
+            const ok = s.fallback === 'AC' || skipped;
+            const chip = el('span', 'CF 相当 ' + (skipped ? '未確認' : s.fallback), ok ? 'judge-chip' : 'judge-chip judge-chip-bad');
+            chip.title = skipped
+              ? 'テストデータを用意できず、Codeforces 相当の CPU では確かめられませんでした'
+              : 'Codeforces と同じ命令の CPU (vpclmulqdq、GFNI、AVX-512 なし) で代わりの経路を走らせた結果: ' + s.fallback;
             submission.append(chip);
           }
           tr.append(problem, submission);
@@ -904,6 +925,8 @@ summary { cursor: pointer; }
 .judge-note { color: var(--c-text-2); font-size: 0.85rem; margin: 0.25rem 0 0.5rem; }
 .judge-table .judge-stale { color: var(--c-text-2); }
 .judge-chip { margin-left: 0.4em; padding: 0 0.4em; border: 1px solid var(--c-divider); border-radius: 8px; font-size: 0.85em; color: var(--c-text-2); }
+/* Codeforces 相当の CPU で代わりの経路が通らなかった印。procon-judge の順位表と同じく赤くする。 */
+.judge-chip-bad { color: var(--c-fail); border-color: var(--c-fail); }
 `;
 
 main().catch(console.error);
