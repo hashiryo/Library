@@ -295,8 +295,13 @@ function renderPage(title: string, content: string, sidebar: string): string {
           // 判定サイトのテストデータでない問題。AC の意味が違うので印を付ける。
           if (s.official === false) {
             const labels = { none: 'コンパイルのみ', local: '自作', manual: '手動取り込み' };
-            const chip = el('span', labels[s.testdata] || s.testdata, 'judge-chip');
-            chip.title = 'テストケースは判定サイトのものではありません';
+            // none は「走らせない」と「提出が自分で検証する」の 2 通りあるので、比べ方で分ける
+            // (procon-judge のサイトの「無し (自己検証)」と同じ)。
+            const selfCheck = s.testdata === 'none' && s.compare === 'exit_code';
+            const chip = el('span', selfCheck ? '自己検証' : labels[s.testdata] || s.testdata, 'judge-chip');
+            chip.title = selfCheck
+              ? 'テストケースが無く、提出が自分で持っている入出力で検証します。終了コード 0 で走り切れば AC です'
+              : 'テストケースは判定サイトのものではありません';
             submission.append(chip);
           }
           // Codeforces と同じ命令の CPU (QEMU) で、このヘッダの実行時の分岐の代わりの経路を
