@@ -189,6 +189,10 @@ struct OrbitPow {
  u64 lo[256], mid[256], hi[(OR_L >> 16) + 1], hp[OR_I];
 };
 inline u32 orbit_home(u32 key) { return ((key * 0x9e3779b1u) >> (32 - OR_BB)) * 8; }
+struct Ord16 {
+ u16 t[65536];
+ u32 x, y;
+};
 template <int D> struct Log {
  static constexpr Arr<u32, 65536> IL16= []() {
   u32 f[2][256]{}, b[2][256]{};
@@ -199,10 +203,20 @@ template <int D> struct Log {
   for(u32 l= 1, x= 1, y= 1; l < 32768; ++l) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= y << 16 | l, r.t[y]= x << 16 | (65535 - l);
   return r;
  }();
- static constexpr LinMap F9= []() { return F8 * F1; }(), F57= F48 * F9;
+ static constexpr Ord16 ord16(Ord16 r, u32 k, u32 e) {
+  u32 f[2][256]{}, b[2][256]{};
+  for(int i= 0; i < 16; ++i)
+   for(u32 h= 1 << (i & 7), j= h; j--;) f[i >> 3][h | j]= f[i >> 3][j] ^ MH_B[i], b[i >> 3][h | j]= b[i >> 3][j] ^ MHI.t[i];
+  u32 x= r.x, y= r.y;
+  for(u32 l= k; l < e; ++l) x= f[0][x & 255] ^ f[1][x >> 8], y= b[0][y & 255] ^ b[1][y >> 8], r.t[x]= r.t[y]= (l % 3 ? 3 : 1) * (l % 5 ? 5 : 1) * (l % 17 ? 17 : 1) * (l % 257 ? 257 : 1);
+  r.x= x, r.y= y;
+  return r;
+ }
+ static constexpr Ord16 ORD16_0= ord16({{0, 1}, 1, 1}, 1, 16385), ORD16= ord16(ORD16_0, 16385, 32768);
+ static constexpr LinMap F9= []() { return F8 * F1; }(), F21= []() { return F16 * F4 * F1; }(), F29= []() { return F15 * F7 * F7; }(), F50= []() { return F48 * F2; }(), F51= []() { return F48 * F3; }(), F57= F48 * F9, F60= []() { return F48 * F8 * F4; }();
  static constexpr Ln641 LN641= []() {
   Ln641 h{};
-  for(u64 k= 0, cur= 1; k < 641; ++k, cur= cmul(cur, 0x6bf808f7824282a2)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 590 * 128 % 641;
+  for(u64 k= 0, cur= 1; k < 641; ++k, cur= cmul(cur, 0x6bf808f7824282a2)) h.t[u16((cur * 0xffef5fb99f1bf6e7) >> 50)]= k * 613 % 641;
   return h;
  }();
  static constexpr Lin<u16, 2> PHI= []() { return Lin<u16, 2>(PHI_B); }();
@@ -308,21 +322,18 @@ template <int D> struct Log {
   auto [x_f16, w]= unpack(mul2<V>(_mm256_set_epi64x(0, sq(x32), 0, n), _mm256_set1_epi64x(fn)));
   const u16 xf= u16(x_f16);
   const u32 il= IL16.t[xf];
-  const u64 s= mul(EMB(u16(il >> 16)), w), w1= mul(s, F9(s)), e57= F57(w1);
-  auto [w2, y]= unpack(mul2<V>(_mm256_set_epi64x(0, e57, 0, sq(w1)), _mm256_set_epi64x(0, s, 0, w1)));
+  const u64 s= mul(EMB(u16(il >> 16)), w), s2= sq(s), ye= mul(mul(s, s2), F57(s)), y= mul(ye, s2);
   u32 r3= log_6700417(y);
-  const u64 w3= mul(s, sq(w2)), w4= mul(w3, F4(w3));
-  u64 r0= LN641(mul(e57, w4)), r2= log_65537(n, fn);
+  u64 r0= LN641(mul(mul(mul(s, sq(ye)), F51(ye)), F29(y))), r2= log_65537(n, fn);
   const __uint128_t acc= 0x663d80ff99c27f * r0 + __uint128_t(0x2f205935d0dfa6ca) * r3 + 0x1000100010001ull * (il & 65535) + 0xffff0000ffff * r2;
   const u64 lo= u64(acc), t= lo + u64(acc >> 64);
   return t + (t < lo);
  }
  static inline u64 ord(u64 a) {
   assert(a);
-  const u64 n= mul(a, F32(a)), fn= F16(n), x3= mul(a, sq(a)), x15= mul(x3, F2(x3)), x51= mul(x3, F4(x3));
-  const u64 c= mul(mul(a, F7(a)), sq(F8(a))), d= mul(mul(sq(F16(x51)), sq(sq(F8(x15)))), mul(F7(x3), a));
-  const u32 l= IL16.t[u16(mul(n, fn))] & 65535;
-  return u64(l % 3 ? 3 : 1) * (l % 5 ? 5 : 1) * (l % 17 ? 17 : 1) * (l % 257 ? 257 : 1) * (fn != n ? 65537 : 1) * (F32(d) != d ? 641 : 1) * (F32(c) != c ? 6700417 : 1);
+  const u64 n= mul(a, F32(a)), fn= F16(n), a2= sq(a), x3= mul(a, a2), y= mul(x3, F57(a)), c= mul(y, a2);
+  const u64 d= mul(mul(mul(y, F21(a)), F60(x3)), F50(y));
+  return u64(ORD16.t[u16(mul(n, fn))]) * (fn != n ? 65537 : 1) * (F32(d) != d ? 641 : 1) * (F32(c) != c ? 6700417 : 1);
  }
 };
 template <int D> struct LogBase {
@@ -400,13 +411,11 @@ template <int D> struct LogBase {
   const auto [wa, wb]= unpack(mul2<V>(sq2(x32), fn2));
   const __m256i s2= mul2<V>(_mm256_set_epi64x(0, EMB(u16(ilb >> 16)), 0, EMB(u16(ila >> 16))), _mm256_set_epi64x(0, wb, 0, wa));
   const auto [sa, sb]= unpack(s2);
-  const __m256i w12= mul2<V>(s2, _mm256_set_epi64x(0, L::F9(sb), 0, L::F9(sa)));
-  const auto [w1a, w1b]= unpack(w12);
-  const __m256i e2= _mm256_set_epi64x(0, L::F57(w1b), 0, L::F57(w1a));
-  const auto [ya, yb]= unpack(mul2<V>(e2, s2));
-  const auto [w3a, w3b]= unpack(mul2<V>(s2, sq2(mul2<V>(sq2(w12), w12))));
-  const auto [w4a, w4b]= unpack(mul2<V>(_mm256_set_epi64x(0, w3b, 0, w3a), _mm256_set_epi64x(0, F4(w3b), 0, F4(w3a))));
-  const auto [za, zb]= unpack(mul2<V>(e2, _mm256_set_epi64x(0, w4b, 0, w4a)));
+  const __m256i q2= sq2(s2), ye2= mul2<V>(mul2<V>(s2, q2), _mm256_set_epi64x(0, L::F57(sb), 0, L::F57(sa))), y2= mul2<V>(ye2, q2);
+  const auto [yea, yeb]= unpack(ye2);
+  const auto [ya, yb]= unpack(y2);
+  const __m256i w2= mul2<V>(mul2<V>(s2, sq2(ye2)), _mm256_set_epi64x(0, L::F51(yeb), 0, L::F51(yea)));
+  const auto [za, zb]= unpack(mul2<V>(w2, _mm256_set_epi64x(0, L::F29(yb), 0, L::F29(ya))));
   const u32 v0a= L::LN641(za), v0b= L::LN641(zb), i2a= L::log_65537(na, fna, ICLS65537), v2b= L::log_65537(nb, fnb);
   const u32 ra= L::log_6700417(ya), rb= L::log_6700417(yb), t255= T255.t[a255];
   if((t255 >> 16 & ~(T255.t[b255] >> 16)) || (!a257 && b257) || (!v0a && v0b) || (!i2a && v2b) || (!ra && rb)) return M;
