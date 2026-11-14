@@ -89,16 +89,16 @@ public:
   MaxFlowLowerBound *ins;
   int v, e;
   flow_t u;
-  const Edge &edge() { return ins->adj[v][e]; }
-  const Edge &rev() {
-   Edge &e= edge();
+  const Edge &edge() const { return ins->adj[v][e]; }
+  const Edge &rev() const {
+   const Edge &e= edge();
    return ins->adj[e.dst][e.rev];
   }
   EdgePtr(MaxFlowLowerBound *ins, int v, int e, flow_t u): ins(ins), v(v), e(e), u(u) {}
  public:
   EdgePtr()= default;
-  int src() const { return v; }
-  int dst() const { return edge().dst; }
+  int src() const { return v - 2; }
+  int dst() const { return edge().dst - 2; }
   flow_t flow() const { return u - edge().cap; }
   flow_t lower() const { return flow() - rev().cap; }
   flow_t upper() const { return u; }
