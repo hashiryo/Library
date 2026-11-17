@@ -50,7 +50,7 @@ template <class T> vector<T> xor_convolve(vector<T> f, vector<T> g) {
  for (int s= f.size(); s--;) f[s]*= g[s];
  hadamard(f);
  if (T iv= T(1) / f.size(); iv == 0)
-  for (int s= f.size(); s--;) f[s]/= f.size();
+  for (int s= f.size(); s--;) f[s]/= T(f.size());
  else
   for (int s= f.size(); s--;) f[s]*= iv;
  return f;
