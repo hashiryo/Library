@@ -55,7 +55,7 @@ public:
  int operator()(int i) const { return b[i]; }
  std::vector<int> min_vertex_cover(std::vector<int> ord= {}) const {
   if(ord.empty()) ord.resize(b.size()), std::iota(ord.begin(), ord.end(), 0);
-  std::vector<char> z(size(), -1);
+  std::vector<signed char> z(size(), -1);
   std::vector<int> q(size()), vc;
   z[0]= 1, z.back()= 0;
   for(int v: ord) {
