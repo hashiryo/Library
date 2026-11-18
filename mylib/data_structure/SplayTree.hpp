@@ -178,7 +178,11 @@ public:
  }
  void reverse(size_t a, size_t b) {
   static_assert(reversible, "\"reverse\" is not available");
-  toggle(between(a, b));
+  np t= between(a, b);
+  toggle(t);
+  if constexpr(semigroup_v<M> && !commute_v<M>)
+   if(np p= t->par; p)
+    if(update<0>(p); p->par) update<0>(p->par);
  }
  std::pair<SplayTree, SplayTree> split(size_t k) {
   if(!k) return {SplayTree(), *this};
